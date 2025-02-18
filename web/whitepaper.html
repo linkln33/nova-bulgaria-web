@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA Bulgaria Whitepaper</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <style>
+        :root {
+            --color-white: #ffffff;
+            --color-green: #00966E;
+            --color-red: #D62612;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+
+        .prose {
+            max-width: 65ch;
+            font-size: 1.125rem;
+            line-height: 1.75;
+        }
+
+        .prose h2 {
+            margin-top: 2.5em;
+            margin-bottom: 1em;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+
+        .prose p {
+            margin-bottom: 1.5em;
+        }
+
+        .prose ul {
+            margin-bottom: 1.5em;
+            list-style-type: disc;
+            padding-left: 1.5em;
+        }
+
+        .code-block {
+            background: #1a1a1a;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+</head>
+<body class="bg-gray-50">
+    <nav class="glass fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <a href="/" class="flex items-center">
+                        <img src="assets/logo.svg" alt="NOVA Bulgaria" class="h-8 w-auto">
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#abstract" class="text-gray-700 hover:text-green-600">Abstract</a>
+                    <a href="#architecture" class="text-gray-700 hover:text-green-600">Architecture</a>
+                    <a href="#tokenomics" class="text-gray-700 hover:text-green-600">Tokenomics</a>
+                    <a href="#governance" class="text-gray-700 hover:text-green-600">Governance</a>
+                    <a href="/" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Abstract -->
+        <section id="abstract" class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="glass rounded-2xl p-8 mb-12">
+                    <h1 class="text-4xl font-bold mb-6">NOVA Bulgaria Whitepaper</h1>
+                    <p class="text-xl text-gray-600 mb-4">Version 1.0 - February 2025</p>
+                    <div class="prose">
+                        <h2>Abstract</h2>
+                        <p>NOVA Bulgaria represents a paradigm shift in nation-state architecture, implementing a fully decentralized digital sovereign nation powered by blockchain technology. This whitepaper outlines the technical foundation, governance mechanisms, and economic model that enables a new form of digital citizenship and national organization.</p>
+                        
+                        <p>Key innovations include:</p>
+                        <ul>
+                            <li>Blockchain-based national identity system with cryptographic proof of citizenship</li>
+                            <li>Democratic governance through smart contracts</li>
+                            <li>Native digital currency (BGL) with advanced economic policies</li>
+                            <li>Proof of Contribution mechanism for value creation and distribution</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Architecture -->
+        <section id="architecture" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-12">Technical Architecture</h2>
+                
+                <div class="glass rounded-2xl p-8 mb-12">
+                    <h3 class="text-2xl font-semibold mb-6">System Components</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-medium mb-4">Core Protocol</h4>
+                            <div class="code-block">
+                                <pre><code class="language-go">
+type NovaApp struct {
+    *baseapp.BaseApp
+    cdc           *codec.Codec
+    keys          map[string]*sdk.StoreKey
+    subspaces    map[string]params.Subspace
+    
+    // Keepers
+    identityKeeper   identity.Keeper
+    tokenKeeper      token.Keeper
+    governanceKeeper governance.Keeper
+    contributionKeeper contribution.Keeper
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="chart-container">
+                                <canvas id="architectureChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl p-8">
+                    <h3 class="text-2xl font-semibold mb-6">Consensus Mechanism</h3>
+                    <div class="prose">
+                        <p>NOVA Bulgaria utilizes a hybrid consensus mechanism combining Delegated Proof of Stake (DPoS) with Proof of Contribution (PoC):</p>
+                        <ul>
+                            <li>Validator selection based on stake and contribution score</li>
+                            <li>Dynamic validator set with maximum of 100 validators</li>
+                            <li>Slashing conditions for malicious behavior</li>
+                            <li>Block time of 5 seconds with instant finality</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tokenomics -->
+        <section id="tokenomics" class="py-20">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-12">Tokenomics</h2>
+                
+                <div class="glass rounded-2xl p-8 mb-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6">Token Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="tokenDistributionChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-semibold mb-6">Token Metrics</h3>
+                            <ul class="space-y-4">
+                                <li class="flex justify-between items-center">
+                                    <span>Total Supply:</span>
+                                    <span class="font-mono">1,000,000,000 BGL</span>
+                                </li>
+                                <li class="flex justify-between items-center">
+                                    <span>Initial Circulating Supply:</span>
+                                    <span class="font-mono">100,000,000 BGL</span>
+                                </li>
+                                <li class="flex justify-between items-center">
+                                    <span>Emission Rate:</span>
+                                    <span class="font-mono">5% annually</span>
+                                </li>
+                                <li class="flex justify-between items-center">
+                                    <span>Staking Rewards:</span>
+                                    <span class="font-mono">12% APR</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Governance -->
+        <section id="governance" class="py-20 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl font-bold mb-12">Governance Model</h2>
+                
+                <div class="glass rounded-2xl p-8 mb-12">
+                    <div class="prose">
+                        <h3>Proposal Types</h3>
+                        <ul>
+                            <li>Parameter Change Proposals</li>
+                            <li>Software Upgrade Proposals</li>
+                            <li>Constitutional Amendments</li>
+                            <li>Resource Allocation Proposals</li>
+                        </ul>
+
+                        <h3>Voting Mechanism</h3>
+                        <p>The voting power is calculated using a quadratic formula that considers both token holdings and contribution score:</p>
+                        <div class="code-block">
+                            <pre><code class="language-go">
+func CalculateVotingPower(tokens sdk.Int, contributionScore sdk.Dec) sdk.Dec {
+    return sdk.NewDec(tokens.Int64()).Sqrt().
+           Add(contributionScore.Sqrt()).
+           Quo(sdk.NewDec(2))
+}
+                            </code></pre>
+                        </div>
+
+                        <h3>Proposal Lifecycle</h3>
+                        <ol>
+                            <li>Submission Period (2 days)</li>
+                            <li>Deposit Period (5 days)</li>
+                            <li>Voting Period (7 days)</li>
+                            <li>Execution Delay (2 days)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Architecture Chart
+        new Chart(document.getElementById('architectureChart'), {
+            type: 'radar',
+            data: {
+                labels: ['Scalability', 'Security', 'Decentralization', 'Privacy', 'Interoperability'],
+                datasets: [{
+                    label: 'NOVA Protocol',
+                    data: [85, 95, 90, 80, 85],
+                    fill: true,
+                    backgroundColor: 'rgba(0, 150, 110, 0.2)',
+                    borderColor: 'rgb(0, 150, 110)',
+                    pointBackgroundColor: 'rgb(0, 150, 110)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(0, 150, 110)'
+                }]
+            },
+            options: {
+                elements: {
+                    line: { tension: 0.4 }
+                },
+                scales: {
+                    r: {
+                        angleLines: { display: true },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // Token Distribution Chart
+        new Chart(document.getElementById('tokenDistributionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Community Treasury', 'Team & Advisors', 'Development Fund', 'Initial Distribution', 'Ecosystem Growth'],
+                datasets: [{
+                    data: [30, 20, 15, 25, 10],
+                    backgroundColor: [
+                        'rgb(0, 150, 110)',
+                        'rgb(214, 38, 18)',
+                        'rgb(59, 130, 246)',
+                        'rgb(245, 158, 11)',
+                        'rgb(139, 92, 246)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

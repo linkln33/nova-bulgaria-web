@@ -1,0 +1,33 @@
+syntax = "proto3";
+package nova.token.v1;
+
+option go_package = "github.com/nova-bulgaria/x/token/types";
+
+import "gogoproto/gogo.proto";
+import "cosmos/base/v1beta1/coin.proto";
+
+// Msg defines the token Msg service.
+service Msg {
+  // Mint defines a method for minting tokens.
+  rpc Mint(MsgMint) returns (MsgMintResponse);
+  // Burn defines a method for burning tokens.
+  rpc Burn(MsgBurn) returns (MsgBurnResponse);
+}
+
+// MsgMint represents a message to mint tokens.
+message MsgMint {
+  string from = 1 [(gogoproto.moretags) = "yaml:\"from\""];
+  cosmos.base.v1beta1.Coin amount = 2 [(gogoproto.nullable) = false];
+}
+
+// MsgMintResponse defines the Msg/Mint response type.
+message MsgMintResponse {}
+
+// MsgBurn represents a message to burn tokens.
+message MsgBurn {
+  string from = 1 [(gogoproto.moretags) = "yaml:\"from\""];
+  cosmos.base.v1beta1.Coin amount = 2 [(gogoproto.nullable) = false];
+}
+
+// MsgBurnResponse defines the Msg/Burn response type.
+message MsgBurnResponse {}

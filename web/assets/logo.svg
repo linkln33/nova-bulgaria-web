@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+    <!-- Shield Background -->
+    <path d="M400 50 L700 200 L700 500 Q400 750 100 500 L100 200 Z" fill="#D62612"/>
+    
+    <!-- Crown -->
+    <path d="M250 150 Q400 50 550 150 L600 100 L500 200 L400 100 L300 200 L200 100 Z" fill="#FFD700"/>
+    <circle cx="600" cy="100" r="20" fill="#FFD700"/>
+    <circle cx="500" cy="200" r="20" fill="#FFD700"/>
+    <circle cx="400" cy="100" r="20" fill="#FFD700"/>
+    <circle cx="300" cy="200" r="20" fill="#FFD700"/>
+    <circle cx="200" cy="100" r="20" fill="#FFD700"/>
+    
+    <!-- Lion Rampant -->
+    <path d="M350 250 Q450 200 450 350 Q500 400 400 500 Q300 450 350 350 Z" fill="#FFD700"/>
+    <path d="M400 300 Q450 250 500 300 L450 350 Z" fill="#FFD700"/> <!-- Head -->
+    <path d="M420 320 L440 340 L430 350 Z" fill="#D62612"/> <!-- Eye -->
+    <path d="M350 400 Q400 350 450 400 L400 450 Z" fill="#FFD700"/> <!-- Body -->
+    <path d="M380 450 Q400 400 420 450 L400 500 Z" fill="#FFD700"/> <!-- Legs -->
+    
+    <!-- Supporting Lions -->
+    <path d="M150 500 Q200 450 250 500 L200 550 Z" fill="#FFD700"/> <!-- Left Lion -->
+    <path d="M550 500 Q600 450 650 500 L600 550 Z" fill="#FFD700"/> <!-- Right Lion -->
+    
+    <!-- Oak Branches -->
+    <path d="M200 600 Q300 550 400 600 Q500 550 600 600" stroke="#006400" fill="none" stroke-width="10"/>
+    <circle cx="250" cy="580" r="10" fill="#8B4513"/> <!-- Acorns -->
+    <circle cx="350" cy="590" r="10" fill="#8B4513"/>
+    <circle cx="450" cy="590" r="10" fill="#8B4513"/>
+    <circle cx="550" cy="580" r="10" fill="#8B4513"/>
+    
+    <!-- Motto Banner -->
+    <path d="M200 650 H600 V700 H200 Z" fill="#FFFFFF"/>
+    <text x="400" y="685" text-anchor="middle" font-family="Arial" font-size="24" fill="#000000">Unity Makes Strength</text>
+    
+    <!-- Digital Elements -->
+    <circle cx="400" cy="400" r="300" stroke="#00966E" fill="none" stroke-width="5" stroke-dasharray="10,10"/>
+    <path d="M250 700 L300 650 L350 700 L400 650 L450 700 L500 650 L550 700" stroke="#00966E" fill="none" stroke-width="3"/>
+</svg>

@@ -1,0 +1,71 @@
+{
+  "app_state": {
+    "bank": {
+      "denom_metadata": [
+        {
+          "description": "The native token of Nova Bulgaria",
+          "denom_units": [
+            {
+              "denom": "ubgl",
+              "exponent": 0,
+              "aliases": ["microBGL"]
+            },
+            {
+              "denom": "BGL",
+              "exponent": 6,
+              "aliases": ["BGL"]
+            }
+          ],
+          "base": "ubgl",
+          "display": "BGL",
+          "name": "Bulgarian Lion",
+          "symbol": "BGL"
+        }
+      ],
+      "balances": [],
+      "supply": [
+        {
+          "denom": "ubgl",
+          "amount": "1000000000000000000" // 1 billion BGL
+        }
+      ]
+    },
+    "token": {
+      "supply": {
+        "denom": "ubgl",
+        "amount": "1000000000000000000"
+      }
+    },
+    "staking": {
+      "params": {
+        "bond_denom": "ubgl",
+        "unbonding_time": "1814400s",
+        "max_validators": 100,
+        "max_entries": 7,
+        "historical_entries": 10000
+      }
+    },
+    "gov": {
+      "deposit_params": {
+        "min_deposit": [
+          {
+            "denom": "ubgl",
+            "amount": "1000000000" // 1000 BGL
+          }
+        ],
+        "max_deposit_period": "172800s"
+      },
+      "voting_params": {
+        "voting_period": "172800s"
+      }
+    }
+  },
+  "chain_id": "nova-bulgaria-1",
+  "consensus_params": {
+    "block": {
+      "max_bytes": "22020096",
+      "max_gas": "-1",
+      "time_iota_ms": "1000"
+    }
+  }
+}
