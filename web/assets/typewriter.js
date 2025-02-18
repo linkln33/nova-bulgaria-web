@@ -19,6 +19,7 @@ class Typewriter {
         this.cursor.className = 'cursor';
         this.element.appendChild(this.cursor);
         this.type = this.type.bind(this);
+        this.type(); // Start typing immediately
     }
 
     type() {
@@ -49,15 +50,14 @@ class Typewriter {
         } else if (this.isDeleting && displayText === '') {
             this.isDeleting = false;
             this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
-            typeSpeed = 700;
+            typeSpeed = 500;
         }
 
-        setTimeout(this.type, typeSpeed);
+        setTimeout(() => this.type(), typeSpeed);
     }
 }
 
-// Make features available globally
-window.features = features;
+// Export the Typewriter class
 window.Typewriter = Typewriter;
 
 // Initialize typewriter when DOM is loaded
@@ -65,6 +65,5 @@ document.addEventListener('DOMContentLoaded', function() {
     const typewriterElement = document.querySelector('.typewriter');
     if (typewriterElement) {
         const typewriter = new Typewriter(typewriterElement, features);
-        typewriter.type();
     }
 });

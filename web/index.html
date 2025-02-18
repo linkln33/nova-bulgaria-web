@@ -6,9 +6,9 @@
     <title>NOVA BULGARIA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/assets/translations.js"></script>
-    <script src="/assets/typewriter.js" defer></script>
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.ethers.io/lib/ethers-5.4.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -18,6 +18,14 @@
             --accent2: #FF3B28;
             --accent3: #FFF01F;
             --accent4: #7B4DFF;
+            
+            /* RGB values for animations */
+            --primary-rgb: 0, 255, 157;
+            --secondary-rgb: 77, 238, 234;
+            --accent1-rgb: 255, 16, 240;
+            --accent2-rgb: 255, 59, 40;
+            --accent3-rgb: 255, 240, 31;
+            --accent4-rgb: 123, 77, 255;
         }
 
         body {
@@ -95,30 +103,93 @@
 
         .typewriter {
             min-height: 2em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-size: 1.5rem;
-            font-weight: 500;
-            opacity: 0.9;
             margin-top: 1rem;
             line-height: 1.5;
-            color: white;
-            white-space: nowrap;
-            overflow: hidden;
         }
-        
-        @keyframes blink {
-            0% { opacity: 1; }
-            50% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-        
+
         .cursor {
             display: inline-block;
             width: 3px;
             height: 1.2em;
-            background-color: white;
-            margin-left: 6px;
+            margin-left: 4px;
+            animation: blink 0.7s infinite;
             vertical-align: middle;
-            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .nft-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.5s ease;
+        }
+
+        .nft-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(var(--primary-rgb), 0.1),
+                rgba(var(--secondary-rgb), 0.1),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        .stats-value {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            position: relative;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: width 1s ease;
+        }
+
+        .feature-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-item:hover .feature-icon {
+            transform: scale(1.1);
         }
     </style>
 </head>
@@ -155,29 +226,29 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center bg-hero bg-cover bg-center relative">
+    <section class="h-[50vh] flex items-start justify-center bg-hero bg-cover bg-center relative pt-32">
         <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent"></div>
-        <div class="relative z-10 text-center max-w-4xl mx-auto px-4">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 gradient-text" data-translate="slogan">Welcome to the Future of Nations</h1>
-            <div id="typewriter" class="typewriter text-xl"></div>
+        <div class="relative z-10 text-center mx-auto px-6">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 gradient-text" style="word-break: keep-all; white-space: nowrap;">Welcome to the Future of Nations</h1>
+            <div id="typewriter" class="typewriter text-xl mb-8"></div>
         </div>
     </section>
 
     <!-- Stats Grid -->
-    <section class="py-20">
+    <section>
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass rounded-2xl p-8 text-center neon-glow">
                     <h3 class="text-lg text-gray-400 mb-2">Total Supply</h3>
-                    <p class="text-3xl font-bold gradient-text">1,000,000,000 NOVA</p>
+                    <p class="text-3xl font-bold stats-value">1,000,000,000 NOVA</p>
                 </div>
                 <div class="glass rounded-2xl p-8 text-center neon-glow">
                     <h3 class="text-lg text-gray-400 mb-2">Holders</h3>
-                    <p class="text-3xl font-bold gradient-text">10,000+</p>
+                    <p class="text-3xl font-bold stats-value">10,000+</p>
                 </div>
                 <div class="glass rounded-2xl p-8 text-center neon-glow">
                     <h3 class="text-lg text-gray-400 mb-2">Market Cap</h3>
-                    <p class="text-3xl font-bold gradient-text">$XX,XXX,XXX</p>
+                    <p class="text-3xl font-bold stats-value">$XX,XXX,XXX</p>
                 </div>
             </div>
         </div>
@@ -237,28 +308,36 @@
                 <div class="glass rounded-2xl p-8 neon-glow">
                     <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mb-6"></div>
                     <h3 class="text-xl font-bold mb-4">Vision & Currency</h3>
-                    <p class="text-gray-400">NOVA BULGARIA is creating a sovereign digital nation powered by blockchain and contribution. Our national currency, the Bulgarian Lion (BGL), symbolizes courage and strength, earned through real contributions to the nation.</p>
+                    <p class="text-gray-400">
+                        NOVA BULGARIA is creating a sovereign digital nation powered by blockchain and contribution. Our national currency, the Bulgarian Lion (BGL), symbolizes courage and strength, earned through real contributions to the nation.
+                    </p>
                 </div>
 
                 <!-- Infrastructure -->
                 <div class="glass rounded-2xl p-8 neon-glow">
                     <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--accent1)] to-[var(--accent2)] mb-6"></div>
                     <h3 class="text-xl font-bold mb-4">Blockchain Infrastructure</h3>
-                    <p class="text-gray-400">Built on Cosmos SDK for unmatched flexibility and interoperability. Features Tendermint consensus, CosmWasm smart contracts, and IPFS/Arweave storage for a robust technical foundation.</p>
+                    <p class="text-gray-400">
+                        Built on Cosmos SDK for unmatched flexibility and interoperability. Features Tendermint consensus, CosmWasm smart contracts, and IPFS/Arweave storage for a robust technical foundation.
+                    </p>
                 </div>
 
                 <!-- Identity System -->
                 <div class="glass rounded-2xl p-8 neon-glow">
                     <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--accent3)] to-[var(--accent4)] mb-6"></div>
                     <h3 class="text-xl font-bold mb-4">Digital Citizenship</h3>
-                    <p class="text-gray-400">Soulbound NFT ID system serving as a digital passport, tracking qualifications, reputation, and rank in real-time. Your key to governance, education, and all national services.</p>
+                    <p class="text-gray-400">
+                        Soulbound NFT ID system serving as a digital passport, tracking qualifications, reputation, and rank in real-time. Your key to governance, education, and all national services.
+                    </p>
                 </div>
 
                 <!-- Governance -->
                 <div class="glass rounded-2xl p-8 neon-glow">
                     <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--accent1)] mb-6"></div>
                     <h3 class="text-xl font-bold mb-4">Governance & Platform</h3>
-                    <p class="text-gray-400">Decentralized governance with expert-based voting, blockchain courts, and a comprehensive social platform for nation-building, education, and community initiatives.</p>
+                    <p class="text-gray-400">
+                        Decentralized governance with expert-based voting, blockchain courts, and a comprehensive social platform for nation-building, education, and community initiatives.
+                    </p>
                 </div>
             </div>
 
@@ -316,8 +395,8 @@
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Whitepaper v1.1</h2>
             
-            <div class="glass rounded-2xl p-8 neon-glow max-w-4xl mx-auto">
-                <div class="prose prose-lg prose-invert">
+            <div class="glass rounded-2xl p-8 neon-glow mx-auto" style="max-width: 96rem;">
+                <div class="prose prose-lg prose-invert max-w-none">
                     <div class="space-y-8">
                         <!-- Vision -->
                         <div>
@@ -472,119 +551,162 @@
     </footer>
 
     <script>
-        // Chart configurations
-        new Chart(document.getElementById('tokenomicsChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Community & PoC', 'Treasury', 'Development', 'Marketing', 'Team', 'Liquidity'],
-                datasets: [{
-                    data: [30, 20, 15, 15, 10, 10],
-                    backgroundColor: [
-                        '#00FF9D',
-                        '#4DEEEA',
-                        '#FF10F0',
-                        '#FF3B28',
-                        '#FFF01F',
-                        '#7B4DFF'
-                    ],
-                    borderWidth: 0
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: '#ffffff',
-                            padding: 20,
-                            font: {
-                                size: 12,
-                                family: "'Inter', sans-serif"
+        // Initialize everything after DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize charts
+            const tokenomicsChart = new Chart(document.getElementById('tokenomicsChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Community & PoC', 'Treasury', 'Development', 'Marketing', 'Team', 'Liquidity'],
+                    datasets: [{
+                        data: [30, 20, 15, 15, 10, 10],
+                        backgroundColor: [
+                            '#00FF9D', // primary
+                            '#4DEEEA', // secondary
+                            '#FF10F0', // accent1
+                            '#FF3B28', // accent2
+                            '#FFF01F', // accent3
+                            '#7B4DFF'  // accent4
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff',
+                                padding: 20,
+                                font: {
+                                    size: 12,
+                                    family: "'Inter', sans-serif"
+                                }
+                            }
+                        }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            const growthChart = new Chart(document.getElementById('growthChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    datasets: [{
+                        label: 'Community Growth',
+                        data: [1000, 5000, 15000, 50000],
+                        borderColor: '#00FF9D',
+                        backgroundColor: 'rgba(0, 255, 157, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#ffffff'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#ffffff'
                             }
                         }
                     }
-                },
-                cutout: '70%'
-            }
-        });
-
-        new Chart(document.getElementById('growthChart'), {
-            type: 'line',
-            data: {
-                labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-                datasets: [{
-                    label: 'Community Growth',
-                    data: [1000, 5000, 15000, 50000],
-                    borderColor: '#00FF9D',
-                    backgroundColor: 'rgba(0, 255, 157, 0.1)',
-                    tension: 0.4,
-                    fill: true
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                },
-                scales: {
-                    y: {
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        },
-                        ticks: {
-                            color: '#ffffff'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            color: 'rgba(255, 255, 255, 0.1)'
-                        },
-                        ticks: {
-                            color: '#ffffff'
-                        }
-                    }
                 }
+            });
+
+            // Initialize wallet connection
+            const connectWalletBtn = document.querySelector('[data-translate="connectWallet"]');
+            if (connectWalletBtn) {
+                connectWalletBtn.addEventListener('click', async function() {
+                    if (typeof window.ethereum !== 'undefined') {
+                        try {
+                            await window.ethereum.request({ method: 'eth_requestAccounts' });
+                            connectWalletBtn.textContent = 'Connected';
+                            connectWalletBtn.disabled = true;
+                        } catch (error) {
+                            console.error('Error connecting wallet:', error);
+                        }
+                    } else {
+                        alert('Please install MetaMask to connect your wallet!');
+                    }
+                });
+            }
+
+            // Initialize language switching
+            const languageSelect = document.getElementById('languageSelect');
+            if (languageSelect) {
+                languageSelect.addEventListener('change', function() {
+                    updateContent(this.value);
+                });
+            }
+
+            // Initialize typewriter
+            const typewriterElement = document.getElementById('typewriter');
+            console.log('Typewriter element:', typewriterElement);
+            
+            if (typewriterElement && typeof Typewriter !== 'undefined') {
+                console.log('Creating typewriter instance');
+                const typewriter = new Typewriter(typewriterElement, {
+                    loop: true,
+                    delay: 75,
+                    deleteSpeed: 50,
+                });
+
+                typewriter
+                    .typeString('<span style="color: #FFFFFF; text-shadow: 0 0 10px #FFFFFF;">Building the First Digital Nation on Cosmos</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #FFA500; text-shadow: 0 0 10px #FFA500;">Earn Bulgarian Lion (BGL) Through Real Contributions</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #0066FF; text-shadow: 0 0 10px #0066FF;">Unique Soulbound NFT Digital Citizenship</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #FFD700; text-shadow: 0 0 10px #FFD700;">Decentralized Governance System</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #800080; text-shadow: 0 0 10px #800080;">Revolutionary Social Platform</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #006400; text-shadow: 0 0 10px #006400;">Community-Driven Development</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #FF69B4; text-shadow: 0 0 10px #FF69B4;">Innovative Digital Economy</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #32CD32; text-shadow: 0 0 10px #32CD32;">Sustainable Growth & Development</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .typeString('<span style="color: #FF0000; text-shadow: 0 0 10px #FF0000;">Join the Digital Revolution</span>')
+                    .pauseFor(2000)
+                    .deleteAll()
+                    .start();
+                console.log('Typewriter started');
+            } else {
+                console.error('Typewriter element or library not found');
             }
         });
 
-        // Wallet Connection
-        const connectWalletBtn = document.getElementById('connectWallet');
-        
-        async function connectWallet() {
-            try {
-                if (typeof window.ethereum === 'undefined') {
-                    alert('Please install MetaMask to connect your wallet!');
-                    return;
-                }
-
-                const provider = new ethers.providers.Web3Provider(window.ethereum);
-                await provider.send("eth_requestAccounts", []);
-                const signer = provider.getSigner();
-                const account = await signer.getAddress();
-                
-                connectWalletBtn.textContent = account.slice(0, 6) + '...' + account.slice(-4);
-                connectWalletBtn.classList.add('connected');
-            } catch (error) {
-                console.error('Error connecting wallet:', error);
-                alert('Failed to connect wallet. Please try again.');
-            }
-        }
-
-        connectWalletBtn.addEventListener('click', connectWallet);
-
-        // Language Switching
-        const languageSelect = document.getElementById('languageSelect');
-        
-        languageSelect.addEventListener('change', function() {
-            const selectedLanguage = this.value;
-            updateContent(selectedLanguage);
-        });
-
+        // Language content update function
         function updateContent(language) {
             const elements = document.querySelectorAll('[data-translate]');
             elements.forEach(element => {
@@ -594,73 +716,6 @@
                 }
             });
         }
-
-        const features = [
-            { text: "Sovereign Digital Nation on Cosmos Blockchain", color: "var(--primary)" },
-            { text: "Bulgarian Lion (BGL) - Earned Through Real Contributions", color: "var(--secondary)" },
-            { text: "Soulbound NFT Digital Citizenship", color: "var(--accent1)" },
-            { text: "Decentralized Governance with Expert Voting", color: "var(--accent2)" },
-            { text: "Transparent Blockchain Courts", color: "var(--primary)" },
-            { text: "Community-Driven Social Platform", color: "var(--secondary)" }
-        ];
-
-        class Typewriter {
-            constructor(element, words, waitTime = 2000, typeSpeed = 50) {
-                this.element = element;
-                this.words = words;
-                this.waitTime = waitTime;
-                this.typeSpeed = typeSpeed;
-                this.currentWordIndex = 0;
-                this.isDeleting = false;
-                this.cursor = document.createElement('span');
-                this.cursor.className = 'cursor';
-                this.element.appendChild(this.cursor);
-            }
-
-            type() {
-                const currentWord = this.words[this.currentWordIndex];
-                const text = currentWord.text;
-                const color = currentWord.color;
-                
-                let displayText = this.element.textContent.slice(0, -1); // Remove cursor
-                
-                if (this.isDeleting) {
-                    displayText = text.substring(0, displayText.length - 1);
-                } else {
-                    displayText = text.substring(0, displayText.length + 1);
-                }
-
-                this.element.innerHTML = `<span style="color: ${color}">${displayText}</span>`;
-                this.element.appendChild(this.cursor);
-
-                let typeSpeed = this.typeSpeed;
-                
-                if (this.isDeleting) {
-                    typeSpeed /= 2;
-                }
-
-                if (!this.isDeleting && displayText === text) {
-                    typeSpeed = this.waitTime;
-                    this.isDeleting = true;
-                } else if (this.isDeleting && displayText === '') {
-                    this.isDeleting = false;
-                    this.currentWordIndex = (this.currentWordIndex + 1) % this.words.length;
-                    typeSpeed = 500;
-                }
-
-                setTimeout(() => this.type(), typeSpeed);
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const typewriterElement = document.getElementById('typewriter');
-            if (typewriterElement) {
-                const typewriter = new Typewriter(typewriterElement, features);
-                typewriter.type();
-            } else {
-                console.error('Typewriter element not found');
-            }
-        });
     </script>
 </body>
 </html>
