@@ -3,299 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA Bulgaria Whitepaper</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <title>NOVA BULGARIA Whitepaper</title>
+    <link rel="stylesheet" href="styles/whitepaper.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
     <style>
         :root {
-            --color-white: #ffffff;
-            --color-green: #00966E;
-            --color-red: #D62612;
+            --primary-color: #00466e;
+            --secondary-color: #c4a777;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
         }
         
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .glass-dark {
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--background-color);
+            margin: 0;
+            padding: 0;
         }
 
-        .chart-container {
+        .header {
+            background: var(--primary-color);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin: 0;
+            padding-bottom: 1rem;
+        }
+
+        .header .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .header .metadata {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+
+        .feature-box {
+            background: rgba(0, 70, 110, 0.05);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .feature-box h3 {
+            margin-top: 0;
+        }
+
+        .feature-box ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .feature-box ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
             position: relative;
-            height: 300px;
-            width: 100%;
         }
 
-        .prose {
-            max-width: 65ch;
-            font-size: 1.125rem;
-            line-height: 1.75;
+        .feature-box ul li::before {
+            content: "•";
+            color: var(--secondary-color);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
         }
 
-        .prose h2 {
-            margin-top: 2.5em;
-            margin-bottom: 1em;
-            font-size: 1.5em;
-            font-weight: 600;
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
         }
 
-        .prose p {
-            margin-bottom: 1.5em;
-        }
-
-        .prose ul {
-            margin-bottom: 1.5em;
-            list-style-type: disc;
-            padding-left: 1.5em;
-        }
-
-        .code-block {
-            background: #1a1a1a;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin: 1.5rem 0;
+        code {
+            background: #f4f6f8;
+            padding: 1.5rem;
+            border-radius: 8px;
+            display: block;
             overflow-x: auto;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9rem;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
 </head>
-<body class="bg-gray-50">
-    <nav class="glass fixed w-full z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex">
-                    <a href="/" class="flex items-center">
-                        <img src="assets/logo.svg" alt="NOVA Bulgaria" class="h-8 w-auto">
-                    </a>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#abstract" class="text-gray-700 hover:text-green-600">Abstract</a>
-                    <a href="#architecture" class="text-gray-700 hover:text-green-600">Architecture</a>
-                    <a href="#tokenomics" class="text-gray-700 hover:text-green-600">Tokenomics</a>
-                    <a href="#governance" class="text-gray-700 hover:text-green-600">Governance</a>
-                    <a href="/" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Back to Home</a>
-                </div>
-            </div>
+<body>
+    <div class="header">
+        <h1>NOVA BULGARIA Whitepaper</h1>
+        <div class="subtitle">A Sovereign Digital Nation Powered by Blockchain and Contribution</div>
+        <div class="metadata">
+            <span>Version: 1.1</span>
+            <span>Date: March 2025</span>
+            <span>Author: NOVA BULGARIA Core Team</span>
         </div>
-    </nav>
+    </div>
 
-    <main class="pt-20">
-        <!-- Abstract -->
-        <section id="abstract" class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="glass rounded-2xl p-8 mb-12">
-                    <h1 class="text-4xl font-bold mb-6">NOVA Bulgaria Whitepaper</h1>
-                    <p class="text-xl text-gray-600 mb-4">Version 1.0 - February 2025</p>
-                    <div class="prose">
-                        <h2>Abstract</h2>
-                        <p>NOVA Bulgaria represents a paradigm shift in nation-state architecture, implementing a fully decentralized digital sovereign nation powered by blockchain technology. This whitepaper outlines the technical foundation, governance mechanisms, and economic model that enables a new form of digital citizenship and national organization.</p>
-                        
-                        <p>Key innovations include:</p>
-                        <ul>
-                            <li>Blockchain-based national identity system with cryptographic proof of citizenship</li>
-                            <li>Democratic governance through smart contracts</li>
-                            <li>Native digital currency (BGL) with advanced economic policies</li>
-                            <li>Proof of Contribution mechanism for value creation and distribution</li>
-                        </ul>
-                    </div>
-                </div>
+    <div class="container">
+        <section class="section">
+            <h2>1. Vision</h2>
+            <p>NOVA BULGARIA is a revolutionary initiative to create a sovereign digital nation on its own blockchain, forked from Cosmos. The nation will be governed by principles of meritocracy, Proof of Contribution (PoC), and decentralization, ensuring that governance, economy, and social systems are fair, transparent, and community-driven.</p>
+            <p>The project honors Bulgaria's history and spirit, symbolized through the national currency — the Bulgarian Lion (BGL), a powerful representation of strength, independence, and unity.</p>
+        </section>
+
+        <section class="section">
+            <h2>2. Blockchain Infrastructure</h2>
+            <p>NOVA BULGARIA will run on a custom-built blockchain, forked from the Cosmos SDK. Cosmos was chosen for its flexibility, scalability, and interoperability, allowing NOVA BULGARIA to remain sovereign while connecting to other ecosystems.</p>
+            
+            <div class="feature-box">
+                <h3><span class="emoji">⚡</span>Why Cosmos?</h3>
+                <ul>
+                    <li>Modular Design: Easily adaptable to NOVA BULGARIA's unique governance and identity systems.</li>
+                    <li>Interoperability: Seamless connection with other blockchains for trade, diplomacy, and collaboration.</li>
+                    <li>Scalability & Speed: Fast transactions and low fees, essential for handling large-scale governance and social interactions.</li>
+                </ul>
+            </div>
+
+            <div class="feature-box">
+                <h3><span class="emoji">🛠️</span>Technical Stack:</h3>
+                <ul>
+                    <li>Consensus: Tendermint (Byzantine Fault Tolerant)</li>
+                    <li>Governance: On-chain voting with PoC-weighted influence</li>
+                    <li>Smart Contracts: CosmWasm for flexible, secure contract execution</li>
+                    <li>Storage: On-chain for public data, IPFS/Arweave for private information</li>
+                </ul>
             </div>
         </section>
 
-        <!-- Architecture -->
-        <section id="architecture" class="py-20 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-12">Technical Architecture</h2>
-                
-                <div class="glass rounded-2xl p-8 mb-12">
-                    <h3 class="text-2xl font-semibold mb-6">System Components</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h4 class="text-xl font-medium mb-4">Core Protocol</h4>
-                            <div class="code-block">
-                                <pre><code class="language-go">
-type NovaApp struct {
-    *baseapp.BaseApp
-    cdc           *codec.Codec
-    keys          map[string]*sdk.StoreKey
-    subspaces    map[string]params.Subspace
-    
-    // Keepers
-    identityKeeper   identity.Keeper
-    tokenKeeper      token.Keeper
-    governanceKeeper governance.Keeper
-    contributionKeeper contribution.Keeper
-}
-                                </code></pre>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="chart-container">
-                                <canvas id="architectureChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <section class="section">
+            <h2>3. The Bulgarian Lion (BGL) — National Currency</h2>
+            <p>The national currency, BGL (Bulgarian Lion), symbolizes courage, strength, and national pride. BGL will be a blockchain-native token, earned through real contributions to the nation — whether through labor, innovation, or social impact.</p>
+            <ul>
+                <li class="highlight">Proof of Contribution (PoC) Minting: New BGL tokens are minted and distributed based on verified contributions.</li>
+                <li class="highlight">Stable Economic Model: The supply of BGL adjusts dynamically to reflect the community's growth and productivity.</li>
+                <li class="highlight">Zero External Manipulation: As an independent blockchain, NOVA BULGARIA's economy is immune to external financial control or speculative manipulation.</li>
+            </ul>
+        </section>
 
-                <div class="glass rounded-2xl p-8">
-                    <h3 class="text-2xl font-semibold mb-6">Consensus Mechanism</h3>
-                    <div class="prose">
-                        <p>NOVA Bulgaria utilizes a hybrid consensus mechanism combining Delegated Proof of Stake (DPoS) with Proof of Contribution (PoC):</p>
-                        <ul>
-                            <li>Validator selection based on stake and contribution score</li>
-                            <li>Dynamic validator set with maximum of 100 validators</li>
-                            <li>Slashing conditions for malicious behavior</li>
-                            <li>Block time of 5 seconds with instant finality</li>
-                        </ul>
-                    </div>
-                </div>
+        <section class="section">
+            <h2>4. Digital Citizenship & NFT ID System</h2>
+            <p>Every citizen receives a Soulbound NFT ID — a non-transferable, evolving digital passport that serves as their identity and access key to the entire NOVA BULGARIA ecosystem.</p>
+            
+            <div class="feature-box">
+                <h3><span class="emoji">🧠</span>NFT ID Features:</h3>
+                <ul>
+                    <li>Non-Transferable: Permanently bound to the user's wallet to prevent fraud or identity theft.</li>
+                    <li>Upgradable Metadata: Tracks qualifications, reputation, and rank, updating in real time as citizens contribute to society.</li>
+                    <li>Access Key to the Ecosystem: The NFT ID grants access to governance systems, educational platforms, healthcare, and more.</li>
+                </ul>
+            </div>
+
+            <div class="feature-box">
+                <h3><span class="emoji">🔑</span>Example Metadata:</h3>
+                <code>{
+  "id": "nova_bulgaria_nft_id_001",
+  "name": "Maria Petrova",
+  "citizenship_status": "Active",
+  "rank": 3,
+  "reputation": 2100,
+  "qualifications": [
+    "Blockchain Law Exam",
+    "Health & Safety Training",
+    "Environmental Policy Expert"
+  ],
+  "voting_history": [
+    "Law Proposal #101 (Voted: YES)",
+    "Education Reform Proposal #202 (Voted: YES)"
+  ],
+  "optional_data": {
+    "medical_record_hash": "Qm12345...",
+    "financial_status": "Debt-Free"
+  },
+  "last_updated": "2025-03-08"
+}</code>
             </div>
         </section>
 
-        <!-- Tokenomics -->
-        <section id="tokenomics" class="py-20">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-12">Tokenomics</h2>
-                
-                <div class="glass rounded-2xl p-8 mb-12">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <h3 class="text-2xl font-semibold mb-6">Token Distribution</h3>
-                            <div class="chart-container">
-                                <canvas id="tokenDistributionChart"></canvas>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-semibold mb-6">Token Metrics</h3>
-                            <ul class="space-y-4">
-                                <li class="flex justify-between items-center">
-                                    <span>Total Supply:</span>
-                                    <span class="font-mono">1,000,000,000 BGL</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>Initial Circulating Supply:</span>
-                                    <span class="font-mono">100,000,000 BGL</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>Emission Rate:</span>
-                                    <span class="font-mono">5% annually</span>
-                                </li>
-                                <li class="flex justify-between items-center">
-                                    <span>Staking Rewards:</span>
-                                    <span class="font-mono">12% APR</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <section class="section">
+            <h2>5. Governance & Lawmaking</h2>
+            <p>NOVA BULGARIA will run on a fully decentralized governance system, where all political decisions are made directly by qualified citizens through blockchain voting.</p>
+            <ul>
+                <li>Direct Democracy: Every vote is recorded on-chain, and laws are executed automatically through smart contracts.</li>
+                <li>Expert-Based Voting: Citizens can only vote on proposals within their areas of expertise (tracked via NFT ID qualifications).</li>
+                <li>Real-Time Law Activation: Once a law passes with a 51% majority, it takes effect instantly — no bureaucracy, no delays.</li>
+            </ul>
         </section>
 
-        <!-- Governance -->
-        <section id="governance" class="py-20 bg-white">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl font-bold mb-12">Governance Model</h2>
-                
-                <div class="glass rounded-2xl p-8 mb-12">
-                    <div class="prose">
-                        <h3>Proposal Types</h3>
-                        <ul>
-                            <li>Parameter Change Proposals</li>
-                            <li>Software Upgrade Proposals</li>
-                            <li>Constitutional Amendments</li>
-                            <li>Resource Allocation Proposals</li>
-                        </ul>
-
-                        <h3>Voting Mechanism</h3>
-                        <p>The voting power is calculated using a quadratic formula that considers both token holdings and contribution score:</p>
-                        <div class="code-block">
-                            <pre><code class="language-go">
-func CalculateVotingPower(tokens sdk.Int, contributionScore sdk.Dec) sdk.Dec {
-    return sdk.NewDec(tokens.Int64()).Sqrt().
-           Add(contributionScore.Sqrt()).
-           Quo(sdk.NewDec(2))
-}
-                            </code></pre>
-                        </div>
-
-                        <h3>Proposal Lifecycle</h3>
-                        <ol>
-                            <li>Submission Period (2 days)</li>
-                            <li>Deposit Period (5 days)</li>
-                            <li>Voting Period (7 days)</li>
-                            <li>Execution Delay (2 days)</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
+        <section class="section">
+            <h2>6. Judicial & Law Enforcement System</h2>
+            <p>Blockchain Courts: Cases are logged and processed transparently on-chain. Judges are selected based on their qualifications and reputation scores.</p>
+            <p>Decentralized Law Enforcement: Citizens can submit reports directly to the blockchain, and law enforcement actions are tracked for full transparency.</p>
         </section>
-    </main>
 
-    <script>
-        // Architecture Chart
-        new Chart(document.getElementById('architectureChart'), {
-            type: 'radar',
-            data: {
-                labels: ['Scalability', 'Security', 'Decentralization', 'Privacy', 'Interoperability'],
-                datasets: [{
-                    label: 'NOVA Protocol',
-                    data: [85, 95, 90, 80, 85],
-                    fill: true,
-                    backgroundColor: 'rgba(0, 150, 110, 0.2)',
-                    borderColor: 'rgb(0, 150, 110)',
-                    pointBackgroundColor: 'rgb(0, 150, 110)',
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(0, 150, 110)'
-                }]
-            },
-            options: {
-                elements: {
-                    line: { tension: 0.4 }
-                },
-                scales: {
-                    r: {
-                        angleLines: { display: true },
-                        suggestedMin: 0,
-                        suggestedMax: 100
-                    }
-                }
-            }
-        });
-
-        // Token Distribution Chart
-        new Chart(document.getElementById('tokenDistributionChart'), {
-            type: 'doughnut',
-            data: {
-                labels: ['Community Treasury', 'Team & Advisors', 'Development Fund', 'Initial Distribution', 'Ecosystem Growth'],
-                datasets: [{
-                    data: [30, 20, 15, 25, 10],
-                    backgroundColor: [
-                        'rgb(0, 150, 110)',
-                        'rgb(214, 38, 18)',
-                        'rgb(59, 130, 246)',
-                        'rgb(245, 158, 11)',
-                        'rgb(139, 92, 246)'
-                    ]
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }
-        });
-    </script>
+        <section class="section">
+            <h2>7. Platform & Social Ecosystem</h2>
+            <p>The NOVA BULGARIA platform will be a social hub with multiple feeds for various aspects of governance, community interaction, and personal growth. Think of it as Facebook on steroids, tailored for nation-building.</p>
+            <ul>
+                <li>Governance Feed: Propose, discuss, and vote on laws and policies.</li>
+                <li>Education Feed: Take exams, earn qualifications, and level up your NFT ID.</li>
+                <li>Community Feed: Organize local initiatives, volunteer for social projects, and track national progress.</li>
+            </ul>
+        </section>
+    </div>
 </body>
 </html>

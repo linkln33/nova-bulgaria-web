@@ -9,6 +9,8 @@
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="/assets/js/nft.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -31,7 +33,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background: #0a0a0a;
-            color: #ffffff;
+            color: white;
             overflow-x: hidden;
         }
 
@@ -44,23 +46,22 @@
 
         .glass {
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             transition: all 0.3s ease;
         }
 
         .glass:hover {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
         }
 
         .gradient-text {
+            -webkit-text-fill-color: transparent;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
             background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .hero-gradient {
@@ -125,17 +126,6 @@
             50% { opacity: 0; }
         }
 
-        .nft-card {
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nft-card:hover {
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
-        }
-
         .stats-value {
             background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -168,6 +158,59 @@
         .feature-item:hover .feature-icon {
             transform: scale(1.1);
         }
+
+        /* NFT ID Card Styles */
+        .nft-id-card {
+            perspective: 1000px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .holographic-line {
+            background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(255,0,0,0.4) 5%,
+                rgba(0,255,255,0.8) 12%,
+                rgba(255,255,255,0.9) 20%,
+                rgba(255,165,0,0.8) 28%,
+                rgba(255,0,255,0.9) 36%,
+                rgba(50,205,50,0.8) 44%,
+                rgba(255,255,255,0.9) 52%,
+                rgba(255,0,0,0.8) 60%,
+                rgba(0,255,255,0.9) 68%,
+                rgba(255,165,0,0.8) 76%,
+                rgba(50,205,50,0.8) 84%,
+                rgba(255,0,255,0.4) 92%,
+                transparent 100%
+            );
+            animation: holographic-shift 15s linear infinite;
+            mix-blend-mode: soft-light;
+            opacity: 0.9;
+            background-size: 100% 200%;
+            backdrop-filter: blur(1px);
+        }
+        
+        .holographic-texture {
+            background-image: repeating-linear-gradient(
+                45deg,
+                rgba(255,255,255,0.15) 0px,
+                rgba(255,255,255,0.15) 2px,
+                transparent 2px,
+                transparent 4px
+            );
+            background-size: 8px 8px;
+            mix-blend-mode: overlay;
+            opacity: 0.8;
+        }
+
+        .citizenship-badge {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+        }
+        
+        @keyframes holographic-shift {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 -200%; }
+        }
     </style>
 </head>
 <body>
@@ -181,6 +224,7 @@
                 
                 <div class="flex items-center space-x-6">
                     <div class="hidden md:flex space-x-6">
+                        <a href="#nft-id" class="hover:text-[var(--primary)] transition-colors">NFT ID</a>
                         <a href="#features" class="hover:text-[var(--primary)] transition-colors" data-translate="features">Features</a>
                         <a href="#tokenomics" class="hover:text-[var(--primary)] transition-colors" data-translate="tokenomics">Tokenomics</a>
                         <a href="#roadmap" class="hover:text-[var(--primary)] transition-colors" data-translate="roadmap">Roadmap</a>
@@ -203,111 +247,139 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="h-[50vh] flex items-start justify-center bg-hero bg-cover bg-center relative pt-32">
+    <section class="h-[50vh] flex items-center justify-center relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent"></div>
-        <div class="relative z-10 text-center mx-auto px-6">
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 gradient-text" style="word-break: keep-all; white-space: nowrap;">Welcome to the Future of Nations</h1>
-            <div id="typewriter" class="typewriter text-xl mb-8"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <!-- Logo -->
+            <div class="flex justify-center mb-4">
+                <img src="assets/images/logo.png" alt="" class="h-32 w-auto">
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-bold mb-3 gradient-text">
+                NOVA BULGARIA
+            </h1>
+            <p class="text-xl md:text-2xl mb-4 text-gray-300">
+                The First Digital Nation on the Blockchain
+            </p>
+            <div id="typewriter" class="typewriter text-xl mb-4"></div>
         </div>
     </section>
-<!-- NFT ID Demo Section -->
-<section class="py-16 relative overflow-hidden" id="nft-demo">
-    <div class="container mx-auto px-6">
-        <div class="glass rounded-3xl p-8 max-w-4xl mx-auto relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--accent4)]"></div>
-            <div class="relative z-10">
-                <h2 class="text-3xl font-bold mb-6 gradient-text">Digital Citizenship NFT ID</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- NFT Preview -->
-                    <div class="space-y-4">
-                        <div class="aspect-square rounded-2xl overflow-hidden relative glass">
-                            <div class="absolute inset-0 flex items-center justify-center p-6">
-                                <div class="text-center w-full">
-                                    <div class="w-full max-w-[240px] mx-auto mb-4">
-                                        <img src="../logo.png" alt="NOVA BULGARIA Logo" class="w-full h-auto filter drop-shadow-[0_0_10px_rgba(var(--primary-rgb),0.3)]">
+
+    <!-- NFT ID Section -->
+    <section id="nft-id" class="py-6 bg-black bg-opacity-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Digital Citizenship NFT ID</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <!-- NFT ID Card Container -->
+                <div class="space-y-6">
+                    <div class="relative w-full max-w-md mx-auto">
+                        <div class="relative h-64 rounded-xl overflow-hidden nft-id-card">
+                            <!-- Card Background -->
+                            <div class="absolute inset-0" style="background: linear-gradient(135deg, #00966E 0%, #004D38 100%);"></div>
+                            
+                            <!-- Vertical Holographic Line -->
+                            <div class="absolute h-full w-16 right-1/3 transform -skew-x-12">
+                                <div class="absolute inset-0 holographic-line"></div>
+                                <div class="absolute inset-0 holographic-texture"></div>
+                            </div>
+                            
+                            <!-- Logo -->
+                            <div class="absolute top-4 left-4 h-12 w-auto flex items-center space-x-2">
+                                <img src="assets/images/logo.png" alt="" class="h-full w-auto">
+                            </div>
+                            
+                            <!-- Profile Picture Area -->
+                            <div class="absolute left-4 top-20 w-28 h-28 rounded-lg border-2 border-white/30 overflow-hidden bg-white/10 flex items-center justify-center shadow-lg">
+                                <svg class="w-16 h-16 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            
+                            <!-- Citizenship Level -->
+                            <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-bold citizenship-badge">
+                                Gold
+                            </div>
+                            
+                            <!-- Main Content -->
+                            <div class="absolute bottom-0 right-0 w-2/3 p-4 text-white">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <h2 class="text-xl font-bold mb-2">John Doe</h2>
+                                        <div class="space-y-1 text-sm">
+                                            <p>ID: BG-2025-0001</p>
+                                            <p>DOB: 1990-01-01</p>
+                                            <p>Nationality: NOVA Bulgarian</p>
+                                        </div>
                                     </div>
-                                    <div class="mt-4">
-                                        <p class="text-sm text-gray-400">Soulbound NFT ID</p>
-                                        <p class="text-xl font-bold gradient-text">NOVA-ID #1337</p>
+                                    <div class="flex flex-col items-end justify-between">
+                                        <div class="bg-white p-1 rounded shadow-lg">
+                                            <canvas id="qr-code" class="mb-0"></canvas>
+                                        </div>
+                                        <div class="text-xs text-right mt-2">
+                                            <p>Issued: 2025-02-19</p>
+                                            <p>Expires: 2030-02-19</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="glass rounded-xl p-4 text-center">
-                            <p class="text-sm text-gray-400 mb-1">Verified Digital Citizen</p>
-                            <p class="text-lg font-semibold text-[var(--primary)]">National Republic of Bulgaria</p>
+                            
+                            <!-- Security Features -->
+                            <div class="absolute bottom-2 left-4 text-[8px] text-white/50">
+                                0x1234...5678
+                            </div>
                         </div>
                     </div>
-                    
-                    <!-- NFT Details -->
-                    <div class="space-y-4">
-                        <div class="glass rounded-xl p-4">
-                            <h3 class="text-lg font-semibold mb-2 text-[var(--primary)]">Citizen Details</h3>
-                            <div class="space-y-2">
-                                <p class="text-sm text-gray-300"><span class="text-gray-400">ID:</span> NOVA-BG-2025-1337</p>
-                                <p class="text-sm text-gray-300"><span class="text-gray-400">Status:</span> <span class="text-[var(--primary)]">Active</span></p>
-                                <p class="text-sm text-gray-300"><span class="text-gray-400">Rank:</span> Level 3 Citizen</p>
-                                <p class="text-sm text-gray-300"><span class="text-gray-400">Issued:</span> February 19, 2025</p>
-                            </div>
+
+                    <div class="glass rounded-2xl p-6 space-y-6 max-w-md mx-auto">
+                        <div class="space-y-4">
+                            <h4 class="text-xl font-semibold text-[var(--secondary)]">How to Obtain</h4>
+                            <p class="text-gray-300">To obtain your NOVA Bulgaria Digital ID:</p>
+                            <ol class="list-decimal pl-5 space-y-2 text-gray-300">
+                                <li>Complete the citizenship application</li>
+                                <li>Pass the verification process</li>
+                                <li>Contribute to the ecosystem</li>
+                                <li>Maintain active participation</li>
+                            </ol>
                         </div>
                         
-                        <div class="glass rounded-xl p-4">
-                            <h3 class="text-lg font-semibold mb-2 text-[var(--secondary)]">Features & Benefits</h3>
-                            <ul class="space-y-2">
-                                <li class="text-sm text-gray-300 flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Voting Rights in DAO
-                                </li>
-                                <li class="text-sm text-gray-300 flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Access to Digital Services
-                                </li>
-                                <li class="text-sm text-gray-300 flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Reward Points System
-                                </li>
-                                <li class="text-sm text-gray-300 flex items-center">
-                                    <svg class="w-4 h-4 mr-2 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                    Skill Verification
-                                </li>
-                            </ul>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="#application" class="flex-1 inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-black bg-[var(--primary)] hover:bg-[var(--secondary)] transition-colors duration-200 ease-in-out shadow-lg hover:shadow-xl">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                Apply for Citizenship
+                            </a>
+                            <a href="#requirements" class="flex-1 inline-flex items-center justify-center px-6 py-3 border-2 border-[var(--primary)] text-base font-medium rounded-lg text-[var(--primary)] hover:bg-[var(--primary)] hover:text-black transition-colors duration-200 ease-in-out shadow-lg hover:shadow-xl">
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                View Requirements
+                            </a>
                         </div>
+                    </div>
+                </div>
 
-                        <div class="glass rounded-xl p-4">
-                            <h3 class="text-lg font-semibold mb-2 text-[var(--accent4)]">Properties</h3>
-                            <div class="grid grid-cols-2 gap-2">
-                                <div class="glass rounded-lg p-2">
-                                    <p class="text-xs text-gray-400">Quiz Score</p>
-                                    <p class="text-sm font-semibold text-[var(--primary)]">85/100</p>
-                                </div>
-                                <div class="glass rounded-lg p-2">
-                                    <p class="text-xs text-gray-400">Level</p>
-                                    <p class="text-sm font-semibold text-[var(--secondary)]">3</p>
-                                </div>
-                                <div class="glass rounded-lg p-2">
-                                    <p class="text-xs text-gray-400">Badge Type</p>
-                                    <p class="text-sm font-semibold text-[var(--accent1)]">Pioneer</p>
-                                </div>
-                                <div class="glass rounded-lg p-2">
-                                    <p class="text-xs text-gray-400">Achievements</p>
-                                    <p class="text-sm font-semibold text-[var(--accent3)]">5</p>
-                                </div>
-                            </div>
-                        </div>
+                <!-- NFT ID Information -->
+                <div class="glass rounded-2xl p-8 space-y-6">
+                    <h3 class="text-2xl font-bold text-[var(--primary)]">Digital Citizenship & NFT ID System</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>Every citizen receives a Soulbound NFT ID — a non-transferable, evolving digital passport that serves as their identity and access key to the entire NOVA BULGARIA ecosystem.</p>
+                        
+                        <h4 class="text-xl font-semibold text-[var(--secondary)]">Features</h4>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Unique holographic security elements</li>
+                            <li>Blockchain-verified authenticity</li>
+                            <li>Different tiers of citizenship (Bronze, Silver, Gold)</li>
+                            <li>Integrated QR code for quick verification</li>
+                            <li>Tamper-proof digital credentials</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Stats Grid -->
     <section>
@@ -330,7 +402,7 @@
     </section>
 
     <!-- Charts Section -->
-    <section id="tokenomics" class="py-20 bg-black bg-opacity-50">
+    <section id="tokenomics" class="py-8 bg-black bg-opacity-50">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Tokenomics</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -351,7 +423,7 @@
     </section>
 
     <!-- Features Section -->
-    <section id="features" class="py-20">
+    <section id="features" class="py-8">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Core Features</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -375,7 +447,7 @@
     </section>
 
     <!-- Pitch Deck Section -->
-    <section id="pitch" class="py-20">
+    <section id="pitch" class="py-8">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Pitch Deck</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -425,7 +497,7 @@
     </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-20 bg-black bg-opacity-50">
+    <section id="roadmap" class="py-8 bg-black bg-opacity-50">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Roadmap</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -466,142 +538,259 @@
     </section>
 
     <!-- Whitepaper Section -->
-    <section id="whitepaper" class="py-20 bg-black bg-opacity-50">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Whitepaper v1.1</h2>
-            
-            <div class="glass rounded-2xl p-8 neon-glow mx-auto" style="max-width: 96rem;">
-                <div class="prose prose-lg prose-invert max-w-none">
-                    <div class="space-y-8">
-                        <!-- Vision -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">1. Vision</h3>
-                            <p class="text-gray-300">
-                                NOVA BULGARIA is a revolutionary initiative to create a sovereign digital nation on its own blockchain, forked from Cosmos. The nation will be governed by principles of meritocracy, Proof of Contribution (PoC), and decentralization, ensuring that governance, economy, and social systems are fair, transparent, and community-driven.
-                            </p>
-                            <p class="text-gray-300 mt-4">
-                                The project honors Bulgaria's history and spirit, symbolized through the national currency — the Bulgarian Lion (BGL), a powerful representation of strength, independence, and unity.
-                            </p>
+    <section id="whitepaper" class="w-full py-16 px-4">
+        <div class="text-center mb-12">
+            <h2 class="text-5xl font-bold mb-4 gradient-text">Whitepaper</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">A comprehensive guide to NOVA BULGARIA's vision, technology, and governance</p>
+        </div>
+
+        <div class="max-w-[1400px] mx-auto">
+            <!-- Table of Contents -->
+            <div class="glass rounded-2xl p-8 mb-12 border border-[var(--accent1)] border-opacity-20">
+                <h3 class="text-2xl font-bold mb-6 text-[var(--accent1)]">Contents</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <a href="#vision" class="glass p-4 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--primary)]">1. Vision</h4>
+                        <p class="text-sm text-gray-400">The foundation of our digital nation</p>
+                    </a>
+                    <a href="#principles" class="glass p-4 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--secondary)]">2. Key Principles</h4>
+                        <p class="text-sm text-gray-400">Core values and concepts</p>
+                    </a>
+                    <a href="#token" class="glass p-4 rounded-xl hover:border-[var(--accent1)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--accent1)]">3. Token Model</h4>
+                        <p class="text-sm text-gray-400">BGL and economic system</p>
+                    </a>
+                    <a href="#nft" class="glass p-4 rounded-xl hover:border-[var(--accent2)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--accent2)]">4. NFT ID System</h4>
+                        <p class="text-sm text-gray-400">Digital citizenship</p>
+                    </a>
+                    <a href="#governance" class="glass p-4 rounded-xl hover:border-[var(--accent3)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--accent3)]">5. Governance</h4>
+                        <p class="text-sm text-gray-400">Decision making and law</p>
+                    </a>
+                    <a href="#funding" class="glass p-4 rounded-xl hover:border-[var(--accent4)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--accent4)]">6. Funding</h4>
+                        <p class="text-sm text-gray-400">Economic growth strategy</p>
+                    </a>
+                    <a href="#development" class="glass p-4 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--primary)]">7. Development</h4>
+                        <p class="text-sm text-gray-400">Roadmap and next steps</p>
+                    </a>
+                    <a href="#conclusion" class="glass p-4 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
+                        <h4 class="text-lg font-semibold text-[var(--secondary)]">8. Conclusion</h4>
+                        <p class="text-sm text-gray-400">Future vision</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="space-y-16">
+                <!-- Vision Section -->
+                <div id="vision" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--primary)]">1. Vision</h3>
+                    <p class="text-gray-300">NOVA BULGARIA is a revolutionary initiative to create a fully decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. The project aims to transfer all traditionally government-controlled functions to the hands of national members through blockchain technology.</p>
+                    <p class="text-gray-300">Governance, economy, healthcare, law enforcement, and public infrastructure will be managed transparently and immutably via blockchain, eliminating corruption and ensuring decisions are based on expertise and contribution.</p>
+                </div>
+
+                <!-- Key Principles -->
+                <div id="principles" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--secondary)]">2. Key Principles</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]">🌟 Proof of Contribution</h4>
+                            <p class="text-gray-300">Members earn voting power, social rank, and economic benefits based on their real contributions — including skilled labor, innovation, and public service. Voting power updates daily, reflecting continuous personal development.</p>
+                        </div>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]">🆔 NFT ID System</h4>
+                            <p class="text-gray-300">A unique, evolving digital identity that serves as a passport to the nation. It records rank, expertise, reputation, and access rights within the ecosystem.</p>
+                        </div>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">⚖️ Transparent Governance</h4>
+                            <p class="text-gray-300">Laws and policies are proposed, discussed, and voted on via blockchain. Decisions are executed immediately with 51% consensus, without bureaucratic delay.</p>
+                        </div>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">💰 Dynamic Token Economy</h4>
+                            <p class="text-gray-300">A hybrid token system balancing long-term growth with short-term stability, designed to reward contribution while protecting against volatility.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hybrid Token Model -->
+                <div id="token" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent1)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent1)]">3. Hybrid Token Model</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]">🦁 BGL (Bulgarian Lion) — Core Nation Token</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Purpose: Governance, staking, long-term value accumulation, and PoC rewards</li>
+                                <li>• Supply: Minted on demand for events (e.g., onboarding, project completion)</li>
+                                <li>• Stability: Logarithmic supply curve slows token issuance as supply grows</li>
+                                <li>• Price Floor: Supported by a treasury fund with auto-buy mechanism</li>
+                            </ul>
                         </div>
 
-                        <!-- Blockchain Infrastructure -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--secondary)]">2. Blockchain Infrastructure</h3>
-                            <p class="text-gray-300">
-                                NOVA BULGARIA will run on a custom-built blockchain, forked from the Cosmos SDK. Cosmos was chosen for its flexibility, scalability, and interoperability, allowing NOVA BULGARIA to remain sovereign while connecting to other ecosystems.
-                            </p>
-                            
-                            <h4 class="text-xl font-semibold mt-6 mb-3 text-[var(--accent1)]">⚡ Why Cosmos?</h4>
-                            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                                <li>Modular Design: Easily adaptable to NOVA BULGARIA's unique governance and identity systems.</li>
-                                <li>Interoperability: Seamless connection with other blockchains for trade, diplomacy, and collaboration.</li>
-                                <li>Scalability & Speed: Fast transactions and low fees, essential for handling large-scale governance and social interactions.</li>
-                            </ul>
-
-                            <h4 class="text-xl font-semibold mt-6 mb-3 text-[var(--accent2)]">🛠️ Technical Stack:</h4>
-                            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                                <li>Consensus: Tendermint (Byzantine Fault Tolerant)</li>
-                                <li>Governance: On-chain voting with PoC-weighted influence</li>
-                                <li>Smart Contracts: CosmWasm for flexible, secure contract execution</li>
-                                <li>Storage: On-chain for public data, IPFS/Arweave for private information</li>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]">🛡️ BGL-S (Stable Lion) — Native Stablecoin</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Purpose: Everyday transactions, salaries, and public services</li>
+                                <li>• Peg: Basket of assets (fiat reserves, tokenized infrastructure, fractional BGL)</li>
+                                <li>• Mechanism: Lock BGL to mint BGL-S, burn BGL-S to redeem</li>
+                                <li>• Governance: Community can vote to adjust stabilization parameters</li>
                             </ul>
                         </div>
 
-                        <!-- Bulgarian Lion -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">3. The Bulgarian Lion (BGL) — National Currency</h3>
-                            <p class="text-gray-300">
-                                The national currency, BGL (Bulgarian Lion), symbolizes courage, strength, and national pride. BGL will be a blockchain-native token, earned through real contributions to the nation — whether through labor, innovation, or social impact.
-                            </p>
-                            <ul class="list-disc list-inside space-y-2 mt-4 text-gray-300">
-                                <li>Proof of Contribution (PoC) Minting: New BGL tokens are minted and distributed based on verified contributions.</li>
-                                <li>Stable Economic Model: The supply of BGL adjusts dynamically to reflect the community's growth and productivity.</li>
-                                <li>Zero External Manipulation: As an independent blockchain, NOVA BULGARIA's economy is immune to external financial control or speculative manipulation.</li>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">🎁 Event-Based Minting & Rewards</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Onboarding: 3 million BGL for new members upon registration</li>
+                                <li>• Project Completion: BGL rewards for completed national projects</li>
+                                <li>• Staking: Earn BGL-S dividends or project ownership shares</li>
                             </ul>
                         </div>
 
-                        <!-- Digital Citizenship -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--secondary)]">4. Digital Citizenship & NFT ID System</h3>
-                            <p class="text-gray-300">
-                                Every citizen receives a Soulbound NFT ID — a non-transferable, evolving digital passport that serves as their identity and access key to the entire NOVA BULGARIA ecosystem.
-                            </p>
-
-                            <h4 class="text-xl font-semibold mt-6 mb-3 text-[var(--accent1)]">🧠 NFT ID Features:</h4>
-                            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                                <li>Non-Transferable: Permanently bound to the user's wallet to prevent fraud or identity theft.</li>
-                                <li>Upgradable Metadata: Tracks qualifications, reputation, and rank, updating in real time as citizens contribute to society.</li>
-                                <li>Access Key to the Ecosystem: The NFT ID grants access to governance systems, educational platforms, healthcare, and more.</li>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">🚨 Emergency Stabilization</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Rapid Mint/Burn for crisis events</li>
+                                <li>• Community-elected emergency committees</li>
+                                <li>• Post-crisis audits for accountability</li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
 
-                            <div class="bg-black bg-opacity-50 p-4 rounded-lg mt-6">
-                                <h4 class="text-xl font-semibold mb-3 text-[var(--accent2)]">🔑 Example Metadata:</h4>
-                                <pre class="text-sm text-gray-300 overflow-x-auto">
+                <!-- NFT ID System -->
+                <div id="nft" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent4)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent4)]">4. NFT ID Onboarding & Identity System</h3>
+                    <p class="text-gray-300">Every citizen receives a Soulbound NFT ID upon passing a foundational knowledge exam covering history, language, psychology, and more.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">🔑 Key Features</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li class="flex items-start">
+                                    <span class="text-[var(--accent4)] mr-2">•</span>
+                                    Non-Transferable Soulbound NFT
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[var(--accent4)] mr-2">•</span>
+                                    Evolving based on contributions and exams
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[var(--accent4)] mr-2">•</span>
+                                    Privacy-focused with minimal public data
+                                </li>
+                                <li class="flex items-start">
+                                    <span class="text-[var(--accent4)] mr-2">•</span>
+                                    Access key to all national systems
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">📊 Public Data</h4>
+                            <pre class="text-sm text-gray-300 overflow-x-auto">
 {
-  "id": "nova_bulgaria_nft_id_001",
   "name": "Maria Petrova",
-  "citizenship_status": "Active",
   "rank": 3,
-  "reputation": 2100,
-  "qualifications": [
-    "Blockchain Law Exam",
-    "Health & Safety Training",
-    "Environmental Policy Expert"
+  "expertise": [
+    "Blockchain Law",
+    "Environmental Policy"
   ],
-  "voting_history": [
-    "Law Proposal #101 (Voted: YES)",
-    "Education Reform Proposal #202 (Voted: YES)"
-  ],
-  "optional_data": {
-    "medical_record_hash": "Qm12345...",
-    "financial_status": "Debt-Free"
-  },
-  "last_updated": "2025-03-08"
+  "contribution_score": 2100
 }</pre>
-                            </div>
                         </div>
+                    </div>
+                </div>
 
-                        <!-- Governance -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">5. Governance & Lawmaking</h3>
-                            <p class="text-gray-300">
-                                NOVA BULGARIA will run on a fully decentralized governance system, where all political decisions are made directly by qualified citizens through blockchain voting.
-                            </p>
-                            <ul class="list-disc list-inside space-y-2 mt-4 text-gray-300">
-                                <li>Direct Democracy: Every vote is recorded on-chain, and laws are executed automatically through smart contracts.</li>
-                                <li>Expert-Based Voting: Citizens can only vote on proposals within their areas of expertise (tracked via NFT ID qualifications).</li>
-                                <li>Real-Time Law Activation: Once a law passes with a 51% majority, it takes effect instantly — no bureaucracy, no delays.</li>
+                <!-- Governance Section -->
+                <div id="governance" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--primary)]">5. Governance & Law Enforcement</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]">🗳️ Decentralized Voting</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Expertise-based voting rights</li>
+                                <li>• Direct democracy system</li>
+                                <li>• Immediate execution of decisions</li>
                             </ul>
                         </div>
-
-                        <!-- Judicial System -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--secondary)]">6. Judicial & Law Enforcement System</h3>
-                            <ul class="list-disc list-inside space-y-2 text-gray-300">
-                                <li>Blockchain Courts: Cases are logged and processed transparently on-chain. Judges are selected based on their qualifications and reputation scores.</li>
-                                <li>Decentralized Law Enforcement: Citizens can submit reports directly to the blockchain, and law enforcement actions are tracked for full transparency.</li>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]">⚡ Emergency Votes</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Expedited voting windows</li>
+                                <li>• Temporary power boosts</li>
+                                <li>• Crisis response system</li>
                             </ul>
                         </div>
-
-                        <!-- Platform -->
-                        <div>
-                            <h3 class="text-2xl font-bold mb-4 text-[var(--accent1)]">7. Platform & Social Ecosystem</h3>
-                            <p class="text-gray-300">
-                                The NOVA BULGARIA platform will be a social hub with multiple feeds for various aspects of governance, community interaction, and personal growth. Think of it as Facebook on steroids, tailored for nation-building.
-                            </p>
-                            <ul class="list-disc list-inside space-y-2 mt-4 text-gray-300">
-                                <li>Governance Feed: Propose, discuss, and vote on laws and policies.</li>
-                                <li>Education Feed: Take exams, earn qualifications, and level up your NFT ID.</li>
-                                <li>Community Feed: Organize local initiatives, volunteer for social projects, and track national progress.</li>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]">⚖️ Blockchain Courts</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• PoC-rated judges</li>
+                                <li>• Random selection</li>
+                                <li>• Transparent proceedings</li>
                             </ul>
                         </div>
                     </div>
+                </div>
 
-                    <div class="mt-12 flex justify-center">
-                        <a href="/whitepaper.pdf" class="inline-block bg-[var(--primary)] text-black px-8 py-3 rounded-lg font-medium hover:bg-[var(--secondary)] transition-colors">
-                            Download Full Whitepaper
-                        </a>
+                <!-- Funding Section -->
+                <div id="funding" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--secondary)]">6. Funding & Economic Growth</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]">💰 Crowdfunding</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• BGL/fiat contributions</li>
+                                <li>• Reward system for contributors</li>
+                                <li>• Transparent project funding</li>
+                            </ul>
+                        </div>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]">🏦 Treasury</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Community governance</li>
+                                <li>• Automatic stabilizers</li>
+                                <li>• Economic security measures</li>
+                            </ul>
+                        </div>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]">💱 Fiat Integration</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Traditional payment options</li>
+                                <li>• BGL reward system</li>
+                                <li>• Bridge to traditional finance</li>
+                            </ul>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Development Section -->
+                <div id="development" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent3)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent3)]">7. Next Steps & MVP Development</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">🔄 Phase 1</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Cosmos Blockchain Fork</li>
+                                <li>• NFT ID Onboarding MVP</li>
+                            </ul>
+                        </div>
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">🚀 Phase 2</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• Hybrid Token Launch</li>
+                                <li>• Crowdfunding Portal</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conclusion -->
+                <div id="conclusion" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent1)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent1)]">Conclusion: A New Era of Digital Sovereignty</h3>
+                    <p class="text-gray-300">Nova Bulgaria aims to pioneer the world's first truly decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. By combining meritocratic governance with a dynamic token economy, the project seeks to create a living, evolving nation-state that thrives on the collective power of its people.</p>
                 </div>
             </div>
         </div>
@@ -625,32 +814,41 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@cosmjs/cosmwasm-stargate@0.31.1/dist/index.min.js"></script>
+    <script src="assets/js/main.js"></script>
     <script>
         // Initialize everything after DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Load NFT Demo Component
-            fetch('/components/nft-demo.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('nft-demo-container').innerHTML = html;
+            // Initialize QR Code
+            const qrCode = document.getElementById('qr-code');
+            if (qrCode && window.QRCode) {
+                QRCode.toCanvas(qrCode, 'NOVA-ID-001', {
+                    width: 64,
+                    margin: 2,
+                    color: {
+                        dark: '#000',
+                        light: '#fff'
+                    },
+                    errorCorrectionLevel: 'M'
                 });
+            }
 
-            // Initialize charts
-            const tokenomicsChart = new Chart(document.getElementById('tokenomicsChart'), {
+            // Initialize tokenomics chart
+            const ctx = document.getElementById('tokenomicsChart').getContext('2d');
+            new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: ['Community & PoC', 'Treasury', 'Development', 'Marketing', 'Team', 'Liquidity'],
                     datasets: [{
                         data: [30, 20, 15, 15, 10, 10],
                         backgroundColor: [
-                            '#00FF9D', // primary
-                            '#4DEEEA', // secondary
-                            '#FF10F0', // accent1
-                            '#FF3B28', // accent2
-                            '#FFF01F', // accent3
-                            '#7B4DFF'  // accent4
-                        ],
-                        borderWidth: 0
+                            '#00FF9D',
+                            '#4DEEEA',
+                            '#FF10F0',
+                            '#FF3B28',
+                            '#FFF01F',
+                            '#7B4DFF'
+                        ]
                     }]
                 },
                 options: {
@@ -658,57 +856,12 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'bottom',
+                            position: 'right',
                             labels: {
-                                color: '#ffffff',
-                                padding: 20,
+                                color: 'white',
                                 font: {
-                                    size: 12,
-                                    family: "'Inter', sans-serif"
+                                    family: 'Inter'
                                 }
-                            }
-                        }
-                    },
-                    cutout: '70%'
-                }
-            });
-
-            const growthChart = new Chart(document.getElementById('growthChart'), {
-                type: 'line',
-                data: {
-                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
-                    datasets: [{
-                        label: 'Community Growth',
-                        data: [1000, 5000, 15000, 50000],
-                        borderColor: '#00FF9D',
-                        backgroundColor: 'rgba(0, 255, 157, 0.1)',
-                        tension: 0.4,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        }
-                    },
-                    scales: {
-                        y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#ffffff'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: '#ffffff'
                             }
                         }
                     }
@@ -743,10 +896,7 @@
 
             // Initialize typewriter
             const typewriterElement = document.getElementById('typewriter');
-            console.log('Typewriter element:', typewriterElement);
-            
             if (typewriterElement && typeof Typewriter !== 'undefined') {
-                console.log('Creating typewriter instance');
                 const typewriter = new Typewriter(typewriterElement, {
                     loop: true,
                     delay: 75,
@@ -782,22 +932,19 @@
                     .pauseFor(2000)
                     .deleteAll()
                     .start();
-                console.log('Typewriter started');
-            } else {
-                console.error('Typewriter element or library not found');
+            }
+
+            // Language content update function
+            function updateContent(language) {
+                const elements = document.querySelectorAll('[data-translate]');
+                elements.forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[language] && translations[language][key]) {
+                        element.textContent = translations[language][key];
+                    }
+                });
             }
         });
-
-        // Language content update function
-        function updateContent(language) {
-            const elements = document.querySelectorAll('[data-translate]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-translate');
-                if (translations[language] && translations[language][key]) {
-                    element.textContent = translations[language][key];
-                }
-            });
-        }
     </script>
 </body>
 </html>
