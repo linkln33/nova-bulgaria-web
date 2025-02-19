@@ -276,7 +276,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="h-[40vh] flex items-center justify-center relative overflow-hidden pb-16 pt-8">
+    <section class="py-24 relative">
         <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex items-center space-x-24">
@@ -288,7 +288,7 @@
                     <p class="text-xl md:text-2xl text-gray-300 mb-4" data-translate="slogan">
                         Welcome to the Future of Nations
                     </p>
-                    <div id="typewriter" class="typewriter text-xl text-gray-300">
+                    <div id="typewriter" class="typewriter text-xl text-gray-300 mb-8">
                         Earn Bulgarian Lion (BGL) Through Real Contributions
                     </div>
                 </div>
@@ -298,12 +298,8 @@
     </section>
 
     <!-- NFT ID Section -->
-    <section id="nft-id" class="pb-16 -mt-32">
+    <section id="nft-id" class="pt-4 pb-12">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-8 text-center">
-                <span class="gradient-text">Digital Citizenship NFT ID</span>
-            </h2>
-            
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
                 <!-- NFT ID Card Container -->
                 <div class="flex justify-center h-[442px]">
@@ -351,43 +347,42 @@
                 </div>
                 
                 <!-- Info Section -->
-                <div class="glass rounded-2xl p-8 h-[442px]">
-                    <h3 class="text-2xl font-semibold text-[var(--primary)] mb-6">Digital Identity System</h3>
-                    <p class="text-gray-300 text-lg mb-10">Your NOVA Bulgaria Digital ID is more than just an identification - it's your gateway to full citizenship rights and privileges in our digital nation.</p>
+                <div class="glass rounded-2xl p-6 h-[442px] flex flex-col">
+                    <h3 class="text-2xl font-semibold text-[var(--primary)] mb-4">Self-sovereign identity (SSI)</h3>
+                    <p class="text-gray-300 text-base mb-6">Self-sovereign identity (SSI) is a form of digital identity that the user has complete control over. This means that the user decides who sees what information and when.</p>
                     
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-                        <div class="glass p-6 rounded-xl border border-[var(--primary)] border-opacity-20">
-                            <h4 class="text-xl font-semibold text-[var(--primary)] mb-6">Features</h4>
-                            <ul class="space-y-4 text-gray-300 text-lg">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                        <div class="glass p-4 rounded-xl border border-[var(--primary)] border-opacity-20">
+                            <h4 class="text-lg font-semibold mb-3 text-[var(--primary)]">Identity Features</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
                                 <li class="flex items-center">
-                                    <span class="text-[var(--primary)] mr-3 text-xl">✓</span>
-                                    Soulbound NFT
+                                    <span class="text-[var(--primary)] mr-2">•</span>
+                                    <span>Decentralized</span>
                                 </li>
                                 <li class="flex items-center">
-                                    <span class="text-[var(--primary)] mr-3 text-xl">✓</span>
-                                    Unique Identifier
+                                    <span class="text-[var(--primary)] mr-2">•</span>
+                                    <span>Soulbound NFT</span>
                                 </li>
                                 <li class="flex items-center">
-                                    <span class="text-[var(--primary)] mr-3 text-xl">✓</span>
-                                    Access to National Services
+                                    <span class="text-[var(--primary)] mr-2">•</span>
+                                    <span>Verifiable</span>
                                 </li>
                             </ul>
                         </div>
-                        
-                        <div class="glass p-6 rounded-xl border border-[var(--secondary)] border-opacity-20">
-                            <h4 class="text-xl font-semibold text-[var(--secondary)] mb-6">Benefits</h4>
-                            <ul class="space-y-4 text-gray-300 text-lg">
+                        <div class="glass p-4 rounded-xl border border-[var(--secondary)] border-opacity-20">
+                            <h4 class="text-lg font-semibold mb-3 text-[var(--secondary)]">Benefits</h4>
+                            <ul class="space-y-2 text-sm text-gray-300">
                                 <li class="flex items-center">
-                                    <span class="text-[var(--secondary)] mr-3 text-xl">✓</span>
-                                    Voting Rights
+                                    <span class="text-[var(--secondary)] mr-2">•</span>
+                                    <span>Governance Rights</span>
                                 </li>
                                 <li class="flex items-center">
-                                    <span class="text-[var(--secondary)] mr-3 text-xl">✓</span>
-                                    Token Rewards
+                                    <span class="text-[var(--secondary)] mr-2">•</span>
+                                    <span>Token Rewards</span>
                                 </li>
                                 <li class="flex items-center">
-                                    <span class="text-[var(--secondary)] mr-3 text-xl">✓</span>
-                                    Community Access
+                                    <span class="text-[var(--secondary)] mr-2">•</span>
+                                    <span>Community Access</span>
                                 </li>
                             </ul>
                         </div>
@@ -418,21 +413,75 @@
     </section>
 
     <!-- Charts Section -->
-    <section id="tokenomics" class="py-8 bg-black bg-opacity-50">
+    <section id="tokenomics" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Tokenomics</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl mb-6">Token Distribution</h3>
+            <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Tokenomics</h2>
+            
+            <!-- Token Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <!-- Token Distribution Chart -->
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-2xl font-semibold mb-6 text-[var(--accent1)]">Token Distribution</h3>
                     <div class="chart-container">
                         <canvas id="tokenomicsChart"></canvas>
                     </div>
                 </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl mb-6">Growth Projection</h3>
+                
+                <!-- Growth Projection Chart -->
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-2xl font-semibold mb-6 text-[var(--accent2)]">Growth Projection</h3>
                     <div class="chart-container">
                         <canvas id="growthChart"></canvas>
                     </div>
+                </div>
+            </div>
+
+            <!-- Token Info Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- BGL Token -->
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-semibold mb-4 text-[var(--accent1)]">🦁 BGL (Bulgarian Lion)</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent1)] mr-2">•</span>
+                            <span>Core governance token of NOVA Bulgaria</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent1)] mr-2">•</span>
+                            <span>Used for staking, voting, and value accumulation</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent1)] mr-2">•</span>
+                            <span>Minted based on community contributions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent1)] mr-2">•</span>
+                            <span>Deflationary mechanism through buy & burn</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- BGL-S Token -->
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-semibold mb-4 text-[var(--accent2)]">🛡️ BGL-S (Stable Lion)</h3>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent2)] mr-2">•</span>
+                            <span>Stablecoin for daily transactions</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent2)] mr-2">•</span>
+                            <span>1:1 peg to a basket of stable assets</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent2)] mr-2">•</span>
+                            <span>Backed by BGL and other collateral</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-[var(--accent2)] mr-2">•</span>
+                            <span>Algorithmic stability mechanism</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -445,7 +494,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="glass rounded-2xl p-8 neon-glow">
                     <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Digital Identity</h3>
+                    <h3 class="text-xl font-bold mb-4">Self-sovereign identity (SSI)</h3>
                     <p class="text-gray-400">Secure and verifiable digital identity system powered by blockchain technology</p>
                 </div>
                 <div class="glass rounded-2xl p-8 neon-glow">
@@ -556,7 +605,7 @@
     <!-- Whitepaper Section -->
     <section id="whitepaper" class="w-full py-16 px-4">
         <div class="text-center mb-12">
-            <h2 class="text-5xl font-bold mb-4 gradient-text">Whitepaper</h2>
+            <h2 class="text-5xl font-bold mb-4 gradient-text">Self-sovereign identity (SSI)</h2>
             <p class="text-xl text-gray-300 max-w-3xl mx-auto">A comprehensive guide to NOVA BULGARIA's vision, technology, and governance</p>
         </div>
 
@@ -857,19 +906,135 @@
                 const typewriter = new Typewriter(typewriterElement, {
                     loop: true,
                     delay: 75,
-                    deleteSpeed: 50,
                 });
 
                 typewriter
-                    .typeString('Digital Citizenship')
+                    .typeString('Self-sovereign identity (SSI)')
                     .pauseFor(2000)
                     .deleteAll()
-                    .typeString('Decentralized Governance')
+                    .typeString('Decentralized and verifiable')
                     .pauseFor(2000)
                     .deleteAll()
-                    .typeString('Blockchain Innovation')
+                    .typeString('Your identity, your control')
                     .pauseFor(2000)
                     .start();
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize homepage charts
+            const tokenomicsChartCtx = document.getElementById('tokenomicsChart');
+            if (tokenomicsChartCtx) {
+                new Chart(tokenomicsChartCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: [
+                            'Community Treasury',
+                            'Development Fund',
+                            'Team & Advisors',
+                            'Early Contributors',
+                            'Marketing & Partnerships'
+                        ],
+                        datasets: [{
+                            data: [45, 25, 15, 10, 5],
+                            backgroundColor: [
+                                '#00FF9D',  // primary
+                                '#4DEEEA',  // secondary
+                                '#FF10F0',  // accent1
+                                '#74EE15',  // accent2
+                                '#FFE500'   // accent3
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#00251f'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'right',
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        family: 'Inter',
+                                        size: 12
+                                    },
+                                    padding: 15
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Growth Projection Chart
+            const growthChartCtx = document.getElementById('growthChart');
+            if (growthChartCtx) {
+                new Chart(growthChartCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Launch', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                        datasets: [{
+                            label: 'Total Supply (Millions)',
+                            data: [100, 150, 225, 300, 350, 375],
+                            borderColor: '#00FF9D',
+                            backgroundColor: 'rgba(0, 255, 157, 0.1)',
+                            tension: 0.4,
+                            fill: true,
+                            pointBackgroundColor: '#00FF9D',
+                            pointRadius: 5,
+                            pointHoverRadius: 7
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        family: 'Inter',
+                                        size: 12
+                                    },
+                                    callback: function(value) {
+                                        return value + 'M';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                },
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: {
+                                        family: 'Inter',
+                                        size: 12
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: {
+                                        family: 'Inter',
+                                        size: 12
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
             }
         });
     </script>
