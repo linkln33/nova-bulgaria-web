@@ -16,22 +16,24 @@
             --primary: #00FF9D;
             --secondary: #4DEEEA;
             --accent1: #FF10F0;
-            --accent2: #FF3B28;
-            --accent3: #FFF01F;
-            --accent4: #7B4DFF;
+            --accent2: #74EE15;
+            --accent3: #FFE500;
+            --accent4: #001AFF;
+            --accent5: #FF3C28;
             
             /* RGB values for animations */
             --primary-rgb: 0, 255, 157;
             --secondary-rgb: 77, 238, 234;
             --accent1-rgb: 255, 16, 240;
-            --accent2-rgb: 255, 59, 40;
-            --accent3-rgb: 255, 240, 31;
-            --accent4-rgb: 123, 77, 255;
+            --accent2-rgb: 116, 238, 21;
+            --accent3-rgb: 255, 239, 0;
+            --accent4-rgb: 0, 26, 255;
+            --accent5-rgb: 255, 60, 40;
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
+            background: #00251f;
             color: white;
             overflow-x: hidden;
         }
@@ -44,22 +46,15 @@
         }
 
         .glass {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            transition: all 0.3s ease;
-        }
-
-        .glass:hover {
             background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .gradient-text {
-            -webkit-text-fill-color: transparent;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
@@ -160,55 +155,90 @@
 
         /* NFT ID Card Styles */
         .nft-id-card {
-            perspective: 1000px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        
-        .holographic-line {
-            background: linear-gradient(180deg,
-                transparent 0%,
-                rgba(255,0,0,0.4) 5%,
-                rgba(0,255,255,0.8) 12%,
-                rgba(255,255,255,0.9) 20%,
-                rgba(255,165,0,0.8) 28%,
-                rgba(255,0,255,0.9) 36%,
-                rgba(50,205,50,0.8) 44%,
-                rgba(255,255,255,0.9) 52%,
-                rgba(255,0,0,0.8) 60%,
-                rgba(0,255,255,0.9) 68%,
-                rgba(255,165,0,0.8) 76%,
-                rgba(50,205,50,0.8) 84%,
-                rgba(255,0,255,0.4) 92%,
-                transparent 100%
-            );
-            animation: holographic-shift 15s linear infinite;
-            mix-blend-mode: soft-light;
-            opacity: 0.9;
-            background-size: 100% 200%;
-            backdrop-filter: blur(1px);
-        }
-        
-        .holographic-texture {
-            background-image: repeating-linear-gradient(
-                45deg,
-                rgba(255,255,255,0.15) 0px,
-                rgba(255,255,255,0.15) 2px,
-                transparent 2px,
-                transparent 4px
-            );
-            background-size: 8px 8px;
-            mix-blend-mode: overlay;
-            opacity: 0.8;
+            position: relative;
+            width: 100%;
+            height: 256px;
+            background: #FFFFFF;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 150, 110, 0.2);
+            overflow: hidden;
         }
 
         .citizenship-badge {
             background: linear-gradient(45deg, #FFD700, #FFA500);
             color: #000;
         }
+
+        /* Enhanced holographic edge effect */
+        .holographic-border {
+            position: absolute;
+            inset: 0;
+            border: 6px solid transparent;
+            border-radius: 0.75rem;
+            background: linear-gradient(90deg,
+                rgba(77, 238, 234, 0.4),
+                rgba(255, 16, 240, 0.4),
+                rgba(255, 229, 0, 0.4),
+                rgba(0, 26, 255, 0.4),
+                rgba(255, 60, 40, 0.4),
+                rgba(77, 238, 234, 0.4)
+            ) border-box;
+            -webkit-mask:
+                linear-gradient(#fff 0 0) padding-box, 
+                linear-gradient(#fff 0 0);
+            mask:
+                linear-gradient(#fff 0 0) padding-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            animation: rotate 16s linear infinite;
+        }
+
+        .holographic-texture {
+            position: absolute;
+            inset: -6px;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(255, 255, 255, 0.2) 0px,
+                    rgba(255, 255, 255, 0.2) 2px,
+                    transparent 2px,
+                    transparent 4px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(255, 255, 255, 0.2) 0px,
+                    rgba(255, 255, 255, 0.2) 2px,
+                    transparent 2px,
+                    transparent 4px
+                );
+            mix-blend-mode: overlay;
+            border-radius: 0.75rem;
+        }
+
+        .card-inner {
+            border-radius: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 6px;
+            height: calc(100% - 12px);
+            width: calc(100% - 12px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes rotate {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 0%; }
+        }
         
-        @keyframes holographic-shift {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 -200%; }
+        @keyframes shimmer {
+            0% { background-position: -400% 0; }
+            100% { background-position: 400% 0; }
+        }
+        
+        @keyframes shimmer-vertical {
+            0% { background-position: 0 -400%; }
+            100% { background-position: 0 400%; }
         }
     </style>
 </head>
@@ -246,11 +276,11 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="h-[40vh] flex items-center justify-center relative overflow-hidden">
+    <section class="h-[40vh] flex items-center justify-center relative overflow-hidden pb-16 pt-8">
         <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent"></div>
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex items-center space-x-24">
-                <img src="assets/images/coat-of-arms.png" alt="NOVA BULGARIA Coat of Arms" class="w-[200px] h-[200px] object-contain">
+                <img src="assets/images/logo.png" alt="NOVA Bulgaria Logo" class="w-[200px] h-[200px] object-contain">
                 <div class="text-center flex-1">
                     <h1 class="text-4xl md:text-6xl font-bold gradient-text mb-4">
                         NOVA BULGARIA
@@ -268,59 +298,99 @@
     </section>
 
     <!-- NFT ID Section -->
-    <section id="nft-id" class="py-6 bg-black bg-opacity-50">
+    <section id="nft-id" class="pb-16 -mt-32">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Digital Citizenship NFT ID</h2>
+            <h2 class="text-4xl font-bold mb-8 text-center">
+                <span class="gradient-text">Digital Citizenship NFT ID</span>
+            </h2>
             
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
                 <!-- NFT ID Card Container -->
-                <div class="space-y-6">
-                    <div id="nft-id-card-container"></div>
-                    
-                    <div class="glass rounded-2xl p-6 space-y-6 max-w-md mx-auto">
-                        <div class="space-y-4">
-                            <h4 class="text-xl font-semibold text-[var(--secondary)]">How to Obtain</h4>
-                            <p class="text-gray-300">To obtain your NOVA Bulgaria Digital ID:</p>
-                            <ol class="list-decimal pl-5 space-y-2 text-gray-300">
-                                <li>Complete the citizenship application</li>
-                                <li>Pass the verification process</li>
-                                <li>Contribute to the ecosystem</li>
-                                <li>Maintain active participation</li>
-                            </ol>
+                <div class="flex justify-center h-[442px]">
+                    <!-- Simple NFT ID Card -->
+                    <div class="w-[700px] h-[442px] glass rounded-xl relative shadow-2xl overflow-hidden">
+                        <!-- Holographic Border -->
+                        <div class="holographic-border">
+                            <div class="holographic-texture"></div>
                         </div>
-                        
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="#application" class="flex-1 inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-black bg-[var(--primary)] hover:bg-[var(--secondary)] transition-colors duration-200 ease-in-out shadow-lg hover:shadow-xl">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+
+                        <!-- Card Inner Content -->
+                        <div class="p-6">
+                            <!-- Photo Area -->
+                            <div class="absolute top-6 left-6 w-[160px] h-[200px] glass rounded-lg border-2 border-[var(--primary)] flex items-center justify-center">
+                                <svg class="w-28 h-28 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                                 </svg>
-                                Apply for Citizenship
-                            </a>
-                            <a href="#requirements" class="flex-1 inline-flex items-center justify-center px-6 py-3 border-2 border-[var(--primary)] text-base font-medium rounded-lg text-[var(--primary)] hover:bg-[var(--primary)] hover:text-black transition-colors duration-200 ease-in-out shadow-lg hover:shadow-xl">
-                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                                </svg>
-                                View Requirements
-                            </a>
+                            </div>
+
+                            <!-- Header -->
+                            <div class="absolute top-6 left-[190px] right-6 text-center">
+                                <h3 class="text-2xl font-bold text-[var(--primary)]">NATIONAL REPUBLIC OF BULGARIA</h3>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="absolute top-[240px] left-6">
+                                <h2 class="text-4xl font-bold text-[var(--primary)]">Иван Иванов</h2>
+                                <!-- ID Number under name -->
+                                <div class="mt-4 text-xl text-[var(--primary)] font-medium"></div>
+                                <!-- Wallet Address -->
+                                <div class="mt-2 text-sm text-[var(--primary)] font-mono">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</div>
+                            </div>
+
+                            <!-- QR Code -->
+                            <div class="absolute bottom-6 left-6 w-24 h-24 glass rounded-lg border border-[var(--primary)] flex items-center justify-center">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=0x742d35Cc6634C0532925a3b844Bc454e4438f44e" alt="Wallet QR Code" class="w-20 h-20">
+                            </div>
+
+                            <!-- Logo -->
+                            <div class="absolute bottom-6 right-6">
+                                <img src="assets/images/logo.png" alt="NOVA Bulgaria Logo" class="w-16 h-16 object-contain mix-blend-luminosity opacity-90">
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- NFT ID Information -->
-                <div class="glass rounded-2xl p-8 space-y-6">
-                    <h3 class="text-2xl font-bold text-[var(--primary)]">Digital Citizenship & NFT ID System</h3>
+                
+                <!-- Info Section -->
+                <div class="glass rounded-2xl p-8 h-[442px]">
+                    <h3 class="text-2xl font-semibold text-[var(--primary)] mb-6">Digital Identity System</h3>
+                    <p class="text-gray-300 text-lg mb-10">Your NOVA Bulgaria Digital ID is more than just an identification - it's your gateway to full citizenship rights and privileges in our digital nation.</p>
                     
-                    <div class="space-y-4 text-gray-300">
-                        <p>Every citizen receives a Soulbound NFT ID — a non-transferable, evolving digital passport that serves as their identity and access key to the entire NOVA BULGARIA ecosystem.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div class="glass p-6 rounded-xl border border-[var(--primary)] border-opacity-20">
+                            <h4 class="text-xl font-semibold text-[var(--primary)] mb-6">Features</h4>
+                            <ul class="space-y-4 text-gray-300 text-lg">
+                                <li class="flex items-center">
+                                    <span class="text-[var(--primary)] mr-3 text-xl">✓</span>
+                                    Soulbound NFT
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[var(--primary)] mr-3 text-xl">✓</span>
+                                    Unique Identifier
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[var(--primary)] mr-3 text-xl">✓</span>
+                                    Access to National Services
+                                </li>
+                            </ul>
+                        </div>
                         
-                        <h4 class="text-xl font-semibold text-[var(--secondary)]">Features</h4>
-                        <ul class="list-disc pl-5 space-y-2">
-                            <li>Unique holographic security elements</li>
-                            <li>Blockchain-verified authenticity</li>
-                            <li>Different tiers of citizenship (Bronze, Silver, Gold)</li>
-                            <li>Integrated QR code for quick verification</li>
-                            <li>Tamper-proof digital credentials</li>
-                        </ul>
+                        <div class="glass p-6 rounded-xl border border-[var(--secondary)] border-opacity-20">
+                            <h4 class="text-xl font-semibold text-[var(--secondary)] mb-6">Benefits</h4>
+                            <ul class="space-y-4 text-gray-300 text-lg">
+                                <li class="flex items-center">
+                                    <span class="text-[var(--secondary)] mr-3 text-xl">✓</span>
+                                    Voting Rights
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[var(--secondary)] mr-3 text-xl">✓</span>
+                                    Token Rewards
+                                </li>
+                                <li class="flex items-center">
+                                    <span class="text-[var(--secondary)] mr-3 text-xl">✓</span>
+                                    Community Access
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -493,37 +563,37 @@
         <div class="max-w-[1400px] mx-auto">
             <!-- Table of Contents -->
             <div class="glass rounded-2xl p-8 mb-12 border border-[var(--accent1)] border-opacity-20">
-                <h3 class="text-2xl font-bold mb-6 text-[var(--accent1)]">Contents</h3>
+                <h3 class="text-2xl font-bold text-[var(--accent1)]">Contents</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <a href="#vision" class="glass p-4 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
+                    <a href="#vision" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--primary)]">1. Vision</h4>
                         <p class="text-sm text-gray-400">The foundation of our digital nation</p>
                     </a>
-                    <a href="#principles" class="glass p-4 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
+                    <a href="#principles" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--secondary)]">2. Key Principles</h4>
                         <p class="text-sm text-gray-400">Core values and concepts</p>
                     </a>
-                    <a href="#token" class="glass p-4 rounded-xl hover:border-[var(--accent1)] hover:border transition-all duration-300">
+                    <a href="#token" class="glass p-6 rounded-xl hover:border-[var(--accent1)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--accent1)]">3. Token Model</h4>
                         <p class="text-sm text-gray-400">BGL and economic system</p>
                     </a>
-                    <a href="#nft" class="glass p-4 rounded-xl hover:border-[var(--accent2)] hover:border transition-all duration-300">
+                    <a href="#nft" class="glass p-6 rounded-xl hover:border-[var(--accent2)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--accent2)]">4. NFT ID System</h4>
                         <p class="text-sm text-gray-300">Digital citizenship</p>
                     </a>
-                    <a href="#governance" class="glass p-4 rounded-xl hover:border-[var(--accent3)] hover:border transition-all duration-300">
+                    <a href="#governance" class="glass p-6 rounded-xl hover:border-[var(--accent3)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--accent3)]">5. Governance</h4>
                         <p class="text-sm text-gray-400">Decision making and law</p>
                     </a>
-                    <a href="#funding" class="glass p-4 rounded-xl hover:border-[var(--accent4)] hover:border transition-all duration-300">
+                    <a href="#funding" class="glass p-6 rounded-xl hover:border-[var(--accent4)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--accent4)]">6. Funding</h4>
                         <p class="text-sm text-gray-400">Economic growth strategy</p>
                     </a>
-                    <a href="#development" class="glass p-4 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
+                    <a href="#development" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--primary)]">7. Development</h4>
                         <p class="text-sm text-gray-400">Roadmap and next steps</p>
                     </a>
-                    <a href="#conclusion" class="glass p-4 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
+                    <a href="#conclusion" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
                         <h4 class="text-lg font-semibold text-[var(--secondary)]">8. Conclusion</h4>
                         <p class="text-sm text-gray-400">Future vision</p>
                     </a>
@@ -767,89 +837,21 @@
     <script>
         // Initialize everything after DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            // Load NFT ID Card Component
-            fetch('/components/nft-id-card.html')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('nft-id-card-container').innerHTML = html;
-                });
-
-            // Initialize QR Code
-            const qrCode = document.getElementById('qr-code');
-            if (qrCode && window.QRCode) {
-                QRCode.toCanvas(qrCode, 'NOVA-ID-001', {
-                    width: 64,
-                    margin: 2,
-                    color: {
-                        dark: '#000',
-                        light: '#fff'
-                    },
-                    errorCorrectionLevel: 'M'
+            // Initialize language selector
+            const langSelect = document.getElementById('languageSelect');
+            if (langSelect) {
+                const savedLang = localStorage.getItem('selectedLanguage') || 'en';
+                langSelect.value = savedLang;
+                updateContent(savedLang);
+                
+                langSelect.addEventListener('change', (e) => {
+                    const selectedLang = e.target.value;
+                    localStorage.setItem('selectedLanguage', selectedLang);
+                    updateContent(selectedLang);
                 });
             }
 
-            // Initialize tokenomics chart
-            const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Community & PoC', 'Treasury', 'Development', 'Marketing', 'Team', 'Liquidity'],
-                    datasets: [{
-                        data: [30, 20, 15, 15, 10, 10],
-                        backgroundColor: [
-                            '#00FF9D',
-                            '#4DEEEA',
-                            '#FF10F0',
-                            '#FF3B28',
-                            '#FFF01F',
-                            '#7B4DFF'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                color: 'white',
-                                font: {
-                                    family: 'Inter'
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Initialize wallet connection
-            const connectWalletBtn = document.querySelector('[data-translate="connectWallet"]');
-            if (connectWalletBtn) {
-                connectWalletBtn.addEventListener('click', async function() {
-                    if (typeof window.ethereum !== 'undefined') {
-                        try {
-                            await window.ethereum.request({ method: 'eth_requestAccounts' });
-                            connectWalletBtn.textContent = 'Connected';
-                            connectWalletBtn.disabled = true;
-                        } catch (error) {
-                            console.error('Error connecting wallet:', error);
-                        }
-                    } else {
-                        alert('Please install MetaMask to connect your wallet!');
-                    }
-                });
-            }
-
-            // Initialize language switching
-            const languageSelect = document.getElementById('languageSelect');
-            if (languageSelect) {
-                languageSelect.addEventListener('change', function() {
-                    updateContent(this.value);
-                });
-            }
-
-            // Initialize typewriter
+            // Initialize typewriter effect
             const typewriterElement = document.getElementById('typewriter');
             if (typewriterElement && typeof Typewriter !== 'undefined') {
                 const typewriter = new Typewriter(typewriterElement, {
@@ -859,45 +861,15 @@
                 });
 
                 typewriter
-                    .typeString('<span style="color: #FFFFFF; text-shadow: 0 0 10px #FFFFFF;">Building the First Digital Nation on Cosmos</span>')
+                    .typeString('Digital Citizenship')
                     .pauseFor(2000)
                     .deleteAll()
-                    .typeString('<span style="color: #FFA500; text-shadow: 0 0 10px #FFA500;">Earn Bulgarian Lion (BGL) Through Real Contributions</span>')
+                    .typeString('Decentralized Governance')
                     .pauseFor(2000)
                     .deleteAll()
-                    .typeString('<span style="color: #0066FF; text-shadow: 0 0 10px #0066FF;">Unique Soulbound NFT Digital Citizenship</span>')
+                    .typeString('Blockchain Innovation')
                     .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('<span style="color: #FFD700; text-shadow: 0 0 10px #FFD700;">Decentralized Governance System</span>')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('<span style="color: #800080; text-shadow: 0 0 10px #800080;">Revolutionary Social Platform</span>')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('<span style="color: #006400; text-shadow: 0 0 10px #006400;">Community-Driven Development</span>')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('<span style="color: #FF69B4; text-shadow: 0 0 10px #FF69B4;">Innovative Digital Economy</span>')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('<span style="color: #32CD32; text-shadow: 0 0 10px #32CD32;">Sustainable Growth & Development</span>')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('<span style="color: #FF0000; text-shadow: 0 0 10px #FF0000;">Join the Digital Revolution</span>')
-                    .pauseFor(2000)
-                    .deleteAll()
                     .start();
-            }
-
-            // Language content update function
-            function updateContent(language) {
-                const elements = document.querySelectorAll('[data-translate]');
-                elements.forEach(element => {
-                    const key = element.getAttribute('data-translate');
-                    if (translations[language] && translations[language][key]) {
-                        element.textContent = translations[language][key];
-                    }
-                });
             }
         });
     </script>
