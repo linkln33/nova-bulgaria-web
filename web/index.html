@@ -3,32 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NOVA BULGARIA - A decentralized digital nation">
+    <meta name="keywords" content="NOVA BULGARIA, decentralized, digital nation, blockchain">
+    <meta name="author" content="NOVA BULGARIA Team">
     <title>NOVA BULGARIA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="assets/translations.js"></script>
-    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    
+    <!-- Load styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/tokenomics.js"></script>
+    
     <style>
         :root {
             --primary: #00FF9D;
-            --secondary: #4DEEEA;
-            --accent1: #FF10F0;
-            --accent2: #74EE15;
-            --accent3: #FFE500;
-            --accent4: #001AFF;
-            --accent5: #FF3C28;
+            --secondary: #00FFFF;
+            --accent1: #FF00FF;
+            --accent2: #7FFF00;
+            --accent3: #FFFF00;
+            --accent4: #00FFFF;
+            --accent5: #FF1493;
             
             /* RGB values for animations */
             --primary-rgb: 0, 255, 157;
-            --secondary-rgb: 77, 238, 234;
-            --accent1-rgb: 255, 16, 240;
-            --accent2-rgb: 116, 238, 21;
-            --accent3-rgb: 255, 239, 0;
-            --accent4-rgb: 0, 26, 255;
-            --accent5-rgb: 255, 60, 40;
+            --secondary-rgb: 0, 255, 255;
+            --accent1-rgb: 255, 0, 255;
+            --accent2-rgb: 127, 255, 0;
+            --accent3-rgb: 255, 255, 0;
+            --accent4-rgb: 0, 255, 255;
+            --accent5-rgb: 255, 20, 147;
         }
 
         body {
@@ -108,13 +111,13 @@
 
         .cursor {
             display: inline-block;
-            width: 3px;
+            width: 2px;
             height: 1.2em;
-            margin-left: 4px;
-            animation: blink 0.7s infinite;
+            margin-left: 2px;
             vertical-align: middle;
+            animation: blink 1s infinite;
         }
-
+        
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -240,34 +243,123 @@
             0% { background-position: 0 -400%; }
             100% { background-position: 0 400%; }
         }
+        
+        .nav-link {
+            position: relative;
+            color: white;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Language Select Styling */
+        #languageSelect {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.5rem center;
+            background-size: 1.5em 1.5em;
+            text-align: left;
+        }
+
+        #languageSelect {
+            text-align: left;
+            min-width: 100px;
+            padding-left: 0.5rem;
+            padding-right: 2rem;
+        }
+
+        #languageSelect option {
+            background: #00251f;
+            color: white;
+            padding: 0.5rem;
+            text-align: left;
+        }
+
+        #languageSelect option:checked {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            color: black;
+        }
+
+        /* Ensure dropdown alignment */
+        #languageSelect::-ms-expand {
+            display: none;
+        }
+        
+        .cursor {
+            display: inline-block;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Add sparkle animation */
+        @keyframes sparkle {
+            0% { background-position: -500px 0; }
+            100% { background-position: 500px 0; }
+        }
+
+        .bg-sparkle {
+            background-image: linear-gradient(
+                90deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.2) 25%,
+                rgba(255,255,255,0.2) 50%,
+                rgba(255,255,255,0) 100%
+            );
+            background-repeat: repeat-x;
+            background-size: 1000px 100%;
+            animation: sparkle 3s linear infinite;
+        }
     </style>
 </head>
 <body>
     <!-- Fixed Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-50 backdrop-blur-lg border-b border-gray-800">
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
                     <a href="#" class="text-2xl font-bold gradient-text">NOVA BULGARIA</a>
                 </div>
                 
-                <div class="flex items-center space-x-6">
-                    <div class="hidden md:flex space-x-6">
-                        <a href="#nft-id" class="hover:text-[var(--primary)] transition-colors">NFT ID</a>
-                        <a href="#features" class="hover:text-[var(--primary)] transition-colors" data-translate="features">Features</a>
-                        <a href="#tokenomics" class="hover:text-[var(--primary)] transition-colors" data-translate="tokenomics">Tokenomics</a>
-                        <a href="#roadmap" class="hover:text-[var(--primary)] transition-colors" data-translate="roadmap">Roadmap</a>
-                        <a href="#pitch" class="hover:text-[var(--primary)] transition-colors" data-translate="pitchDeck">Pitch Deck</a>
-                        <a href="#whitepaper" class="hover:text-[var(--primary)] transition-colors" data-translate="whitepaper">Whitepaper</a>
-                    </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#nft-id" class="nav-link" data-translate="navNFT">NFT ID</a>
+                    <a href="#features" class="nav-link" data-translate="navFeatures">Features</a>
+                    <a href="#tokenomics" class="nav-link" data-translate="navTokenomics">Tokenomics</a>
+                    <a href="#roadmap" class="nav-link" data-translate="navRoadmap">Roadmap</a>
+                    <a href="#pitch" class="nav-link" data-translate="navPitch">Pitch Deck</a>
+                    <a href="#whitepaper" class="nav-link" data-translate="navWhitepaper">Whitepaper</a>
                 </div>
+
                 <div class="flex items-center space-x-4">
-                    <select id="languageSelect" class="bg-transparent border border-[var(--primary)] rounded-lg px-3 py-1" onchange="updateContent(this.value)">
-                        <option value="en">EN</option>
-                        <option value="bg">BG</option>
-                        <option value="ru">RU</option>
-                    </select>
-                    <button class="bg-[var(--primary)] text-black px-4 py-1 rounded-lg hover:bg-[var(--secondary)] transition-colors" data-translate="connectWallet" title="Connect your wallet to the platform">
+                    <div class="relative">
+                        <select id="languageSelect" class="glass pl-2 pr-8 py-2 rounded-lg appearance-none cursor-pointer min-w-[100px] text-left" onchange="updateContent(this.value)">
+                            <option value="en" class="text-left">🇬🇧 EN</option>
+                            <option value="bg" class="text-left">🇧🇬 BG</option>
+                        </select>
+                    </div>
+                    <button class="bg-[var(--primary)] text-black px-6 py-2 rounded-lg hover:bg-[var(--secondary)] transition-colors" data-translate="connectWallet">
                         Connect Wallet
                     </button>
                 </div>
@@ -288,9 +380,7 @@
                     <p class="text-xl md:text-2xl text-gray-300 mb-4" data-translate="slogan">
                         Welcome to the Future of Nations
                     </p>
-                    <div id="typewriter" class="typewriter text-xl text-gray-300 mb-8">
-                        Earn Bulgarian Lion (BGL) Through Real Contributions
-                    </div>
+                    <div class="typewriter text-xl md:text-2xl mb-8"></div>
                 </div>
                 <div class="w-[200px]"></div> <!-- Spacer to help center the text -->
             </div>
@@ -347,55 +437,33 @@
                 </div>
                 
                 <!-- Info Section -->
-                <div class="glass rounded-2xl p-6 h-[442px] flex flex-col">
-                    <h3 class="text-2xl font-semibold text-[var(--primary)] mb-4">Self-sovereign identity (SSI)</h3>
-                    <p class="text-gray-300 text-base mb-6">Self-sovereign identity (SSI) is a form of digital identity that the user has complete control over. This means that the user decides who sees what information and when.</p>
+                <div class="glass rounded-2xl p-8 h-[442px] flex flex-col">
+                    <h3 class="text-2xl font-semibold text-[var(--primary)] mb-4" data-translate="ssiTitle">Self-sovereign identity (SSI)</h3>
+                    <p class="text-gray-300 text-base mb-6" data-translate="ssiIntro">Self-sovereign identity (SSI) is a form of digital identity that the user has complete control over. This means that the user decides who sees what information and when.</p>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
-                        <div class="glass p-4 rounded-xl border border-[var(--primary)] border-opacity-20">
-                            <h4 class="text-lg font-semibold mb-3 text-[var(--primary)]">How to Apply</h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-center">
-                                    <span class="text-[var(--primary)] mr-2">•</span>
-                                    <span>Complete Knowledge Test</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[var(--primary)] mr-2">•</span>
-                                    <span>Submit Documentation</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[var(--primary)] mr-2">•</span>
-                                    <span>Pass Identity Verification</span>
-                                </li>
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="howToApply">How to Apply</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li data-translate="completeTest">Complete Knowledge Test</li>
+                                <li data-translate="submitDocs">Submit Documentation</li>
+                                <li data-translate="passVerification">Pass Identity Verification</li>
                             </ul>
-                            <div class="mt-4">
-                                <a href="#apply" class="inline-block px-4 py-2 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-lg transition-all duration-300">
-                                    <div class="text-xs mb-1 text-[var(--primary)] font-bold">Start your application process</div>
-                                    <div class="font-semibold text-white">APPLY NOW</div>
-                                </a>
+                            <div class="mt-6">
+                                <p class="text-sm text-gray-400 mb-2" data-translate="startApplication">Start your application process</p>
+                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--primary)] hover:bg-opacity-80 transition-all text-black" data-translate="applyNow">APPLY NOW</button>
                             </div>
                         </div>
-                        <div class="glass p-4 rounded-xl border border-[var(--secondary)] border-opacity-20">
-                            <h4 class="text-lg font-semibold mb-3 text-[var(--secondary)]">Benefits</h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-center">
-                                    <span class="text-[var(--secondary)] mr-2">•</span>
-                                    <span>Governance Rights</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[var(--secondary)] mr-2">•</span>
-                                    <span>Token Rewards</span>
-                                </li>
-                                <li class="flex items-center">
-                                    <span class="text-[var(--secondary)] mr-2">•</span>
-                                    <span>Community Access</span>
-                                </li>
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="benefits">Benefits</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li data-translate="governanceRights">Governance Rights</li>
+                                <li data-translate="tokenRewards">Token Rewards</li>
+                                <li data-translate="communityAccess">Community Access</li>
                             </ul>
-                            <div class="mt-4">
-                                <a href="#whitepaper" class="inline-block px-4 py-2 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-lg transition-all duration-300">
-                                    <div class="text-xs mb-1 text-[var(--secondary)] font-bold">Read our detailed whitepaper</div>
-                                    <div class="font-semibold text-white">READ MORE</div>
-                                </a>
+                            <div class="mt-6">
+                                <p class="text-sm text-gray-400 mb-2" data-translate="readWhitepaper">Read our detailed whitepaper</p>
+                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--secondary)] hover:bg-opacity-80 transition-all text-black" data-translate="readMore">READ MORE</button>
                             </div>
                         </div>
                     </div>
@@ -409,16 +477,71 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="glass rounded-2xl p-8 text-center neon-glow">
-                    <h3 class="text-lg text-gray-400 mb-2">Total Supply</h3>
-                    <p class="text-3xl font-bold stats-value">1,000,000,000 NOVA</p>
+                    <h3 class="text-lg text-gray-400 mb-2" data-translate="statsBulgariansWorldwide">Total Bulgarians Worldwide</h3>
+                    <p class="text-3xl font-bold stats-value">Over 33 Million</p>
                 </div>
                 <div class="glass rounded-2xl p-8 text-center neon-glow">
-                    <h3 class="text-lg text-gray-400 mb-2">Holders</h3>
+                    <h3 class="text-lg text-gray-400 mb-2" data-translate="statsJoinedNova">Joined Nova Bulgaria</h3>
                     <p class="text-3xl font-bold stats-value">10,000+</p>
                 </div>
                 <div class="glass rounded-2xl p-8 text-center neon-glow">
-                    <h3 class="text-lg text-gray-400 mb-2">Market Cap</h3>
-                    <p class="text-3xl font-bold stats-value">$XX,XXX,XXX</p>
+                    <h3 class="text-lg text-gray-400 mb-2" data-translate="statsContributed">Total Contributed</h3>
+                    <p class="text-3xl font-bold stats-value">$578,000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Funding Progress Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="glass rounded-2xl p-12 text-center neon-glow">
+                <h2 class="text-3xl font-bold mb-6 gradient-text" data-translate="fundingTitle">Seed Round: Early Access to Nova Bulgaria</h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto" data-translate="fundingDescription">Join the founding of the first digital nation for Bulgarians worldwide. Be among the first to receive and stake BGL tokens. Our seed round offers exclusive early access to 20 million BGL (Bulgarian Lion) tokens.</p>
+                
+                <!-- Funding Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2" data-translate="seedRoundDetails">Seed Round Details</h4>
+                        <ul class="text-gray-300 text-left space-y-2">
+                            <li>• <span data-translate="tokenAmount">20 Million BGL Tokens Available</span></li>
+                            <li>• <span data-translate="softCap">Soft Cap: $2 Million</span></li>
+                            <li>• <span data-translate="hardCap">Hard Cap: $20 Million</span></li>
+                        </ul>
+                    </div>
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold text-[var(--secondary)] mb-2" data-translate="stakingBenefits">Early Staking Benefits</h4>
+                        <ul class="text-gray-300 text-left space-y-2">
+                            <li>• <span data-translate="earlyAccess">First Access to BGL Token Staking</span></li>
+                            <li>• <span data-translate="maxRewards">Maximum Staking Rewards</span></li>
+                            <li>• <span data-translate="foundingMember">Founding Member Status</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar Container -->
+                <div class="relative h-8 glass rounded-full mb-4 overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]" style="width: 28.9%;" id="fundingProgress">
+                        <div class="absolute inset-0 bg-sparkle"></div>
+                    </div>
+                </div>
+                
+                <!-- Progress Stats -->
+                <div class="flex justify-between text-lg mb-8">
+                    <span class="text-[var(--primary)]">$578,000 Raised</span>
+                    <span class="text-[var(--secondary)]">$2,000,000 Soft Cap</span>
+                </div>
+
+                <!-- Call to Action Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <a href="#whitepaper" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300 group">
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2" data-translate="readWhitepaperTitle">Read Our Whitepaper</h4>
+                        <p class="text-sm text-gray-300" data-translate="readWhitepaperDesc">Learn about our vision, technology, and governance model</p>
+                    </a>
+                    <a href="#contribute" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300 group">
+                        <h4 class="text-lg font-semibold text-[var(--secondary)] mb-2" data-translate="contributeTitle">Contribute Now</h4>
+                        <p class="text-sm text-gray-300" data-translate="contributeDesc">Become a founding member and secure your BGL tokens</p>
+                    </a>
                 </div>
             </div>
         </div>
@@ -427,74 +550,119 @@
     <!-- Charts Section -->
     <section id="tokenomics" class="py-16">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Tokenomics</h2>
+            <h2 class="text-4xl font-bold mb-12 text-center gradient-text" data-translate="tokenomicsTitle">Tokenomics (100-Year Model)</h2>
             
             <!-- Token Charts Section -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
                 <!-- Token Distribution Chart -->
                 <div class="glass p-8 rounded-xl neon-glow">
-                    <h3 class="text-2xl font-semibold mb-6 text-[var(--accent1)]">Token Distribution</h3>
+                    <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenDistributionTitle">Token Distribution</h3>
                     <div class="chart-container">
                         <canvas id="tokenomicsChart"></canvas>
                     </div>
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="initialSupplyTitle">Total Supply</h4>
+                            <p class="text-gray-300" data-translate="initialSupplyValue">1 Trillion BGL</p>
+                        </div>
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="maxSupplyTitle">Reserve Fund</h4>
+                            <p class="text-gray-300" data-translate="maxSupplyValue">200B BGL (20%)</p>
+                        </div>
+                    </div>
                 </div>
-                
-                <!-- Growth Projection Chart -->
+
+                <!-- Token Allocation Chart -->
                 <div class="glass p-8 rounded-xl neon-glow">
-                    <h3 class="text-2xl font-semibold mb-6 text-[var(--accent2)]">Growth Projection</h3>
+                    <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenAllocationTitle">Fund Allocation</h3>
                     <div class="chart-container">
-                        <canvas id="growthChart"></canvas>
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="coreSectorsTitle">Core Sectors</h4>
+                            <p class="text-gray-300" data-translate="coreSectorsDesc">500B BGL for 24 existing parachains</p>
+                        </div>
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="futureSectorsTitle">Future Sectors</h4>
+                            <p class="text-gray-300" data-translate="futureSectorsDesc">300B BGL for 20 new parachains</p>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Token Info Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- BGL Token -->
+            <!-- Token Release Schedule -->
+            <div class="glass p-8 rounded-xl neon-glow mb-8">
+                <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="releaseScheduleTitle">Token Release Schedule</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div class="glass p-4 rounded-lg">
+                        <p class="text-gray-300" data-translate="release1">1st Decade: 5% annual (50B BGL/year)</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <p class="text-gray-300" data-translate="release2">2nd Decade: 4% annual (40B BGL/year)</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <p class="text-gray-300" data-translate="release3">3rd Decade: 3% annual (30B BGL/year)</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <p class="text-gray-300" data-translate="release4">4th Decade: 2% annual (20B BGL/year)</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <p class="text-gray-300" data-translate="release5">5th+ Decades: ≤1% annual (10B BGL/year)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Token Details Section -->
+            <div class="glass p-8 rounded-xl neon-glow mb-8">
+                <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenDetailsTitle">Token Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="tokenomicsUtilityTitle">Utility Features</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li data-translate="tokenomicsUtility1">• Governance voting rights</li>
+                            <li data-translate="tokenomicsUtility2">• Access to premium services</li>
+                            <li data-translate="tokenomicsUtility3">• Staking rewards</li>
+                        </ul>
+                    </div>
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="tokenomicsEconomicsTitle">Token Economics</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li data-translate="tokenomicsEconomics1">• Deflationary mechanism</li>
+                            <li data-translate="tokenomicsEconomics2">• Dynamic supply adjustment</li>
+                            <li data-translate="tokenomicsEconomics3">• Reward-based distribution</li>
+                        </ul>
+                    </div>
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="tokenomicsGovernanceTitle">Governance</h4>
+                        <ul class="space-y-2 text-gray-300">
+                            <li data-translate="tokenomicsGovernance1">• Proposal creation rights</li>
+                            <li data-translate="tokenomicsGovernance2">• Voting weight system</li>
+                            <li data-translate="tokenomicsGovernance3">• Delegation options</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="glass p-8 rounded-xl neon-glow">
-                    <h3 class="text-xl font-semibold mb-4 text-[var(--accent1)]">🦁 BGL (Bulgarian Lion)</h3>
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent1)] mr-2">•</span>
-                            <span>Core governance token of NOVA Bulgaria</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent1)] mr-2">•</span>
-                            <span>Used for staking, voting, and value accumulation</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent1)] mr-2">•</span>
-                            <span>Minted based on community contributions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent1)] mr-2">•</span>
-                            <span>Deflationary mechanism through buy & burn</span>
-                        </li>
-                    </ul>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="sustainableTitle">Sustainable</h3>
+                    <p class="text-gray-300" data-translate="sustainableDesc">Long-term planning with controlled inflation</p>
+                </div>
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="decentralizedTitle">Decentralized</h3>
+                    <p class="text-gray-300" data-translate="decentralizedDesc">Community-driven governance and funding</p>
+                </div>
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]" data-translate="efficientTitle">Efficient</h3>
+                    <p class="text-gray-300" data-translate="efficientDesc">Optimal resource distribution</p>
+                </div>
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]" data-translate="scalableTitle">Scalable</h3>
+                    <p class="text-gray-300" data-translate="scalableDesc">Adapts to new economic & tech advances</p>
                 </div>
 
-                <!-- BGL-S Token -->
-                <div class="glass p-8 rounded-xl neon-glow">
-                    <h3 class="text-xl font-semibold mb-4 text-[var(--accent2)]">🛡️ BGL-S (Stable Lion)</h3>
-                    <ul class="space-y-3 text-gray-300">
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent2)] mr-2">•</span>
-                            <span>Stablecoin for daily transactions</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent2)] mr-2">•</span>
-                            <span>1:1 peg to a basket of stable assets</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent2)] mr-2">•</span>
-                            <span>Backed by BGL and other collateral</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-[var(--accent2)] mr-2">•</span>
-                            <span>Algorithmic stability mechanism</span>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </section>
@@ -502,112 +670,72 @@
     <!-- Features Section -->
     <section id="features" class="py-8">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Core Features</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="coreFeaturesTitle">Core Features</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Self-sovereign identity (SSI)</h3>
-                    <p class="text-gray-400">Secure and verifiable digital identity system powered by blockchain technology</p>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="featureInfrastructureTitle">Decentralized Infrastructure</h3>
+                    <p class="text-gray-300" data-translate="featureInfrastructureDesc">Built on a sovereign blockchain network, ensuring independence from external systems while maintaining high security and scalability.</p>
                 </div>
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--accent1)] to-[var(--accent2)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Governance</h3>
-                    <p class="text-gray-400">Decentralized decision-making through smart contracts and community voting</p>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="featureGovernanceTitle">Meritocratic Governance</h3>
+                    <p class="text-gray-300" data-translate="featureGovernanceDesc">Voting power based on proven expertise and contributions, ensuring qualified decision-making in specialized domains.</p>
                 </div>
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--accent3)] to-[var(--accent4)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Community</h3>
-                    <p class="text-gray-400">Engaging social platform for nation building and community interaction</p>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]" data-translate="featureEconomyTitle">Hybrid Token Economy</h3>
+                    <p class="text-gray-300" data-translate="featureEconomyDesc">Dual-token system combining stability for everyday transactions with long-term value growth for governance participants.</p>
+                </div>
+                <div class="glass rounded-2xl p-8 neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]" data-translate="featurePrivacyTitle">Privacy & Security</h3>
+                    <p class="text-gray-300" data-translate="featurePrivacyDesc">Advanced cryptographic systems protect your data while ensuring transparency where needed. You control what information to share.</p>
+                </div>
+                <div class="glass rounded-2xl p-8 neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="featureRewardsTitle">Contribution Rewards</h3>
+                    <p class="text-gray-300" data-translate="featureRewardsDesc">Earn tokens and reputation through meaningful contributions. Every verified action increases your standing in the community.</p>
+                </div>
+                <div class="glass rounded-2xl p-8 neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="featureAutonomyTitle">Digital Autonomy</h3>
+                    <p class="text-gray-300" data-translate="featureAutonomyDesc">Complete independence in digital governance, economy, and social systems. A truly sovereign digital nation.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pitch Deck Section -->
-    <section id="pitch" class="py-8">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Pitch Deck</h2>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Vision -->
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Vision & Currency</h3>
-                    <p class="text-gray-400">
-                        NOVA BULGARIA is creating a sovereign digital nation powered by blockchain and contribution. Our national currency, the Bulgarian Lion (BGL), symbolizes courage and strength, earned through real contributions to the nation.
-                    </p>
-                </div>
-
-                <!-- Infrastructure -->
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--accent1)] to-[var(--accent2)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Blockchain Infrastructure</h3>
-                    <p class="text-gray-400">
-                        Built on Cosmos SDK for unmatched flexibility and interoperability. Features Tendermint consensus, CosmWasm smart contracts, and IPFS/Arweave storage for a robust technical foundation.
-                    </p>
-                </div>
-
-                <!-- Identity System -->
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--accent3)] to-[var(--accent4)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Digital Citizenship</h3>
-                    <p class="text-gray-400">
-                        Soulbound NFT ID system serving as a digital passport, tracking qualifications, reputation, and rank in real-time. Your key to governance, education, and all national services.
-                    </p>
-                </div>
-
-                <!-- Governance -->
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <div class="h-12 w-12 rounded-full bg-gradient-to-r from-[var(--primary)] to-[var(--accent1)] mb-6"></div>
-                    <h3 class="text-xl font-bold mb-4">Governance & Platform</h3>
-                    <p class="text-gray-400">
-                        Decentralized governance with expert-based voting, blockchain courts, and a comprehensive social platform for nation-building, education, and community initiatives.
-                    </p>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <a href="/pitch-deck.pdf" class="inline-block bg-[var(--primary)] text-black px-8 py-3 rounded-lg font-medium hover:bg-[var(--secondary)] transition-colors">
-                    Download Full Pitch Deck
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-8 bg-black bg-opacity-50">
+    <section id="roadmap" class="py-8">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text">Roadmap</h2>
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="roadmapTitle">Roadmap</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]">Phase 1</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li>Platform Development</li>
-                        <li>Community Building</li>
-                        <li>Token Launch</li>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="roadmapPhase1Title">Phase 1: Foundation</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li data-translate="roadmapPhase1Item1">• Technical infrastructure setup</li>
+                        <li data-translate="roadmapPhase1Item2">• Core team formation</li>
+                        <li data-translate="roadmapPhase1Item3">• Initial documentation</li>
                     </ul>
                 </div>
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]">Phase 2</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li>Governance Implementation</li>
-                        <li>Identity System</li>
-                        <li>Community Growth</li>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="roadmapPhase2Title">Phase 2: Development</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li data-translate="roadmapPhase2Item1">• Smart contract deployment</li>
+                        <li data-translate="roadmapPhase2Item2">• NFT ID system launch</li>
+                        <li data-translate="roadmapPhase2Item3">• Governance framework</li>
                     </ul>
                 </div>
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]">Phase 3</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li>Platform Expansion</li>
-                        <li>Partnership Development</li>
-                        <li>Feature Enhancement</li>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]" data-translate="roadmapPhase3Title">Phase 3: Growth</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li data-translate="roadmapPhase3Item1">• Community expansion</li>
+                        <li data-translate="roadmapPhase3Item2">• Token economy launch</li>
+                        <li data-translate="roadmapPhase3Item3">• Partnership development</li>
                     </ul>
                 </div>
                 <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]">Phase 4</h3>
-                    <ul class="space-y-3 text-gray-400">
-                        <li>Global Adoption</li>
-                        <li>Ecosystem Growth</li>
-                        <li>Advanced Features</li>
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]" data-translate="roadmapPhase4Title">Phase 4: Maturity</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li data-translate="roadmapPhase4Item1">• Full decentralization</li>
+                        <li data-translate="roadmapPhase4Item2">• Global expansion</li>
+                        <li data-translate="roadmapPhase4Item3">• Advanced features</li>
                     </ul>
                 </div>
             </div>
@@ -617,46 +745,46 @@
     <!-- Whitepaper Section -->
     <section id="whitepaper" class="w-full py-16 px-4">
         <div class="text-center mb-12">
-            <h2 class="text-5xl font-bold mb-4 gradient-text">Self-sovereign identity (SSI)</h2>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto">A comprehensive guide to NOVA BULGARIA's vision, technology, and governance</p>
+            <h2 class="text-5xl font-bold mb-4 gradient-text" data-translate="whitepaperTitle">Self-sovereign identity (SSI)</h2>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto" data-translate="whitepaperSubtitle">A comprehensive guide to NOVA BULGARIA's vision, technology, and governance</p>
         </div>
 
         <div class="max-w-[1400px] mx-auto">
             <!-- Table of Contents -->
             <div class="glass rounded-2xl p-8 mb-12 border border-[var(--accent1)] border-opacity-20">
-                <h3 class="text-2xl font-bold text-[var(--accent1)]">Contents</h3>
+                <h3 class="text-2xl font-bold text-[var(--accent1)]" data-translate="tableOfContents">Contents</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <a href="#vision" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--primary)]">1. Vision</h4>
-                        <p class="text-sm text-gray-400">The foundation of our digital nation</p>
+                        <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="tocVisionTitle">1. Vision</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocVisionDesc">Our mission and goals</p>
                     </a>
                     <a href="#principles" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--secondary)]">2. Key Principles</h4>
-                        <p class="text-sm text-gray-400">Core values and concepts</p>
+                        <h4 class="text-lg font-semibold text-[var(--secondary)]" data-translate="tocPrinciplesTitle">2. Key Principles</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocPrinciplesDesc">Core values and beliefs</p>
                     </a>
                     <a href="#token" class="glass p-6 rounded-xl hover:border-[var(--accent1)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent1)]">3. Token Model</h4>
-                        <p class="text-sm text-gray-400">BGL and economic system</p>
+                        <h4 class="text-lg font-semibold text-[var(--accent1)]" data-translate="tocTokenModelTitle">3. Token Model</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocTokenModelDesc">BGL and economic system</p>
                     </a>
                     <a href="#nft" class="glass p-6 rounded-xl hover:border-[var(--accent2)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent2)]">4. NFT ID System</h4>
-                        <p class="text-sm text-gray-300">Digital citizenship</p>
+                        <h4 class="text-lg font-semibold text-[var(--accent2)]" data-translate="tocNFTTitle">4. NFT ID System</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocNFTDesc">Digital identity and access</p>
                     </a>
                     <a href="#governance" class="glass p-6 rounded-xl hover:border-[var(--accent3)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent3)]">5. Governance</h4>
-                        <p class="text-sm text-gray-400">Decision making and law</p>
+                        <h4 class="text-lg font-semibold text-[var(--accent3)]" data-translate="tocGovernanceTitle">5. Governance</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocGovernanceDesc">Decision making and law</p>
                     </a>
                     <a href="#funding" class="glass p-6 rounded-xl hover:border-[var(--accent4)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent4)]">6. Funding</h4>
-                        <p class="text-sm text-gray-400">Economic growth strategy</p>
+                        <h4 class="text-lg font-semibold text-[var(--accent4)]" data-translate="tocFundingTitle">6. Funding</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocFundingDesc">Economic growth strategy</p>
                     </a>
                     <a href="#development" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--primary)]">7. Development</h4>
-                        <p class="text-sm text-gray-400">Roadmap and next steps</p>
+                        <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="tocDevelopmentTitle">7. Development</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocDevelopmentDesc">Roadmap and next steps</p>
                     </a>
                     <a href="#conclusion" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--secondary)]">8. Conclusion</h4>
-                        <p class="text-sm text-gray-400">Future vision</p>
+                        <h4 class="text-lg font-semibold text-[var(--secondary)]" data-translate="tocConclusionTitle">8. Conclusion</h4>
+                        <p class="text-sm text-gray-300" data-translate="tocConclusionDesc">Future vision</p>
                     </a>
                 </div>
             </div>
@@ -664,74 +792,424 @@
             <div class="space-y-16">
                 <!-- Vision Section -->
                 <div id="vision" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--primary)]">1. Vision</h3>
-                    <p class="text-gray-300">NOVA BULGARIA is a revolutionary initiative to create a fully decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. The project aims to transfer all traditionally government-controlled functions to the hands of national members through blockchain technology.</p>
-                    <p class="text-gray-300">Governance, economy, healthcare, law enforcement, and public infrastructure will be managed transparently and immutably via blockchain, eliminating corruption and ensuring decisions are based on expertise and contribution.</p>
+                    <h3 class="text-2xl font-bold text-[var(--primary)]" data-translate="visionTitle">Vision</h3>
+                    <p class="text-gray-300" data-translate="visionMainDesc">NOVA BULGARIA is a revolutionary initiative to create a fully decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. The project aims to transfer all traditionally government-controlled functions to the hands of national members through blockchain technology.</p>
+                    <p class="text-gray-300" data-translate="visionSecondaryDesc">Governance, economy, healthcare, law enforcement, and public infrastructure will be managed transparently and immutably via blockchain, eliminating corruption and ensuring decisions are based on expertise and contribution.</p>
+                </div>
+
+                <div id="token-model" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent2)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent2)]" data-translate="tokenModelTitle">Dynamic Event-Based Minting</h3>
+                    <p class="text-gray-300" data-translate="tokenModelDesc">Instead of a static supply or constant inflation, new BGL tokens are minted only when specific value-adding events occur</p>
+                    
+                    <!-- Minting Events -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]">Minting Events</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="tokenModelOnboardingReward">Onboarding Reward: 3M BGL for new verified members</li>
+                                <li data-translate="tokenModelExams">Knowledge Exams & Certifications: Tokens based on exam difficulty</li>
+                                <li data-translate="tokenModelService">Public Service Contributions: Rewards for governance and infrastructure</li>
+                                <li data-translate="tokenModelVoting">Policy Voting Participation: Incentives for active governance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="tokenLedgerTitle">Contribution Ledger & Tracking</h4>
+                            <p class="text-gray-300 mb-4" data-translate="tokenLedgerDesc">Public record of all minting events and contributions</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="tokenLedgerMinting">Minting Ledger: Transparent record of when and why coins were created</li>
+                                <li data-translate="tokenLedgerBalance">Individual Balances: Track contribution-based earnings</li>
+                                <li data-translate="tokenLedgerSupply">Total Supply Visibility: Real-time monitoring of circulation</li>
+                            </ul>
+                        </div>
+
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="tokenBenefitsTitle">Benefits of Event-Based Minting</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="tokenBenefitsGrowth">Incentive-Based Growth: Value-driven token creation</li>
+                                <li data-translate="tokenBenefitsControl">Precise Governance Control: Community-managed minting</li>
+                                <li data-translate="tokenBenefitsSafeguard">Anti-Gaming Protection: Verifiable event requirements</li>
+                                <li data-translate="tokenBenefitsHybrid">Hybrid Token Economy: Dual-token system combining stability for everyday transactions with long-term value growth for governance participants</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Hybrid Token System -->
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="hybridTokenTitle">Dual-Token Economy</h4>
+                        <p class="text-gray-300 mb-4" data-translate="hybridTokenDesc">BGL for governance and BGL-S for stability</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="glass p-6 rounded-xl">
+                                <h5 class="text-md font-semibold mb-3 text-[var(--accent2)]">BGL Token</h5>
+                                <ul class="space-y-3 text-gray-300">
+                                    <li data-translate="bglPurpose">BGL: Core governance and staking token</li>
+                                    <li data-translate="bglSupply">Dynamic supply with logarithmic minting curve</li>
+                                    <li data-translate="bglStability">Treasury-backed price floor protection</li>
+                                </ul>
+                            </div>
+                            <div class="glass p-6 rounded-xl">
+                                <h5 class="text-md font-semibold mb-3 text-[var(--accent2)]" data-translate="bglsTitle">BGL-S: Native Stablecoin</h5>
+                                <ul class="space-y-3 text-gray-300">
+                                    <li data-translate="bglsPurpose">Stable token for daily transactions</li>
+                                    <li data-translate="bglsPeg">Multi-asset backed stability</li>
+                                    <li data-translate="bglsMechanism">Mint by staking BGL, burn on redemption</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="staking" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent3)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent3)]" data-translate="stakingTitle">Project Staking & Dividends</h3>
+                    <p class="text-gray-300" data-translate="stakingDesc">Stake BGL to fund and own shares in national projects</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Project Proposals -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingProposalsTitle">Project Proposals</h4>
+                            <p class="text-gray-300 mb-4" data-translate="stakingProposalsDesc">Submit and fund community projects</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="stakingProposalSubmit">Any citizen can propose projects</li>
+                                <li data-translate="stakingProposalVote">Governance voting approval process</li>
+                                <li data-translate="stakingProposalStake">Open staking after approval</li>
+                            </ul>
+                        </div>
+
+                        <!-- Staking Mechanism -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingMechanismTitle">Staking Mechanism</h4>
+                            <p class="text-gray-300 mb-4" data-translate="stakingMechanismDesc">Secure project funding through BGL staking</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="stakingMechanismFund">Stake BGL tokens for project funding</li>
+                                <li data-translate="stakingMechanismShares">Ownership shares based on contribution</li>
+                                <li data-translate="stakingMechanismRewards">Automatic dividend distribution</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <!-- Contribution Rewards -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingRewardsTitle">Contribution-Based Rewards</h4>
+                            <p class="text-gray-300 mb-4" data-translate="stakingRewardsDesc">Earn returns based on project success</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="stakingRewardsDividends">Receive project dividends</li>
+                                <li data-translate="stakingRewardsAuto">Smart contract distribution</li>
+                                <li data-translate="stakingRewardsBonus">Extra rewards for active contribution</li>
+                            </ul>
+                        </div>
+
+                        <!-- Protection Features -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingProtectionTitle">Anti-Gaming Protections</h4>
+                            <p class="text-gray-300 mb-4" data-translate="stakingProtectionDesc">Security measures for sustainable growth</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="stakingProtectionPeriod">Minimum staking periods</li>
+                                <li data-translate="stakingProtectionPenalty">Reputation penalties for failures</li>
+                                <li data-translate="stakingProtectionAudit">Regular project audits</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Public Projects -->
+                    <div class="glass p-6 rounded-xl mt-6">
+                        <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingPublicTitle">Public Utility Projects</h4>
+                        <p class="text-gray-300 mb-4" data-translate="stakingPublicDesc">Community infrastructure initiatives</p>
+                        <ul class="space-y-3 text-gray-300">
+                            <li data-translate="stakingPublicCredits">Social credits for public projects</li>
+                            <li data-translate="stakingPublicVoting">Enhanced governance privileges</li>
+                            <li data-translate="stakingPublicBenefits">Community-wide benefits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="network" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent4)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent4)]" data-translate="networkTitle">Decentralized Network Architecture</h3>
+                    <p class="text-gray-300" data-translate="networkDesc">A resilient, multi-layer network infrastructure</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Node System -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkNodesTitle">Hybrid Node System</h4>
+                            <p class="text-gray-300 mb-4" data-translate="networkNodesDesc">Multi-tier validation network</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="networkNodesLight">Light Nodes: Mobile validation & voting</li>
+                                <li data-translate="networkNodesLightDetails">Minimal resource usage for phones</li>
+                                <li data-translate="networkNodesFull">Full Nodes: Consensus & block creation</li>
+                                <li data-translate="networkNodesRewards">Node operator rewards & privileges</li>
+                            </ul>
+                        </div>
+
+                        <!-- Validation System -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkValidationTitle">Proof of Contribution Validation</h4>
+                            <p class="text-gray-300 mb-4" data-translate="networkValidationDesc">Merit-based consensus mechanism</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="networkValidationPoc">PoC score + staked BGL for validation</li>
+                                <li data-translate="networkValidationDelegate">Delegate stake to trusted validators</li>
+                                <li data-translate="networkValidationRewards">Contribution-based validator rewards</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <!-- Network Mesh -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkMeshTitle">P2P Mesh Network</h4>
+                            <p class="text-gray-300 mb-4" data-translate="networkMeshDesc">Resilient device interconnection</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="networkMeshLocal">Local device mesh networks</li>
+                                <li data-translate="networkMeshSync">Offline-capable with global sync</li>
+                                <li data-translate="networkMeshRedundancy">Geographic node distribution</li>
+                            </ul>
+                        </div>
+
+                        <!-- Privacy & Security -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkPrivacyTitle">Zero-Knowledge & Encryption</h4>
+                            <p class="text-gray-300 mb-4" data-translate="networkPrivacyDesc">Advanced privacy protection</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="networkPrivacyZk">Zero-knowledge transaction proofs</li>
+                                <li data-translate="networkPrivacyEncrypt">End-to-end data encryption</li>
+                                <li data-translate="networkPrivacyTransparent">Public transparency options</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <!-- Network Protection -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkProtectionTitle">Auto-Healing & Fork Protection</h4>
+                            <p class="text-gray-300 mb-4" data-translate="networkProtectionDesc">Automatic network security</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="networkProtectionHeal">Self-healing protocol</li>
+                                <li data-translate="networkProtectionFork">Community-driven fork resolution</li>
+                                <li data-translate="networkProtectionAudit">Continuous security auditing</li>
+                            </ul>
+                        </div>
+
+                        <!-- Storage & Contracts -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkStorageTitle">Decentralized Storage</h4>
+                            <p class="text-gray-300 mb-4" data-translate="networkStorageDesc">Distributed data management</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="networkStorageIpfs">IPFS/Arweave integration</li>
+                                <li data-translate="networkStorageContracts">Smart contract automation</li>
+                                <li data-translate="networkStorageGov">Governance document storage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="pension" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--primary)]" data-translate="pensionTitle">Contribution-Based Pension</h3>
+                    <p class="text-gray-300" data-translate="pensionDesc">Automatic pension accumulation through contributions</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Pension Fund -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionFundTitle">Pension Fund & PoC Rewards</h4>
+                            <p class="text-gray-300 mb-4" data-translate="pensionFundDesc">Community-managed retirement system</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="pensionFundPool">Shared pension pool from transactions</li>
+                                <li data-translate="pensionFundCredits">Contribution-based credit accumulation</li>
+                                <li data-translate="pensionFundPayout">Monthly BGL retirement payouts</li>
+                            </ul>
+                        </div>
+
+                        <!-- Disability Support -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionDisabilityTitle">Social Support System</h4>
+                            <p class="text-gray-300 mb-4" data-translate="pensionDisabilityDesc">Community protection for disabled members</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="pensionDisabilityFund">Mandatory community contributions</li>
+                                <li data-translate="pensionDisabilityPayout">Regular BGL-S disability payments</li>
+                                <li data-translate="pensionDisabilityGov">Community oversight committee</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <!-- Pension Staking -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionStakingTitle">Stake-Based Enhancement</h4>
+                            <p class="text-gray-300 mb-4" data-translate="pensionStakingDesc">Optional pension boosting</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="pensionStakingBoost">Stake BGL for increased benefits</li>
+                                <li data-translate="pensionStakingFiat">Fiat conversion for expenses</li>
+                                <li data-translate="pensionStakingRewards">Staking reward distributions</li>
+                            </ul>
+                        </div>
+
+                        <!-- Partial Contribution -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionServiceTitle">Partial PoC Maintenance</h4>
+                            <p class="text-gray-300 mb-4" data-translate="pensionServiceDesc">Flexible retirement options</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="pensionServiceMentor">Mentoring & knowledge sharing</li>
+                                <li data-translate="pensionServicePartial">Gradual retirement transition</li>
+                                <li data-translate="pensionServiceBonus">Activity-based bonus rewards</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tax" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--secondary)]" data-translate="taxTitle">Voluntary Contribution Tax</h3>
+                    <p class="text-gray-300" data-translate="taxDesc">Optional tax contributions with reward multipliers</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Tax Tiers -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxTiersTitle">Contribution Tiers</h4>
+                            <p class="text-gray-300 mb-4" data-translate="taxTiersDesc">Progressive reward multipliers</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="taxTier5">5% Contribution: x0.5 Reward Multiplier</li>
+                                <li data-translate="taxTier10">10% Contribution: x1.5 Reward Multiplier</li>
+                                <li data-translate="taxTier20">20% Contribution: x3.0 Reward Multiplier</li>
+                                <li data-translate="taxTierCustom">Higher tiers available</li>
+                            </ul>
+                        </div>
+
+                        <!-- Tax Benefits -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxBenefitsTitle">Tax Benefits</h4>
+                            <p class="text-gray-300 mb-4" data-translate="taxBenefitsDesc">Enhanced rewards for contributors</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="taxBenefitsStaking">Increased staking rewards</li>
+                                <li data-translate="taxBenefitsVoting">Enhanced voting power</li>
+                                <li data-translate="taxBenefitsPension">Higher pension accumulation</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                        <!-- Tax Examples -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxExamplesTitle">Practical Examples</h4>
+                            <p class="text-gray-300 mb-4" data-translate="taxExamplesDesc">Real contribution scenarios</p>
+                            <div class="space-y-4">
+                                <div class="border-b border-gray-700 pb-2">
+                                    <p class="text-gray-300" data-translate="taxExample1">1000 BGL income, 5% tax (50 BGL)</p>
+                                    <p class="text-gray-400 text-sm" data-translate="taxExample1Result">Rewards multiplied by x0.5</p>
+                                </div>
+                                <div class="border-b border-gray-700 pb-2">
+                                    <p class="text-gray-300" data-translate="taxExample2">1000 BGL income, 10% tax (100 BGL)</p>
+                                    <p class="text-gray-400 text-sm" data-translate="taxExample2Result">Rewards multiplied by x1.5</p>
+                                </div>
+                                <div>
+                                    <p class="text-gray-300" data-translate="taxExample3">1000 BGL income, 20% tax (200 BGL)</p>
+                                    <p class="text-gray-400 text-sm" data-translate="taxExample3Result">Rewards multiplied by x3.0</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tax Distribution -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxDistributionTitle">Tax Distribution</h4>
+                            <p class="text-gray-300 mb-4" data-translate="taxDistributionDesc">Community fund allocation</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="taxDistributionPension">40% to pension fund</li>
+                                <li data-translate="taxDistributionProjects">30% to public projects</li>
+                                <li data-translate="taxDistributionReserve">30% to community reserve</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="education" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent2)] border-opacity-20">
+                    <h3 class="text-2xl font-bold text-[var(--accent2)]" data-translate="educationTitle">Education & Training</h3>
+                    <p class="text-gray-300" data-translate="educationDesc">Community-driven knowledge sharing</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Education System -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="educationSystemTitle">Education System</h4>
+                            <p class="text-gray-300 mb-4" data-translate="educationSystemDesc">Skill-based progression</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="educationSystemCourses">Community-created courses</li>
+                                <li data-translate="educationSystemMentor">Mentorship programs</li>
+                                <li data-translate="educationSystemCertification">Certification & reputation</li>
+                            </ul>
+                        </div>
+
+                        <!-- Training Programs -->
+                        <div class="glass p-6 rounded-xl">
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="trainingProgramsTitle">Training Programs</h4>
+                            <p class="text-gray-300 mb-4" data-translate="trainingProgramsDesc">Practical skill development</p>
+                            <ul class="space-y-3 text-gray-300">
+                                <li data-translate="trainingProgramsWorkshops">Workshops & hackathons</li>
+                                <li data-translate="trainingProgramsProjects">Community projects & collaborations</li>
+                                <li data-translate="trainingProgramsFeedback">Peer review & feedback</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Key Principles -->
                 <div id="principles" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--secondary)]">2. Key Principles</h3>
+                    <h3 class="text-2xl font-bold text-[var(--secondary)]" data-translate="principlesTitle">Key Principles</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]">🌟 Proof of Contribution</h4>
-                            <p class="text-gray-300">Members earn voting power, social rank, and economic benefits based on their real contributions — including skilled labor, innovation, and public service. Voting power updates daily, reflecting continuous personal development.</p>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="pocTitle">🌟 Proof of Contribution</h4>
+                            <p class="text-gray-300" data-translate="pocDescription">Members earn voting power, social rank, and economic benefits based on their real contributions — including skilled labor, innovation, and public service. Voting power updates daily, reflecting continuous personal development.</p>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]">🆔 NFT ID System</h4>
-                            <p class="text-gray-300">A unique, evolving digital identity that serves as a passport to the nation. It records rank, expertise, reputation, and access rights within the ecosystem.</p>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]" data-translate="nftIdTitle">🆔 NFT ID System</h4>
+                            <p class="text-gray-300" data-translate="nftIdDescription">A unique, evolving digital identity that serves as a passport to the nation. It records rank, expertise, reputation, and access rights within the ecosystem.</p>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">⚖️ Transparent Governance</h4>
-                            <p class="text-gray-300">Laws and policies are proposed, discussed, and voted on via blockchain. Decisions are executed immediately with 51% consensus, without bureaucratic delay.</p>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="governanceTitle">⚖️ Transparent Governance</h4>
+                            <p class="text-gray-300" data-translate="governanceDescription">Laws and policies are proposed, discussed, and voted on via blockchain. Decisions are executed immediately with 51% consensus, without bureaucratic delay.</p>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">💰 Dynamic Token Economy</h4>
-                            <p class="text-gray-300">A hybrid token system balancing long-term growth with short-term stability, designed to reward contribution while protecting against volatility.</p>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]" data-translate="tokenEconomyTitle">💰 Dynamic Token Economy</h4>
+                            <p class="text-gray-300" data-translate="tokenEconomyDescription">A hybrid token system balancing long-term growth with short-term stability, designed to reward contribution while protecting against volatility.</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Hybrid Token Model -->
                 <div id="token" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent1)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent1)]">3. Hybrid Token Model</h3>
+                    <h3 class="text-2xl font-bold text-[var(--accent1)]" data-translate="hybridTokenTitle">Hybrid Token Model</h3>
+                    <p class="text-gray-300" data-translate="hybridTokenDescription">Our dual-token system combines utility and governance:</p>
                     
                     <div class="space-y-6">
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]">🦁 BGL (Bulgarian Lion) — Core Nation Token</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="novaTokenTitle">Governance Token (BGL)</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Purpose: Governance, staking, long-term value accumulation, and PoC rewards</li>
-                                <li>• Supply: Minted on demand for events (e.g., onboarding, project completion)</li>
-                                <li>• Stability: Logarithmic supply curve slows token issuance as supply grows</li>
-                                <li>• Price Floor: Supported by a treasury fund with auto-buy mechanism</li>
+                                <li data-translate="novaTokenPurpose">• Purpose: Governance, staking, long-term value accumulation, and PoC rewards</li>
+                                <li data-translate="novaTokenSupply">• Supply: Minted on demand for events (e.g., onboarding, project completion)</li>
+                                <li data-translate="novaTokenStability">• Stability: Logarithmic supply curve slows token issuance as supply grows</li>
+                                <li data-translate="novaTokenPriceFloor">• Price Floor: Supported by a treasury fund with auto-buy mechanism</li>
                             </ul>
                         </div>
 
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]">🛡️ BGL-S (Stable Lion) — Native Stablecoin</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]" data-translate="stablecoinTitle">Stablecoin (BGL-S)</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Purpose: Everyday transactions, salaries, and public services</li>
-                                <li>• Peg: Basket of assets (fiat reserves, tokenized infrastructure, fractional BGL)</li>
-                                <li>• Mechanism: Lock BGL to mint BGL-S, burn BGL-S to redeem</li>
-                                <li>• Governance: Community can vote to adjust stabilization parameters</li>
+                                <li data-translate="stablecoinPurpose">• Purpose: Everyday transactions, salaries, and public services</li>
+                                <li data-translate="stablecoinPeg">• Peg: Basket of assets (fiat reserves, tokenized infrastructure, fractional BGL)</li>
+                                <li data-translate="stablecoinMechanism">• Mechanism: Lock BGL to mint BGL-S, burn BGL-S to redeem</li>
+                                <li data-translate="stablecoinGovernance">• Governance: Community can vote to adjust stabilization parameters</li>
                             </ul>
                         </div>
 
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">🎁 Event-Based Minting & Rewards</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="eventBasedMintingTitle">Event-Based Minting & Rewards</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Onboarding: 3 million BGL for new members upon registration</li>
-                                <li>• Project Completion: BGL rewards for completed national projects</li>
-                                <li>• Staking: Earn BGL-S dividends or project ownership shares</li>
+                                <li data-translate="eventMintingOnboarding">• Onboarding: 3 million BGL for new verified members</li>
+                                <li data-translate="eventMintingProject">• Project Completion: BGL rewards for completed national projects</li>
+                                <li data-translate="eventMintingStaking">• Staking: Earn BGL-S dividends or project ownership shares</li>
                             </ul>
                         </div>
 
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">🚨 Emergency Stabilization</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]" data-translate="emergencyStabilizationTitle">Emergency Stabilization</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Rapid Mint/Burn for crisis events</li>
-                                <li>• Community-elected emergency committees</li>
-                                <li>• Post-crisis audits for accountability</li>
+                                <li data-translate="emergencyMint">• Rapid Mint/Burn for crisis events</li>
+                                <li data-translate="emergencyCommittee">• Community-elected emergency committees</li>
+                                <li data-translate="emergencyAudit">• Post-crisis audits for accountability</li>
                             </ul>
                         </div>
                     </div>
@@ -739,74 +1217,73 @@
 
                 <!-- NFT ID System -->
                 <div id="nft" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent4)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent4)]">4. NFT ID Onboarding & Identity System</h3>
-                    <p class="text-gray-300">Every citizen receives a Soulbound NFT ID upon passing a foundational knowledge exam covering history, language, psychology, and more.</p>
+                    <h3 class="text-2xl font-bold text-[var(--accent4)]" data-translate="nftSystemTitle">NFT ID Onboarding & Identity System</h3>
+                    <p class="text-gray-300" data-translate="nftSystemDescription">Every citizen receives a Soulbound NFT ID upon passing a foundational knowledge exam covering history, language, psychology, and more.</p>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">🔑 Key Features</h4>
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="nftKeyFeaturesTitle">Key Features</h4>
                             <ul class="space-y-3 text-gray-300">
                                 <li class="flex items-start">
                                     <span class="text-[var(--accent4)] mr-2">•</span>
-                                    Non-Transferable Soulbound NFT
+                                    <span data-translate="nftSoulbound">Non-Transferable Soulbound NFT</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="text-[var(--accent4)] mr-2">•</span>
-                                    Evolving based on contributions and exams
+                                    <span data-translate="nftEvolving">Evolving based on contributions and exams</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="text-[var(--accent4)] mr-2">•</span>
-                                    Privacy-focused with minimal public data
+                                    <span data-translate="nftPrivacy">Privacy-focused with minimal public data</span>
                                 </li>
                                 <li class="flex items-start">
                                     <span class="text-[var(--accent4)] mr-2">•</span>
-                                    Access key to all national systems
+                                    <span data-translate="nftAccess">Access key to all national systems</span>
                                 </li>
                             </ul>
                         </div>
                         
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]">📊 Public Data</h4>
+                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="nftPublicDataTitle">Public Data</h4>
                             <pre class="text-sm text-gray-300 overflow-x-auto">
 {
-  "name": "Иван Иванов",
-  "rank": 3,
-  "expertise": [
-    "Blockchain Law",
-    "Environmental Policy"
-  ],
-  "contribution_score": 2100
-}</pre>
+  <span data-translate="nftName">"name": "Иван Иванов"</span>,
+  <span data-translate="nftId">"id": "BG-NFT-001"</span>,
+  <span data-translate="nftLevel">"level": "Citizen"</span>,
+  <span data-translate="nftContributions">"contributions": 156</span>,
+  <span data-translate="nftVotingPower">"votingPower": 3.2</span>
+}
+                            </pre>
                         </div>
                     </div>
                 </div>
 
                 <!-- Governance Section -->
                 <div id="governance" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--primary)]">5. Governance & Law Enforcement</h3>
+                    <h3 class="text-2xl font-bold text-[var(--primary)]" data-translate="governanceTitle">Governance & Law Enforcement</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]">🗳️ Decentralized Voting</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]" data-translate="decentralizedVotingTitle">🗳️ Decentralized Voting</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Expertise-based voting rights</li>
-                                <li>• Direct democracy system</li>
-                                <li>• Immediate execution of decisions</li>
+                                <li data-translate="decentralizedVoting1">• Expertise-based voting rights</li>
+                                <li data-translate="decentralizedVoting2">• Direct democracy system</li>
+                                <li data-translate="decentralizedVoting3">• Immediate execution of decisions</li>
                             </ul>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]">⚡ Emergency Votes</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]" data-translate="emergencyVotesTitle">⚡ Emergency Votes</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Expedited voting windows</li>
-                                <li>• Temporary power boosts</li>
-                                <li>• Crisis response system</li>
+                                <li data-translate="emergencyVotes1">• Expedited voting windows</li>
+                                <li data-translate="emergencyVotes2">• Temporary power boosts</li>
+                                <li data-translate="emergencyVotes3">• Crisis response system</li>
                             </ul>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]">⚖️ Blockchain Courts</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]" data-translate="courtsTitle">⚖️ Blockchain Courts</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• PoC-rated judges</li>
-                                <li>• Random selection</li>
-                                <li>• Transparent proceedings</li>
+                                <li data-translate="courts1">• PoC-rated judges</li>
+                                <li data-translate="courts2">• Random selection</li>
+                                <li data-translate="courts3">• Transparent proceedings</li>
                             </ul>
                         </div>
                     </div>
@@ -814,30 +1291,30 @@
 
                 <!-- Funding Section -->
                 <div id="funding" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--secondary)]">6. Funding & Economic Growth</h3>
+                    <h3 class="text-2xl font-bold text-[var(--secondary)]" data-translate="fundingTitle">Funding & Economic Growth</h3>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]">💰 Crowdfunding</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]" data-translate="crowdfundingTitle">💰 Crowdfunding</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• BGL/fiat contributions</li>
-                                <li>• Reward system for contributors</li>
-                                <li>• Transparent project funding</li>
+                                <li data-translate="crowdfunding1">• BGL/fiat contributions</li>
+                                <li data-translate="crowdfunding2">• Reward system for contributors</li>
+                                <li data-translate="crowdfunding3">• Transparent project funding</li>
                             </ul>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]">🏦 Treasury</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]" data-translate="treasuryTitle">🏦 Treasury</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Community governance</li>
-                                <li>• Automatic stabilizers</li>
-                                <li>• Economic security measures</li>
+                                <li data-translate="treasury1">• Community governance</li>
+                                <li data-translate="treasury2">• Automatic stabilizers</li>
+                                <li data-translate="treasury3">• Economic security measures</li>
                             </ul>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]">💱 Fiat Integration</h4>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--secondary)]" data-translate="fiatTitle">💱 Fiat Integration</h4>
                             <ul class="space-y-2 text-gray-300">
-                                <li>• Traditional payment options</li>
-                                <li>• BGL reward system</li>
-                                <li>• Bridge to traditional finance</li>
+                                <li data-translate="fiat1">• Traditional payment options</li>
+                                <li data-translate="fiat2">• BGL reward system</li>
+                                <li data-translate="fiat3">• Bridge to traditional finance</li>
                             </ul>
                         </div>
                     </div>
@@ -845,29 +1322,23 @@
 
                 <!-- Development Section -->
                 <div id="development" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent3)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent3)]">7. Next Steps & MVP Development</h3>
+                    <h3 class="text-2xl font-bold text-[var(--accent3)]" data-translate="nextStepsTitle">Next Steps & MVP Development</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">🔄 Phase 1</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li>• Cosmos Blockchain Fork</li>
-                                <li>• NFT ID Onboarding MVP</li>
-                            </ul>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="phase1Title">Phase 1</h4>
+                            <p class="text-gray-300" data-translate="phase1Items">• Cosmos Blockchain Fork<br>• NFT ID Onboarding MVP</p>
                         </div>
                         <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]">🚀 Phase 2</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li>• Hybrid Token Launch</li>
-                                <li>• Crowdfunding Portal</li>
-                            </ul>
+                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="phase2Title">Phase 2</h4>
+                            <p class="text-gray-300" data-translate="phase2Items">• Hybrid Token Launch<br>• Crowdfunding Portal</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Conclusion -->
                 <div id="conclusion" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent1)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent1)]">Conclusion: A New Era of Digital Sovereignty</h3>
-                    <p class="text-gray-300">Nova Bulgaria aims to pioneer the world's first truly decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. By combining meritocratic governance with a dynamic token economy, the project seeks to create a living, evolving nation-state that thrives on the collective power of its people.</p>
+                    <h3 class="text-2xl font-bold text-[var(--accent1)]" data-translate="conclusionTitle">Conclusion: A New Era of Digital Sovereignty</h3>
+                    <p class="text-gray-300" data-translate="conclusionText">Nova Bulgaria aims to pioneer the world's first truly decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. By combining meritocratic governance with a dynamic token economy, the project seeks to create a living, evolving nation-state that thrives on the collective power of its people.</p>
                 </div>
             </div>
         </div>
@@ -878,177 +1349,53 @@
         <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-8 md:mb-0">
-                    <h2 class="text-2xl font-bold gradient-text mb-2">NOVA BULGARIA</h2>
-                    <p class="text-gray-400">Building the future of digital nations</p>
+                    <h2 class="text-2xl font-bold gradient-text mb-2" data-translate="footerTitle">NOVA BULGARIA</h2>
+                    <p class="text-gray-400" data-translate="footerSlogan">Building the future of digital nations</p>
                 </div>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]">Twitter</a>
-                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]">Telegram</a>
-                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]">Discord</a>
-                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]">Medium</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerTwitter">Twitter</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerTelegram">Telegram</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerDiscord">Discord</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerMedium">Medium</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@cosmjs/cosmwasm-stargate@0.31.1/dist/index.min.js"></script>
-    <script src="/assets/js/nft.js"></script>
-    <script src="/assets/js/quiz.js"></script>
-    <script src="/assets/translations.js"></script>
-    <script>
-        // Initialize everything after DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize language selector
-            const langSelect = document.getElementById('languageSelect');
-            if (langSelect) {
-                const savedLang = localStorage.getItem('selectedLanguage') || 'en';
-                langSelect.value = savedLang;
-                updateContent(savedLang);
-                
-                langSelect.addEventListener('change', (e) => {
-                    const selectedLang = e.target.value;
-                    localStorage.setItem('selectedLanguage', selectedLang);
-                    updateContent(selectedLang);
-                });
-            }
-
-            // Initialize typewriter effect
-            const typewriterElement = document.getElementById('typewriter');
-            if (typewriterElement && typeof Typewriter !== 'undefined') {
-                const typewriter = new Typewriter(typewriterElement, {
-                    loop: true,
-                    delay: 75,
-                });
-
-                typewriter
-                    .typeString('Self-sovereign identity (SSI)')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('Decentralized and verifiable')
-                    .pauseFor(2000)
-                    .deleteAll()
-                    .typeString('Your identity, your control')
-                    .pauseFor(2000)
-                    .start();
-            }
-        });
-    </script>
+    <!-- Load external dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize homepage charts
-            const tokenomicsChartCtx = document.getElementById('tokenomicsChart');
-            if (tokenomicsChartCtx) {
-                new Chart(tokenomicsChartCtx, {
-                    type: 'pie',
-                    data: {
-                        labels: [
-                            'Community Treasury',
-                            'Development Fund',
-                            'Team & Advisors',
-                            'Early Contributors',
-                            'Marketing & Partnerships'
-                        ],
-                        datasets: [{
-                            data: [45, 25, 15, 10, 5],
-                            backgroundColor: [
-                                '#00FF9D',  // primary
-                                '#4DEEEA',  // secondary
-                                '#FF10F0',  // accent1
-                                '#74EE15',  // accent2
-                                '#FFE500'   // accent3
-                            ],
-                            borderWidth: 2,
-                            borderColor: '#00251f'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'right',
-                                labels: {
-                                    color: '#ffffff',
-                                    font: {
-                                        family: 'Inter',
-                                        size: 12
-                                    },
-                                    padding: 15
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-
-            // Growth Projection Chart
-            const growthChartCtx = document.getElementById('growthChart');
-            if (growthChartCtx) {
-                new Chart(growthChartCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Launch', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
-                        datasets: [{
-                            label: 'Total Supply (Millions)',
-                            data: [100, 150, 225, 300, 350, 375],
-                            borderColor: '#00FF9D',
-                            backgroundColor: 'rgba(0, 255, 157, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#00FF9D',
-                            pointRadius: 5,
-                            pointHoverRadius: 7
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                },
-                                ticks: {
-                                    color: '#ffffff',
-                                    font: {
-                                        family: 'Inter',
-                                        size: 12
-                                    },
-                                    callback: function(value) {
-                                        return value + 'M';
-                                    }
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    color: 'rgba(255, 255, 255, 0.1)'
-                                },
-                                ticks: {
-                                    color: '#ffffff',
-                                    font: {
-                                        family: 'Inter',
-                                        size: 12
-                                    }
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                labels: {
-                                    color: '#ffffff',
-                                    font: {
-                                        family: 'Inter',
-                                        size: 12
-                                    }
-                                }
-                            }
-                        }
-                    }
-                });
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@cosmjs/cosmwasm-stargate@0.31.1/dist/index.min.js"></script>
+    
+    <!-- Load application scripts -->
+    <script src="assets/js/typewriter.js"></script>
+    <script src="assets/js/nft.js"></script>
+    <script src="assets/js/quiz.js"></script>
+    
+    <!-- Load translations last -->
+    <script src="assets/translations.js"></script>
+    
+    <style>
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            margin-left: 2px;
+            vertical-align: middle;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .typewriter {
+            min-height: 2em;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    </style>
 </body>
 </html>
