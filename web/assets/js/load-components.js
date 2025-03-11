@@ -1,7 +1,13 @@
 // Component Loader Script
 document.addEventListener('DOMContentLoaded', function() {
-    // Load the introduction component
-    loadComponent('introduction-container', 'components/introduction/introduction.html');
+    // Load the combined hero and introduction component
+    loadComponent('hero-intro-container', 'components/combined-hero/combined-hero.html');
+    
+    // Load the token details component
+    loadComponent('token-details-container', 'components/tokenomics/token-details.html');
+    
+    // Load the roadmap component
+    loadComponent('roadmap-container', 'components/roadmap/roadmap.html');
 });
 
 // Function to load HTML components

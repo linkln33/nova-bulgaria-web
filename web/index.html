@@ -12,30 +12,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="assets/css/sector-buttons.css">
-    <link rel="stylesheet" href="components/introduction/introduction.css">    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="components/combined-hero/combined-hero.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/tokenomics.js"></script>
     <script src="assets/js/load-components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+
+    <!-- Load other external dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@cosmjs/cosmwasm-stargate@0.31.1/dist/index.min.js"></script>
     
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const closeMobileMenu = document.getElementById('closeMobileMenu');
-            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-
-            function toggleMobileMenu() {
-                mobileMenu.classList.toggle('hidden');
-                document.body.classList.toggle('overflow-hidden');
-            }
-
-            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-            closeMobileMenu.addEventListener('click', toggleMobileMenu);
-
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', toggleMobileMenu);
-            });
-        });
-    </script>
+    <!-- Load application scripts -->
+    <script src="assets/js/typewriter.js"></script>
+    <script src="assets/js/nft.js"></script>
+    <script src="assets/js/sector-buttons.js" defer></script>    <script src="assets/js/quiz.js"></script>
+        <script src="assets/js/charts.js" defer></script>
+<script src="assets/js/token-release-chart.js" defer></script>
+    
+    <!-- Load translations last -->
+    <script src="assets/translations.js"></script>
     
     <style>
         :root {
@@ -151,197 +147,6 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
-
-        .stats-value {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-        }
-
-        .progress-bar {
-            position: relative;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            transition: width 1s ease;
-        }
-
-        .feature-icon {
-            transition: all 0.3s ease;
-        }
-
-        .feature-item:hover .feature-icon {
-            transform: scale(1.1);
-        }
-
-        /* NFT ID Card Styles */
-        .nft-id-card {
-            position: relative;
-            width: 100%;
-            height: 256px;
-            background: #FFFFFF;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 150, 110, 0.2);
-            overflow: hidden;
-        }
-
-        .citizenship-badge {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #000;
-        }
-
-        /* Enhanced holographic edge effect */
-        .holographic-border {
-            position: absolute;
-            inset: 0;
-            border: 6px solid transparent;
-            border-radius: 0.75rem;
-            background: linear-gradient(90deg,
-                rgba(77, 238, 234, 0.4),
-                rgba(255, 16, 240, 0.4),
-                rgba(255, 229, 0, 0.4),
-                rgba(0, 26, 255, 0.4),
-                rgba(255, 60, 40, 0.4),
-                rgba(77, 238, 234, 0.4)
-            ) border-box;
-            -webkit-mask:
-                linear-gradient(#fff 0 0) padding-box, 
-                linear-gradient(#fff 0 0);
-            mask:
-                linear-gradient(#fff 0 0) padding-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: destination-out;
-            mask-composite: exclude;
-            animation: rotate 16s linear infinite;
-        }
-
-        .holographic-texture {
-            position: absolute;
-            inset: -6px;
-            background-image: 
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(255, 255, 255, 0.2) 0px,
-                    rgba(255, 255, 255, 0.2) 2px,
-                    transparent 2px,
-                    transparent 4px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    rgba(255, 255, 255, 0.2) 0px,
-                    rgba(255, 255, 255, 0.2) 2px,
-                    transparent 2px,
-                    transparent 4px
-                );
-            mix-blend-mode: overlay;
-            border-radius: 0.75rem;
-        }
-
-        .card-inner {
-            border-radius: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            margin: 6px;
-            height: calc(100% - 12px);
-            width: calc(100% - 12px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes rotate {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 0%; }
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: -400% 0; }
-            100% { background-position: 400% 0; }
-        }
-        
-        @keyframes shimmer-vertical {
-            0% { background-position: 0 -400%; }
-            100% { background-position: 0 400%; }
-        }
-        
-        .nav-link {
-            position: relative;
-            color: white;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover {
-            color: var(--primary);
-        }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
-        /* Language Select Styling */
-        #languageSelect {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.5rem center;
-            background-size: 1.5em 1.5em;
-            text-align: left;
-        }
-
-        #languageSelect {
-            text-align: left;
-            min-width: 100px;
-            padding-left: 0.5rem;
-            padding-right: 2rem;
-        }
-
-        #languageSelect option {
-            background: #00251f;
-            color: white;
-            padding: 0.5rem;
-            text-align: left;
-        }
-
-        #languageSelect option:checked {
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            color: black;
-        }
-
-        /* Ensure dropdown alignment */
-        #languageSelect::-ms-expand {
-            display: none;
-        }
-        
-        .cursor {
-            display: inline-block;
-            margin-left: 2px;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
         
         /* Add sparkle animation */
         @keyframes sparkle {
@@ -423,32 +228,9 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-40 pb-24 relative">
-        <div class="absolute inset-0 bg-gradient-to-b from-black to-transparent"></div>
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="flex flex-col md:flex-row items-center justify-center max-w-6xl mx-auto">
-                <div class="flex-shrink-0 mb-8 md:mb-0">
-                    <img src="assets/images/logo.png" alt="NOVA Bulgaria Logo" class="w-[150px] h-[150px] md:w-[140px] md:h-[140px] object-contain">
-                </div>
-                <div class="md:ml-12">
-                    <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-8">
-                        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text text-center md:text-left">
-                            NOVA BULGARIA
-                        </h1>
-                        <span class="hidden md:inline text-gray-300 opacity-50 mx-2">|</span>
-                        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 text-center md:text-left whitespace-nowrap" data-translate="slogan">
-                            Welcome to the Future of Nations
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Introduction Section -->
-    <div id="introduction-container">
-        <!-- Introduction component will be loaded here -->
+    <!-- Combined Hero and Introduction Section -->
+    <div id="hero-intro-container">
+        <!-- Combined hero and introduction component will be loaded here -->
     </div>
 
     <!-- NFT ID Section -->
@@ -515,7 +297,7 @@
                             </ul>
                             <div class="mt-6">
                                 <p class="text-sm text-gray-400 mb-2" data-translate="startApplication">Start your application process</p>
-                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--primary)] hover:bg-opacity-80 transition-all text-black" data-translate="applyNow">APPLY NOW</button>
+                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--primary)] hover:bg-opacity-90 transition-all text-black" data-translate="applyNow">APPLY NOW</button>
                             </div>
                         </div>
                         <div class="glass p-4 rounded-lg">
@@ -527,7 +309,7 @@
                             </ul>
                             <div class="mt-6">
                                 <p class="text-sm text-gray-400 mb-2" data-translate="readWhitepaper">Read our detailed whitepaper</p>
-                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--secondary)] hover:bg-opacity-80 transition-all text-black" data-translate="readMore">READ MORE</button>
+                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--secondary)] hover:bg-opacity-90 transition-all text-black" data-translate="readMore">READ MORE</button>
                             </div>
                         </div>
                     </div>
@@ -560,8 +342,10 @@
     <section class="py-16">
         <div class="container mx-auto px-6">
             <div class="glass rounded-2xl p-6 sm:p-12 text-center neon-glow">
-                <h2 class="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 gradient-text" data-translate="fundingTitle">Seed Round: Early Access to Nova Bulgaria</h2>
-                <p class="text-lg sm:text-xl text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto" data-translate="fundingDescription">Join the founding of the first digital nation for Bulgarians worldwide. Be among the first to receive and stake BGL tokens. Our seed round offers exclusive early access to 20 million BGL (Bulgarian Lion) tokens.</p>
+                <h2 class="text-2xl sm:text-3xl md:text-6xl font-bold gradient-text" data-translate="fundingTitle">Seed Round: Early Access to Nova Bulgaria</h2>
+                <p class="text-lg sm:text-xl md:text-3xl text-gray-300 mb-6 sm:mb-8 max-w-3xl">
+                    A blockchain-powered solution to rebuild a nation in crisis through decentralized governance and meritocracy
+                </p>
                 
                 <!-- Funding Details -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -715,38 +499,11 @@
             </div>
 
             <!-- Token Details Section -->
-            <div class="glass p-4 sm:p-8 rounded-xl neon-glow mb-8">
-                <h3 class="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6 text-[var(--primary)]" data-translate="tokenDetailsTitle">Token Details</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-                    <div class="glass p-6 rounded-xl">
-                        <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="tokenomicsUtilityTitle">Utility Features</h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li data-translate="tokenomicsUtility1">• Governance voting rights</li>
-                            <li data-translate="tokenomicsUtility2">• Access to premium services</li>
-                            <li data-translate="tokenomicsUtility3">• Staking rewards</li>
-                        </ul>
-                    </div>
-                    <div class="glass p-6 rounded-xl">
-                        <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="tokenomicsEconomicsTitle">Token Economics</h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li data-translate="tokenomicsEconomics1">• Deflationary mechanism</li>
-                            <li data-translate="tokenomicsEconomics2">• Dynamic supply adjustment</li>
-                            <li data-translate="tokenomicsEconomics3">• Reward-based distribution</li>
-                        </ul>
-                    </div>
-                    <div class="glass p-6 rounded-xl">
-                        <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="tokenomicsGovernanceTitle">Governance</h4>
-                        <ul class="space-y-2 text-gray-300">
-                            <li data-translate="tokenomicsGovernance1">• Proposal creation rights</li>
-                            <li data-translate="tokenomicsGovernance2">• Voting weight system</li>
-                            <li data-translate="tokenomicsGovernance3">• Delegation options</li>
-                        </ul>
-                    </div>
-                </div>
+            <div id="token-details-container">
+                <!-- Token details component will be loaded here -->
             </div>
 
-            <!-- Key Features Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Key Features Grid -->            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="glass p-8 rounded-xl neon-glow">
                     <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="sustainableTitle">Sustainable</h3>
                     <p class="text-gray-300" data-translate="sustainableDesc">Long-term planning with controlled inflation</p>
@@ -803,7 +560,15 @@
 
 
     <!-- Roadmap Section -->
-    <section id="roadmap" class="py-8">
+    <section id="roadmap-section" class="py-8">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="roadmapTitle">Roadmap</h2>
+            <div id="roadmap-container"></div>
+        </div>
+    </section>
+
+    <!-- Original Roadmap Section (Hidden) -->
+    <section id="roadmap" class="py-8" style="display:none;">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="roadmapTitle">Roadmap</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -1480,6 +1245,27 @@
     
     <!-- Load translations last -->
     <script src="assets/translations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            closeMobileMenu.addEventListener('click', toggleMobileMenu);
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
+        });
+    </script>
     
     <style>
         .cursor {
