@@ -25,23 +25,21 @@ function initializeCharts() {
             type: 'pie',
             data: {
                 labels: [
-                    'Community Treasury',
-                    'Development Fund',
-                    'Team & Advisors',
-                    'Early Contributors',
-                    'Marketing & Partnerships'
+                    'Core Sectors (50%)',
+                    'Future Sectors (20%)',
+                    'Reserves (20%)',
+                    'Community (10%)'
                 ],
                 datasets: [{
-                    data: [45, 25, 15, 10, 5],
+                    data: [50, 20, 20, 10],
                     backgroundColor: [
                         '#00FF9D',  // primary
                         '#4DEEEA',  // secondary
                         '#FF10F0',  // accent1
-                        '#74EE15',  // accent2
-                        '#FFE500'   // accent3
+                        '#74EE15'   // accent2
                     ],
                     borderWidth: 2,
-                    borderColor: '#00251f'
+                    borderColor: '#000000'
                 }]
             },
             options: {
@@ -71,25 +69,58 @@ function initializeCharts() {
         });
     }
 
-    // Token Growth Projection Chart
-    const growthCtx = document.getElementById('tokenGrowth');
-    console.log('Growth context:', growthCtx);
+    // Inflation Rate Curve Chart
+    const inflationCtx = document.getElementById('tokenGrowth');
+    console.log('Inflation context:', inflationCtx);
     
-    if (growthCtx) {
-        new Chart(growthCtx, {
+    if (inflationCtx) {
+        const years = [];
+        const inflationRates = [];
+        
+        // First Decade: 5% annual
+        for (let i = 1; i <= 10; i++) {
+            years.push(`Year ${i}`);
+            inflationRates.push(5);
+        }
+        
+        // Second Decade: 4% annual
+        for (let i = 11; i <= 20; i++) {
+            years.push(`Year ${i}`);
+            inflationRates.push(4);
+        }
+        
+        // Third Decade: 3% annual
+        for (let i = 21; i <= 30; i++) {
+            years.push(`Year ${i}`);
+            inflationRates.push(3);
+        }
+        
+        // Fourth Decade: 2% annual
+        for (let i = 31; i <= 40; i++) {
+            years.push(`Year ${i}`);
+            inflationRates.push(2);
+        }
+        
+        // Fifth+ Decades: 1% annual
+        for (let i = 41; i <= 100; i++) {
+            years.push(`Year ${i}`);
+            inflationRates.push(1);
+        }
+        
+        new Chart(inflationCtx, {
             type: 'line',
             data: {
-                labels: ['Launch', 'Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5'],
+                labels: years,
                 datasets: [{
-                    label: 'Total Supply (Millions)',
-                    data: [100, 150, 225, 300, 350, 375],
+                    label: 'Annual Inflation Rate (%)',
+                    data: inflationRates,
                     borderColor: '#00FF9D',
                     backgroundColor: 'rgba(0, 255, 157, 0.1)',
-                    tension: 0.4,
+                    tension: 0.1,
                     fill: true,
                     pointBackgroundColor: '#00FF9D',
-                    pointRadius: 5,
-                    pointHoverRadius: 7
+                    pointRadius: 0,
+                    pointHoverRadius: 5
                 }]
             },
             options: {
@@ -98,6 +129,7 @@ function initializeCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
+                        max: 6,
                         grid: {
                             color: 'rgba(255, 255, 255, 0.1)'
                         },
@@ -108,7 +140,7 @@ function initializeCharts() {
                                 size: 12
                             },
                             callback: function(value) {
-                                return value + 'M';
+                                return value + '%';
                             }
                         }
                     },
@@ -121,7 +153,10 @@ function initializeCharts() {
                             font: {
                                 family: 'Inter',
                                 size: 12
-                            }
+                            },
+                            maxRotation: 0,
+                            autoSkip: true,
+                            maxTicksLimit: 10
                         }
                     }
                 },
@@ -138,7 +173,7 @@ function initializeCharts() {
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `Supply: ${context.raw}M tokens`;
+                                return `Inflation: ${context.raw}%`;
                             }
                         }
                     }

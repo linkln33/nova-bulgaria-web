@@ -22,22 +22,13 @@
 #introduction .tab-btn {
     position: relative;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 #introduction .tab-btn.active {
     background-color: rgba(var(--primary-rgb), 0.2);
     position: relative;
-}
-
-#introduction .tab-btn.active::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 10%;
-    width: 80%;
-    height: 3px;
-    background: linear-gradient(90deg, var(--primary), var(--accent1));
-    border-radius: 3px;
+    font-weight: 600;
 }
 
 /* Content styling */
@@ -53,6 +44,16 @@
     box-shadow: 0 0 20px rgba(var(--primary-rgb), 0.2);
 }
 
+/* Tab pane styling */
+#introduction .tab-pane {
+    display: none;
+}
+
+#introduction .tab-pane.active {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
 /* Animation for tab content */
 @keyframes fadeIn {
     from { 
@@ -63,15 +64,6 @@
         opacity: 1; 
         transform: translateY(0); 
     }
-}
-
-#introduction .tab-pane {
-    display: none;
-}
-
-#introduction .tab-pane.active {
-    display: block;
-    animation: fadeIn 0.5s ease-in-out;
 }
 
 /* Call to action button styling */

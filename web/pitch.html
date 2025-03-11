@@ -104,8 +104,12 @@
                             <div class="glass-dark rounded-2xl p-8 text-white">
                                 <h3 class="text-2xl font-semibold mb-6">Bulgarian Lion (BGL)</h3>
                                 <p class="mb-6">Our national currency symbolizes strength, independence, and unity.</p>
-                                <div class="chart-container">
+                                <div class="chart-container mb-8">
                                     <canvas id="tokenomicsChart"></canvas>
+                                </div>
+                                <h4 class="text-xl font-semibold mb-4">100-Year Token Release Schedule</h4>
+                                <div class="chart-container" style="height: 200px;">
+                                    <canvas id="vestingChart"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -278,6 +282,59 @@
     </div>
 
     <script>
+        // Vesting Schedule Chart
+        new Chart(document.getElementById('vestingChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2025-2034', '2035-2044', '2045-2054', '2055-2064', '2065-2074', '2075-2084', '2085-2094', '2095-2104', '2105-2114', '2115-2124'],
+                datasets: [{
+                    label: 'Annual Token Release (Billion BGL)',
+                    data: [50, 40, 30, 20, 10, 10, 10, 10, 10, 10],
+                    backgroundColor: 'rgba(0, 150, 110, 0.6)',
+                    borderColor: 'rgba(0, 150, 110, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.x + ' Billion BGL per year';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            font: {
+                                size: 10
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
         // Tokenomics Chart
         new Chart(document.getElementById('tokenomicsChart'), {
             type: 'doughnut',
