@@ -11,8 +11,10 @@
     <!-- Load styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="assets/css/sector-buttons.css">    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/sector-buttons.css">
+    <link rel="stylesheet" href="components/introduction/introduction.css">    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/tokenomics.js"></script>
+    <script src="assets/js/load-components.js"></script>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -372,6 +374,7 @@
                 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-8">
+                    <a href="#introduction" class="nav-link" data-translate="navIntroduction">Introduction</a>
                     <a href="#nft-id" class="nav-link" data-translate="navNFT">NFT ID</a>
                     <a href="#features" class="nav-link" data-translate="navFeatures">Features</a>
                     <a href="#tokenomics" class="nav-link" data-translate="navTokenomics">Tokenomics</a>
@@ -382,6 +385,7 @@
                 <!-- Mobile Menu Panel -->
                 <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden">
                     <div class="flex flex-col items-center justify-center h-full space-y-8">
+                        <a href="#introduction" class="text-2xl nav-link" data-translate="navIntroduction">Introduction</a>
                         <a href="#nft-id" class="text-2xl nav-link" data-translate="navNFT">NFT ID</a>
                         <a href="#features" class="text-2xl nav-link" data-translate="navFeatures">Features</a>
                         <a href="#tokenomics" class="text-2xl nav-link" data-translate="navTokenomics">Tokenomics</a>
@@ -441,6 +445,11 @@
             </div>
         </div>
     </section>
+
+    <!-- Introduction Section -->
+    <div id="introduction-container">
+        <!-- Introduction component will be loaded here -->
+    </div>
 
     <!-- NFT ID Section -->
     <section id="nft-id" class="pt-4 pb-12 relative">
