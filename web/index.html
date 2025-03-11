@@ -11,7 +11,7 @@
     <!-- Load styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="assets/css/sector-buttons.css">    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/tokenomics.js"></script>
     
     <script>
@@ -630,41 +630,78 @@
                 <!-- Token Allocation Chart -->
                 <div class="glass p-8 rounded-xl neon-glow">
                     <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenAllocationTitle">Fund Allocation</h3>
-                    <div class="chart-container">
-                        <canvas id="tokenGrowth"></canvas>
+                    <div >
+                        <div class="grid grid-cols-4 gap-2 mb-6">
+                            <button class="sector-button" data-sector="healthcare">Healthcare</button>
+                            <button class="sector-button" data-sector="education">Education</button>
+                            <button class="sector-button" data-sector="agriculture">Agriculture</button>
+                            <button class="sector-button" data-sector="energy">Energy</button>
+                            <button class="sector-button" data-sector="transportation">Transportation</button>
+                            <button class="sector-button" data-sector="manufacturing">Manufacturing</button>
+                            <button class="sector-button" data-sector="tourism">Tourism</button>
+                            <button class="sector-button" data-sector="it">Information Technology</button>
+                            <button class="sector-button" data-sector="finance">Finance</button>
+                            <button class="sector-button" data-sector="realestate">Real Estate</button>
+                            <button class="sector-button" data-sector="environment">Environmental Protection</button>
+                            <button class="sector-button" data-sector="research">Research & Development</button>
+                            <button class="sector-button" data-sector="administration">Public Administration</button>
+                            <button class="sector-button" data-sector="defense">Defense & Security</button>
+                            <button class="sector-button" data-sector="culture">Cultural Heritage</button>
+                            <button class="sector-button" data-sector="sports">Sports & Recreation</button>
+                            <button class="sector-button" data-sector="media">Media & Communications</button>
+                            <button class="sector-button" data-sector="legal">Legal Services</button>
+                            <button class="sector-button" data-sector="social">Social Services</button>
+                            <button class="sector-button" data-sector="infrastructure">Infrastructure</button>
+                            <button class="sector-button" data-sector="trade">Trade & Commerce</button>
+                            <button class="sector-button" data-sector="maritime">Maritime Affairs</button>
+                            <button class="sector-button" data-sector="mining">Mining & Resources</button>
+                            <button class="sector-button" data-sector="emergency">Emergency Services</button>
+                        </div>
                     </div>
-                    <div class="mt-6 grid grid-cols-2 gap-4">
-                        <div class="glass p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="coreSectorsTitle">Core Sectors</h4>
-                            <p class="text-gray-300" data-translate="coreSectorsDesc">500B BGL for 24 existing parachains</p>
-                        </div>
-                        <div class="glass p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="futureSectorsTitle">Future Sectors</h4>
-                            <p class="text-gray-300" data-translate="futureSectorsDesc">300B BGL for 20 new parachains</p>
-                        </div>
+                    <div id="sector-details" class="glass p-4 rounded-lg mt-6 hidden">
+                        <h4 id="sector-title" class="text-lg font-semibold text-[var(--primary)] mb-2">Sector Details</h4>
+                        <p id="sector-description" class="text-gray-300">Click on a sector to view details.</p>
                     </div>
                 </div>
             </div>
-
             <!-- Token Release Schedule -->
             <div class="glass p-8 rounded-xl neon-glow mb-8">
                 <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="releaseScheduleTitle">Token Release Schedule</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <div class="mb-6" style="height: 300px;">
+                    <canvas id="tokenReleaseChart"></canvas>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="glass p-4 rounded-lg">
-                        <p class="text-gray-300" data-translate="release1">1st Decade: 5% annual (50B BGL/year)</p>
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Foundation Phase</h4>
+                        <p class="text-gray-300 mb-1">2025-2044: 0.0001% to 0.001% annual</p>
+                        <p class="text-gray-400 text-sm">Starting with 1M BGL in Year 1, gradually increasing to 10M BGL annually by Year 20</p>
                     </div>
                     <div class="glass p-4 rounded-lg">
-                        <p class="text-gray-300" data-translate="release2">2nd Decade: 4% annual (40B BGL/year)</p>
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Development Phase</h4>
+                        <p class="text-gray-300 mb-1">2045-2084: 0.001% to 0.01% annual</p>
+                        <p class="text-gray-400 text-sm">Releasing 10M to 100M BGL annually during Years 21-60, supporting ecosystem growth</p>
                     </div>
                     <div class="glass p-4 rounded-lg">
-                        <p class="text-gray-300" data-translate="release3">3rd Decade: 3% annual (30B BGL/year)</p>
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Expansion Phase</h4>
+                        <p class="text-gray-300 mb-1">2085-2114: 0.01% to 0.02% annual</p>
+                        <p class="text-gray-400 text-sm">Increasing to 100M-200M BGL annually during Years 61-90 as adoption accelerates</p>
                     </div>
                     <div class="glass p-4 rounded-lg">
-                        <p class="text-gray-300" data-translate="release4">4th Decade: 2% annual (20B BGL/year)</p>
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Peak Phase</h4>
+                        <p class="text-gray-300 mb-1">2115-2124: 0.03% annual</p>
+                        <p class="text-gray-400 text-sm">Reaching maximum release of 300M BGL annually during the final decade (Years 91-100)</p>
                     </div>
-                    <div class="glass p-4 rounded-lg">
-                        <p class="text-gray-300" data-translate="release5">5th+ Decades: ≤1% annual (10B BGL/year)</p>
-                    </div>
+                </div>
+                
+                <div class="mt-6 glass p-4 rounded-lg">
+                    <p class="text-gray-300 text-center">Total Supply: 1 Trillion BGL (1,000,000,000,000 BGL) released over 100 years</p>
+                    <p class="text-gray-400 text-sm text-center mt-2">This gradual release schedule ensures long-term sustainability and minimizes inflation</p>
+                </div>
+                
+                <div class="mt-6 glass p-4 rounded-lg">
+                    <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Inflation Calculation</h4>
+                    <p class="text-gray-300 mb-2">Inflation Rate (Year X) = (New Supply in Year X / Total Circulating Supply in Year X-1) × 100%</p>
+                    <p class="text-gray-400 text-sm">Starting high in early years, inflation naturally decreases over time as the circulating supply grows, promoting long-term price stability</p>
                 </div>
             </div>
 
@@ -1306,7 +1343,7 @@
   <span data-translate="nftId">"id": "BG-NFT-001"</span>,
   <span data-translate="nftLevel">"level": "Citizen"</span>,
   <span data-translate="nftContributions">"contributions": 156</span>,
-  <span data-translate="nftVotingPower">"votingPower": 3.2</span>
+  <span data="nftVotingPower">"votingPower": 3.2</span>
 }
                             </pre>
                         </div>
@@ -1428,8 +1465,9 @@
     <!-- Load application scripts -->
     <script src="assets/js/typewriter.js"></script>
     <script src="assets/js/nft.js"></script>
-    <script src="assets/js/quiz.js"></script>
-    <script src="assets/js/charts.js" defer></script>
+    <script src="assets/js/sector-buttons.js" defer></script>    <script src="assets/js/quiz.js"></script>
+        <script src="assets/js/charts.js" defer></script>
+<script src="assets/js/token-release-chart.js" defer></script>
     
     <!-- Load translations last -->
     <script src="assets/translations.js"></script>
