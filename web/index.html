@@ -11,7 +11,7 @@
     <!-- Load styles -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="modern/styles/combined.css">
+    <link rel="stylesheet" href="modern/styles/combined.css?v=20250311235800">
     <link rel="stylesheet" href="assets/css/sector-buttons.css">
     <link rel="stylesheet" href="components/combined-hero/combined-hero.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -33,6 +33,85 @@
     
     <!-- Load translations last -->
     <script src="assets/translations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            closeMobileMenu.addEventListener('click', toggleMobileMenu);
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stats box hover effects
+            const whiteBox = document.querySelector('.stats-box-white');
+            const greenBox = document.querySelector('.stats-box-green');
+            const redBox = document.querySelector('.stats-box-red');
+            
+            whiteBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid white';
+            });
+            
+            whiteBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            greenBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid var(--primary)';
+            });
+            
+            greenBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            redBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid #ff3b30';
+            });
+            
+            redBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            // Roadmap tabs functionality
+            const roadmapTabs = document.querySelectorAll('.roadmap-tab');
+            const roadmapContents = document.querySelectorAll('.roadmap-content');
+            
+            if (roadmapTabs.length > 0) {
+                roadmapTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        roadmapTabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Hide all content sections
+                        roadmapContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Show the corresponding content section
+                        const phaseContent = document.getElementById(`${this.dataset.phase}-content`);
+                        if (phaseContent) {
+                            phaseContent.classList.add('active');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
     
     <style>
         :root {
@@ -167,6 +246,76 @@
             background-size: 1000px 100%;
             animation: sparkle 3s linear infinite;
         }
+        
+        .sparkle-text {
+            background: linear-gradient(90deg, #ffffff, #7f7f7f, #ffffff);
+            background-size: 1000px 100%;
+            animation: sparkle 3s linear infinite;
+        }
+        
+        /* Removed the stats box styles as they're now in the external CSS file */
+        
+        /* Roadmap Styles */
+        .roadmap-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #a0a0a0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            line-height: 1.2;
+        }
+        
+        .roadmap-tab:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .roadmap-tab.active {
+            background-color: rgba(76, 175, 80, 0.2);
+            color: var(--primary);
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+        
+        .roadmap-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .roadmap-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .glass {
+            background: rgba(30, 30, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .glass:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -182,7 +331,6 @@
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="#introduction" class="nav-link" data-translate="navIntroduction">Introduction</a>
                     <a href="#nft-id" class="nav-link" data-translate="navNFT">NFT ID</a>
-                    <a href="#features" class="nav-link" data-translate="navFeatures">Features</a>
                     <a href="#tokenomics" class="nav-link" data-translate="navTokenomics">Tokenomics</a>
                     <a href="#roadmap" class="nav-link" data-translate="navRoadmap">Roadmap</a>
                     <a href="#whitepaper" class="nav-link" data-translate="navWhitepaper">Whitepaper</a>
@@ -193,7 +341,6 @@
                     <div class="flex flex-col items-center justify-center h-full space-y-8">
                         <a href="#introduction" class="text-2xl nav-link" data-translate="navIntroduction">Introduction</a>
                         <a href="#nft-id" class="text-2xl nav-link" data-translate="navNFT">NFT ID</a>
-                        <a href="#features" class="text-2xl nav-link" data-translate="navFeatures">Features</a>
                         <a href="#tokenomics" class="text-2xl nav-link" data-translate="navTokenomics">Tokenomics</a>
                         <a href="#roadmap" class="text-2xl nav-link" data-translate="navRoadmap">Roadmap</a>
                         <a href="#whitepaper" class="text-2xl nav-link" data-translate="navWhitepaper">Whitepaper</a>
@@ -352,26 +499,27 @@
     <!-- Combined Stats and Funding Section -->
     <section class="py-12 relative z-10 mt-8 lg:mt-24">
         <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="glass rounded-2xl p-6 md:p-8 text-center neon-glow">
-                    <h3 class="text-lg text-gray-400 mb-2" data-translate="statsBulgariansWorldwide">Total Bulgarians Worldwide</h3>
-                    <p class="text-2xl md:text-3xl font-bold stats-value">Over 33 Million</p>
-                </div>
-                <div class="glass rounded-2xl p-6 md:p-8 text-center neon-glow">
-                    <h3 class="text-lg text-gray-400 mb-2" data-translate="statsJoinedNova">Joined Nova Bulgaria</h3>
-                    <p class="text-2xl md:text-3xl font-bold stats-value">10,000+</p>
-                </div>
-                <div class="glass rounded-2xl p-6 md:p-8 text-center neon-glow">
-                    <h3 class="text-lg text-gray-400 mb-2" data-translate="statsContributed">Total Contributed</h3>
-                    <p class="text-2xl md:text-3xl font-bold stats-value">$578,000</p>
-                </div>
-            </div>
-
-            <div class="glass rounded-2xl p-6 sm:p-12 text-center neon-glow mt-8">
-                <h2 class="text-xl sm:text-2xl md:text-5xl font-bold gradient-text text-center" data-translate="fundingTitle">Lionheart Fund: Igniting Bulgaria’s Digital Rebirth</h2>
+            <div class="glass rounded-2xl p-6 sm:p-12 text-center neon-glow">
+                <h2 class="text-xl sm:text-2xl md:text-5xl font-bold gradient-text text-center" style="padding-bottom: 0.3em;" data-translate="fundingTitle">Lionheart Fund: Igniting Bulgaria's Digital Rebirth</h2>
                 <p class="text-base sm:text-lg md:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto text-center">
                     A Nation of Lions Shall Never Kneel - Power ON
                 </p>
+                
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass p-6 rounded-xl text-center stats-box-white" style="border: 2px solid transparent; transition: all 0.3s ease;">
+                        <h3 class="text-lg mb-2" style="color: white;" data-translate="statsBulgariansWorldwide">Total Bulgarians Worldwide</h3>
+                        <p style="color: white !important; font-size: 2.5rem !important; font-weight: 700 !important; -webkit-text-fill-color: white !important; background: none !important; background-clip: initial !important; -webkit-background-clip: initial !important;">Over 33 Million</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl text-center stats-box-green" style="border: 2px solid transparent; transition: all 0.3s ease;">
+                        <h3 class="text-lg mb-2" style="color: white;" data-translate="statsJoinedNova">Joined Nova Bulgaria</h3>
+                        <p style="color: white !important; font-size: 2.5rem !important; font-weight: 700 !important; -webkit-text-fill-color: white !important; background: none !important; background-clip: initial !important; -webkit-background-clip: initial !important;">10,000+</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl text-center stats-box-red" style="border: 2px solid transparent; transition: all 0.3s ease;">
+                        <h3 class="text-lg mb-2" style="color: white;" data-translate="statsContributed">Total Contributed</h3>
+                        <p style="color: white !important; font-size: 2.5rem !important; font-weight: 700 !important; -webkit-text-fill-color: white !important; background: none !important; background-clip: initial !important; -webkit-background-clip: initial !important;">$578,000</p>
+                    </div>
+                </div>
                 
                 <!-- Funding Details -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -449,32 +597,9 @@
                 <!-- Token Allocation Chart -->
                 <div class="glass p-8 rounded-xl neon-glow">
                     <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenAllocationTitle">Fund Allocation</h3>
-                    <div >
-                        <div class="grid grid-cols-4 gap-2 mb-6">
-                            <button class="sector-button" data-sector="healthcare">Healthcare</button>
-                            <button class="sector-button" data-sector="education">Education</button>
-                            <button class="sector-button" data-sector="agriculture">Agriculture</button>
-                            <button class="sector-button" data-sector="energy">Energy</button>
-                            <button class="sector-button" data-sector="transportation">Transportation</button>
-                            <button class="sector-button" data-sector="manufacturing">Manufacturing</button>
-                            <button class="sector-button" data-sector="tourism">Tourism</button>
-                            <button class="sector-button" data-sector="it">Information Technology</button>
-                            <button class="sector-button" data-sector="finance">Finance</button>
-                            <button class="sector-button" data-sector="realestate">Real Estate</button>
-                            <button class="sector-button" data-sector="environment">Environmental Protection</button>
-                            <button class="sector-button" data-sector="research">Research & Development</button>
-                            <button class="sector-button" data-sector="administration">Public Administration</button>
-                            <button class="sector-button" data-sector="defense">Defense & Security</button>
-                            <button class="sector-button" data-sector="culture">Cultural Heritage</button>
-                            <button class="sector-button" data-sector="sports">Sports & Recreation</button>
-                            <button class="sector-button" data-sector="media">Media & Communications</button>
-                            <button class="sector-button" data-sector="legal">Legal Services</button>
-                            <button class="sector-button" data-sector="social">Social Services</button>
-                            <button class="sector-button" data-sector="infrastructure">Infrastructure</button>
-                            <button class="sector-button" data-sector="trade">Trade & Commerce</button>
-                            <button class="sector-button" data-sector="maritime">Maritime Affairs</button>
-                            <button class="sector-button" data-sector="mining">Mining & Resources</button>
-                            <button class="sector-button" data-sector="emergency">Emergency Services</button>
+                    <div>
+                        <div class="glass p-4 rounded-lg">
+                            <p class="text-gray-300">Nova Bulgaria starts with the release of 1 million BGL in the first year, gradually increasing over the next 100 years to ensure controlled growth. The total supply of 1 trillion BGL is securely held in a smart contract and released in small portions based on economic demand and community participation. Instead of traditional mining or pre-allocated distribution, funds are unlocked through a Proof of Contribution (PoC) system, meaning individuals receive BGL based on their contributions to the nation's development—such as building projects, innovation, governance, or social services. As the economy grows and more people participate, the release rate gradually increases, ensuring there is always enough supply to support expansion while preventing inflation. This mechanism creates a self-sustaining economic model, where currency distribution is tied to real-world value and progress rather than speculation or centralized control. Over time, this ensures fairness, long-term stability, and an economy that adapts naturally to the needs of its citizens.</p>
                         </div>
                     </div>
                     <div id="sector-details" class="glass p-4 rounded-lg mt-6 hidden">
@@ -491,22 +616,22 @@
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="glass p-4 rounded-lg">
-                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Foundation Phase</h4>
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Foundation Phase</h4>
                         <p class="text-gray-300 mb-1">2025-2044: 0.0001% to 0.001% annual</p>
                         <p class="text-gray-400 text-sm">Starting with 1M BGL in Year 1, gradually increasing to 10M BGL annually by Year 20</p>
                     </div>
                     <div class="glass p-4 rounded-lg">
-                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Development Phase</h4>
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Development Phase</h4>
                         <p class="text-gray-300 mb-1">2045-2084: 0.001% to 0.01% annual</p>
                         <p class="text-gray-400 text-sm">Releasing 10M to 100M BGL annually during Years 21-60, supporting ecosystem growth</p>
                     </div>
                     <div class="glass p-4 rounded-lg">
-                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Expansion Phase</h4>
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Expansion Phase</h4>
                         <p class="text-gray-300 mb-1">2085-2114: 0.01% to 0.02% annual</p>
                         <p class="text-gray-400 text-sm">Increasing to 100M-200M BGL annually during Years 61-90 as adoption accelerates</p>
                     </div>
                     <div class="glass p-4 rounded-lg">
-                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Peak Phase</h4>
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Peak Phase</h4>
                         <p class="text-gray-300 mb-1">2115-2124: 0.03% annual</p>
                         <p class="text-gray-400 text-sm">Reaching maximum release of 300M BGL annually during the final decade (Years 91-100)</p>
                     </div>
@@ -518,7 +643,7 @@
                 </div>
                 
                 <div class="mt-6 glass p-4 rounded-lg">
-                    <h4 class="text-lg font-semibold text-[var(--primary)] mb-2">Inflation Calculation</h4>
+                    <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Inflation Calculation</h4>
                     <p class="text-gray-300 mb-2">Inflation Rate (Year X) = (New Supply in Year X / Total Circulating Supply in Year X-1) × 100%</p>
                     <p class="text-gray-400 text-sm">Starting high in early years, inflation naturally decreases over time as the circulating supply grows, promoting long-term price stability</p>
                 </div>
@@ -551,686 +676,320 @@
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-8">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="coreFeaturesTitle">Core Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="featureInfrastructureTitle">Decentralized Infrastructure</h3>
-                    <p class="text-gray-300" data-translate="featureInfrastructureDesc">Built on a sovereign blockchain network, ensuring independence from external systems while maintaining high security and scalability.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="featureGovernanceTitle">Meritocratic Governance</h3>
-                    <p class="text-gray-300" data-translate="featureGovernanceDesc">Voting power based on proven expertise and contributions, ensuring qualified decision-making in specialized domains.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]" data-translate="featureEconomyTitle">Hybrid Token Economy</h3>
-                    <p class="text-gray-300" data-translate="featureEconomyDesc">Dual-token system combining stability for everyday transactions with long-term value growth for governance participants.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]" data-translate="featurePrivacyTitle">Privacy & Security</h3>
-                    <p class="text-gray-300" data-translate="featurePrivacyDesc">Advanced cryptographic systems protect your data while ensuring transparency where needed. You control what information to share.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="featureRewardsTitle">Contribution Rewards</h3>
-                    <p class="text-gray-300" data-translate="featureRewardsDesc">Earn tokens and reputation through meaningful contributions. Every verified action increases your standing in the community.</p>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="featureAutonomyTitle">Digital Autonomy</h3>
-                    <p class="text-gray-300" data-translate="featureAutonomyDesc">Complete independence in digital governance, economy, and social systems. A truly sovereign digital nation.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
     <!-- Roadmap Section -->
-    <section id="roadmap-section" class="py-8">
+    <section id="roadmap-section" class="py-12 bg-gradient-to-b from-[#1a1a1a] to-[#121212] text-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="roadmapTitle">Roadmap</h2>
-            <div id="roadmap-container"></div>
-        </div>
-    </section>
-
-    <!-- Original Roadmap Section (Hidden) -->
-    <section id="roadmap" class="py-8" style="display:none;">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold mb-12 text-center gradient-text" data-translate="roadmapTitle">Roadmap</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="roadmapPhase1Title">Phase 1: Foundation</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li data-translate="roadmapPhase1Item1">• Technical infrastructure setup</li>
-                        <li data-translate="roadmapPhase1Item2">• Core team formation</li>
-                        <li data-translate="roadmapPhase1Item3">• Initial documentation</li>
-                    </ul>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="roadmapPhase2Title">Phase 2: Development</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li data-translate="roadmapPhase2Item1">• Smart contract deployment</li>
-                        <li data-translate="roadmapPhase2Item2">• NFT ID system launch</li>
-                        <li data-translate="roadmapPhase2Item3">• Governance framework</li>
-                    </ul>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]" data-translate="roadmapPhase3Title">Phase 3: Growth</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li data-translate="roadmapPhase3Item1">• Community expansion</li>
-                        <li data-translate="roadmapPhase3Item2">• Token economy launch</li>
-                        <li data-translate="roadmapPhase3Item3">• Partnership development</li>
-                    </ul>
-                </div>
-                <div class="glass rounded-2xl p-8 neon-glow">
-                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]" data-translate="roadmapPhase4Title">Phase 4: Maturity</h3>
-                    <ul class="space-y-2 text-gray-300">
-                        <li data-translate="roadmapPhase4Item1">• Full decentralization</li>
-                        <li data-translate="roadmapPhase4Item2">• Global expansion</li>
-                        <li data-translate="roadmapPhase4Item3">• Advanced features</li>
-                    </ul>
+            <h2 class="text-4xl font-bold text-center mb-6 gradient-text" data-translate="roadmapTitle">NOVA BULGARIA Roadmap</h2>
+            <p class="text-lg text-center text-gray-300 mb-8 max-w-3xl mx-auto">Development timeline for 2025-2026</p>
+            
+            <!-- Timeline Navigation -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-[#2a2a2a] rounded-full p-1 shadow-lg">
+                    <button class="roadmap-tab active" data-phase="foundation">Q1-Q2 2025<br>Foundation</button>
+                    <button class="roadmap-tab" data-phase="development">Q3-Q4 2025<br>Development</button>
+                    <button class="roadmap-tab" data-phase="expansion">Q1-Q2 2026<br>Expansion</button>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Whitepaper Section -->
-    <section id="whitepaper" class="w-full py-8 sm:py-16 px-4">
-        <div class="text-center mb-8 sm:mb-12">
-            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 gradient-text" data-translate="whitepaperTitle">Self-sovereign identity (SSI)</h2>
-            <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto" data-translate="whitepaperSubtitle">A comprehensive guide to NOVA BULGARIA's vision, technology, and governance</p>
-        </div>
-
-        <div class="max-w-[1400px] mx-auto">
-            <!-- Table of Contents -->
-            <div class="glass rounded-2xl p-4 sm:p-8 mb-8 sm:mb-12 border border-[var(--accent1)] border-opacity-20">
-                <h3 class="text-xl sm:text-2xl font-bold text-[var(--accent1)]" data-translate="tableOfContents">Contents</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <a href="#vision" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="tocVisionTitle">1. Vision</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocVisionDesc">Our mission and goals</p>
-                    </a>
-                    <a href="#principles" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--secondary)]" data-translate="tocPrinciplesTitle">2. Key Principles</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocPrinciplesDesc">Core values and beliefs</p>
-                    </a>
-                    <a href="#token" class="glass p-6 rounded-xl hover:border-[var(--accent1)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent1)]" data-translate="tocTokenModelTitle">3. Token Model</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocTokenModelDesc">BGL and economic system</p>
-                    </a>
-                    <a href="#nft" class="glass p-6 rounded-xl hover:border-[var(--accent2)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent2)]" data-translate="tocNFTTitle">4. NFT ID System</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocNFTDesc">Digital identity and access</p>
-                    </a>
-                    <a href="#governance" class="glass p-6 rounded-xl hover:border-[var(--accent3)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent3)]" data-translate="tocGovernanceTitle">5. Governance</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocGovernanceDesc">Decision making and law</p>
-                    </a>
-                    <a href="#funding" class="glass p-6 rounded-xl hover:border-[var(--accent4)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--accent4)]" data-translate="tocFundingTitle">6. Funding</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocFundingDesc">Economic growth strategy</p>
-                    </a>
-                    <a href="#development" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="tocDevelopmentTitle">7. Development</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocDevelopmentDesc">Roadmap and next steps</p>
-                    </a>
-                    <a href="#conclusion" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300">
-                        <h4 class="text-lg font-semibold text-[var(--secondary)]" data-translate="tocConclusionTitle">8. Conclusion</h4>
-                        <p class="text-sm text-gray-300" data-translate="tocConclusionDesc">Future vision</p>
-                    </a>
-                </div>
-            </div>
-
-            <div class="space-y-16">
-                <!-- Vision Section -->
-                <div id="vision" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--primary)]" data-translate="visionTitle">Vision</h3>
-                    <p class="text-gray-300" data-translate="visionMainDesc">NOVA BULGARIA is a revolutionary initiative to create a fully decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. The project aims to transfer all traditionally government-controlled functions to the hands of national members through blockchain technology.</p>
-                    <p class="text-gray-300" data-translate="visionSecondaryDesc">Governance, economy, healthcare, law enforcement, and public infrastructure will be managed transparently and immutably via blockchain, eliminating corruption and ensuring decisions are based on expertise and contribution.</p>
-                </div>
-
-                <div id="token-model" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent2)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent2)]" data-translate="tokenModelTitle">Dynamic Event-Based Minting</h3>
-                    <p class="text-gray-300" data-translate="tokenModelDesc">Instead of a static supply or constant inflation, new BGL tokens are minted only when specific value-adding events occur</p>
+            
+            <!-- Foundation Phase Content -->
+            <div class="roadmap-content active" id="foundation-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--primary)] hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--primary)]">Q1 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Initial funding allocation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Core team formation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Technical infrastructure setup</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Whitepaper finalization</span>
+                            </li>
+                        </ul>
+                    </div>
                     
-                    <!-- Minting Events -->
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]">Minting Events</h4>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="tokenModelOnboardingReward">Onboarding Reward: 3M BGL for new verified members</li>
-                                <li data-translate="tokenModelExams">Knowledge Exams & Certifications: Tokens based on exam difficulty</li>
-                                <li data-translate="tokenModelService">Public Service Contributions: Rewards for governance and infrastructure</li>
-                                <li data-translate="tokenModelVoting">Policy Voting Participation: Incentives for active governance</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="tokenLedgerTitle">Contribution Ledger & Tracking</h4>
-                            <p class="text-gray-300 mb-4" data-translate="tokenLedgerDesc">Public record of all minting events and contributions</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="tokenLedgerMinting">Minting Ledger: Transparent record of when and why coins were created</li>
-                                <li data-translate="tokenLedgerBalance">Individual Balances: Track contribution-based earnings</li>
-                                <li data-translate="tokenLedgerSupply">Total Supply Visibility: Real-time monitoring of circulation</li>
-                            </ul>
-                        </div>
-
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="tokenBenefitsTitle">Benefits of Event-Based Minting</h4>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="tokenBenefitsGrowth">Incentive-Based Growth: Value-driven token creation</li>
-                                <li data-translate="tokenBenefitsControl">Precise Governance Control: Community-managed minting</li>
-                                <li data-translate="tokenBenefitsSafeguard">Anti-Gaming Protection: Verifiable event requirements</li>
-                                <li data-translate="tokenBenefitsHybrid">Hybrid Token Economy: Dual-token system combining stability for everyday transactions with long-term value growth for governance participants</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Hybrid Token System -->
-                    <div class="mt-6">
-                        <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="hybridTokenTitle">Dual-Token Economy</h4>
-                        <p class="text-gray-300 mb-4" data-translate="hybridTokenDesc">BGL for governance and BGL-S for stability</p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="glass p-6 rounded-xl">
-                                <h5 class="text-md font-semibold mb-3 text-[var(--accent2)]">BGL Token</h5>
-                                <ul class="space-y-3 text-gray-300">
-                                    <li data-translate="bglPurpose">BGL: Core governance and staking token</li>
-                                    <li data-translate="bglSupply">Dynamic supply with logarithmic minting curve</li>
-                                    <li data-translate="bglStability">Treasury-backed price floor protection</li>
-                                </ul>
-                            </div>
-                            <div class="glass p-6 rounded-xl">
-                                <h5 class="text-md font-semibold mb-3 text-[var(--accent2)]" data-translate="bglsTitle">BGL-S: Native Stablecoin</h5>
-                                <ul class="space-y-3 text-gray-300">
-                                    <li data-translate="bglsPurpose">Stable token for daily transactions</li>
-                                    <li data-translate="bglsPeg">Multi-asset backed stability</li>
-                                    <li data-translate="bglsMechanism">Mint by staking BGL, burn on redemption</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="staking" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent3)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent3)]" data-translate="stakingTitle">Project Staking & Dividends</h3>
-                    <p class="text-gray-300" data-translate="stakingDesc">Stake BGL to fund and own shares in national projects</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Project Proposals -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingProposalsTitle">Project Proposals</h4>
-                            <p class="text-gray-300 mb-4" data-translate="stakingProposalsDesc">Submit and fund community projects</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="stakingProposalSubmit">Any citizen can propose projects</li>
-                                <li data-translate="stakingProposalVote">Governance voting approval process</li>
-                                <li data-translate="stakingProposalStake">Open staking after approval</li>
-                            </ul>
-                        </div>
-
-                        <!-- Staking Mechanism -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingMechanismTitle">Staking Mechanism</h4>
-                            <p class="text-gray-300 mb-4" data-translate="stakingMechanismDesc">Secure project funding through BGL staking</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="stakingMechanismFund">Stake BGL tokens for project funding</li>
-                                <li data-translate="stakingMechanismShares">Ownership shares based on contribution</li>
-                                <li data-translate="stakingMechanismRewards">Automatic dividend distribution</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <!-- Contribution Rewards -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingRewardsTitle">Contribution-Based Rewards</h4>
-                            <p class="text-gray-300 mb-4" data-translate="stakingRewardsDesc">Earn returns based on project success</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="stakingRewardsDividends">Receive project dividends</li>
-                                <li data-translate="stakingRewardsAuto">Smart contract distribution</li>
-                                <li data-translate="stakingRewardsBonus">Extra rewards for active contribution</li>
-                            </ul>
-                        </div>
-
-                        <!-- Protection Features -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingProtectionTitle">Anti-Gaming Protections</h4>
-                            <p class="text-gray-300 mb-4" data-translate="stakingProtectionDesc">Security measures for sustainable growth</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="stakingProtectionPeriod">Minimum staking periods</li>
-                                <li data-translate="stakingProtectionPenalty">Reputation penalties for failures</li>
-                                <li data-translate="stakingProtectionAudit">Regular project audits</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Public Projects -->
-                    <div class="glass p-6 rounded-xl mt-6">
-                        <h4 class="text-lg font-semibold mb-4 text-[var(--accent3)]" data-translate="stakingPublicTitle">Public Utility Projects</h4>
-                        <p class="text-gray-300 mb-4" data-translate="stakingPublicDesc">Community infrastructure initiatives</p>
-                        <ul class="space-y-3 text-gray-300">
-                            <li data-translate="stakingPublicCredits">Social credits for public projects</li>
-                            <li data-translate="stakingPublicVoting">Enhanced governance privileges</li>
-                            <li data-translate="stakingPublicBenefits">Community-wide benefits</li>
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--secondary)] hover:shadow-[0_0_15px_rgba(var(--secondary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--secondary)]">Q2 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Blockchain prototype development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>NFT ID system architecture</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Initial smart contract deployment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Community building initiatives</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
-
-                <div id="network" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent4)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent4)]" data-translate="networkTitle">Decentralized Network Architecture</h3>
-                    <p class="text-gray-300" data-translate="networkDesc">A resilient, multi-layer network infrastructure</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Node System -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkNodesTitle">Hybrid Node System</h4>
-                            <p class="text-gray-300 mb-4" data-translate="networkNodesDesc">Multi-tier validation network</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="networkNodesLight">Light Nodes: Mobile validation & voting</li>
-                                <li data-translate="networkNodesLightDetails">Minimal resource usage for phones</li>
-                                <li data-translate="networkNodesFull">Full Nodes: Consensus & block creation</li>
-                                <li data-translate="networkNodesRewards">Node operator rewards & privileges</li>
-                            </ul>
-                        </div>
-
-                        <!-- Validation System -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkValidationTitle">Proof of Contribution Validation</h4>
-                            <p class="text-gray-300 mb-4" data-translate="networkValidationDesc">Merit-based consensus mechanism</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="networkValidationPoc">PoC score + staked BGL for validation</li>
-                                <li data-translate="networkValidationDelegate">Delegate stake to trusted validators</li>
-                                <li data-translate="networkValidationRewards">Contribution-based validator rewards</li>
-                            </ul>
-                        </div>
+            </div>
+            
+            <!-- Development Phase Content -->
+            <div class="roadmap-content" id="development-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--accent1)] hover:shadow-[0_0_15px_rgba(var(--accent1-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--accent1)]">Q3 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Launch of NOVA BULGARIA testnet</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Proof-of-Contribution implementation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Core sector parachain development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Governance framework testing</span>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <!-- Network Mesh -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkMeshTitle">P2P Mesh Network</h4>
-                            <p class="text-gray-300 mb-4" data-translate="networkMeshDesc">Resilient device interconnection</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="networkMeshLocal">Local device mesh networks</li>
-                                <li data-translate="networkMeshSync">Offline-capable with global sync</li>
-                                <li data-translate="networkMeshRedundancy">Geographic node distribution</li>
-                            </ul>
-                        </div>
-
-                        <!-- Privacy & Security -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkPrivacyTitle">Zero-Knowledge & Encryption</h4>
-                            <p class="text-gray-300 mb-4" data-translate="networkPrivacyDesc">Advanced privacy protection</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="networkPrivacyZk">Zero-knowledge transaction proofs</li>
-                                <li data-translate="networkPrivacyEncrypt">End-to-end data encryption</li>
-                                <li data-translate="networkPrivacyTransparent">Public transparency options</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <!-- Network Protection -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkProtectionTitle">Auto-Healing & Fork Protection</h4>
-                            <p class="text-gray-300 mb-4" data-translate="networkProtectionDesc">Automatic network security</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="networkProtectionHeal">Self-healing protocol</li>
-                                <li data-translate="networkProtectionFork">Community-driven fork resolution</li>
-                                <li data-translate="networkProtectionAudit">Continuous security auditing</li>
-                            </ul>
-                        </div>
-
-                        <!-- Storage & Contracts -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="networkStorageTitle">Decentralized Storage</h4>
-                            <p class="text-gray-300 mb-4" data-translate="networkStorageDesc">Distributed data management</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="networkStorageIpfs">IPFS/Arweave integration</li>
-                                <li data-translate="networkStorageContracts">Smart contract automation</li>
-                                <li data-translate="networkStorageGov">Governance document storage</li>
-                            </ul>
-                        </div>
+                    
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--accent2)] hover:shadow-[0_0_15px_rgba(var(--accent2-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--accent2)]">Q4 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>BGL token pre-launch activities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>Initial parachain integration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>Security audits and optimization</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>Partnership development</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-
-                <div id="pension" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--primary)]" data-translate="pensionTitle">Contribution-Based Pension</h3>
-                    <p class="text-gray-300" data-translate="pensionDesc">Automatic pension accumulation through contributions</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Pension Fund -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionFundTitle">Pension Fund & PoC Rewards</h4>
-                            <p class="text-gray-300 mb-4" data-translate="pensionFundDesc">Community-managed retirement system</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="pensionFundPool">Shared pension pool from transactions</li>
-                                <li data-translate="pensionFundCredits">Contribution-based credit accumulation</li>
-                                <li data-translate="pensionFundPayout">Monthly BGL retirement payouts</li>
-                            </ul>
-                        </div>
-
-                        <!-- Disability Support -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionDisabilityTitle">Social Support System</h4>
-                            <p class="text-gray-300 mb-4" data-translate="pensionDisabilityDesc">Community protection for disabled members</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="pensionDisabilityFund">Mandatory community contributions</li>
-                                <li data-translate="pensionDisabilityPayout">Regular BGL-S disability payments</li>
-                                <li data-translate="pensionDisabilityGov">Community oversight committee</li>
-                            </ul>
-                        </div>
+            </div>
+            
+            <!-- Expansion Phase Content -->
+            <div class="roadmap-content" id="expansion-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--primary)] hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--primary)]">Q1 2026</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Mainnet launch</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>BGL token public distribution</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>NFT ID system public release</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>First governance proposals</span>
+                            </li>
+                        </ul>
                     </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <!-- Pension Staking -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionStakingTitle">Stake-Based Enhancement</h4>
-                            <p class="text-gray-300 mb-4" data-translate="pensionStakingDesc">Optional pension boosting</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="pensionStakingBoost">Stake BGL for increased benefits</li>
-                                <li data-translate="pensionStakingFiat">Fiat conversion for expenses</li>
-                                <li data-translate="pensionStakingRewards">Staking reward distributions</li>
-                            </ul>
-                        </div>
-
-                        <!-- Partial Contribution -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--primary)]" data-translate="pensionServiceTitle">Partial PoC Maintenance</h4>
-                            <p class="text-gray-300 mb-4" data-translate="pensionServiceDesc">Flexible retirement options</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="pensionServiceMentor">Mentoring & knowledge sharing</li>
-                                <li data-translate="pensionServicePartial">Gradual retirement transition</li>
-                                <li data-translate="pensionServiceBonus">Activity-based bonus rewards</li>
-                            </ul>
-                        </div>
+                    
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--secondary)] hover:shadow-[0_0_15px_rgba(var(--secondary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--secondary)]">Q2 2026</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Full integration of all 44 parachains</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Meritocratic governance system activation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Global expansion initiatives</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Ecosystem development grants</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div id="tax" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--secondary)]" data-translate="taxTitle">Voluntary Contribution Tax</h3>
-                    <p class="text-gray-300" data-translate="taxDesc">Optional tax contributions with reward multipliers</p>
+    <!-- Vision for the Future Section (formerly Whitepaper) -->
+    <section id="whitepaper" class="w-full py-8 sm:py-16 px-4">
+        <div class="text-center mb-8 sm:mb-12">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text" data-translate="whitepaperTitle">Vision for the Future</h2>
+            <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto" data-translate="whitepaperSubtitle">Rebuilding Bulgaria as a digital nation for all citizens</p>
+        </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Tax Tiers -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxTiersTitle">Contribution Tiers</h4>
-                            <p class="text-gray-300 mb-4" data-translate="taxTiersDesc">Progressive reward multipliers</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="taxTier5">5% Contribution: x0.5 Reward Multiplier</li>
-                                <li data-translate="taxTier10">10% Contribution: x1.5 Reward Multiplier</li>
-                                <li data-translate="taxTier20">20% Contribution: x3.0 Reward Multiplier</li>
-                                <li data-translate="taxTierCustom">Higher tiers available</li>
-                            </ul>
-                        </div>
-
-                        <!-- Tax Benefits -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxBenefitsTitle">Tax Benefits</h4>
-                            <p class="text-gray-300 mb-4" data-translate="taxBenefitsDesc">Enhanced rewards for contributors</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="taxBenefitsStaking">Increased staking rewards</li>
-                                <li data-translate="taxBenefitsVoting">Enhanced voting power</li>
-                                <li data-translate="taxBenefitsPension">Higher pension accumulation</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                        <!-- Tax Examples -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxExamplesTitle">Practical Examples</h4>
-                            <p class="text-gray-300 mb-4" data-translate="taxExamplesDesc">Real contribution scenarios</p>
-                            <div class="space-y-4">
-                                <div class="border-b border-gray-700 pb-2">
-                                    <p class="text-gray-300" data-translate="taxExample1">1000 BGL income, 5% tax (50 BGL)</p>
-                                    <p class="text-gray-400 text-sm" data-translate="taxExample1Result">Rewards multiplied by x0.5</p>
-                                </div>
-                                <div class="border-b border-gray-700 pb-2">
-                                    <p class="text-gray-300" data-translate="taxExample2">1000 BGL income, 10% tax (100 BGL)</p>
-                                    <p class="text-gray-400 text-sm" data-translate="taxExample2Result">Rewards multiplied by x1.5</p>
-                                </div>
-                                <div>
-                                    <p class="text-gray-300" data-translate="taxExample3">1000 BGL income, 20% tax (200 BGL)</p>
-                                    <p class="text-gray-400 text-sm" data-translate="taxExample3Result">Rewards multiplied by x3.0</p>
-                                </div>
+        <div class="container mx-auto">
+            <!-- Vision Navigation -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-[#2a2a2a] rounded-full p-1 shadow-lg">
+                    <button class="whitepaper-tab active" data-section="introduction">The Problem</button>
+                    <button class="whitepaper-tab" data-section="vision">Our Vision</button>
+                    <button class="whitepaper-tab" data-section="technology">How It Works</button>
+                    <button class="whitepaper-tab" data-section="governance">Citizen Power</button>
+                </div>
+            </div>
+            
+            <!-- Introduction Section -->
+            <div class="whitepaper-content active" id="introduction-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Why Bulgaria Needs Change</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>Bulgaria today faces serious challenges that affect the daily lives of its citizens. For decades, the same problems have persisted despite promises of change from traditional political parties.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--accent1)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--accent1)]">Political Problems</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Government decisions favor the wealthy and connected</li>
+                                    <li>• Citizens have little say in important decisions</li>
+                                    <li>• Young people leave Bulgaria for better opportunities</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--accent2)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--accent2)]">Environmental Issues</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Beautiful natural resources are being damaged</li>
+                                    <li>• Pollution affects our health and quality of life</li>
+                                    <li>• Short-term profit is prioritized over long-term health</li>
+                                </ul>
                             </div>
                         </div>
-
-                        <!-- Tax Distribution -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="taxDistributionTitle">Tax Distribution</h4>
-                            <p class="text-gray-300 mb-4" data-translate="taxDistributionDesc">Community fund allocation</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="taxDistributionPension">40% to pension fund</li>
-                                <li data-translate="taxDistributionProjects">30% to public projects</li>
-                                <li data-translate="taxDistributionReserve">30% to community reserve</li>
-                            </ul>
+                        
+                        <div class="mt-6">
+                            <h4 class="text-xl font-semibold mb-3 text-[var(--secondary)]">A New Approach</h4>
+                            <p>What if we could rebuild Bulgaria from the ground up? NOVA BULGARIA is a completely new way of thinking about our nation - one where citizens make the decisions, where transparency is guaranteed by technology, and where your contribution to society determines your influence, not your connections or wealth.</p>
                         </div>
                     </div>
                 </div>
-
-                <div id="education" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent2)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent2)]" data-translate="educationTitle">Education & Training</h3>
-                    <p class="text-gray-300" data-translate="educationDesc">Community-driven knowledge sharing</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Education System -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="educationSystemTitle">Education System</h4>
-                            <p class="text-gray-300 mb-4" data-translate="educationSystemDesc">Skill-based progression</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="educationSystemCourses">Community-created courses</li>
-                                <li data-translate="educationSystemMentor">Mentorship programs</li>
-                                <li data-translate="educationSystemCertification">Certification & reputation</li>
-                            </ul>
-                        </div>
-
-                        <!-- Training Programs -->
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent2)]" data-translate="trainingProgramsTitle">Training Programs</h4>
-                            <p class="text-gray-300 mb-4" data-translate="trainingProgramsDesc">Practical skill development</p>
-                            <ul class="space-y-3 text-gray-300">
-                                <li data-translate="trainingProgramsWorkshops">Workshops & hackathons</li>
-                                <li data-translate="trainingProgramsProjects">Community projects & collaborations</li>
-                                <li data-translate="trainingProgramsFeedback">Peer review & feedback</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Key Principles -->
-                <div id="principles" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--secondary)]" data-translate="principlesTitle">Key Principles</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="pocTitle">🌟 Proof of Contribution</h4>
-                            <p class="text-gray-300" data-translate="pocDescription">Members earn voting power, social rank, and economic benefits based on their real contributions — including skilled labor, innovation, and public service. Voting power updates daily, reflecting continuous personal development.</p>
-                        </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]" data-translate="nftIdTitle">🆔 NFT ID System</h4>
-                            <p class="text-gray-300" data-translate="nftIdDescription">A unique, evolving digital identity that serves as a passport to the nation. It records rank, expertise, reputation, and access rights within the ecosystem.</p>
-                        </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="governanceTitle">⚖️ Transparent Governance</h4>
-                            <p class="text-gray-300" data-translate="governanceDescription">Laws and policies are proposed, discussed, and voted on via blockchain. Decisions are executed immediately with 51% consensus, without bureaucratic delay.</p>
-                        </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]" data-translate="tokenEconomyTitle">💰 Dynamic Token Economy</h4>
-                            <p class="text-gray-300" data-translate="tokenEconomyDescription">A hybrid token system balancing long-term growth with short-term stability, designed to reward contribution while protecting against volatility.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hybrid Token Model -->
-                <div id="token" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent1)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent1)]" data-translate="hybridTokenTitle">Hybrid Token Model</h3>
-                    <p class="text-gray-300" data-translate="hybridTokenDescription">Our dual-token system combines utility and governance:</p>
+            </div>
+            
+            <!-- Vision Section -->
+            <div class="whitepaper-content" id="vision-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">A Digital Nation Built By Its People</h3>
                     
-                    <div class="space-y-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent1)]" data-translate="novaTokenTitle">Governance Token (BGL)</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="novaTokenPurpose">• Purpose: Governance, staking, long-term value accumulation, and PoC rewards</li>
-                                <li data-translate="novaTokenSupply">• Supply: Minted on demand for events (e.g., onboarding, project completion)</li>
-                                <li data-translate="novaTokenStability">• Stability: Logarithmic supply curve slows token issuance as supply grows</li>
-                                <li data-translate="novaTokenPriceFloor">• Price Floor: Supported by a treasury fund with auto-buy mechanism</li>
-                            </ul>
-                        </div>
-
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent2)]" data-translate="stablecoinTitle">Stablecoin (BGL-S)</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="stablecoinPurpose">• Purpose: Everyday transactions, salaries, and public services</li>
-                                <li data-translate="stablecoinPeg">• Peg: Basket of assets (fiat reserves, tokenized infrastructure, fractional BGL)</li>
-                                <li data-translate="stablecoinMechanism">• Mechanism: Lock BGL to mint BGL-S, burn BGL-S to redeem</li>
-                                <li data-translate="stablecoinGovernance">• Governance: Community can vote to adjust stabilization parameters</li>
-                            </ul>
-                        </div>
-
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="eventBasedMintingTitle">Event-Based Minting & Rewards</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="eventMintingOnboarding">• Onboarding: 3 million BGL for new verified members</li>
-                                <li data-translate="eventMintingProject">• Project Completion: BGL rewards for completed national projects</li>
-                                <li data-translate="eventMintingStaking">• Staking: Earn BGL-S dividends or project ownership shares</li>
-                            </ul>
-                        </div>
-
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent4)]" data-translate="emergencyStabilizationTitle">Emergency Stabilization</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="emergencyMint">• Rapid Mint/Burn for crisis events</li>
-                                <li data-translate="emergencyCommittee">• Community-elected emergency committees</li>
-                                <li data-translate="emergencyAudit">• Post-crisis audits for accountability</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- NFT ID System -->
-                <div id="nft" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent4)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent4)]" data-translate="nftSystemTitle">NFT ID Onboarding & Identity System</h3>
-                    <p class="text-gray-300" data-translate="nftSystemDescription">Every citizen receives a Soulbound NFT ID upon passing a foundational knowledge exam covering history, language, psychology, and more.</p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="nftKeyFeaturesTitle">Key Features</h4>
-                            <ul class="space-y-3 text-gray-300">
-                                <li class="flex items-start">
-                                    <span class="text-[var(--accent4)] mr-2">•</span>
-                                    <span data-translate="nftSoulbound">Non-Transferable Soulbound NFT</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-[var(--accent4)] mr-2">•</span>
-                                    <span data-translate="nftEvolving">Evolving based on contributions and exams</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-[var(--accent4)] mr-2">•</span>
-                                    <span data-translate="nftPrivacy">Privacy-focused with minimal public data</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-[var(--accent4)] mr-2">•</span>
-                                    <span data-translate="nftAccess">Access key to all national systems</span>
-                                </li>
-                            </ul>
+                    <div class="space-y-4 text-gray-300">
+                        <p>NOVA BULGARIA reimagines what a country can be in the digital age. Instead of power concentrated in the hands of a few politicians, we're creating a nation where all citizens participate directly in governance through secure digital technology.</p>
+                        
+                        <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--primary)] mt-6">
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Your Contribution Matters</h4>
+                            <p class="text-sm">In traditional systems, your voice is heard only during elections. In NOVA BULGARIA, your positive contributions to society are recognized and rewarded with greater influence. Whether you're a teacher, doctor, artist, or programmer, your expertise and effort directly translate to decision-making power in your field.</p>
                         </div>
                         
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--accent4)]" data-translate="nftPublicDataTitle">Public Data</h4>
-                            <pre class="text-sm text-gray-300 overflow-x-auto">
-{
-  <span data-translate="nftName">"name": "Иван Иванов"</span>,
-  <span data-translate="nftId">"id": "BG-NFT-001"</span>,
-  <span data-translate="nftLevel">"level": "Citizen"</span>,
-  <span data="nftContributions">"contributions": 156</span>,
-  <span data="nftVotingPower">"votingPower": 3.2</span>
-}
-                            </pre>
+                        <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--secondary)] mt-4">
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--secondary)]">44 Areas of National Life</h4>
+                            <p class="text-sm">NOVA BULGARIA is organized into 44 specialized areas covering everything a nation needs to function. These include traditional sectors like Healthcare, Education, and Agriculture (24 sectors), plus new digital areas like Renewable Energy, Digital Identity, and Smart Cities (20 sectors). Each area has its own governance, allowing citizens with relevant expertise to make decisions in their fields.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Governance Section -->
-                <div id="governance" class="glass rounded-2xl p-8 space-y-6 border border-[var(--primary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--primary)]" data-translate="governanceTitle">Governance & Law Enforcement</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]" data-translate="decentralizedVotingTitle">🗳️ Decentralized Voting</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="decentralizedVoting1">• Expertise-based voting rights</li>
-                                <li data-translate="decentralizedVoting2">• Direct democracy system</li>
-                                <li data-translate="decentralizedVoting3">• Immediate execution of decisions</li>
-                            </ul>
+            </div>
+            
+            <!-- Technology Section -->
+            <div class="whitepaper-content" id="technology-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">How Our Digital Nation Works</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>NOVA BULGARIA uses advanced digital technology to ensure transparency, security, and fairness. Think of it as a digital record-keeping system that cannot be tampered with, allowing citizens to trust that everything from voting to resource allocation happens fairly.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--primary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Your Digital Identity</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• A secure digital ID that only you control</li>
+                                    <li>• Cannot be copied, stolen, or used by others</li>
+                                    <li>• Stores your contributions and achievements</li>
+                                    <li>• Gives you access to national services</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--secondary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--secondary)]">Our Digital Economy</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• BGL: Our national currency for investment</li>
+                                    <li>• BGL-Stable: For everyday purchases</li>
+                                    <li>• 20% set aside for emergencies and stability</li>
+                                    <li>• 80% dedicated to building our nation</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]" data-translate="emergencyVotesTitle">⚡ Emergency Votes</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="emergencyVotes1">• Expedited voting windows</li>
-                                <li data-translate="emergencyVotes2">• Temporary power boosts</li>
-                                <li data-translate="emergencyVotes3">• Crisis response system</li>
-                            </ul>
-                        </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--primary)]" data-translate="courtsTitle">⚖️ Blockchain Courts</h4>
-                            <ul class="space-y-2 text-gray-300">
-                                <li data-translate="courts1">• PoC-rated judges</li>
-                                <li data-translate="courts2">• Random selection</li>
-                                <li data-translate="courts3">• Transparent proceedings</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Funding Section -->
-                <div id="funding" class="glass rounded-2xl p-8 space-y-6 border border-[var(--secondary)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--secondary)]" data-translate="fundingTitle">Funding & Economic Growth</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="crowdfundingTitle">💰 Crowdfunding</h4>
-                            <ul class="text-gray-300 text-left space-y-2">
-                                <li>• <span data-translate="tokenAmount">20 Million BGL Tokens Available</span></li>
-                                <li>• <span data-translate="softCap">Soft Cap: $2 Million</span></li>
-                                <li>• <span data-translate="hardCap">Hard Cap: $20 Million</span></li>
-                            </ul>
-                        </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="treasuryTitle">🏦 Treasury</h4>
-                            <ul class="text-gray-300 text-left space-y-2">
-                                <li data-translate="treasury1">• Community governance</li>
-                                <li data-translate="treasury2">• Automatic stabilizers</li>
-                                <li data-translate="treasury3">• Economic security measures</li>
-                            </ul>
-                        </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-lg font-semibold mb-4 text-[var(--secondary)]" data-translate="fiatTitle">💱 Fiat Integration</h4>
-                            <ul class="text-gray-300 text-left space-y-2">
-                                <li data-translate="fiat1">• Traditional payment options</li>
-                                <li data-translate="fiat2">• BGL reward system</li>
-                                <li data-translate="fiat3">• Bridge to traditional finance</li>
-                            </ul>
+                        
+                        <div class="mt-6">
+                            <h4 class="text-xl font-semibold mb-3 text-[var(--accent1)]">Building a Complete Nation</h4>
+                            <p>Our 44 specialized areas work together to create a complete nation. Traditional sectors like Healthcare, Education, and Agriculture work alongside new digital sectors like Renewable Energy and Artificial Intelligence. Each area has dedicated funding and is governed by citizens with relevant expertise and contributions.</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Development Section -->
-                <div id="development" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent3)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent3)]" data-translate="nextStepsTitle">Next Steps & MVP Development</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="phase1Title">Phase 1</h4>
-                            <p class="text-gray-300" data-translate="phase1Items">• Cosmos Blockchain Fork<br>• NFT ID Onboarding MVP</p>
+            </div>
+            
+            <!-- Governance Section -->
+            <div class="whitepaper-content" id="governance-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Citizens in Control</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>In NOVA BULGARIA, citizens make decisions directly rather than electing representatives who may not keep their promises. Our digital system ensures that everyone can participate, votes cannot be manipulated, and the results are implemented automatically.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--primary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Becoming a Citizen</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Verify your identity securely</li>
+                                    <li>• Learn about how our nation works</li>
+                                    <li>• Begin contributing in your areas of expertise</li>
+                                    <li>• Earn greater influence through positive actions</li>
+                                    <li>• Access more services as your contributions grow</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--secondary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--secondary)]">Citizen Decision-Making</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Propose ideas to improve Bulgaria</li>
+                                    <li>• Vote on proposals in your areas of expertise</li>
+                                    <li>• Decisions made by those who understand the issues</li>
+                                    <li>• Earn rewards for helpful participation</li>
+                                    <li>• Watch your ideas become reality</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="glass p-6 rounded-xl">
-                            <h4 class="text-xl font-semibold mb-4 text-[var(--accent3)]" data-translate="phase2Title">Phase 2</h4>
-                            <p class="text-gray-300" data-translate="phase2Items">• Hybrid Token Launch<br>• Crowdfunding Portal</p>
+                        
+                        <div class="mt-6">
+                            <h4 class="text-xl font-semibold mb-3 text-[var(--accent2)]">Rules Everyone Can Trust</h4>
+                            <p>Our national rules (constitution) are written into the digital system itself, meaning they apply equally to everyone and cannot be changed without widespread citizen approval. This ensures that no individual or group can manipulate the system for their own benefit.</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- Conclusion -->
-                <div id="conclusion" class="glass rounded-2xl p-8 space-y-6 border border-[var(--accent1)] border-opacity-20">
-                    <h3 class="text-2xl font-bold text-[var(--accent1)]" data-translate="conclusionTitle">Conclusion: A New Era of Digital Sovereignty</h3>
-                    <p class="text-gray-300" data-translate="conclusionText">Nova Bulgaria aims to pioneer the world's first truly decentralized, self-governed nation — where contribution defines citizenship, and blockchain ensures transparency and fairness. By combining meritocratic governance with a dynamic token economy, the project seeks to create a living, evolving nation-state that thrives on the collective power of its people.</p>
                 </div>
             </div>
         </div>
@@ -1293,6 +1052,64 @@
         });
     </script>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stats box hover effects
+            const whiteBox = document.querySelector('.stats-box-white');
+            const greenBox = document.querySelector('.stats-box-green');
+            const redBox = document.querySelector('.stats-box-red');
+            
+            whiteBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid white';
+            });
+            
+            whiteBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            greenBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid var(--primary)';
+            });
+            
+            greenBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            redBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid #ff3b30';
+            });
+            
+            redBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            // Roadmap tabs functionality
+            const roadmapTabs = document.querySelectorAll('.roadmap-tab');
+            const roadmapContents = document.querySelectorAll('.roadmap-content');
+            
+            if (roadmapTabs.length > 0) {
+                roadmapTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        roadmapTabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Hide all content sections
+                        roadmapContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Show the corresponding content section
+                        const phaseContent = document.getElementById(`${this.dataset.phase}-content`);
+                        if (phaseContent) {
+                            phaseContent.classList.add('active');
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+    
     <style>
         .cursor {
             display: inline-block;
@@ -1314,5 +1131,74 @@
             font-weight: 500;
         }
     </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const roadmapContainer = document.getElementById('roadmap-container');
+            
+            // Fetch the roadmap component
+            fetch('components/roadmap/roadmap.html')
+                .then(response => response.text())
+                .then(html => {
+                    roadmapContainer.innerHTML = html;
+                    
+                    // Execute any scripts in the roadmap component
+                    const scripts = roadmapContainer.querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        roadmapContainer.appendChild(newScript);
+                        script.remove();
+                    });
+                    
+                    // Initialize roadmap tabs
+                    initRoadmapTabs();
+                    
+                    console.log('Roadmap component loaded successfully');
+                })
+                .catch(error => {
+                    console.error('Error loading roadmap component:', error);
+                    roadmapContainer.innerHTML = '<p class="text-red-500">Error loading roadmap component</p>';
+                });
+                
+            // Function to initialize roadmap tabs
+            function initRoadmapTabs() {
+                const tabs = document.querySelectorAll('.roadmap-tab');
+                const contentSections = document.querySelectorAll('.roadmap-content');
+                
+                if (tabs.length === 0) {
+                    console.error('No roadmap tabs found');
+                    return;
+                }
+                
+                console.log(`Found ${tabs.length} roadmap tabs`);
+                
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        tabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Hide all content sections
+                        contentSections.forEach(section => section.classList.remove('active'));
+                        
+                        // Show the corresponding content section
+                        const targetContent = document.getElementById(`${this.dataset.phase}-content`);
+                        if (targetContent) {
+                            targetContent.classList.add('active');
+                        }
+                        
+                        console.log(`Tab clicked: ${this.dataset.phase}`);
+                    });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
