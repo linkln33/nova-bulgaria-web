@@ -110,6 +110,43 @@
                     });
                 });
             }
+            
+            // Check if hero section loaded properly
+            setTimeout(function() {
+                const heroContainer = document.getElementById('hero-intro-container');
+                if (heroContainer && heroContainer.innerHTML.trim() === '') {
+                    console.log('Hero section failed to load via component loader, loading directly...');
+                    fetch('/components/combined-hero/combined-hero.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            heroContainer.innerHTML = html;
+                            // Initialize typewriter if it exists
+                            if (typeof initTypewriter === 'function') {
+                                initTypewriter();
+                            }
+                            // Initialize hero tabs
+                            const tabBtns = heroContainer.querySelectorAll('.tab-btn');
+                            const tabPanes = heroContainer.querySelectorAll('.tab-pane');
+                            
+                            tabBtns.forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    const tabId = this.getAttribute('data-tab');
+                                    
+                                    // Remove active class from all buttons and panes
+                                    tabBtns.forEach(b => b.classList.remove('active'));
+                                    tabPanes.forEach(p => p.classList.remove('active'));
+                                    
+                                    // Add active class to current button and pane
+                                    this.classList.add('active');
+                                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                                });
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading hero section directly:', error);
+                        });
+                }
+            }, 1000); // Check after 1 second
         });
     </script>
     
@@ -204,117 +241,102 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        .typewriter {
-            min-height: 2em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            margin-top: 1rem;
-            line-height: 1.5;
+        /* Animated gradient border */
+        @keyframes borderAnimation {
+            0% {
+                border-image-source: linear-gradient(to right, var(--primary), var(--secondary));
+            }
+            25% {
+                border-image-source: linear-gradient(to bottom, var(--secondary), var(--accent1));
+            }
+            50% {
+                border-image-source: linear-gradient(to left, var(--accent1), var(--accent2));
+            }
+            75% {
+                border-image-source: linear-gradient(to top, var(--accent2), var(--primary));
+            }
+            100% {
+                border-image-source: linear-gradient(to right, var(--primary), var(--secondary));
+            }
         }
 
-        .cursor {
-            display: inline-block;
-            width: 2px;
-            height: 1.2em;
-            margin-left: 2px;
-            vertical-align: middle;
-            animation: blink 1s infinite;
-        }
-        
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        /* Add sparkle animation */
-        @keyframes sparkle {
-            0% { background-position: -500px 0; }
-            100% { background-position: 500px 0; }
+        .animated-border {
+            border: 2px solid;
+            border-image-slice: 1;
+            animation: borderAnimation 8s linear infinite;
         }
 
-        .bg-sparkle {
-            background-image: linear-gradient(
-                90deg,
-                rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.2) 25%,
-                rgba(255,255,255,0.2) 50%,
-                rgba(255,255,255,0) 100%
-            );
-            background-repeat: repeat-x;
-            background-size: 1000px 100%;
-            animation: sparkle 3s linear infinite;
-        }
-        
-        .sparkle-text {
-            background: linear-gradient(90deg, #ffffff, #7f7f7f, #ffffff);
-            background-size: 1000px 100%;
-            animation: sparkle 3s linear infinite;
-        }
-        
-        /* Removed the stats box styles as they're now in the external CSS file */
-        
-        /* Roadmap Styles */
+        /* Roadmap styles */
         .roadmap-tab {
             padding: 0.75rem 1.5rem;
             border-radius: 9999px;
             font-weight: 500;
-            font-size: 0.875rem;
-            color: #a0a0a0;
             transition: all 0.3s ease;
-            cursor: pointer;
-            text-align: center;
-            line-height: 1.2;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0 0.5rem;
         }
-        
+
         .roadmap-tab:hover {
-            color: white;
-            background-color: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
         }
-        
+
         .roadmap-tab.active {
-            background-color: rgba(76, 175, 80, 0.2);
-            color: var(--primary);
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+            background: var(--primary);
+            color: #000;
         }
-        
+
         .roadmap-content {
             display: none;
             opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
-        
+
         .roadmap-content.active {
             display: block;
             opacity: 1;
             transform: translateY(0);
             animation: fadeIn 0.5s ease forwards;
         }
-        
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(10px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        .glass {
-            background: rgba(30, 30, 30, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.75rem;
+
+        /* Whitepaper tab styles */
+        .whitepaper-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
             transition: all 0.3s ease;
+            background: transparent;
+            margin: 0 0.25rem;
+            color: #fff;
         }
-        
-        .glass:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+
+        .whitepaper-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .whitepaper-tab.active {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .whitepaper-content {
+            display: none;
+        }
+
+        .whitepaper-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
         }
     </style>
 </head>
@@ -587,11 +609,11 @@
                     </div>
                     <div class="mt-6 grid grid-cols-2 gap-4">
                         <div class="glass p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="initialSupplyTitle">Total Supply</h4>
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Initial Supply</h4>
                             <p class="text-gray-300" data-translate="initialSupplyValue">1 Trillion BGL</p>
                         </div>
                         <div class="glass p-4 rounded-lg">
-                            <h4 class="text-lg font-semibold text-[var(--primary)]" data-translate="maxSupplyTitle">Reserve Fund</h4>
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Reserve Fund</h4>
                             <p class="text-gray-300" data-translate="maxSupplyValue">200B BGL (20%)</p>
                         </div>
                     </div>
@@ -1110,6 +1132,43 @@
                     });
                 });
             }
+            
+            // Check if hero section loaded properly
+            setTimeout(function() {
+                const heroContainer = document.getElementById('hero-intro-container');
+                if (heroContainer && heroContainer.innerHTML.trim() === '') {
+                    console.log('Hero section failed to load via component loader, loading directly...');
+                    fetch('/components/combined-hero/combined-hero.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            heroContainer.innerHTML = html;
+                            // Initialize typewriter if it exists
+                            if (typeof initTypewriter === 'function') {
+                                initTypewriter();
+                            }
+                            // Initialize hero tabs
+                            const tabBtns = heroContainer.querySelectorAll('.tab-btn');
+                            const tabPanes = heroContainer.querySelectorAll('.tab-pane');
+                            
+                            tabBtns.forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    const tabId = this.getAttribute('data-tab');
+                                    
+                                    // Remove active class from all buttons and panes
+                                    tabBtns.forEach(b => b.classList.remove('active'));
+                                    tabPanes.forEach(p => p.classList.remove('active'));
+                                    
+                                    // Add active class to current button and pane
+                                    this.classList.add('active');
+                                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                                });
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading hero section directly:', error);
+                        });
+                }
+            }, 1000); // Check after 1 second
         });
     </script>
     
