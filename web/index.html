@@ -12,11 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="modern/styles/combined.css?v=20250311235800">
-    <link rel="stylesheet" href="assets/css/sector-buttons.css">
+    <link rel="stylesheet" href="modern/styles/holographic.css">    <link rel="stylesheet" href="assets/css/sector-buttons.css">
     <link rel="stylesheet" href="components/combined-hero/combined-hero.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="assets/js/tokenomics.js"></script>
-    <script src="assets/js/load-components.js"></script>
+<script src="assets/js/tokenomics.js"></script>
+    <!-- <script src="assets/js/load-components.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 
     <!-- Load other external dependencies -->
@@ -110,42 +110,42 @@
                     });
                 });
             }
-            
-            // Check if hero section loaded properly
-            setTimeout(function() {
-                const heroContainer = document.getElementById('hero-intro-container');
-                if (heroContainer && heroContainer.innerHTML.trim() === '') {
-                    console.log('Hero section failed to load via component loader, loading directly...');
-                    fetch('/components/combined-hero/combined-hero.html')
-                        .then(response => response.text())
-                        .then(html => {
-                            heroContainer.innerHTML = html;
-                            // Initialize typewriter if it exists
-                            if (typeof initTypewriter === 'function') {
-                                initTypewriter();
-                            }
-                            // Initialize hero tabs
-                            const tabBtns = heroContainer.querySelectorAll('.tab-btn');
-                            const tabPanes = heroContainer.querySelectorAll('.tab-pane');
-                            
-                            tabBtns.forEach(btn => {
-                                btn.addEventListener('click', function() {
-                                    const tabId = this.getAttribute('data-tab');
-                                    
-                                    // Remove active class from all buttons and panes
-                                    tabBtns.forEach(b => b.classList.remove('active'));
-                                    tabPanes.forEach(p => p.classList.remove('active'));
-                                    
-                                    // Add active class to current button and pane
-                                    this.classList.add('active');
-                                    document.getElementById(`${tabId}-tab`).classList.add('active');
-                                });
-                            });
-                        })
-                        .catch(error => {
-                            console.error('Error loading hero section directly:', error);
-                        });
-                }
+//             
+// //             // Check if hero section loaded properly
+//             setTimeout(function() {
+//                 const heroContainer = document.getElementById('hero-intro-container');
+//                 if (heroContainer && heroContainer.innerHTML.trim() === '') {
+//                     console.log('Hero section failed to load via component loader, loading directly...');
+//                     fetch('/components/combined-hero/combined-hero.html')
+//                         .then(response => response.text())
+//                         .then(html => {
+//                             heroContainer.innerHTML = html;
+//                             // Initialize typewriter if it exists
+//                             if (typeof initTypewriter === 'function') {
+//                                 initTypewriter();
+//                             }
+//                             // Initialize hero tabs
+//                             const tabBtns = heroContainer.querySelectorAll('.tab-btn');
+//                             const tabPanes = heroContainer.querySelectorAll('.tab-pane');
+//                             
+//                             tabBtns.forEach(btn => {
+//                                 btn.addEventListener('click', function() {
+//                                     const tabId = this.getAttribute('data-tab');
+//                                     
+//                                     // Remove active class from all buttons and panes
+//                                     tabBtns.forEach(b => b.classList.remove('active'));
+//                                     tabPanes.forEach(p => p.classList.remove('active'));
+//                                     
+//                                     // Add active class to current button and pane
+//                                     this.classList.add('active');
+//                                     document.getElementById(`${tabId}-tab`).classList.add('active');
+//                                 });
+//                             });
+//                         })
+//                         .catch(error => {
+//                             console.error('Error loading hero section directly:', error);
+//                         });
+// //                 }
             }, 1000); // Check after 1 second
         });
     </script>
