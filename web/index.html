@@ -341,8 +341,229 @@
     </style>
 </head>
 <body>
-    <!-- Hero and Introduction Container -->
-    <div id="hero-intro-container"></div>
+    <!-- Combined Hero and Introduction Section -->
+    <section id="hero-intro" class="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden py-16 pt-36">
+        <!-- Background elements -->
+        <div class="absolute inset-0 bg-[url('/assets/images/hero-bg.jpg')] bg-cover bg-center opacity-10"></div>
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute top-10 left-10 w-64 h-64 bg-[var(--primary)] rounded-full filter blur-[100px] opacity-20"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-[var(--accent1)] rounded-full filter blur-[120px] opacity-20"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Hero Header -->
+            <div class="text-center mb-12">
+                <div class="flex justify-center mb-6">
+                    <img src="assets/images/logo.png" alt="NOVA Bulgaria Logo" class="w-[120px] h-[120px] object-contain">
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]" data-translate="heroTitle">
+                    NOVA BULGARIA
+                </h1>
+                <div class="flex flex-col items-center mb-12">
+                    <p class="text-xl md:text-2xl text-gray-300 flex items-center justify-center gap-3 mb-4" data-translate="heroSubtitle">
+                        It's time! Awaken the Lions
+                        <span class="inline-flex h-5 overflow-hidden rounded shadow-sm ml-2">
+                            <span class="w-5 h-5 bg-white"></span>
+                            <span class="w-5 h-5 bg-green-600"></span>
+                            <span class="w-5 h-5 bg-red-600"></span>
+                        </span>
+                    </p>
+                </div>
+                <div class="text-2xl md:text-3xl text-[var(--primary)] font-semibold mb-8">
+                    <span id="typewriter"></span>
+                </div>
+            </div>
+            
+            <!-- Overview Section -->
+            <div class="glass p-8 rounded-xl neon-glow mb-12">
+                <h2 class="text-3xl font-bold text-center text-[var(--primary)] mb-6">The Need for NOVA BULGARIA</h2>
+                <p class="text-xl text-gray-300 text-center max-w-4xl mx-auto mb-8">
+                    Bulgaria stands at a critical crossroads, facing political corruption, environmental degradation, and a youth exodus.
+                </p>
+                
+                <div class="flex flex-col md:flex-row">
+                    <!-- Vertical Tab navigation -->
+                    <div class="md:w-1/4 mb-6 md:mb-0 md:border-r border-gray-700 md:pr-4">
+                        <div class="flex flex-col space-y-6">
+                            <!-- Introduction Tabs Section -->
+                            <div>
+                                <div class="flex flex-col space-y-2">
+                                    <button class="tab-btn active px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="crisis">
+                                        Political Crisis
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="environment">
+                                        Environmental Crisis
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="youth">
+                                        Youth Crisis
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="solution">
+                                        The Solution
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="vision">
+                                        Vision
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="blockchain">
+                                        Why Blockchain
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab content -->
+                    <div class="md:w-3/4 md:pl-6">
+                        <!-- Introduction Tab Content -->
+                        <div class="tab-content">
+                            <!-- Political Crisis Tab -->
+                            <div class="tab-pane active" id="crisis-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">The Current Political Crisis: Corruption, Tyranny, and National Collapse</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Bulgaria stands at the edge of destruction, gripped by a ruthless and corrupt regime that has held power for decades. The country is controlled by an oligarchic mafia, led by political figures such as Boyko Borissov and Delyan Peevski, who have systematically looted the nation's resources, silenced opposition, and driven millions into poverty. Their control extends deep into every institution—the government, judiciary, media, and even law enforcement—turning Bulgaria into a puppet state where laws serve only the interests of the corrupt elite.</p>
+                                    
+                                    <p class="text-gray-300">For years, these political criminals have engaged in mass financial theft, suppression of free speech, and the destruction of democratic values. Instead of serving the people, they have orchestrated an economic genocide, forcing millions of Bulgarians to flee the country in search of a better future. Those who remain are trapped in a system of oppression, where poverty, lack of healthcare, and unchecked police brutality are the norm.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">The Imminent Collapse of Bulgaria</h4>
+                                        <p class="text-gray-300">The current state of Bulgaria is unsustainable. With a rapidly declining population, widespread unemployment, and a complete lack of institutional trust, the country is on the verge of economic and social collapse. If the corruption continues, Bulgaria will cease to function as a sovereign state and will be left in ruins, controlled by foreign interests and criminal networks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Environmental Crisis Tab -->
+                            <div class="tab-pane" id="environment-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Environmental Crisis: Destruction of Bulgaria's Natural Heritage</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Bulgaria's once pristine environment is being systematically destroyed by corrupt officials who sell off protected lands to private interests. Ancient forests are being clear-cut, rivers polluted with industrial waste, and protected areas developed for commercial gain. The government has failed to implement effective environmental regulations, resulting in some of the worst air quality in Europe and widespread environmental degradation.</p>
+                                    
+                                    <p class="text-gray-300">The Black Sea coast, once a natural treasure, has been overdeveloped with illegal construction projects that destroy fragile ecosystems. Mining operations continue to contaminate soil and water sources, while waste management remains inadequate, leading to illegal dumping and pollution. Climate change further exacerbates these issues, with more frequent droughts, floods, and extreme weather events affecting agriculture and water supplies.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Environmental Consequences</h4>
+                                        <p class="text-gray-300">The environmental crisis has severe consequences for public health, with increased rates of respiratory diseases, cancer, and other illnesses linked to pollution. Agricultural productivity is declining due to soil degradation and water scarcity, threatening food security. Bulgaria's biodiversity is rapidly diminishing, with many endemic species facing extinction. Without immediate action, the country's natural resources will be depleted beyond recovery, leaving a barren landscape for future generations.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Youth Crisis Tab -->
+                            <div class="tab-pane" id="youth-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Youth Crisis: A Generation Without Hope</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Bulgaria is experiencing a catastrophic youth exodus, with an estimated 1.5 million young Bulgarians having left the country in the past three decades. This brain drain represents the loss of the country's most valuable resource—its future generation. Young people are fleeing due to a lack of economic opportunities, poor educational systems, and a pervasive sense of hopelessness about Bulgaria's future.</p>
+                                    
+                                    <p class="text-gray-300">Those who remain face unemployment, low wages, and a system that rewards corruption over merit. The education system fails to prepare students for the modern economy, while nepotism and bribery often determine career advancement rather than skill or hard work. This creates a vicious cycle where talented youth see no future in their homeland and choose to build their lives elsewhere.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Demographic Collapse</h4>
+                                        <p class="text-gray-300">Bulgaria's population has decreased from nearly 9 million in 1989 to less than 7 million today, with projections showing a further decline to under 5 million by 2050 if current trends continue. This demographic crisis threatens the very existence of the Bulgarian nation, as villages empty, schools close, and entire regions become depopulated. Without its youth, Bulgaria cannot sustain its economy, culture, or national identity.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- The Solution Tab -->
+                            <div class="tab-pane" id="solution-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">The Solution: A Digital Rebirth</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Traditional solutions have failed Bulgaria. Decades of protests, elections, and attempted reforms have not broken the grip of corruption or reversed the country's decline. A radical new approach is needed—one that bypasses the corrupt system entirely and empowers citizens directly.</p>
+                                    
+                                    <p class="text-gray-300">NOVA BULGARIA represents this revolutionary solution: a sovereign digital nation built on blockchain technology that creates a parallel governance structure. This digital nation is not bound by geographical borders but instead unites Bulgarians worldwide through shared values, culture, and a commitment to building a better future.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Key Elements of the Solution</h4>
+                                        <ul class="space-y-2 text-gray-300">
+                                            <li>• <span class="font-semibold">Digital Citizenship:</span> A secure, blockchain-based identity system that gives every Bulgarian a voice in governance</li>
+                                            <li>• <span class="font-semibold">Decentralized Governance:</span> Direct democratic decision-making that eliminates corrupt intermediaries</li>
+                                            <li>• <span class="font-semibold">Tokenized Economy:</span> A fair economic system that rewards contribution and creates opportunities</li>
+                                            <li>• <span class="font-semibold">Global Community:</span> Uniting the Bulgarian diaspora with those still in the homeland</li>
+                                            <li>• <span class="font-semibold">Transparent Operations:</span> All decisions and financial transactions visible on the blockchain</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vision Tab -->
+                            <div class="tab-pane" id="vision-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Our Vision: A New Bulgarian Renaissance</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">NOVA BULGARIA envisions a digital renaissance that revitalizes Bulgarian society, culture, and economy. We aim to create a thriving, meritocratic community where talent is rewarded, innovation flourishes, and decisions are made collectively for the common good.</p>
+                                    
+                                    <p class="text-gray-300">Our digital nation will serve as a model for how blockchain technology can transform governance and create more just, efficient, and participatory systems. By demonstrating success at scale, we will inspire similar movements globally while preserving and promoting Bulgaria's unique cultural heritage.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Long-term Vision</h4>
+                                        <p class="text-gray-300">In the long term, NOVA BULGARIA will evolve from a parallel digital structure to a recognized sovereign entity with diplomatic relations, economic partnerships, and cultural exchanges. Our digital nation will eventually acquire physical territories through legal means, creating innovation hubs, sustainable communities, and cultural centers that embody our values and showcase Bulgarian talent to the world.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Why Blockchain Tab -->
+                            <div class="tab-pane" id="blockchain-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Why Blockchain Technology?</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Blockchain technology provides the perfect foundation for NOVA BULGARIA because it enables trustless, transparent, and tamper-proof systems—precisely what is needed to overcome Bulgaria's crisis of corruption and institutional failure.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Blockchain Advantages</h4>
+                                        <ul class="space-y-2 text-gray-300">
+                                            <li>• <span class="font-semibold">Immutability:</span> Once recorded, information cannot be altered, preventing fraud and manipulation</li>
+                                            <li>• <span class="font-semibold">Transparency:</span> All transactions and decisions are visible to all participants</li>
+                                            <li>• <span class="font-semibold">Decentralization:</span> No single point of failure or control, preventing power concentration</li>
+                                            <li>• <span class="font-semibold">Smart Contracts:</span> Automated execution of agreements without intermediaries</li>
+                                            <li>• <span class="font-semibold">Tokenization:</span> Digital representation of value that enables new economic models</li>
+                                            <li>• <span class="font-semibold">Global Accessibility:</span> Participation from anywhere with internet access</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <p class="text-gray-300">By building on the Cosmos SDK, NOVA BULGARIA leverages a proven, scalable blockchain framework that enables interoperability with other blockchain networks while maintaining sovereignty over our governance and economic systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Information Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-[var(--primary)] mb-8">Project Overview</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- NOVA Bulgaria Concept Card -->
+                    <div class="glass p-8 rounded-xl neon-glow">
+                        <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">The NOVA Bulgaria Concept</h3>
+                        
+                        <div class="space-y-6">
+                            <p class="text-gray-300">NOVA BULGARIA is a sovereign digital nation blockchain project built on Cosmos SDK. It represents a revolutionary approach to rebuilding a nation through decentralized technology and direct democracy.</p>
+                            
+                            <p class="text-gray-300">The project is powered by the Bulgarian Lion (BGL) token with a total supply of 1 trillion tokens distributed over 100 years, supporting both core traditional sectors and innovative new sectors through a meritocratic governance system.</p>
+                            
+                            <p class="text-gray-300">At the heart of NOVA BULGARIA is the Proof of Contribution (PoC) consensus mechanism, which rewards citizens based on their valuable contributions to the nation rather than just financial stake or computing power.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- National NFT ID System Card -->
+                    <div class="glass p-8 rounded-xl neon-glow">
+                        <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">National NFT ID System</h3>
+                        
+                        <div class="space-y-6">
+                            <p class="text-gray-300">The foundation of citizenship in NOVA BULGARIA is our innovative National NFT ID System, which uses soulbound NFTs that cannot be transferred or sold.</p>
+                            
+                            <p class="text-gray-300">Each citizen receives a unique digital identity after passing a foundational knowledge exam covering Bulgarian history, language, and culture. This NFT ID serves as proof of citizenship and enables participation in governance.</p>
+                            
+                            <p class="text-gray-300">The system provides self-sovereign identity (SSI), giving users complete control over their personal information while enabling secure verification for national services and governance participation.</p>
+                            
+                            <p class="text-gray-300">Citizens with NFT IDs can vote on proposals, contribute to projects, earn token rewards, and access all community resources and benefits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Fixed Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
@@ -400,11 +621,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Combined Hero and Introduction Section -->
-    <div id="hero-intro-container">
-        <!-- Combined hero and introduction component will be loaded here -->
-    </div>
 
     <!-- NFT ID Section -->
     <section id="nft-id" class="pt-4 pb-12 relative">
@@ -848,7 +1064,7 @@
                             </li>
                             <li class="flex items-start">
                                 <span class="text-[var(--secondary)] mr-2">•</span>
-                                <span>Meritocratic governance system activation</span>
+                                <span>Metricocratic governance system activation</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-[var(--secondary)] mr-2">•</span>
@@ -1169,6 +1385,49 @@
                         });
                 }
             }, 1000); // Check after 1 second
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality script
+            // Execute the script immediately
+            (function() {
+                console.log('Combined tabs: Direct script running');
+                
+                // Wait a short time to ensure DOM is fully loaded
+                setTimeout(function() {
+                    // Introduction tabs functionality
+                    const tabBtns = document.querySelectorAll('#hero-intro .tab-btn');
+                    const tabPanes = document.querySelectorAll('#hero-intro .tab-pane');
+                    
+                    console.log('Introduction tabs: Found buttons:', tabBtns.length);
+                    console.log('Introduction tabs: Found panes:', tabPanes.length);
+                    
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const tabId = this.getAttribute('data-tab');
+                            console.log('Introduction tab clicked:', tabId);
+                            
+                            // Remove active class from all introduction buttons and panes
+                            tabBtns.forEach(b => b.classList.remove('active'));
+                            tabPanes.forEach(p => p.classList.remove('active'));
+                            
+                            // Add active class to clicked button
+                            this.classList.add('active');
+                            
+                            // Show corresponding tab content
+                            const targetPane = document.getElementById(tabId + '-tab');
+                            if (targetPane) {
+                                targetPane.classList.add('active');
+                                console.log('Activated introduction tab pane:', tabId + '-tab');
+                            } else {
+                                console.error('Introduction tab pane not found:', tabId + '-tab');
+                            }
+                        });
+                    });
+                }, 100);
+            })();
         });
     </script>
     
