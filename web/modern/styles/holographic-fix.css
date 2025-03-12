@@ -1,0 +1,55 @@
+/* Fix for holographic border to make it static (no rotation) */
+.holographic-border {
+    position: absolute;
+    inset: 0;
+    border: 6px solid transparent;
+    border-radius: 0.75rem;
+    background: linear-gradient(90deg,
+        rgba(var(--secondary-rgb), 0.4),
+        rgba(var(--accent1-rgb), 0.4),
+        rgba(var(--accent3-rgb), 0.4),
+        rgba(var(--accent4-rgb), 0.4),
+        rgba(var(--accent5-rgb), 0.4),
+        rgba(var(--secondary-rgb), 0.4)
+    ) border-box;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+    mask:
+        linear-gradient(#fff 0 0) padding-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    /* Remove any animation or rotation */
+    animation: none !important;
+    transform: none !important;
+    z-index: 1;
+}
+
+/* Keep the shimmer effect but remove any rotation */
+.holographic-texture {
+    position: absolute;
+    inset: -6px;
+    background-image: 
+        repeating-linear-gradient(
+            105deg,
+            rgba(var(--primary-rgb), 0.05) 0%,
+            rgba(var(--secondary-rgb), 0.05) 12%,
+            rgba(var(--accent1-rgb), 0.05) 21%,
+            rgba(var(--accent2-rgb), 0.05) 34%,
+            rgba(var(--accent3-rgb), 0.05) 45%,
+            rgba(var(--accent4-rgb), 0.05) 56%,
+            rgba(var(--accent5-rgb), 0.05) 67%,
+            rgba(var(--primary-rgb), 0.05) 78%
+        );
+    animation: shimmer 6s linear infinite;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Only keep the shimmer animation */
+@keyframes shimmer {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 0%; }
+}
