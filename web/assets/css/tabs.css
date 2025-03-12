@@ -1,0 +1,34 @@
+/* Tab styling for Vision for the Future section */
+.whitepaper-tab {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 500;
+    color: #a0a0a0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.whitepaper-tab:hover {
+    color: white;
+}
+
+.whitepaper-tab.active {
+    background: linear-gradient(90deg, 
+        var(--primary) 0%, 
+        var(--secondary) 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Hide all content sections by default */
+.whitepaper-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show active content section */
+.whitepaper-content.active {
+    display: block;
+    opacity: 1;
+}
