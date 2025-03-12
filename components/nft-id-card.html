@@ -1,0 +1,111 @@
+<!-- NFT ID Card Component -->
+<div class="relative w-full max-w-md mx-auto">
+    <div class="relative h-64 rounded-xl overflow-hidden nft-id-card">
+        <!-- Card Background -->
+        <div class="absolute inset-0 bg-[#C7FAD2]">
+            <!-- ID Card Texture Pattern -->
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h20v20H0V0zm10 17c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm0-1c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6z\' fill=\'%239BE3B3\' fill-opacity=\'0.2\' fill-rule=\'evenodd\'/%3E%3C/svg%3E');"></div>
+        </div>
+
+        <!-- Holographic Border -->
+        <div class="absolute inset-0 pointer-events-none">
+            <!-- Top Edge -->
+            <div class="absolute top-0 left-0 right-0 h-2" style="background: linear-gradient(90deg, 
+                transparent 0%,
+                rgba(255,215,0,0.5) 20%,
+                rgba(255,255,255,0.8) 40%,
+                rgba(0,255,255,0.5) 60%,
+                rgba(255,215,0,0.5) 80%,
+                transparent 100%);
+                animation: shimmer 2s linear infinite;"></div>
+            
+            <!-- Bottom Edge -->
+            <div class="absolute bottom-0 left-0 right-0 h-2" style="background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(255,215,0,0.5) 20%,
+                rgba(255,255,255,0.8) 40%,
+                rgba(0,255,255,0.5) 60%,
+                rgba(255,215,0,0.5) 80%,
+                transparent 100%);
+                animation: shimmer 2s linear infinite;"></div>
+            
+            <!-- Left Edge -->
+            <div class="absolute top-0 left-0 bottom-0 w-2" style="background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(255,215,0,0.5) 20%,
+                rgba(255,255,255,0.8) 40%,
+                rgba(0,255,255,0.5) 60%,
+                rgba(255,215,0,0.5) 80%,
+                transparent 100%);
+                animation: shimmerVertical 2s linear infinite;"></div>
+            
+            <!-- Right Edge -->
+            <div class="absolute top-0 right-0 bottom-0 w-2" style="background: linear-gradient(180deg,
+                transparent 0%,
+                rgba(255,215,0,0.5) 20%,
+                rgba(255,255,255,0.8) 40%,
+                rgba(0,255,255,0.5) 60%,
+                rgba(255,215,0,0.5) 80%,
+                transparent 100%);
+                animation: shimmerVertical 2s linear infinite;"></div>
+        </div>
+        
+        <!-- Passport Photo Area -->
+        <div class="absolute top-4 left-4 w-28 h-36 bg-white rounded-lg overflow-hidden border-2 border-[#85D4A4] shadow-lg">
+            <img src="/assets/images/placeholder-photo.jpg" alt="Иван Иванов" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Header with National Title -->
+        <div class="absolute top-4 left-36 right-4">
+            <div class="text-center">
+                <h3 class="text-sm font-bold text-[#00966E] mb-0.5">NATIONAL REPUBLIC</h3>
+                <h3 class="text-sm font-bold text-[#00966E]">OF BULGARIA</h3>
+            </div>
+        </div>
+
+        <!-- Logo in bottom right -->
+        <div class="absolute bottom-4 right-4">
+            <img src="/assets/images/coat-of-arms.png" alt="NOVA Bulgaria" class="h-12 w-auto">
+        </div>
+
+        <!-- Member Name -->
+        <div class="absolute top-44 left-4 right-4">
+            <h2 class="text-2xl font-bold text-[#00966E]">Иван Иванов</h2>
+            <div class="mt-2 text-sm text-[#00966E] font-medium break-all">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</div>
+            <div class="mt-2 flex justify-start">
+                <img src="/assets/images/qr-code.png" alt="NFT QR Code" class="h-16 w-16">
+            </div>
+        </div>
+
+        <!-- Citizenship Level -->
+        <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg">
+            Gold
+        </div>
+
+        <!-- Security Features -->
+        <div class="absolute bottom-4 left-4 flex items-center space-x-2">
+            <div class="w-16 h-4 bg-gradient-to-r from-[#00966E] to-[#85D4A4] rounded-sm"></div>
+        </div>
+    </div>
+</div>
+
+<style>
+@keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+@keyframes shimmerVertical {
+    0% { background-position: center -200%; }
+    100% { background-position: center 200%; }
+}
+
+.nft-id-card {
+    box-shadow: 0 8px 32px rgba(0, 150, 110, 0.2);
+}
+
+/* Add this to your existing styles */
+.holographic-border > div {
+    background-size: 200% 200%;
+}
+</style>

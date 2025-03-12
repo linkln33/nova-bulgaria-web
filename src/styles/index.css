@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #00966E;
+  --primary-rgb: 0, 150, 110;
+  --secondary: #004D38;
+  --secondary-rgb: 0, 77, 56;
+  --accent1: #00D6A1;
+  --accent1-rgb: 0, 214, 161;
+  --accent2: #00B081;
+  --accent2-rgb: 0, 176, 129;
+  --accent3: #007F5C;
+  --accent3-rgb: 0, 127, 92;
+  --accent4: #005A41;
+  --accent4-rgb: 0, 90, 65;
+  --accent5: #003528;
+  --accent5-rgb: 0, 53, 40;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(0, 26, 21, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(var(--primary-rgb), 0.2);
+}
+
+/* Holographic border and texture effects */
+.holographic-border {
+  position: absolute;
+  inset: 0;
+  border: 6px solid transparent;
+  border-radius: 0.75rem;
+  background: linear-gradient(90deg,
+      rgba(var(--secondary-rgb), 0.4),
+      rgba(var(--accent1-rgb), 0.4),
+      rgba(var(--accent3-rgb), 0.4),
+      rgba(var(--accent4-rgb), 0.4),
+      rgba(var(--accent5-rgb), 0.4),
+      rgba(var(--secondary-rgb), 0.4)
+  ) border-box;
+  -webkit-mask:
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(#fff 0 0);
+  mask:
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  /* Remove any animation or rotation */
+  animation: none !important;
+  transform: none !important;
+  z-index: 1;
+}
+
+.holographic-texture {
+  position: absolute;
+  inset: -6px;
+  background-image: 
+      repeating-linear-gradient(
+          105deg,
+          rgba(var(--primary-rgb), 0.05) 0%,
+          rgba(var(--secondary-rgb), 0.05) 12%,
+          rgba(var(--accent1-rgb), 0.05) 21%,
+          rgba(var(--accent2-rgb), 0.05) 34%,
+          rgba(var(--accent3-rgb), 0.05) 45%,
+          rgba(var(--accent4-rgb), 0.05) 56%,
+          rgba(var(--accent5-rgb), 0.05) 67%,
+          rgba(var(--primary-rgb), 0.05) 78%
+      );
+  animation: shimmer 6s linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Only keep the shimmer animation */
+@keyframes shimmer {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+/* Gradient text */
+.gradient-text {
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--primary), var(--secondary));
+}
+
+/* Neon glow effect */
+.neon-glow {
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+}

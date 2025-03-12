@@ -1,0 +1,90 @@
+/* SSI Info Card Styles */
+.ssi-info-card-container {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  height: 442px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.ssi-info-card {
+  position: absolute;
+  inset: 0;
+  background: #001a15;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 170, 0.2);
+  border-radius: 0.75rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Explicitly disable all animations */
+  animation: none !important;
+}
+
+/* Explicitly disable all animations for all child elements */
+.ssi-info-card * {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
+.ssi-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 170, 0.7), transparent);
+  /* No animation */
+  animation: none !important;
+}
+
+.ssi-info-card h2, .ssi-info-card h3 {
+  position: relative;
+  display: inline-block;
+}
+
+.ssi-info-card h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #00ffaa;
+}
+
+.ssi-info-card ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.ssi-info-card ul li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #00ffaa;
+  font-weight: bold;
+}
+
+.apply-section, .benefits-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Button glow effect - only on hover, not animated */
+.hover\:shadow-glow:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.7);
+  transition: box-shadow 0.3s ease !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ssi-info-card {
+    padding: 1.5rem;
+  }
+}

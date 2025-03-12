@@ -1,7 +1,13 @@
 [build]
+<<<<<<< HEAD
   base = "web/"
   publish = "."
   command = "# no build command needed"
+=======
+  base = "/"
+  publish = "dist"
+  command = "npm run build"
+>>>>>>> 75ebcdf8 (Initial commit of NOVA Bulgaria React app)
 
 [[redirects]]
   from = "/*"

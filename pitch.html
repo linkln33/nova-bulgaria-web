@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA Bulgaria - Pitch Deck</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --color-white: #ffffff;
+            --color-green: #00966E;
+            --color-red: #D62612;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-pattern {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300966E' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 4rem;
+            scroll-snap-align: start;
+        }
+
+        .slide-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="slide-container">
+        <!-- Title Slide -->
+        <div class="slide hero-pattern flex items-center justify-center">
+            <div class="text-center">
+                <div class="floating mb-8">
+                    <img src="assets/logo.svg" alt="NOVA Bulgaria" class="mx-auto w-64">
+                </div>
+                <h1 class="text-6xl font-bold mb-4">NOVA Bulgaria</h1>
+                <p class="text-2xl text-gray-600 mb-8">A Sovereign Digital Nation Powered by Blockchain and Contribution</p>
+                <div class="glass rounded-xl p-4 inline-block">
+                    <p class="text-gray-600">Version 1.1 • March 2025</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vision Slide -->
+        <div class="slide bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="glass rounded-2xl p-12">
+                    <h2 class="text-4xl font-bold mb-8">Vision</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <p class="text-xl text-gray-600 mb-6">
+                                NOVA BULGARIA is a revolutionary initiative to create a sovereign digital nation on its own blockchain, forked from Cosmos. The nation is governed by principles of meritocracy, Proof of Contribution (PoC), and decentralization.
+                            </p>
+                            <div class="glass rounded-xl p-6 mb-6">
+                                <h3 class="text-2xl font-semibold mb-4">Core Values</h3>
+                                <ul class="space-y-3">
+                                    <li class="flex items-center">
+                                        <span class="text-green-600 mr-3">⚖️</span>
+                                        Meritocratic Governance
+                                    </li>
+                                    <li class="flex items-center">
+                                        <span class="text-green-600 mr-3">🌟</span>
+                                        Proof of Contribution
+                                    </li>
+                                    <li class="flex items-center">
+                                        <span class="text-green-600 mr-3">🔗</span>
+                                        Decentralization
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="floating">
+                            <div class="glass-dark rounded-2xl p-8 text-white">
+                                <h3 class="text-2xl font-semibold mb-6">Bulgarian Lion (BGL)</h3>
+                                <p class="mb-6">Our national currency symbolizes strength, independence, and unity.</p>
+                                <div class="chart-container mb-8">
+                                    <canvas id="tokenomicsChart"></canvas>
+                                </div>
+                                <h4 class="text-xl font-semibold mb-4">100-Year Token Release Schedule</h4>
+                                <div class="chart-container" style="height: 200px;">
+                                    <canvas id="vestingChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technical Stack -->
+        <div class="slide bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">Blockchain Infrastructure</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="glass rounded-2xl p-8 hover:shadow-xl transition-all">
+                        <div class="text-4xl mb-6">⚡</div>
+                        <h3 class="text-2xl font-semibold mb-4">Cosmos SDK</h3>
+                        <p class="text-gray-600 mb-4">Custom-built blockchain forked from Cosmos for flexibility and interoperability.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li>• Modular Design</li>
+                            <li>• Cross-Chain Communication</li>
+                            <li>• High Performance</li>
+                        </ul>
+                    </div>
+                    <div class="glass rounded-2xl p-8 hover:shadow-xl transition-all">
+                        <div class="text-4xl mb-6">🔒</div>
+                        <h3 class="text-2xl font-semibold mb-4">Consensus</h3>
+                        <p class="text-gray-600 mb-4">Tendermint-based Byzantine Fault Tolerant consensus mechanism.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li>• Fast Finality</li>
+                            <li>• High Security</li>
+                            <li>• Energy Efficient</li>
+                        </ul>
+                    </div>
+                    <div class="glass rounded-2xl p-8 hover:shadow-xl transition-all">
+                        <div class="text-4xl mb-6">📜</div>
+                        <h3 class="text-2xl font-semibold mb-4">Smart Contracts</h3>
+                        <p class="text-gray-600 mb-4">CosmWasm for flexible and secure contract execution.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li>• Multi-Chain Support</li>
+                            <li>• Gas Efficient</li>
+                            <li>• WebAssembly Based</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Digital Identity -->
+        <div class="slide bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="glass rounded-2xl p-12">
+                    <h2 class="text-4xl font-bold mb-8">Digital Citizenship & NFT ID</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <div>
+                            <div class="space-y-6">
+                                <div class="glass rounded-xl p-6">
+                                    <h3 class="text-2xl font-semibold mb-4">Soulbound NFT Features</h3>
+                                    <ul class="space-y-3">
+                                        <li class="flex items-center">
+                                            <span class="text-green-600 mr-3">🔒</span>
+                                            Non-Transferable Identity
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-green-600 mr-3">📈</span>
+                                            Dynamic Metadata Updates
+                                        </li>
+                                        <li class="flex items-center">
+                                            <span class="text-green-600 mr-3">🎓</span>
+                                            Qualification Tracking
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="floating">
+                            <div class="glass-dark rounded-2xl p-8 text-white">
+                                <h3 class="text-2xl font-semibold mb-6">NFT ID Example</h3>
+                                <pre class="text-sm overflow-auto">
+{
+  "id": "nova_bulgaria_nft_id_001",
+  "name": "Maria Petrova",
+  "citizenship_status": "Active",
+  "rank": 3,
+  "reputation": 2100,
+  "qualifications": [
+    "Blockchain Law",
+    "Environmental Policy"
+  ]
+}
+                                </pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Governance -->
+        <div class="slide bg-gray-50">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-12">Governance & Legal System</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="glass rounded-2xl p-8">
+                        <div class="text-4xl mb-6">⚖️</div>
+                        <h3 class="text-2xl font-semibold mb-4">Direct Democracy</h3>
+                        <p class="text-gray-600 mb-4">Transparent and efficient decision-making through blockchain voting.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li>• On-chain Voting Records</li>
+                            <li>• Expert-Based System</li>
+                            <li>• Instant Law Activation</li>
+                        </ul>
+                    </div>
+                    <div class="glass rounded-2xl p-8">
+                        <div class="text-4xl mb-6">👨‍⚖️</div>
+                        <h3 class="text-2xl font-semibold mb-4">Judicial System</h3>
+                        <p class="text-gray-600 mb-4">Blockchain-based courts with transparent case processing.</p>
+                        <ul class="text-sm text-gray-500 space-y-2">
+                            <li>• Merit-Based Judge Selection</li>
+                            <li>• Automated Case Assignment</li>
+                            <li>• Public Record Keeping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Platform -->
+        <div class="slide bg-white">
+            <div class="max-w-6xl mx-auto">
+                <div class="glass rounded-2xl p-12">
+                    <h2 class="text-4xl font-bold mb-8">Social Platform & Ecosystem</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass rounded-xl p-6">
+                            <div class="text-4xl mb-6">📜</div>
+                            <h3 class="text-xl font-semibold mb-4">Governance Feed</h3>
+                            <p class="text-gray-600">Propose and vote on laws, participate in national decisions.</p>
+                        </div>
+                        <div class="glass rounded-xl p-6">
+                            <div class="text-4xl mb-6">🎓</div>
+                            <h3 class="text-xl font-semibold mb-4">Education Feed</h3>
+                            <p class="text-gray-600">Learn, earn qualifications, and upgrade your NFT ID.</p>
+                        </div>
+                        <div class="glass rounded-xl p-6">
+                            <div class="text-4xl mb-6">👥</div>
+                            <h3 class="text-xl font-semibold mb-4">Community Feed</h3>
+                            <p class="text-gray-600">Connect, collaborate, and contribute to social projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="slide hero-pattern">
+            <div class="max-w-6xl mx-auto">
+                <div class="glass rounded-2xl p-12 text-center">
+                    <h2 class="text-5xl font-bold mb-6">Join NOVA Bulgaria</h2>
+                    <p class="text-xl text-gray-600 mb-8">Be part of the world's first digital sovereign nation</p>
+                    <div class="flex justify-center space-x-4">
+                        <a href="#apply" class="bg-green-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                            Apply for Citizenship
+                        </a>
+                        <a href="whitepaper.html" class="glass px-8 py-3 rounded-lg text-gray-700 hover:bg-white transition-all">
+                            Read Whitepaper
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Vesting Schedule Chart
+        new Chart(document.getElementById('vestingChart'), {
+            type: 'bar',
+            data: {
+                labels: ['2025-2034', '2035-2044', '2045-2054', '2055-2064', '2065-2074', '2075-2084', '2085-2094', '2095-2104', '2105-2114', '2115-2124'],
+                datasets: [{
+                    label: 'Annual Token Release (Billion BGL)',
+                    data: [50, 40, 30, 20, 10, 10, 10, 10, 10, 10],
+                    backgroundColor: 'rgba(0, 150, 110, 0.6)',
+                    borderColor: 'rgba(0, 150, 110, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.parsed.x + ' Billion BGL per year';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: 'rgba(255, 255, 255, 0.7)',
+                            font: {
+                                size: 10
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Tokenomics Chart
+        new Chart(document.getElementById('tokenomicsChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Governance', 'Treasury', 'Community', 'Development'],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [
+                        'rgba(0, 150, 110, 0.8)',
+                        'rgba(255, 215, 0, 0.8)',
+                        'rgba(214, 38, 18, 0.8)',
+                        'rgba(75, 192, 192, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            color: 'white'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

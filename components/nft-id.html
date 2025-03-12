@@ -1,0 +1,85 @@
+<div class="relative w-full max-w-md mx-auto h-64 rounded-xl overflow-hidden transform hover:scale-105 transition-transform duration-300 nft-id-card">
+    <!-- Card Background -->
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, #00966E 0%, #004D38 100%); box-shadow: 0 10px 20px rgba(0,0,0,0.2)"></div>
+    
+    <!-- Holographic Effect -->
+    <div class="absolute inset-0 opacity-30 holographic-effect"></div>
+    
+    <!-- Logo -->
+    <img src="/assets/logo.svg" alt="NOVA Bulgaria" class="absolute top-4 left-4 h-10 w-auto">
+    
+    <!-- Citizenship Level -->
+    <div class="absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-bold citizenship-badge">
+        Gold
+    </div>
+    
+    <!-- Main Content -->
+    <div class="absolute bottom-0 w-full p-4 text-white">
+        <div class="grid grid-cols-2 gap-4">
+            <div>
+                <h2 class="text-xl font-bold mb-2">John Doe</h2>
+                <div class="space-y-1 text-sm">
+                    <p>ID: BG-2025-0001</p>
+                    <p>DOB: 1990-01-01</p>
+                    <p>Nationality: NOVA Bulgarian</p>
+                </div>
+            </div>
+            <div class="flex flex-col items-end justify-between">
+                <canvas id="qr-code" class="mb-2"></canvas>
+                <div class="text-xs text-right">
+                    <p>Issued: 2025-02-19</p>
+                    <p>Expires: 2030-02-19</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Security Features -->
+    <div class="absolute bottom-2 left-4 text-[8px] text-white/50">
+        0x1234...5678
+    </div>
+</div>
+
+<style>
+    .nft-id-card {
+        perspective: 1000px;
+    }
+    
+    .holographic-effect {
+        background: linear-gradient(45deg, 
+            transparent 0%, 
+            rgba(255,255,255,0.1) 45%, 
+            rgba(255,255,255,0.5) 50%, 
+            rgba(255,255,255,0.1) 55%, 
+            transparent 100%
+        );
+        background-size: 200% 200%;
+        animation: holographic 5s ease infinite;
+    }
+    
+    .citizenship-badge {
+        background: linear-gradient(45deg, #FFD700, #FFA500);
+        color: #000;
+    }
+    
+    @keyframes holographic {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const qrCode = document.getElementById('qr-code');
+    if (qrCode && window.QRCode) {
+        QRCode.toCanvas(qrCode, 'NOVA-ID-001', {
+            width: 80,
+            color: {
+                dark: '#000',
+                light: '#fff'
+            }
+        });
+    }
+});
+</script>

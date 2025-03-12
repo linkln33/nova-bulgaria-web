@@ -1,0 +1,194 @@
+<!-- NFT ID Demo Section -->
+<section class="py-16 relative overflow-hidden" id="nft-demo">
+    <div class="container mx-auto px-6">
+        <div class="glass rounded-3xl p-8 max-w-4xl mx-auto relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-gradient-to-br from-[var(--primary)] via-[var(--secondary)] to-[var(--accent4)]"></div>
+            <div class="relative z-10">
+                <h2 class="text-3xl font-bold mb-6 gradient-text">Self-sovereign identity (SSI)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- NFT Preview -->
+                    <div class="space-y-4" id="nft-preview">
+                        <!-- NFT preview will be dynamically inserted here -->
+                    </div>
+                    
+                    <!-- NFT Details & Controls -->
+                    <div class="space-y-4">
+                        <div class="glass rounded-xl p-4">
+                            <h3 class="text-lg font-semibold mb-2 text-[var(--primary)]">Connect Wallet</h3>
+                            <div class="space-y-2">
+                                <button id="connect-keplr" class="btn btn-primary w-full mb-2">
+                                    Connect with Keplr
+                                </button>
+                                <button id="connect-metamask" class="btn btn-secondary w-full">
+                                    Connect with MetaMask
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-xl p-4">
+                            <h3 class="text-lg font-semibold mb-2 text-[var(--accent4)]">Get Your Digital ID</h3>
+                            <p class="text-sm text-gray-300 mb-4">Take a short quiz to verify your understanding of NOVA Bulgaria and earn your Digital Citizenship NFT.</p>
+                            <button data-action="start-quiz" class="btn btn-accent w-full">Start Citizenship Quiz</button>
+                        </div>
+
+                        <div class="glass rounded-xl p-4" id="mint-controls" style="display: none;">
+                            <h3 class="text-lg font-semibold mb-2 text-[var(--primary)]">Mint Your Digital ID</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="text-sm text-gray-400">Quiz Score</label>
+                                    <input type="number" id="quiz-score" class="w-full bg-black bg-opacity-50 rounded px-3 py-2 mt-1" readonly>
+                                </div>
+                                <div>
+                                    <label class="text-sm text-gray-400">Achievements</label>
+                                    <div id="achievements-list" class="mt-1 flex flex-wrap gap-2">
+                                        <!-- Achievements will be dynamically added here -->
+                                    </div>
+                                </div>
+                                <button id="mint-nft" class="btn btn-primary w-full" disabled>
+                                    Mint Digital ID
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-xl p-4" id="user-nfts" style="display: none;">
+                            <h3 class="text-lg font-semibold mb-2 text-[var(--primary)]">Your Digital IDs</h3>
+                            <div id="nft-list" class="space-y-2">
+                                <!-- User's NFTs will be listed here -->
+                            </div>
+                        </div>
+
+                        <div class="glass rounded-xl p-4">
+                            <h3 class="text-lg font-semibold mb-2 text-[var(--accent4)]">Digital Identity NFT</h3>
+                            <div class="space-y-2">
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Name:</span>
+                                    <span class="font-semibold">Иван Иванов</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">ID:</span>
+                                    <span class="font-mono">BG-2025-0001</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">DOB:</span>
+                                    <span>1990-01-01</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Nationality:</span>
+                                    <span>NOVA Bulgarian</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Issued:</span>
+                                    <span>2025-02-19</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span class="text-gray-400">Expires:</span>
+                                    <span>2030-02-19</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const preview = document.getElementById('nft-preview');
+    const mintControls = document.getElementById('mint-controls');
+    const userNFTs = document.getElementById('user-nfts');
+    const connectKeplr = document.getElementById('connect-keplr');
+    const connectMetamask = document.getElementById('connect-metamask');
+    const mintNFT = document.getElementById('mint-nft');
+    const quizScore = document.getElementById('quiz-score');
+    const achievementsList = document.getElementById('achievements-list');
+    const nftList = document.getElementById('nft-list');
+
+    // Initialize NFT preview
+    const updatePreview = window.novaNFT.initNFTPreview(preview);
+
+    // Wallet connection handlers
+    connectKeplr.addEventListener('click', async () => {
+        try {
+            await window.novaNFT.connectWallet('keplr');
+            mintControls.style.display = 'block';
+            userNFTs.style.display = 'block';
+            connectKeplr.disabled = true;
+            connectMetamask.disabled = true;
+            loadUserNFTs();
+        } catch (error) {
+            alert(error.message);
+        }
+    });
+
+    connectMetamask.addEventListener('click', async () => {
+        try {
+            await window.novaNFT.connectWallet('metamask');
+            mintControls.style.display = 'block';
+            userNFTs.style.display = 'block';
+            connectKeplr.disabled = true;
+            connectMetamask.disabled = true;
+            loadUserNFTs();
+        } catch (error) {
+            alert(error.message);
+        }
+    });
+
+    // Mint NFT handler
+    mintNFT.addEventListener('click', async () => {
+        try {
+            const score = parseInt(quizScore.value);
+            const achievements = Array.from(achievementsList.children)
+                .map(el => el.textContent.trim());
+
+            await window.novaNFT.mintNFT(
+                'ipfs://...',  // Token URI will be generated during minting
+                score,
+                achievements,
+                1,  // Initial level
+                'citizen'  // Default badge type
+            );
+
+            alert('Digital ID minted successfully!');
+            loadUserNFTs();
+        } catch (error) {
+            alert(error.message);
+        }
+    });
+
+    // Load user's NFTs
+    async function loadUserNFTs() {
+        try {
+            const nfts = await window.novaNFT.getUserNFTs();
+            nftList.innerHTML = nfts.map(nft => `
+                <div class="flex items-center justify-between p-2 bg-black bg-opacity-20 rounded">
+                    <span class="text-sm">NOVA-ID #${nft.token_id}</span>
+                    <span class="text-xs text-gray-400">Level ${nft.level}</span>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error('Error loading NFTs:', error);
+        }
+    }
+
+    // Update quiz score when available
+    window.addEventListener('quizCompleted', (event) => {
+        const { score, achievements } = event.detail;
+        quizScore.value = score;
+        
+        // Update achievements list
+        achievementsList.innerHTML = achievements.map(achievement => `
+            <span class="px-2 py-1 rounded-full text-xs bg-[var(--primary)] bg-opacity-20">
+                ${achievement}
+            </span>
+        `).join('');
+
+        // Enable mint button
+        mintNFT.disabled = false;
+
+        // Update preview
+        updatePreview({ id: 'Preview', achievements });
+    });
+});
+</script>

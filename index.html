@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NOVA BULGARIA - A decentralized digital nation">
+    <meta name="keywords" content="NOVA BULGARIA, decentralized, digital nation, blockchain">
+    <meta name="author" content="NOVA BULGARIA Team">
+    <title>NOVA BULGARIA</title>
+    
+    <!-- Load styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="modern/styles/combined.css?v=20250311235800">
+    <link rel="stylesheet" href="modern/styles/responsive.css">    <link rel="stylesheet" href="assets/css/tabs.css">    <link rel="stylesheet" href="modern/styles/holographic.css">    <link rel="stylesheet" href="modern/styles/holographic-fix.css">    <link rel="stylesheet" href="assets/css/sector-buttons.css">
+    <link rel="stylesheet" href="modern/styles/responsive.css">    <link rel="stylesheet" href="assets/css/tabs.css">    <link rel="stylesheet" href="modern/styles/holographic.css">    <link rel="stylesheet" href="assets/css/sector-buttons.css">
+    <link rel="stylesheet" href="components/combined-hero/combined-hero.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="assets/js/tokenomics.js"></script>
+    <!-- <script src="assets/js/load-components.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+
+    <!-- Load other external dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@cosmjs/cosmwasm-stargate@0.31.1/dist/index.min.js"></script>
+    
+    <!-- Load application scripts -->
+    <script src="assets/js/typewriter.js"></script>
+    <script src="assets/js/nft.js"></script>
+    <script src="assets/js/tabs.js" defer></script>    <script src="assets/js/sector-buttons.js" defer></script>    <script src="assets/js/quiz.js"></script>
+        <script src="assets/js/charts.js" defer></script>
+<script src="assets/js/token-release-chart.js" defer></script>
+    
+    <!-- Load translations last -->
+    <script src="assets/translations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            closeMobileMenu.addEventListener('click', toggleMobileMenu);
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stats box hover effects
+            const whiteBox = document.querySelector('.stats-box-white');
+            const greenBox = document.querySelector('.stats-box-green');
+            const redBox = document.querySelector('.stats-box-red');
+            
+            whiteBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid white';
+            });
+            
+            whiteBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            greenBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid var(--primary)';
+            });
+            
+            greenBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            redBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid #ff3b30';
+            });
+            
+            redBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            // Roadmap tabs functionality
+            const roadmapTabs = document.querySelectorAll('.roadmap-tab');
+            const roadmapContents = document.querySelectorAll('.roadmap-content');
+            
+            if (roadmapTabs.length > 0) {
+                roadmapTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        roadmapTabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Hide all content sections
+                        roadmapContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Show the corresponding content section
+                        const phaseContent = document.getElementById(`${this.dataset.phase}-content`);
+                        if (phaseContent) {
+                            phaseContent.classList.add('active');
+                        }
+                    });
+                });
+            }
+//             
+// //             // Check if hero section loaded properly
+//             setTimeout(function() {
+//                 const heroContainer = document.getElementById('hero-intro-container');
+//                 if (heroContainer && heroContainer.innerHTML.trim() === '') {
+//                     console.log('Hero section failed to load via component loader, loading directly...');
+//                     fetch('/components/combined-hero/combined-hero.html')
+//                         .then(response => response.text())
+//                         .then(html => {
+//                             heroContainer.innerHTML = html;
+//                             // Initialize typewriter if it exists
+//                             if (typeof initTypewriter === 'function') {
+//                                 initTypewriter();
+//                             }
+//                             // Initialize hero tabs
+//                             const tabBtns = heroContainer.querySelectorAll('.tab-btn');
+//                             const tabPanes = heroContainer.querySelectorAll('.tab-pane');
+//                             
+//                             tabBtns.forEach(btn => {
+//                                 btn.addEventListener('click', function() {
+//                                     const tabId = this.getAttribute('data-tab');
+//                                     
+//                                     // Remove active class from all buttons and panes
+//                                     tabBtns.forEach(b => b.classList.remove('active'));
+//                                     tabPanes.forEach(p => p.classList.remove('active'));
+//                                     
+//                                     // Add active class to current button and pane
+//                                     this.classList.add('active');
+//                                     document.getElementById(`${tabId}-tab`).classList.add('active');
+//                                 });
+//                             });
+//                         })
+//                         .catch(error => {
+//                             console.error('Error loading hero section directly:', error);
+//                         });
+// //                 }
+            }, 1000); // Check after 1 second
+        });
+    </script>
+    
+    <style>
+        :root {
+            --primary: #00FF9D;
+            --primary-rgb: 0, 255, 157;
+            --secondary: #00FFFF;
+            --accent1: #FF00FF;
+            --accent2: #7FFF00;
+            --accent3: #FFFF00;
+            --accent4: #00FFFF;
+            --accent5: #FF1493;
+            
+            /* RGB values for animations */
+            --secondary-rgb: 0, 255, 255;
+            --accent1-rgb: 255, 0, 255;
+            --accent2-rgb: 127, 255, 0;
+            --accent3-rgb: 255, 255, 0;
+            --accent4-rgb: 0, 255, 255;
+            --accent5-rgb: 255, 20, 147;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #000000;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        .nav-blur {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, 
+                rgba(0, 255, 157, 0.1), 
+                rgba(77, 238, 234, 0.1), 
+                transparent 60%);
+        }
+
+        .neon-glow {
+            transition: all 0.3s ease;
+        }
+
+        .neon-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+        }
+
+        .chart-container {
+            min-height: 250px;
+            max-height: 400px;
+            position: relative;
+        }
+        @media (min-width: 640px) {
+            .chart-container {
+                min-height: 300px;
+            }
+        }
+
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Animated gradient border */
+        @keyframes borderAnimation {
+            0% {
+                border-image-source: linear-gradient(to right, var(--primary), var(--secondary));
+            }
+            25% {
+                border-image-source: linear-gradient(to bottom, var(--secondary), var(--accent1));
+            }
+            50% {
+                border-image-source: linear-gradient(to left, var(--accent1), var(--accent2));
+            }
+            75% {
+                border-image-source: linear-gradient(to top, var(--accent2), var(--primary));
+            }
+            100% {
+                border-image-source: linear-gradient(to right, var(--primary), var(--secondary));
+            }
+        }
+
+        .animated-border {
+            border: 2px solid;
+            border-image-slice: 1;
+            animation: borderAnimation 8s linear infinite;
+        }
+
+        /* Roadmap styles */
+        .roadmap-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            margin: 0 0.5rem;
+        }
+
+        .roadmap-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .roadmap-tab.active {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .roadmap-content {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .roadmap-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Whitepaper tab styles */
+        .whitepaper-tab {
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: transparent;
+            margin: 0 0.25rem;
+            color: #fff;
+        }
+
+        .whitepaper-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .whitepaper-tab.active {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .whitepaper-content {
+            display: none;
+        }
+
+        .whitepaper-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: var(--primary);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Tab styling */
+        .tab-btn.active {
+            background-color: rgba(var(--primary-rgb), 0.2);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .tab-pane {
+            display: none;
+        }
+        
+        .tab-pane.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Combined Hero and Introduction Section -->
+    <section id="hero-intro" class="min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden py-16 pt-36">
+        <!-- Background elements -->
+        <div class="absolute inset-0 bg-[url('/assets/images/hero-bg.jpg')] bg-cover bg-center opacity-10"></div>
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute top-10 left-10 w-64 h-64 bg-[var(--primary)] rounded-full filter blur-[100px] opacity-20"></div>
+            <div class="absolute bottom-10 right-10 w-80 h-80 bg-[var(--accent1)] rounded-full filter blur-[120px] opacity-20"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Hero Header -->
+            <div class="text-center mb-12">
+                <div class="flex justify-center mb-6">
+                    <img src="assets/images/logo.png" alt="NOVA Bulgaria Logo" class="w-[120px] h-[120px] object-contain">
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]" data-translate="heroTitle">
+                    NOVA BULGARIA
+                </h1>
+                <div class="flex flex-col items-center mb-12">
+                    <p class="text-xl md:text-2xl text-gray-300 flex items-center justify-center gap-3 mb-4" data-translate="heroSubtitle">
+                        It's time! Awaken the Lions
+                        <span class="inline-flex h-5 overflow-hidden rounded shadow-sm ml-2">
+                            <span class="w-5 h-5 bg-white"></span>
+                            <span class="w-5 h-5 bg-green-600"></span>
+                            <span class="w-5 h-5 bg-red-600"></span>
+                        </span>
+                    </p>
+                </div>
+                <div class="text-2xl md:text-3xl text-[var(--primary)] font-semibold mb-8">
+                    <span id="typewriter"></span>
+                </div>
+            </div>
+            
+            <!-- Overview Section -->
+            <div class="glass p-8 rounded-xl neon-glow mb-12">
+                <h2 class="text-3xl font-bold text-center text-[var(--primary)] mb-6">The Need for NOVA BULGARIA</h2>
+                <p class="text-xl text-gray-300 text-center max-w-4xl mx-auto mb-8">
+                    Bulgaria stands at a critical crossroads, facing political corruption, environmental degradation, and a youth exodus.
+                </p>
+                
+                <div class="flex flex-col md:flex-row">
+                    <!-- Vertical Tab navigation -->
+                    <div class="md:w-1/4 mb-6 md:mb-0 md:border-r border-gray-700 md:pr-4">
+                        <div class="flex flex-col space-y-6">
+                            <!-- Introduction Tabs Section -->
+                            <div>
+                                <div class="flex flex-col space-y-2">
+                                    <button class="tab-btn active px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="crisis">
+                                        Political Crisis
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="environment">
+                                        Environmental Crisis
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="youth">
+                                        Youth Crisis
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="solution">
+                                        The Solution
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="vision">
+                                        Vision
+                                    </button>
+                                    <button class="tab-btn px-4 py-3 rounded-lg text-left text-white hover:bg-[var(--primary)] hover:bg-opacity-20 transition-all" data-tab="blockchain">
+                                        Why Blockchain
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tab content -->
+                    <div class="md:w-3/4 md:pl-6">
+                        <!-- Introduction Tab Content -->
+                        <div class="tab-content">
+                            <!-- Political Crisis Tab -->
+                            <div class="tab-pane active" id="crisis-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">The Current Political Crisis: Corruption, Tyranny, and National Collapse</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Bulgaria stands at the edge of destruction, gripped by a ruthless and corrupt regime that has held power for decades. The country is controlled by an oligarchic mafia, led by political figures such as Boyko Borissov and Delyan Peevski, who have systematically looted the nation's resources, silenced opposition, and driven millions into poverty. Their control extends deep into every institution—the government, judiciary, media, and even law enforcement—turning Bulgaria into a puppet state where laws serve only the interests of the corrupt elite.</p>
+                                    
+                                    <p class="text-gray-300">For years, these political criminals have engaged in mass financial theft, suppression of free speech, and the destruction of democratic values. Instead of serving the people, they have orchestrated an economic genocide, forcing millions of Bulgarians to flee the country in search of a better future. Those who remain are trapped in a system of oppression, where poverty, lack of healthcare, and unchecked police brutality are the norm.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">The Imminent Collapse of Bulgaria</h4>
+                                        <p class="text-gray-300">The current state of Bulgaria is unsustainable. With a rapidly declining population, widespread unemployment, and a complete lack of institutional trust, the country is on the verge of economic and social collapse. If the corruption continues, Bulgaria will cease to function as a sovereign state and will be left in ruins, controlled by foreign interests and criminal networks.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Environmental Crisis Tab -->
+                            <div class="tab-pane" id="environment-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Environmental Crisis: Destruction of Bulgaria's Natural Heritage</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Bulgaria's once pristine environment is being systematically destroyed by corrupt officials who sell off protected lands to private interests. Ancient forests are being clear-cut, rivers polluted with industrial waste, and protected areas developed for commercial gain. The government has failed to implement effective environmental regulations, resulting in some of the worst air quality in Europe and widespread environmental degradation.</p>
+                                    
+                                    <p class="text-gray-300">The Black Sea coast, once a natural treasure, has been overdeveloped with illegal construction projects that destroy fragile ecosystems. Mining operations continue to contaminate soil and water sources, while waste management remains inadequate, leading to illegal dumping and pollution. Climate change further exacerbates these issues, with more frequent droughts, floods, and extreme weather events affecting agriculture and water supplies.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Environmental Consequences</h4>
+                                        <p class="text-gray-300">The environmental crisis has severe consequences for public health, with increased rates of respiratory diseases, cancer, and other illnesses linked to pollution. Agricultural productivity is declining due to soil degradation and water scarcity, threatening food security. Bulgaria's biodiversity is rapidly diminishing, with many endemic species facing extinction. Without immediate action, the country's natural resources will be depleted beyond recovery, leaving a barren landscape for future generations.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Youth Crisis Tab -->
+                            <div class="tab-pane" id="youth-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Youth Crisis: A Generation Without Hope</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Bulgaria is experiencing a catastrophic youth exodus, with an estimated 1.5 million young Bulgarians having left the country in the past three decades. This brain drain represents the loss of the country's most valuable resource—its future generation. Young people are fleeing due to a lack of economic opportunities, poor educational systems, and a pervasive sense of hopelessness about Bulgaria's future.</p>
+                                    
+                                    <p class="text-gray-300">Those who remain face unemployment, low wages, and a system that rewards corruption over merit. The education system fails to prepare students for the modern economy, while nepotism and bribery often determine career advancement rather than skill or hard work. This creates a vicious cycle where talented youth see no future in their homeland and choose to build their lives elsewhere.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Demographic Collapse</h4>
+                                        <p class="text-gray-300">Bulgaria's population has decreased from nearly 9 million in 1989 to less than 7 million today, with projections showing a further decline to under 5 million by 2050 if current trends continue. This demographic crisis threatens the very existence of the Bulgarian nation, as villages empty, schools close, and entire regions become depopulated. Without its youth, Bulgaria cannot sustain its economy, culture, or national identity.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- The Solution Tab -->
+                            <div class="tab-pane" id="solution-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">The Solution: A Digital Rebirth</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Traditional solutions have failed Bulgaria. Decades of protests, elections, and attempted reforms have not broken the grip of corruption or reversed the country's decline. A radical new approach is needed—one that bypasses the corrupt system entirely and empowers citizens directly.</p>
+                                    
+                                    <p class="text-gray-300">NOVA BULGARIA represents this revolutionary solution: a sovereign digital nation built on blockchain technology that creates a parallel governance structure. This digital nation is not bound by geographical borders but instead unites Bulgarians worldwide through shared values, culture, and a commitment to building a better future.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Key Elements of the Solution</h4>
+                                        <ul class="space-y-2 text-gray-300">
+                                            <li>• <span class="font-semibold">Digital Citizenship:</span> A secure, blockchain-based identity system that gives every Bulgarian a voice in governance</li>
+                                            <li>• <span class="font-semibold">Decentralized Governance:</span> Direct democratic decision-making that eliminates corrupt intermediaries</li>
+                                            <li>• <span class="font-semibold">Tokenized Economy:</span> A fair economic system that rewards contribution and creates opportunities</li>
+                                            <li>• <span class="font-semibold">Global Community:</span> Uniting the Bulgarian diaspora with those still in the homeland</li>
+                                            <li>• <span class="font-semibold">Transparent Operations:</span> All decisions and financial transactions visible on the blockchain</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Vision Tab -->
+                            <div class="tab-pane" id="vision-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Our Vision: A New Bulgarian Renaissance</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">NOVA BULGARIA envisions a digital renaissance that revitalizes Bulgarian society, culture, and economy. We aim to create a thriving, meritocratic community where talent is rewarded, innovation flourishes, and decisions are made collectively for the common good.</p>
+                                    
+                                    <p class="text-gray-300">Our digital nation will serve as a model for how blockchain technology can transform governance and create more just, efficient, and participatory systems. By demonstrating success at scale, we will inspire similar movements globally while preserving and promoting Bulgaria's unique cultural heritage.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Long-term Vision</h4>
+                                        <p class="text-gray-300">In the long term, NOVA BULGARIA will evolve from a parallel digital structure to a recognized sovereign entity with diplomatic relations, economic partnerships, and cultural exchanges. Our digital nation will eventually acquire physical territories through legal means, creating innovation hubs, sustainable communities, and cultural centers that embody our values and showcase Bulgarian talent to the world.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Why Blockchain Tab -->
+                            <div class="tab-pane" id="blockchain-tab">
+                                <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">Why Blockchain Technology?</h3>
+                                
+                                <div class="space-y-6">
+                                    <p class="text-gray-300">Blockchain technology provides the perfect foundation for NOVA BULGARIA because it enables trustless, transparent, and tamper-proof systems—precisely what is needed to overcome Bulgaria's crisis of corruption and institutional failure.</p>
+                                    
+                                    <div class="glass p-6 rounded-lg mt-8">
+                                        <h4 class="text-xl font-semibold text-[var(--accent1)] mb-3">Blockchain Advantages</h4>
+                                        <ul class="space-y-2 text-gray-300">
+                                            <li>• <span class="font-semibold">Immutability:</span> Once recorded, information cannot be altered, preventing fraud and manipulation</li>
+                                            <li>• <span class="font-semibold">Transparency:</span> All transactions and decisions are visible to all participants</li>
+                                            <li>• <span class="font-semibold">Decentralization:</span> No single point of failure or control, preventing power concentration</li>
+                                            <li>• <span class="font-semibold">Smart Contracts:</span> Automated execution of agreements without intermediaries</li>
+                                            <li>• <span class="font-semibold">Tokenization:</span> Digital representation of value that enables new economic models</li>
+                                            <li>• <span class="font-semibold">Global Accessibility:</span> Participation from anywhere with internet access</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <p class="text-gray-300">By building on the Cosmos SDK, NOVA BULGARIA leverages a proven, scalable blockchain framework that enables interoperability with other blockchain networks while maintaining sovereignty over our governance and economic systems.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Information Section -->
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-center text-[var(--primary)] mb-8">Project Overview</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- NOVA Bulgaria Concept Card -->
+                    <div class="glass p-8 rounded-xl neon-glow">
+                        <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">The NOVA Bulgaria Concept</h3>
+                        
+                        <div class="space-y-6">
+                            <p class="text-gray-300">NOVA BULGARIA is a sovereign digital nation blockchain project built on Cosmos SDK. It represents a revolutionary approach to rebuilding a nation through decentralized technology and direct democracy.</p>
+                            
+                            <p class="text-gray-300">The project is powered by the Bulgarian Lion (BGL) token with a total supply of 1 trillion tokens distributed over 100 years, supporting both core traditional sectors and innovative new sectors through a meritocratic governance system.</p>
+                            
+                            <p class="text-gray-300">At the heart of NOVA BULGARIA is the Proof of Contribution (PoC) consensus mechanism, which rewards citizens based on their valuable contributions to the nation rather than just financial stake or computing power.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- National NFT ID System Card -->
+                    <div class="glass p-8 rounded-xl neon-glow">
+                        <h3 class="text-2xl font-bold text-[var(--primary)] mb-4">National NFT ID System</h3>
+                        
+                        <div class="space-y-6">
+                            <p class="text-gray-300">The foundation of citizenship in NOVA BULGARIA is our innovative National NFT ID System, which uses soulbound NFTs that cannot be transferred or sold.</p>
+                            
+                            <p class="text-gray-300">Each citizen receives a unique digital identity after passing a foundational knowledge exam covering Bulgarian history, language, and culture. This NFT ID serves as proof of citizenship and enables participation in governance.</p>
+                            
+                            <p class="text-gray-300">The system provides self-sovereign identity (SSI), giving users complete control over their personal information while enabling secure verification for national services and governance participation.</p>
+                            
+                            <p class="text-gray-300">Citizens with NFT IDs can vote on proposals, contribute to projects, earn token rewards, and access all community resources and benefits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fixed Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold gradient-text">NOVA BULGARIA</a>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#introduction" class="nav-link" data-translate="navIntroduction">Introduction</a>
+                    <a href="#nft-id" class="nav-link" data-translate="navNFT">NFT ID</a>
+                    <a href="#tokenomics" class="nav-link" data-translate="navTokenomics">Tokenomics</a>
+                    <a href="#roadmap" class="nav-link" data-translate="navRoadmap">Roadmap</a>
+                    <a href="#whitepaper" class="nav-link" data-translate="navWhitepaper">Whitepaper</a>
+                </div>
+
+                <!-- Mobile Menu Panel -->
+                <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden">
+                    <div class="flex flex-col items-center justify-center h-full space-y-8">
+                        <a href="#introduction" class="text-2xl nav-link" data-translate="navIntroduction">Introduction</a>
+                        <a href="#nft-id" class="text-2xl nav-link" data-translate="navNFT">NFT ID</a>
+                        <a href="#tokenomics" class="text-2xl nav-link" data-translate="navTokenomics">Tokenomics</a>
+                        <a href="#roadmap" class="text-2xl nav-link" data-translate="navRoadmap">Roadmap</a>
+                        <a href="#whitepaper" class="text-2xl nav-link" data-translate="navWhitepaper">Whitepaper</a>
+                        <button id="closeMobileMenu" class="absolute top-6 right-6">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobileMenuBtn" class="text-white p-2">
+                        <svg class="w-6 h-[1.125em]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <div class="relative">
+                        <select id="languageSelect" class="glass pl-2 pr-8 py-2 rounded-lg appearance-none cursor-pointer min-w-[100px] text-left" onchange="updateContent(this.value)">
+                            <option value="en" class="text-left">🇬🇧 EN</option>
+                            <option value="bg" class="text-left">🇧🇬 BG</option>
+                        </select>
+                    </div>
+                    <button class="hidden md:block bg-[var(--primary)] text-black px-6 py-2 rounded-lg hover:bg-[var(--secondary)] transition-colors" data-translate="connectWallet">
+                        Connect Wallet
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- NFT ID Section -->
+    <section id="nft-id" class="pt-4 pb-12 relative">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-stretch relative z-20">
+                <!-- NFT ID Card Container -->
+                <div class="flex justify-center h-[300px] sm:h-[442px]">
+                    <!-- Simple NFT ID Card -->
+                    <div class="w-full max-w-[700px] h-full glass rounded-xl relative shadow-2xl overflow-hidden" style="background: #001a15;">
+                        <!-- Holographic Border -->
+                        <div class="holographic-border">
+                            <div class="holographic-texture"></div>
+                        </div>
+
+                        <!-- Card Inner Content -->
+                        <div class="p-6">
+                            <!-- Photo Area -->
+                            <div class="absolute top-[5%] left-[5%] w-[25%] h-[45%] glass rounded-lg border-2 border-[var(--primary)] flex items-center justify-center">
+                                <svg class="w-3/4 h-3/4 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Header -->
+                            <div class="absolute top-[5%] left-[32%] right-[5%] flex flex-col items-end">
+                                <div class="flex items-center">
+                                    <!-- Title -->
+                                    <h3 class="text-base sm:text-lg md:text-xl font-bold text-[var(--primary)]">NATIONAL REPUBLIC OF BULGARIA</h3>
+                                    <!-- Bulgarian Flag -->
+                                    <div class="flex flex-col ml-2 h-[1.25em] justify-center">
+                                        <div class="w-8 h-[0.425em] bg-white"></div>
+                                        <div class="w-8 h-[0.425em] bg-green-600"></div>
+                                        <div class="w-8 h-[0.425em] bg-red-600"></div>
+                                    </div>
+                                </div>
+                                <!-- Subtitle -->
+                                <p class="text-xs italic text-gray-300 mt-1 text-center">Self-sovereign identity SSID</p>
+                            </div>
+
+                            <!-- Additional Features -->
+                            <div class="absolute top-[25%] left-[32%] right-[5%] flex flex-row gap-2 justify-center">
+                                <!-- Social Score -->
+                                <div class="glass p-2 rounded-lg border border-[var(--primary)] text-center" style="width: 150px;">
+                                    <div class="text-xs text-gray-300">Social Score</div>
+                                    <div class="text-lg font-bold text-[var(--primary)]">785</div>
+                                </div>
+                                <!-- Rank -->
+                                <div class="glass p-2 rounded-lg border border-[var(--primary)] text-center" style="width: 150px;">
+                                    <div class="text-xs text-gray-300">Rank</div>
+                                    <div class="text-lg font-bold text-[var(--primary)]">Citizen</div>
+                                </div>
+                                <!-- Expertise -->
+                                <div class="glass p-2 rounded-lg border border-[var(--primary)] text-center" style="width: 150px;">
+                                    <div class="text-xs text-gray-300">Expertise</div>
+                                    <div class="text-lg font-bold text-[var(--primary)]">Technology</div>
+                                </div>
+                            </div>
+
+                            <!-- Name -->
+                            <div class="absolute top-[53%] left-[5%]">
+                                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[var(--primary)]">Иван Иванов</h2>
+                                <!-- ID Number under name -->
+                                <div class="mt-2 sm:mt-4 text-base sm:text-xl text-[var(--primary)] font-medium"></div>
+                                <!-- Wallet Address -->
+                                <div class="mt-1 sm:mt-2 text-xs sm:text-sm text-[var(--primary)] font-mono break-all">0x742d35Cc6634C0532925a3b844Bc454e4438f44e</div>
+                            </div>
+
+                            <!-- QR Code -->
+                            <div class="absolute bottom-[5%] left-[5%] w-[15%] aspect-square glass rounded-lg border border-[var(--primary)] flex items-center justify-center">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=0x742d35Cc6634C0532925a3b844Bc454e4438f44e" alt="Wallet QR Code" class="w-[80%] h-[80%]">
+                            </div>
+
+                            <!-- Logo -->
+                            <div class="absolute bottom-6 right-6">
+                                <img src="assets/images/logo.png" alt="NOVA Bulgaria Logo" class="w-16 h-16 object-contain">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Info Section -->
+                <div class="glass rounded-2xl p-8 h-auto lg:h-[442px] flex flex-col relative z-20 mb-2 lg:mb-0">
+                    <h3 class="text-2xl font-semibold text-[var(--primary)] mb-4" data-translate="ssiTitle">Self-sovereign identity (SSI)</h3>
+                    <p class="text-gray-300 text-base mb-6" data-translate="ssiIntro">Self-sovereign identity (SSI) is a form of digital identity that the user has complete control over. This means that the user decides who sees what information and when.</p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1">
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)] mb-2" data-translate="howToApply">How to Apply</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li data-translate="completeTest">Complete Knowledge Test</li>
+                                <li data-translate="submitDocs">Submit Documentation</li>
+                                <li data-translate="passVerification">Pass Identity Verification</li>
+                            </ul>
+                            <div class="mt-6">
+                                <p class="text-sm text-gray-400 mb-2" data-translate="startApplication">Start your application process</p>
+                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--primary)] hover:bg-opacity-90 transition-all text-black" data-translate="applyNow">APPLY NOW</button>
+                            </div>
+                        </div>
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold text-[var(--primary)] mb-2" data-translate="benefits">Benefits</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li data-translate="governanceRights">Governance Rights</li>
+                                <li data-translate="tokenRewards">Token Rewards</li>
+                                <li data-translate="communityAccess">Community Access</li>
+                            </ul>
+                            <div class="mt-6">
+                                <p class="text-sm text-gray-400 mb-2" data-translate="readWhitepaper">Read our detailed whitepaper</p>
+                                <button class="btn w-full text-center py-2 rounded-lg bg-[var(--secondary)] hover:bg-opacity-90 transition-all text-black" data-translate="readMore">READ MORE</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combined Stats and Funding Section -->
+    <section class="py-12 relative z-10 mt-8 lg:mt-24">
+        <div class="container mx-auto px-6">
+            <div class="glass rounded-2xl p-6 sm:p-12 text-center neon-glow">
+                <h2 class="text-xl sm:text-2xl md:text-5xl font-bold gradient-text text-center" style="padding-bottom: 0.3em;" data-translate="fundingTitle">Lionheart Fund: Igniting Bulgaria's Digital Rebirth</h2>
+                <p class="text-base sm:text-lg md:text-2xl text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto text-center">
+                    A Nation of Lions Shall Never Kneel - Power ON
+                </p>
+                
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div class="glass p-6 rounded-xl text-center stats-box-white" style="border: 2px solid transparent; transition: all 0.3s ease;">
+                        <h3 class="text-lg mb-2" style="color: white;" data-translate="statsBulgariansWorldwide">Total Bulgarians Worldwide</h3>
+                        <p style="color: white !important; font-size: 2.5rem !important; font-weight: 700 !important; -webkit-text-fill-color: white !important; background: none !important; background-clip: initial !important; -webkit-background-clip: initial !important;">Over 33 Million</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl text-center stats-box-green" style="border: 2px solid transparent; transition: all 0.3s ease;">
+                        <h3 class="text-lg mb-2" style="color: white;" data-translate="statsJoinedNova">Joined Nova Bulgaria</h3>
+                        <p style="color: white !important; font-size: 2.5rem !important; font-weight: 700 !important; -webkit-text-fill-color: white !important; background: none !important; background-clip: initial !important; -webkit-background-clip: initial !important;">10,000+</p>
+                    </div>
+                    <div class="glass p-6 rounded-xl text-center stats-box-red" style="border: 2px solid transparent; transition: all 0.3s ease;">
+                        <h3 class="text-lg mb-2" style="color: white;" data-translate="statsContributed">Total Contributed</h3>
+                        <p style="color: white !important; font-size: 2.5rem !important; font-weight: 700 !important; -webkit-text-fill-color: white !important; background: none !important; background-clip: initial !important; -webkit-background-clip: initial !important;">$578,000</p>
+                    </div>
+                </div>
+                
+                <!-- Funding Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2" data-translate="seedRoundDetails">Seed Round Details</h4>
+                        <ul class="text-gray-300 text-left space-y-2">
+                            <li>• <span data-translate="tokenAmount">20 Million BGL Tokens Available</span></li>
+                            <li>• <span data-translate="softCap">Soft Cap: $2 Million</span></li>
+                            <li>• <span data-translate="hardCap">Hard Cap: $20 Million</span></li>
+                        </ul>
+                    </div>
+                    <div class="glass p-6 rounded-xl">
+                        <h4 class="text-lg font-semibold text-[var(--secondary)] mb-2" data-translate="stakingBenefits">Early Staking Benefits</h4>
+                        <ul class="text-gray-300 text-left space-y-2">
+                            <li>• <span data-translate="earlyAccess">First Access to BGL Token Staking</span></li>
+                            <li>• <span data-translate="maxRewards">Maximum Staking Rewards</span></li>
+                            <li>• <span data-translate="foundingMember">Founding Member Status</span></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar Container -->
+                <div class="relative h-8 glass rounded-full mb-4 overflow-hidden">
+                    <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[var(--primary)] to-[var(--secondary)]" style="width: 28.9%;" id="fundingProgress">
+                        <div class="absolute inset-0 bg-sparkle"></div>
+                    </div>
+                </div>
+                
+                <!-- Progress Stats -->
+                <div class="flex justify-between text-lg mb-8">
+                    <span class="text-[var(--primary)]">$578,000 Raised</span>
+                    <span class="text-[var(--secondary)]">$2,000,000 Soft Cap</span>
+                </div>
+
+                <!-- Call to Action Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                    <a href="#whitepaper" class="glass p-6 rounded-xl hover:border-[var(--primary)] hover:border transition-all duration-300 group">
+                        <h4 class="text-lg font-semibold text-[var(--primary)] mb-2" data-translate="readWhitepaperTitle">Read Our Whitepaper</h4>
+                        <p class="text-sm text-gray-300" data-translate="readWhitepaperDesc">Learn about our vision, technology, and governance model</p>
+                    </a>
+                    <a href="#contribute" class="glass p-6 rounded-xl hover:border-[var(--secondary)] hover:border transition-all duration-300 group">
+                        <h4 class="text-lg font-semibold text-[var(--secondary)] mb-2" data-translate="contributeTitle">Contribute Now</h4>
+                        <p class="text-sm text-gray-300" data-translate="contributeDesc">Become a founding member and secure your BGL tokens</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section id="tokenomics" class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center gradient-text" data-translate="tokenomicsTitle">Tokenomics (100-Year Model)</h2>
+            
+            <!-- Token Charts Section -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-8 mb-8 sm:mb-12">
+                <!-- Token Distribution Chart -->
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenDistributionTitle">Token Distribution</h3>
+                    <div class="chart-container">
+                        <canvas id="tokenDistribution"></canvas>
+                    </div>
+                    <div class="mt-6 grid grid-cols-2 gap-4">
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Initial Supply</h4>
+                            <p class="text-gray-300" data-translate="initialSupplyValue">1 Trillion BGL</p>
+                        </div>
+                        <div class="glass p-4 rounded-lg">
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Reserve Fund</h4>
+                            <p class="text-gray-300" data-translate="maxSupplyValue">200B BGL (20%)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Token Allocation Chart -->
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="tokenAllocationTitle">Fund Allocation</h3>
+                    <div>
+                        <div class="glass p-4 rounded-lg">
+                            <p class="text-gray-300">Nova Bulgaria starts with the release of 1 million BGL in the first year, gradually increasing over the next 100 years to ensure controlled growth. The total supply of 1 trillion BGL is securely held in a smart contract and released in small portions based on economic demand and community participation. Instead of traditional mining or pre-allocated distribution, funds are unlocked through a Proof of Contribution (PoC) system, meaning individuals receive BGL based on their contributions to the nation's development—such as building projects, innovation, governance, or social services. As the economy grows and more people participate, the release rate gradually increases, ensuring there is always enough supply to support expansion while preventing inflation. This mechanism creates a self-sustaining economic model, where currency distribution is tied to real-world value and progress rather than speculation or centralized control. Over time, this ensures fairness, long-term stability, and an economy that adapts naturally to the needs of its citizens.</p>
+                        </div>
+                    </div>
+                    <div id="sector-details" class="glass p-4 rounded-lg mt-6 hidden">
+                        <h4 id="sector-title" class="text-lg font-semibold text-[var(--primary)] mb-2">Sector Details</h4>
+                        <p id="sector-description" class="text-gray-300">Click on a sector to view details.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Token Release Schedule -->
+            <div class="glass p-8 rounded-xl neon-glow mb-8">
+                <h3 class="text-2xl font-semibold mb-6 text-[var(--primary)]" data-translate="releaseScheduleTitle">Token Release Schedule</h3>
+                <div class="mb-6" style="height: 300px;">
+                    <canvas id="tokenReleaseChart"></canvas>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="glass p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Foundation Phase</h4>
+                        <p class="text-gray-300 mb-1">2025-2044: 0.0001% to 0.001% annual</p>
+                        <p class="text-gray-400 text-sm">Starting with 1M BGL in Year 1, gradually increasing to 10M BGL annually by Year 20</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Development Phase</h4>
+                        <p class="text-gray-300 mb-1">2045-2084: 0.001% to 0.01% annual</p>
+                        <p class="text-gray-400 text-sm">Releasing 10M to 100M BGL annually during Years 21-60, supporting ecosystem growth</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Expansion Phase</h4>
+                        <p class="text-gray-300 mb-1">2085-2114: 0.01% to 0.02% annual</p>
+                        <p class="text-gray-400 text-sm">Increasing to 100M-200M BGL annually during Years 61-90 as adoption accelerates</p>
+                    </div>
+                    <div class="glass p-4 rounded-lg">
+                        <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Peak Phase</h4>
+                        <p class="text-gray-300 mb-1">2115-2124: 0.03% annual</p>
+                        <p class="text-gray-400 text-sm">Reaching maximum release of 300M BGL annually during the final decade (Years 91-100)</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 glass p-4 rounded-lg">
+                    <p class="text-gray-300 text-center">Total Supply: 1 Trillion BGL (1,000,000,000,000 BGL) released over 100 years</p>
+                    <p class="text-gray-400 text-sm text-center mt-2">This gradual release schedule ensures long-term sustainability and minimizes inflation</p>
+                </div>
+                
+                <div class="mt-6 glass p-4 rounded-lg">
+                    <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Inflation Calculation</h4>
+                    <p class="text-gray-300 mb-2">Inflation Rate (Year X) = (New Supply in Year X / Total Circulating Supply in Year X-1) × 100%</p>
+                    <p class="text-gray-400 text-sm">Starting high in early years, inflation naturally decreases over time as the circulating supply grows, promoting long-term price stability</p>
+                </div>
+            </div>
+
+            <!-- Token Details Section -->
+            <div id="token-details-container">
+                <!-- Token details component will be loaded here -->
+            </div>
+
+            <!-- Key Features Grid -->            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--primary)]" data-translate="sustainableTitle">Sustainable</h3>
+                    <p class="text-gray-300" data-translate="sustainableDesc">Long-term planning with controlled inflation</p>
+                </div>
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--secondary)]" data-translate="decentralizedTitle">Decentralized</h3>
+                    <p class="text-gray-300" data-translate="decentralizedDesc">Community-driven governance and funding</p>
+                </div>
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent1)]" data-translate="efficientTitle">Efficient</h3>
+                    <p class="text-gray-300" data-translate="efficientDesc">Optimal resource distribution</p>
+                </div>
+                <div class="glass p-8 rounded-xl neon-glow">
+                    <h3 class="text-xl font-bold mb-4 text-[var(--accent2)]" data-translate="scalableTitle">Scalable</h3>
+                    <p class="text-gray-300" data-translate="scalableDesc">Adapts to new economic & tech advances</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section id="roadmap-section" class="py-12 bg-gradient-to-b from-[#1a1a1a] to-[#121212] text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-6 gradient-text" data-translate="roadmapTitle">NOVA BULGARIA Roadmap</h2>
+            <p class="text-lg text-center text-gray-300 mb-8 max-w-3xl mx-auto">Development timeline for 2025-2026</p>
+            
+            <!-- Timeline Navigation -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-[#2a2a2a] rounded-full p-1 shadow-lg">
+                    <button class="roadmap-tab active" data-phase="foundation">Q1-Q2 2025<br>Foundation</button>
+                    <button class="roadmap-tab" data-phase="development">Q3-Q4 2025<br>Development</button>
+                    <button class="roadmap-tab" data-phase="expansion">Q1-Q2 2026<br>Expansion</button>
+                </div>
+            </div>
+            
+            <!-- Foundation Phase Content -->
+            <div class="roadmap-content active" id="foundation-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--primary)] hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--primary)]">Q1 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Initial funding allocation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Core team formation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Technical infrastructure setup</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Whitepaper finalization</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--secondary)] hover:shadow-[0_0_15px_rgba(var(--secondary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--secondary)]">Q2 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Blockchain prototype development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>NFT ID system architecture</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Initial smart contract deployment</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Community building initiatives</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Development Phase Content -->
+            <div class="roadmap-content" id="development-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--accent1)] hover:shadow-[0_0_15px_rgba(var(--accent1-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--accent1)]">Q3 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Launch of NOVA BULGARIA testnet</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Proof-of-Contribution implementation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Core sector parachain development</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent1)] mr-2">•</span>
+                                <span>Governance framework testing</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--accent2)] hover:shadow-[0_0_15px_rgba(var(--accent2-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--accent2)]">Q4 2025</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>BGL token pre-launch activities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>Initial parachain integration</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>Security audits and optimization</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--accent2)] mr-2">•</span>
+                                <span>Partnership development</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Expansion Phase Content -->
+            <div class="roadmap-content" id="expansion-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--primary)] hover:shadow-[0_0_15px_rgba(var(--primary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--primary)]">Q1 2026</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>Mainnet launch</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>BGL token public distribution</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>NFT ID system public release</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--primary)] mr-2">•</span>
+                                <span>First governance proposals</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="glass p-6 rounded-xl border-t-4 border-[var(--secondary)] hover:shadow-[0_0_15px_rgba(var(--secondary-rgb),0.3)]">
+                        <h4 class="text-xl font-semibold mb-3 text-[var(--secondary)]">Q2 2026</h4>
+                        <ul class="space-y-2 text-gray-300 text-sm">
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Full integration of all 44 parachains</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Metricocratic governance system activation</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Global expansion initiatives</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-[var(--secondary)] mr-2">•</span>
+                                <span>Ecosystem development grants</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision for the Future Section (formerly Whitepaper) -->
+    <section id="whitepaper" class="w-full py-8 sm:py-16 px-4">
+        <div class="text-center mb-8 sm:mb-12">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold gradient-text" data-translate="whitepaperTitle">Vision for the Future</h2>
+            <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto" data-translate="whitepaperSubtitle">Rebuilding Bulgaria as a digital nation for all citizens</p>
+        </div>
+
+        <div class="container mx-auto">
+            <!-- Vision Navigation -->
+            <div class="flex justify-center mb-8">
+                <div class="inline-flex bg-[#2a2a2a] rounded-full p-1 shadow-lg">
+                    <button class="whitepaper-tab active" data-section="introduction">The Problem</button>
+                    <button class="whitepaper-tab" data-section="vision">Our Vision</button>
+                    <button class="whitepaper-tab" data-section="technology">How It Works</button>
+                    <button class="whitepaper-tab" data-section="governance">Citizen Power</button>
+                </div>
+            </div>
+            
+            <!-- Introduction Section -->
+            <div class="whitepaper-content active" id="introduction-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Why Bulgaria Needs Change</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>Bulgaria today faces serious challenges that affect the daily lives of its citizens. For decades, the same problems have persisted despite promises of change from traditional political parties.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--accent1)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--accent1)]">Political Problems</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Government decisions favor the wealthy and connected</li>
+                                    <li>• Citizens have little say in important decisions</li>
+                                    <li>• Young people leave Bulgaria for better opportunities</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--accent2)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--accent2)]">Environmental Issues</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Beautiful natural resources are being damaged</li>
+                                    <li>• Pollution affects our health and quality of life</li>
+                                    <li>• Short-term profit is prioritized over long-term health</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="text-xl font-semibold mb-3 text-[var(--secondary)]">A New Approach</h4>
+                            <p>What if we could rebuild Bulgaria from the ground up? NOVA BULGARIA is a completely new way of thinking about our nation - one where citizens make the decisions, where transparency is guaranteed by technology, and where your contribution to society determines your influence, not your connections or wealth.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vision Section -->
+            <div class="whitepaper-content" id="vision-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">A Digital Nation Built By Its People</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>NOVA BULGARIA reimagines what a country can be in the digital age. Instead of power concentrated in the hands of a few politicians, we're creating a nation where all citizens participate directly in governance through secure digital technology.</p>
+                        
+                        <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--primary)] mt-6">
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Your Contribution Matters</h4>
+                            <p class="text-sm">In traditional systems, your voice is heard only during elections. In NOVA BULGARIA, your positive contributions to society are recognized and rewarded with greater influence. Whether you're a teacher, doctor, artist, or programmer, your expertise and effort directly translate to decision-making power in your field.</p>
+                        </div>
+                        
+                        <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--secondary)] mt-4">
+                            <h4 class="text-lg font-semibold mb-2 text-[var(--secondary)]">44 Areas of National Life</h4>
+                            <p class="text-sm">NOVA BULGARIA is organized into 44 specialized areas covering everything a nation needs to function. These include traditional sectors like Healthcare, Education, and Agriculture (24 sectors), plus new digital areas like Renewable Energy, Digital Identity, and Smart Cities (20 sectors). Each area has its own governance, allowing citizens with relevant expertise to make decisions in their fields.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Technology Section -->
+            <div class="whitepaper-content" id="technology-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">How Our Digital Nation Works</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>NOVA BULGARIA uses advanced digital technology to ensure transparency, security, and fairness. Think of it as a digital record-keeping system that cannot be tampered with, allowing citizens to trust that everything from voting to resource allocation happens fairly.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--primary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Your Digital Identity</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• A secure digital ID that only you control</li>
+                                    <li>• Cannot be copied, stolen, or used by others</li>
+                                    <li>• Stores your contributions and achievements</li>
+                                    <li>• Gives you access to national services</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--secondary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--secondary)]">Our Digital Economy</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• BGL: Our national currency for investment</li>
+                                    <li>• BGL-Stable: For everyday purchases</li>
+                                    <li>• 20% set aside for emergencies and stability</li>
+                                    <li>• 80% dedicated to building our nation</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="text-xl font-semibold mb-3 text-[var(--accent1)]">Building a Complete Nation</h4>
+                            <p>Our 44 specialized areas work together to create a complete nation. Traditional sectors like Healthcare, Education, and Agriculture work alongside new digital sectors like Renewable Energy and Artificial Intelligence. Each area has dedicated funding and is governed by citizens with relevant expertise and contributions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Governance Section -->
+            <div class="whitepaper-content" id="governance-content">
+                <div class="glass p-6 rounded-xl mb-6">
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Citizens in Control</h3>
+                    
+                    <div class="space-y-4 text-gray-300">
+                        <p>In NOVA BULGARIA, citizens make decisions directly rather than electing representatives who may not keep their promises. Our digital system ensures that everyone can participate, votes cannot be manipulated, and the results are implemented automatically.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--primary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--primary)]">Becoming a Citizen</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Verify your identity securely</li>
+                                    <li>• Learn about how our nation works</li>
+                                    <li>• Begin contributing in your areas of expertise</li>
+                                    <li>• Earn greater influence through positive actions</li>
+                                    <li>• Access more services as your contributions grow</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="bg-[rgba(30,30,30,0.5)] p-4 rounded-lg border-l-4 border-[var(--secondary)]">
+                                <h4 class="text-lg font-semibold mb-2 text-[var(--secondary)]">Citizen Decision-Making</h4>
+                                <ul class="space-y-2 text-sm">
+                                    <li>• Propose ideas to improve Bulgaria</li>
+                                    <li>• Vote on proposals in your areas of expertise</li>
+                                    <li>• Decisions made by those who understand the issues</li>
+                                    <li>• Earn rewards for helpful participation</li>
+                                    <li>• Watch your ideas become reality</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <h4 class="text-xl font-semibold mb-3 text-[var(--accent2)]">Rules Everyone Can Trust</h4>
+                            <p>Our national rules (constitution) are written into the digital system itself, meaning they apply equally to everyone and cannot be changed without widespread citizen approval. This ensures that no individual or group can manipulate the system for their own benefit.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <h2 class="text-2xl font-bold gradient-text mb-2" data-translate="footerTitle">NOVA BULGARIA</h2>
+                    <p class="text-gray-400" data-translate="footerSlogan">Building the future of digital nations</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerTwitter">Twitter</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerTelegram">Telegram</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerDiscord">Discord</a>
+                    <a href="#" class="text-gray-400 hover:text-[var(--primary)]" data-translate="footerMedium">Medium</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Chart.js first -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+
+    <!-- Load other external dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@cosmjs/cosmwasm-stargate@0.31.1/dist/index.min.js"></script>
+    
+    <!-- Load application scripts -->
+    <script src="assets/js/typewriter.js"></script>
+    <script src="assets/js/nft.js"></script>
+    <script src="assets/js/sector-buttons.js" defer></script>    <script src="assets/js/quiz.js"></script>
+        <script src="assets/js/charts.js" defer></script>
+<script src="assets/js/token-release-chart.js" defer></script>
+    
+    <!-- Load translations last -->
+    <script src="assets/translations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+            const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+
+            function toggleMobileMenu() {
+                mobileMenu.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden');
+            }
+
+            mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+            closeMobileMenu.addEventListener('click', toggleMobileMenu);
+
+            mobileMenuLinks.forEach(link => {
+                link.addEventListener('click', toggleMobileMenu);
+            });
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Stats box hover effects
+            const whiteBox = document.querySelector('.stats-box-white');
+            const greenBox = document.querySelector('.stats-box-green');
+            const redBox = document.querySelector('.stats-box-red');
+            
+            whiteBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid white';
+            });
+            
+            whiteBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            greenBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid var(--primary)';
+            });
+            
+            greenBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            redBox.addEventListener('mouseenter', function() {
+                this.style.border = '2px solid #ff3b30';
+            });
+            
+            redBox.addEventListener('mouseleave', function() {
+                this.style.border = '2px solid transparent';
+            });
+            
+            // Roadmap tabs functionality
+            const roadmapTabs = document.querySelectorAll('.roadmap-tab');
+            const roadmapContents = document.querySelectorAll('.roadmap-content');
+            
+            if (roadmapTabs.length > 0) {
+                roadmapTabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        roadmapTabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Hide all content sections
+                        roadmapContents.forEach(content => content.classList.remove('active'));
+                        
+                        // Show the corresponding content section
+                        const phaseContent = document.getElementById(`${this.dataset.phase}-content`);
+                        if (phaseContent) {
+                            phaseContent.classList.add('active');
+                        }
+                    });
+                });
+            }
+            
+            // Check if hero section loaded properly
+            setTimeout(function() {
+                const heroContainer = document.getElementById('hero-intro-container');
+                if (heroContainer && heroContainer.innerHTML.trim() === '') {
+                    console.log('Hero section failed to load via component loader, loading directly...');
+                    fetch('/components/combined-hero/combined-hero.html')
+                        .then(response => response.text())
+                        .then(html => {
+                            heroContainer.innerHTML = html;
+                            // Initialize typewriter if it exists
+                            if (typeof initTypewriter === 'function') {
+                                initTypewriter();
+                            }
+                            // Initialize hero tabs
+                            const tabBtns = heroContainer.querySelectorAll('.tab-btn');
+                            const tabPanes = heroContainer.querySelectorAll('.tab-pane');
+                            
+                            tabBtns.forEach(btn => {
+                                btn.addEventListener('click', function() {
+                                    const tabId = this.getAttribute('data-tab');
+                                    
+                                    // Remove active class from all buttons and panes
+                                    tabBtns.forEach(b => b.classList.remove('active'));
+                                    tabPanes.forEach(p => p.classList.remove('active'));
+                                    
+                                    // Add active class to current button and pane
+                                    this.classList.add('active');
+                                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                                });
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error loading hero section directly:', error);
+                        });
+                }
+            }, 1000); // Check after 1 second
+        });
+    </script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality script
+            // Execute the script immediately
+            (function() {
+                console.log('Combined tabs: Direct script running');
+                
+                // Wait a short time to ensure DOM is fully loaded
+                setTimeout(function() {
+                    // Introduction tabs functionality
+                    const tabBtns = document.querySelectorAll('#hero-intro .tab-btn');
+                    const tabPanes = document.querySelectorAll('#hero-intro .tab-pane');
+                    
+                    console.log('Introduction tabs: Found buttons:', tabBtns.length);
+                    console.log('Introduction tabs: Found panes:', tabPanes.length);
+                    
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', function() {
+                            const tabId = this.getAttribute('data-tab');
+                            console.log('Introduction tab clicked:', tabId);
+                            
+                            // Remove active class from all introduction buttons and panes
+                            tabBtns.forEach(b => b.classList.remove('active'));
+                            tabPanes.forEach(p => p.classList.remove('active'));
+                            
+                            // Add active class to clicked button
+                            this.classList.add('active');
+                            
+                            // Show corresponding tab content
+                            const targetPane = document.getElementById(tabId + '-tab');
+                            if (targetPane) {
+                                targetPane.classList.add('active');
+                                console.log('Activated introduction tab pane:', tabId + '-tab');
+                            } else {
+                                console.error('Introduction tab pane not found:', tabId + '-tab');
+                            }
+                        });
+                    });
+                }, 100);
+            })();
+        });
+    </script>
+    
+    <style>
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background-color: var(--primary);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .typewriter {
+            min-height: 2em;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+    </style>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const roadmapContainer = document.getElementById('roadmap-container');
+            
+            // Fetch the roadmap component
+            fetch('components/roadmap/roadmap.html')
+                .then(response => response.text())
+                .then(html => {
+                    roadmapContainer.innerHTML = html;
+                    
+                    // Execute any scripts in the roadmap component
+                    const scripts = roadmapContainer.querySelectorAll('script');
+                    scripts.forEach(script => {
+                        const newScript = document.createElement('script');
+                        if (script.src) {
+                            newScript.src = script.src;
+                        } else {
+                            newScript.textContent = script.textContent;
+                        }
+                        roadmapContainer.appendChild(newScript);
+                        script.remove();
+                    });
+                    
+                    // Initialize roadmap tabs
+                    initRoadmapTabs();
+                    
+                    console.log('Roadmap component loaded successfully');
+                })
+                .catch(error => {
+                    console.error('Error loading roadmap component:', error);
+                    roadmapContainer.innerHTML = '<p class="text-red-500">Error loading roadmap component</p>';
+                });
+                
+            // Function to initialize roadmap tabs
+            function initRoadmapTabs() {
+                const tabs = document.querySelectorAll('.roadmap-tab');
+                const contentSections = document.querySelectorAll('.roadmap-content');
+                
+                if (tabs.length === 0) {
+                    console.error('No roadmap tabs found');
+                    return;
+                }
+                
+                console.log(`Found ${tabs.length} roadmap tabs`);
+                
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Remove active class from all tabs
+                        tabs.forEach(t => t.classList.remove('active'));
+                        
+                        // Add active class to clicked tab
+                        this.classList.add('active');
+                        
+                        // Hide all content sections
+                        contentSections.forEach(section => section.classList.remove('active'));
+                        
+                        // Show the corresponding content section
+                        const targetContent = document.getElementById(`${this.dataset.phase}-content`);
+                        if (targetContent) {
+                            targetContent.classList.add('active');
+                        }
+                        
+                        console.log(`Tab clicked: ${this.dataset.phase}`);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
