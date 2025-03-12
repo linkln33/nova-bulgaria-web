@@ -1,0 +1,211 @@
+/* Main App Component Styles */
+
+.app {
+  position: relative;
+  min-height: 100vh;
+  background-color: #000;
+  color: white;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Background Elements */
+.app-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bg-gradient-1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(0, 150, 110, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(100px);
+  opacity: 0.7;
+}
+
+.bg-gradient-2 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(255, 255, 0, 0.07) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(100px);
+  opacity: 0.5;
+}
+
+.bg-gradient-3 {
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(255, 153, 0, 0.07) 0%, rgba(0, 0, 0, 0) 70%);
+  filter: blur(100px);
+  opacity: 0.5;
+}
+
+/* Section Styles */
+.section {
+  position: relative;
+  padding: 6rem 0;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* NFT ID Card Section */
+.nft-id-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.nft-id-card {
+  flex: 1;
+  min-width: 320px;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+}
+
+.nft-id-info {
+  flex: 1;
+  min-width: 320px;
+  max-width: 600px;
+  padding: 2rem;
+}
+
+.nft-id-info h3 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.nft-id-info p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.id-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.feature {
+  display: flex;
+  gap: 1rem;
+}
+
+.feature-icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.feature-text h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: white;
+}
+
+.feature-text p {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+  
+  .section-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .nft-id-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .nft-id-card, .nft-id-info {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 4rem 0;
+  }
+  
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .id-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 150, 110, 0.5);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 150, 110, 0.7);
+}

@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import { QRCode } from 'react-qrcode-logo';
-import useResizeObserver from '../../hooks/useResizeObserver';
+import useResizeObserver from '@hooks/useResizeObserver';
 import './NFTIdCard.css';
+// Import logo image
+import logoImage from '../../../assets/images/logo.png';
 
 interface NFTIdCardProps {
   userData?: {
@@ -72,8 +74,15 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
     }
   };
 
-  // Use custom resize observer hook
-  useResizeObserver(containerRef, scaleIdCard);
+  // Use custom resize observer hook to track container size changes
+  const dimensions = useResizeObserver(containerRef);
+  
+  // Apply scaling when dimensions change
+  useEffect(() => {
+    if (dimensions.width > 0) {
+      scaleIdCard();
+    }
+  }, [dimensions]);
 
   useEffect(() => {
     // Apply initial scaling
@@ -187,7 +196,7 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
 
             {/* Logo */}
             <div className="absolute bottom-6 right-6">
-              <img src="/assets/images/logo.png" alt="NOVA Bulgaria Logo" className="w-16 h-16 object-contain" />
+              <img src={logoImage} alt="NOVA Bulgaria Logo" className="w-16 h-16 object-contain" />
             </div>
           </div>
         </div>

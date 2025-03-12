@@ -1,129 +1,132 @@
-import React from 'react';
-import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import NFTIdCardDemo from './components/NFTIdCard/NFTIdCardDemo';
-import NFTIdCardHtmlStyle from './components/NFTIdCard/NFTIdCard-html-style';
+import React, { useState, useEffect } from 'react';
+import NavbarUpdated from '@components/Navbar/NavbarUpdated';
+import HeroUpdated from '@components/Hero/HeroUpdated';
+import Introduction from '@components/Introduction/Introduction';
+import NFTIdCardDemo from '@components/NFTIdCard/NFTIdCardDemo';
+import Tokenomics from '@components/Tokenomics/Tokenomics';
+import Roadmap from '@components/Roadmap/Roadmap';
+import Footer from '@components/Footer/Footer';
 import './styles/index.css';
 
 const App: React.FC = () => {
+  // State for active section (for highlighting in navbar)
+  const [activeSection, setActiveSection] = useState('hero');
+
+  // Effect for handling scroll and updating active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['hero', 'vision', 'governance', 'technology', 'development'];
+      const scrollPosition = window.scrollY + 100; // Offset for better UX
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const offsetTop = element.offsetTop;
+          const offsetBottom = offsetTop + element.offsetHeight;
+
+          if (scrollPosition >= offsetTop && scrollPosition < offsetBottom) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-black text-white">
-      <Navbar />
+      {/* Navigation/Navbar with fixed position, logo, mobile menu, and language selector */}
+      <NavbarUpdated activeSection={activeSection} />
 
       <main>
-        {/* Hero Section */}
-        <Hero />
+        {/* Hero Section with blur effects, gradient overlays, and animated elements */}
+        <section id="hero">
+          <HeroUpdated />
+        </section>
 
-        {/* NFT ID Section */}
-        <section id="nft-id" className="pt-4 pb-12 relative">
+        {/* Vision Section with tabbed interface for Political Crisis, Youth Crisis, Vision */}
+        <section id="vision" className="pt-24 pb-24 relative">
+          <Introduction />
+        </section>
+
+        {/* Governance Section with premium holographic border and QR code */}
+        <section id="governance" className="pt-24 pb-24 relative">
           <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-[var(--primary)]">National NFT ID System</h2>
-              <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-[var(--primary)]">National NFT ID System</h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 Every citizen of NOVA Bulgaria receives a unique soulbound NFT ID card that serves as their digital identity within our ecosystem.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-stretch relative z-20">
-              {/* NFT ID Card Container */}
+            <div className="flex justify-center items-center relative z-20">
+              {/* NFT ID Card Container with holographic border and QR code */}
               <NFTIdCardDemo />
-              
-              {/* NFT ID Information */}
-              <div className="flex flex-col justify-center">
-                <h3 className="text-2xl font-bold mb-4 text-[var(--primary)]">Soulbound Digital Identity</h3>
-                <p className="text-gray-300 mb-6">
-                  Our NFT ID system provides a secure, verifiable digital identity that cannot be transferred or sold. 
-                  Each ID card contains essential information about the citizen and their status within NOVA Bulgaria.
-                </p>
-                
-                <div className="space-y-4">
-                  <div className="flex items-start">
-                    <div className="bg-[var(--primary)] p-2 rounded-full mr-4 mt-1">
-                      <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white">Proof of Citizenship</h4>
-                      <p className="text-gray-300">Verifiable proof of your citizenship status and rights within the digital nation.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-[var(--primary)] p-2 rounded-full mr-4 mt-1">
-                      <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white">Governance Access</h4>
-                      <p className="text-gray-300">Participate in governance decisions based on your citizenship level and social score.</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="bg-[var(--primary)] p-2 rounded-full mr-4 mt-1">
-                      <svg className="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-white">Digital Asset Access</h4>
-                      <p className="text-gray-300">Access to exclusive digital assets, services, and opportunities within the NOVA ecosystem.</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-8">
-                  <button className="px-6 py-3 bg-[var(--primary)] text-black font-bold rounded-lg hover:bg-opacity-90 transition-all">
-                    Apply for Citizenship
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="bg-[#001a15] text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-6 md:mb-0">
-              <div className="flex items-center">
-                <div className="h-10 w-10 bg-[var(--primary)] rounded-full flex items-center justify-center text-black font-bold mr-4">
-                  NOVA
-                </div>
-                <h2 className="text-xl font-bold text-[var(--primary)]">NOVA BULGARIA</h2>
-              </div>
-              <p className="text-gray-400 mt-2">A sovereign digital nation built on blockchain</p>
             </div>
             
-            <div className="flex space-x-6">
-              <a href="#" className="text-gray-400 hover:text-[var(--primary)]">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                </svg>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[var(--primary)]">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
-              </a>
-              <a href="#" className="text-gray-400 hover:text-[var(--primary)]">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-              </a>
+            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {/* Self-Sovereign Identity Card */}
+              <div className="bg-gray-900 bg-opacity-50 p-8 rounded-xl border border-[var(--primary)] border-opacity-20 backdrop-blur-sm">
+                <div className="w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-[var(--primary)]">Self-Sovereign Identity</h3>
+                <p className="text-gray-300">
+                  Complete control over your personal information while enabling secure verification for national services and governance participation.
+                </p>
+              </div>
+              
+              {/* Soulbound NFT Card */}
+              <div className="bg-gray-900 bg-opacity-50 p-8 rounded-xl border border-[var(--primary)] border-opacity-20 backdrop-blur-sm">
+                <div className="w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-[var(--primary)]">Soulbound NFT</h3>
+                <p className="text-gray-300">
+                  Your NFT ID cannot be transferred or sold, ensuring the integrity of our citizenship system and governance participation.
+                </p>
+              </div>
+              
+              {/* Governance Access Card */}
+              <div className="bg-gray-900 bg-opacity-50 p-8 rounded-xl border border-[var(--primary)] border-opacity-20 backdrop-blur-sm">
+                <div className="w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path>
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold mb-4 text-[var(--primary)]">Governance Access</h3>
+                <p className="text-gray-300">
+                  Your ID card enables participation in governance, voting on proposals, and contributing to the future of NOVA Bulgaria.
+                </p>
+              </div>
             </div>
           </div>
           
-          <hr className="border-gray-800 my-8" />
-          
-          <div className="text-center text-gray-400 text-sm">
-            <p>&copy; {new Date().getFullYear()} NOVA BULGARIA. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+          {/* Background decoration */}
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-[var(--primary)] opacity-5 -z-10"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-gradient-to-t from-[var(--primary)] opacity-5 -z-10"></div>
+        </section>
+
+        {/* Technology Section with charts and token distribution */}
+        <section id="technology" className="pt-24 pb-24 relative">
+          <Tokenomics />
+        </section>
+
+        {/* Development Section with timeline navigation */}
+        <section id="development" className="pt-24 pb-24 relative">
+          <Roadmap />
+        </section>
+        
+        {/* Footer with social media links and copyright */}
+        <Footer />
+      </main>
     </div>
   );
 };

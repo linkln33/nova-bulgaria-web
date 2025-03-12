@@ -1,0 +1,84 @@
+.hero {
+  background: linear-gradient(to bottom, rgba(0, 26, 21, 0.8), rgba(0, 0, 0, 0.9));
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Floating animation for background elements */
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+@keyframes float-delayed {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(20px) translateX(-10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+/* Typewriter cursor animation */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 15s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float-delayed 18s ease-in-out infinite;
+}
+
+/* Typewriter styles */
+.typewriter {
+  display: inline-block;
+}
+
+.cursor {
+  display: inline-block;
+  color: #00ffaa;
+  animation: blink 0.7s infinite;
+  font-weight: bold;
+}
+
+/* Glow effect for buttons */
+.hover\:shadow-glow:hover {
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.7);
+}

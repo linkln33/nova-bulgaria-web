@@ -1,0 +1,55 @@
+/* Roadmap Component Styles */
+
+.roadmap-tab {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.roadmap-tab.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.roadmap-tab:not(.active) {
+  color: #d1d5db;
+}
+
+.roadmap-tab:not(.active):hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.roadmap-content-container {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glass effect for content boxes */
+.glass {
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(75, 85, 99, 0.3);
+  transition: all 0.3s ease;
+  background: rgba(42, 42, 42, 0.5);
+}
+
+.glass:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Gradient text effect */
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent1) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
