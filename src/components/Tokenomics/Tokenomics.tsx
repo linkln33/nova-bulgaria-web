@@ -2,6 +2,7 @@ import React from 'react';
 import './Tokenomics.css';
 import '../../styles/glassmorphism.css';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface DistributionData {
   name: string;
@@ -10,25 +11,22 @@ interface DistributionData {
 }
 
 const Tokenomics: React.FC = () => {
+  const { t } = useLanguage();
+  
   // Token distribution data based on the image
   const distributionData: DistributionData[] = [
-    { name: 'Core Sectors', value: 50, color: '#00FFAA' },
-    { name: 'Future Sectors', value: 20, color: '#33cc33' },
-    { name: 'Reserves', value: 20, color: '#FF00FF' },
-    { name: 'Community', value: 10, color: '#CCFF00' }
+    { name: t('tokenomics.distribution.coreSectors'), value: 50, color: '#00FFAA' },
+    { name: t('tokenomics.distribution.futureSectors'), value: 20, color: '#33cc33' },
+    { name: t('tokenomics.distribution.reserves'), value: 20, color: '#FF00FF' },
+    { name: t('tokenomics.distribution.community'), value: 10, color: '#CCFF00' }
   ];
 
   return (
     <div className="tokenomics-container glassmorphism">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#00ffaa]">Tokenomics 100-Year Model</h2>
-        <div className="w-24 h-1 bg-[#00ffaa] mx-auto mb-8"></div>
-      </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Left Panel - Token Distribution */}
         <div className="glassmorphism-dark p-6 rounded-lg">
-          <h3 className="text-2xl font-bold mb-6 text-[#00ffaa]">Token Distribution</h3>
+          <h3 className="text-2xl font-bold mb-6 text-[#00ffaa]">{t('tokenomics.distribution.title')}</h3>
           
           <div className="flex justify-center mb-8" style={{ height: '300px' }}>
             <ResponsiveContainer width="100%" height="100%">
@@ -56,42 +54,32 @@ const Tokenomics: React.FC = () => {
 
           <div className="grid grid-cols-2 gap-4 mt-4">
             <div className="bg-black bg-opacity-30 p-4 rounded-lg border border-[#00ffaa30]">
-              <h4 className="text-[#00ffaa] text-lg font-bold mb-2">Initial Supply</h4>
-              <p className="text-white text-xl">1 Trillion BGL</p>
+              <h4 className="text-[#00ffaa] text-lg font-bold mb-2">{t('tokenomics.initialSupply.title')}</h4>
+              <p className="text-white text-xl">{t('tokenomics.initialSupply.value')}</p>
             </div>
             <div className="bg-black bg-opacity-30 p-4 rounded-lg border border-[#00ffaa30]">
-              <h4 className="text-[#00ffaa] text-lg font-bold mb-2">Reserve Fund</h4>
-              <p className="text-white text-xl">200B BGL (20%)</p>
+              <h4 className="text-[#00ffaa] text-lg font-bold mb-2">{t('tokenomics.reserveFund.title')}</h4>
+              <p className="text-white text-xl">{t('tokenomics.reserveFund.value')}</p>
             </div>
           </div>
         </div>
 
         {/* Right Panel - Fund Allocation */}
         <div className="glassmorphism-dark p-6 rounded-lg">
-          <h3 className="text-2xl font-bold mb-6 text-[#00ffaa]">Fund Allocation</h3>
+          <h3 className="text-2xl font-bold mb-6 text-[#00ffaa]">{t('tokenomics.fundAllocation.title')}</h3>
           
           <div className="bg-black bg-opacity-50 p-6 rounded-lg border border-[#00ffaa30] text-gray-200">
             <p className="mb-4">
-              Nova Bulgaria starts with the release of 1 million BGL in the first year, gradually 
-              increasing over the next 100 years to ensure controlled growth. The total supply of 
-              1 trillion BGL is securely held in a smart contract and released in small portions 
-              based on economic demand and community participation.
+              {t('tokenomics.fundAllocation.paragraph1')}
             </p>
             <p className="mb-4">
-              Instead of traditional mining or pre-allocated distribution, funds are unlocked through a 'Proof of 
-              Contribution (PoC)' system, meaning individuals receive BGL based on their 
-              contributions to the nation's development—such as building projects, innovation, 
-              governance, or social services.
+              {t('tokenomics.fundAllocation.paragraph2')}
             </p>
             <p className="mb-4">
-              As the economy grows and more people participate, the release rate gradually increases, ensuring there is always enough 
-              supply to support expansion while preventing inflation. This mechanism creates a 
-              self-sustaining economic model, where currency distribution is tied to real-world 
-              value and progress rather than speculation or centralized control.
+              {t('tokenomics.fundAllocation.paragraph3')}
             </p>
             <p>
-              Over time, this ensures fairness, long-term stability, and an economy that adapts naturally to the 
-              needs of its citizens.
+              {t('tokenomics.fundAllocation.paragraph4')}
             </p>
           </div>
         </div>

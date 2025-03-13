@@ -9,16 +9,12 @@ const unityPlusTranslations: TranslationDictionary = {
   
   // Unity+ Main Section
   'unityPlus.title': {
-    en: 'Unity+',
-    bg: 'Unity+'
+    en: 'The Social-Governance Super App',
+    bg: 'Супер приложението за социално управление'
   },
   'unityPlus.mainDescription': {
     en: 'The Social-Governance Super App for the new digital nation.',
     bg: 'Супер приложението за социално управление на новата дигитална нация.'
-  },
-  'unityPlus.subtitle': {
-    en: 'The Social-Governance Super App',
-    bg: 'Супер приложението за социално управление'
   },
   'unityPlus.welcome': {
     en: 'Welcome to Unity+',

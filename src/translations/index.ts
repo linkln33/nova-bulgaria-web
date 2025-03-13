@@ -829,18 +829,14 @@ const translations: TranslationDictionary = {
     bg: 'Нация от Лъвове Никога Няма да Коленичи'
   },
   'tokenomics.title': {
-    en: 'Tokenomics',
-    bg: 'Токеномика'
+    en: 'Tokenomics 100-Year Model',
+    bg: 'Токеномика 100-годишен модел'
   },
   'roadmap.title': {
-    en: 'Roadmap',
-    bg: 'Пътна карта'
+    en: 'Development Roadmap',
+    bg: 'Пътна карта за развитие'
   },
   'sectors.title': {
-    en: '44 Sectors',
-    bg: '44 Сектора'
-  },
-  'sectors.header.title': {
     en: '44 Sectors of NOVA BULGARIA',
     bg: '44 Сектора на НОВА БЪЛГАРИЯ'
   },
@@ -1023,14 +1019,6 @@ const translations: TranslationDictionary = {
     bg: 'Твърда Граница: 2,000,000 BGL'
   },
   // Tokenomics
-  'tokenomics.title': {
-    en: 'Tokenomics',
-    bg: 'Токеномика'
-  },
-  'tokenomics.model.title': {
-    en: 'Tokenomics 100-Year Model',
-    bg: 'Токеномика 100-годишен модел'
-  },
   'tokenomics.distribution.title': {
     en: 'Token Distribution',
     bg: 'Разпределение на токените'
