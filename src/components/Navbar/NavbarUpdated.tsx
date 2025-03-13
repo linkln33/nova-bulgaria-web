@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useUnityPlus } from '../../context/UnityPlusContext';
 import './NavbarUpdated.css';
 
 interface NavbarUpdatedProps {
@@ -9,6 +10,7 @@ interface NavbarUpdatedProps {
 const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { openUnityPlusDashboard } = useUnityPlus();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -17,6 +19,14 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setLanguage(e.target.value);
+  };
+
+  const handleBecomeALionClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    openUnityPlusDashboard();
+    if (mobileMenuOpen) {
+      toggleMobileMenu();
+    }
   };
 
   useEffect(() => {
@@ -64,9 +74,12 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
                 <a href="#lionheart-title" className={`text-2xl nav-link ${activeSection === 'lionheart' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
                 <a href="#development-roadmap" className={`text-2xl nav-link ${activeSection === 'roadmap' ? 'active' : ''}`}>{t('nav.development')}</a>
                 <a href="#unity-plus" className={`text-2xl nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
-                <a href="#unity-plus" className="bg-[#00ffaa] text-black px-6 py-2 rounded-lg hover:bg-[#00dd99] transition-colors mt-4">
+                <button 
+                  onClick={handleBecomeALionClick}
+                  className="bg-[#00ffaa] text-black px-6 py-2 rounded-lg hover:bg-[#00dd99] transition-colors mt-4"
+                >
                   {t('nav.becomeALion')}
-                </a>
+                </button>
                 <button onClick={toggleMobileMenu} className="absolute top-6 right-6">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -104,9 +117,12 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
             </div>
             
             {/* Become a Lion Button */}
-            <a href="#unity-plus" className="hidden md:block bg-[#00ffaa] text-black px-6 py-2 rounded-lg hover:bg-[#00dd99] transition-colors">
+            <button 
+              onClick={handleBecomeALionClick}
+              className="hidden md:block bg-[#00ffaa] text-black px-6 py-2 rounded-lg hover:bg-[#00dd99] transition-colors"
+            >
               {t('nav.becomeALion')}
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { UnityPlusProvider } from './context/UnityPlusContext';
 import NavbarUpdated from '@components/Navbar/NavbarUpdated';
 import HeroUpdated from '@components/Hero/HeroUpdated';
 import Problem from '@components/Problem/Problem';
@@ -190,7 +191,9 @@ const AppContent: React.FC = () => {
 const App: React.FC = () => {
   return (
     <LanguageProvider>
-      <AppContent />
+      <UnityPlusProvider>
+        <AppContent />
+      </UnityPlusProvider>
     </LanguageProvider>
   );
 };

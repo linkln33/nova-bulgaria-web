@@ -7,6 +7,24 @@ const unityPlusTranslations: TranslationDictionary = {
     bg: 'Unity+'
   },
   
+  // Intro Section
+  'unityPlus.intro.title': {
+    en: 'Welcome to Unity+',
+    bg: 'Добре дошли в Unity+'
+  },
+  'unityPlus.intro.description': {
+    en: 'The Social-Governance Super App for the new digital nation.',
+    bg: 'Супер приложението за социално управление на новата дигитална нация.'
+  },
+  'unityPlus.intro.features': {
+    en: 'Participate in governance, vote in elections, complete tasks, and earn tokens.',
+    bg: 'Участвайте в управлението, гласувайте на избори, изпълнявайте задачи и печелете токени.'
+  },
+  'unityPlus.intro.start': {
+    en: 'START HERE',
+    bg: 'ЗАПОЧНЕТЕ ТУК'
+  },
+  
   // Unity+ Main Section
   'unityPlus.title': {
     en: 'The Social-Governance Super App',

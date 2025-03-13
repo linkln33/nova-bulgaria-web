@@ -202,6 +202,57 @@
   background: #00c87f;
 }
 
+/* Unity+ Intro Section */
+.unity-plus-intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+  padding: 2rem;
+}
+
+.intro-card {
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(0, 255, 170, 0.3);
+  border-radius: 1rem;
+  padding: 2rem;
+  max-width: 600px;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(0, 255, 170, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.intro-card h2 {
+  color: #00ffaa;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.intro-card p {
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.start-button {
+  background-color: #00ffaa;
+  color: black;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.start-button:hover {
+  background-color: #00dd99;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 170, 0.3);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .unity-plus-dashboard {
