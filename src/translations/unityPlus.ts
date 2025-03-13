@@ -282,6 +282,30 @@ const unityPlusTranslations: TranslationDictionary = {
     en: 'Invest in solar and wind energy infrastructure to achieve 50% renewable energy usage within the next 5 years.',
     bg: 'Инвестиране в инфраструктура за слънчева и вятърна енергия за постигане на 50% използване на възобновяема енергия в рамките на следващите 5 години.'
   },
+  'unityPlus.proposals.prop5.title': {
+    en: 'National Education Curriculum Reform',
+    bg: 'Реформа на Националната Образователна Програма'
+  },
+  'unityPlus.proposals.prop5.description': {
+    en: 'Modernize the national education curriculum to include digital literacy, critical thinking, and practical skills development for all grade levels.',
+    bg: 'Модернизиране на националната образователна програма, за да включва дигитална грамотност, критично мислене и развитие на практически умения за всички образователни нива.'
+  },
+  'unityPlus.proposals.prop6.title': {
+    en: 'Cultural Heritage Preservation Fund',
+    bg: 'Фонд за Опазване на Културното Наследство'
+  },
+  'unityPlus.proposals.prop6.description': {
+    en: 'Establish a dedicated fund for the preservation and digitization of Bulgarian cultural heritage, including historical sites, artifacts, and traditional practices.',
+    bg: 'Създаване на специален фонд за опазване и дигитализация на българското културно наследство, включително исторически обекти, артефакти и традиционни практики.'
+  },
+  'unityPlus.proposals.prop7.title': {
+    en: 'Cybersecurity Enhancement Initiative',
+    bg: 'Инициатива за Подобряване на Киберсигурността'
+  },
+  'unityPlus.proposals.prop7.description': {
+    en: 'Implement advanced cybersecurity measures to protect national digital infrastructure and provide training programs for citizens on digital security best practices.',
+    bg: 'Внедряване на усъвършенствани мерки за киберсигурност за защита на националната дигитална инфраструктура и предоставяне на обучителни програми за гражданите относно най-добрите практики за дигитална сигурност.'
+  },
   
   // Tasks
   'unityPlus.tasks.title': {

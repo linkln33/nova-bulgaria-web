@@ -116,6 +116,63 @@ const ProposalFeed: React.FC<ProposalFeedProps> = ({ userProfile }) => {
         weightedNo: 72.8
       },
       status: 'active'
+    },
+    {
+      id: 'prop-5',
+      title: 'National Education Curriculum Reform',
+      description: 'Modernize the national education curriculum to include digital literacy, critical thinking, and practical skills development for all grade levels.',
+      sector: 'Education',
+      author: {
+        name: 'Petar Stoyanov',
+        nftId: 'BG-NFT-0345',
+        pocScore: 91
+      },
+      deadline: '2025-05-05',
+      votes: {
+        yes: 423,
+        no: 87,
+        weightedYes: 487.5,
+        weightedNo: 95.3
+      },
+      status: 'active'
+    },
+    {
+      id: 'prop-6',
+      title: 'Cultural Heritage Preservation Fund',
+      description: 'Establish a dedicated fund for the preservation and digitization of Bulgarian cultural heritage, including historical sites, artifacts, and traditional practices.',
+      sector: 'Culture & Arts',
+      author: {
+        name: 'Irina Petrova',
+        nftId: 'BG-NFT-0512',
+        pocScore: 83
+      },
+      deadline: '2025-04-25',
+      votes: {
+        yes: 198,
+        no: 32,
+        weightedYes: 227.4,
+        weightedNo: 38.6
+      },
+      status: 'active'
+    },
+    {
+      id: 'prop-7',
+      title: 'Cybersecurity Enhancement Initiative',
+      description: 'Implement advanced cybersecurity measures to protect national digital infrastructure and provide training programs for citizens on digital security best practices.',
+      sector: 'Security & Defense',
+      author: {
+        name: 'Viktor Kovachev',
+        nftId: 'BG-NFT-0278',
+        pocScore: 94
+      },
+      deadline: '2025-04-18',
+      votes: {
+        yes: 345,
+        no: 28,
+        weightedYes: 412.6,
+        weightedNo: 31.9
+      },
+      status: 'active'
     }
   ];
 
