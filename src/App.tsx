@@ -107,7 +107,7 @@ const AppContent: React.FC = () => {
         {/* Lionheart Fund Section */}
         <section id="lionheart" className="pt-16 pb-16 relative">
           <div className="container mx-auto px-6">
-            <div className="text-center mb-12">
+            <div className="text-center mb-12" id="lionheart-title">
               <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#00ffaa]">{t('lionheart.title')}</h2>
               <div className="w-24 h-1 bg-[#00ffaa] mx-auto mb-8"></div>
               <p className="text-xl text-gray-300 max-w-3xl mx-auto">

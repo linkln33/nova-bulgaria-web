@@ -19,6 +19,11 @@
   --accent5-rgb: 0, 53, 40;
 }
 
+html {
+  scroll-padding-top: 100px; /* Adjust based on navbar height */
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;

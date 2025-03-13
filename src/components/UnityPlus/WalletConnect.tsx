@@ -64,7 +64,7 @@ const WalletConnect: React.FC<WalletConnectProps> = ({ onConnect }) => {
                 disabled={isLoading}
               >
                 <span className="wallet-icon">🦊</span>
-                MetaMask
+                START HERE
               </button>
               
               <button 

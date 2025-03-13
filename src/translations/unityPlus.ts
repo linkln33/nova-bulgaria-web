@@ -21,8 +21,8 @@ const unityPlusTranslations: TranslationDictionary = {
     bg: 'Добре дошли в Unity+'
   },
   'unityPlus.loginDescription': {
-    en: 'Connect your wallet or enter with your NFT ID to access the governance platform.',
-    bg: 'Свържете вашия портфейл или влезте с вашето NFT ID, за да получите достъп до платформата за управление.'
+    en: 'Experience the Future',
+    bg: 'Изживейте бъдещето'
   },
   'unityPlus.explore': {
     en: 'Explore Unity+',

@@ -15,7 +15,7 @@ const Roadmap: React.FC = () => {
       {/* Token Release Chart */}
       <TokenReleaseChart />
       
-      <div className="text-center mb-12">
+      <div className="text-center mb-12" id="development-roadmap">
         <h2 className="text-4xl md:text-5xl font-bold mb-4 text-[#00ffaa]">Development Roadmap</h2>
         <div className="w-24 h-1 bg-[#00ffaa] mx-auto mb-8"></div>
         <p className="text-xl text-gray-300 max-w-3xl mx-auto">
