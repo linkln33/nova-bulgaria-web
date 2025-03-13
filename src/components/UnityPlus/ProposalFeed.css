@@ -63,8 +63,8 @@
 }
 
 .proposal-sector {
-  background: rgba(58, 123, 213, 0.1);
-  color: #3a7bd5;
+  background: rgba(0, 214, 161, 0.1);
+  color: #00D6A1;
   padding: 4px 10px;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -90,8 +90,19 @@
   margin-bottom: 15px;
 }
 
+.proposal-author a {
+  color: #00D6A1;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.proposal-author a:hover {
+  text-decoration: underline;
+  color: #00c87f;
+}
+
 .author-poc {
-  color: #3a7bd5;
+  color: #00D6A1;
   margin-left: 5px;
 }
 

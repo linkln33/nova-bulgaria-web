@@ -5,7 +5,7 @@
 .user-profile-loading {
   text-align: center;
   padding: 20px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .profile-header {
@@ -18,7 +18,7 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  background: linear-gradient(135deg, #00ffaa, #00D6A1);
   color: white;
   display: flex;
   align-items: center;
@@ -36,19 +36,19 @@
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #333;
+  color: white;
 }
 
 .profile-id {
   font-size: 0.8rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: 5px;
 }
 
 .profile-rank {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #3a7bd5;
+  color: #00D6A1;
   text-transform: uppercase;
 }
 
@@ -60,12 +60,12 @@
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 8px;
-  color: #333;
+  color: white;
 }
 
 .poc-meter {
   height: 8px;
-  background: #eee;
+  background: rgba(0, 26, 21, 0.6);
   border-radius: 4px;
   overflow: hidden;
   margin-bottom: 5px;
@@ -73,6 +73,7 @@
 
 .poc-value {
   height: 100%;
+  background: #00D6A1;
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -81,7 +82,7 @@
   text-align: right;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #333;
+  color: white;
 }
 
 .profile-section {
@@ -92,7 +93,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   margin-bottom: 10px;
-  color: #333;
+  color: white;
 }
 
 .expertise-tags, .followed-sectors {
@@ -102,8 +103,8 @@
 }
 
 .expertise-tag, .sector-tag {
-  background: rgba(58, 123, 213, 0.1);
-  color: #3a7bd5;
+  background: rgba(0, 214, 161, 0.1);
+  color: #00D6A1;
   padding: 4px 10px;
   border-radius: 15px;
   font-size: 0.8rem;
@@ -111,8 +112,8 @@
 }
 
 .sector-tag {
-  background: rgba(46, 204, 113, 0.1);
-  color: #2ecc71;
+  background: rgba(0, 214, 161, 0.1);
+  color: #00D6A1;
 }
 
 .token-list {
@@ -125,19 +126,19 @@
   display: flex;
   justify-content: space-between;
   padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(0, 26, 21, 0.6);
   border-radius: 8px;
 }
 
 .token-name {
   font-size: 0.9rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .token-amount {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #333;
+  color: white;
 }
 
 .profile-actions {
@@ -146,7 +147,7 @@
 
 .profile-button {
   width: 100%;
-  background: #3a7bd5;
+  background: #00D6A1;
   color: white;
   border: none;
   padding: 10px;
@@ -158,5 +159,5 @@
 }
 
 .profile-button:hover {
-  background: #2a6ac4;
+  background: #00c87f;
 }

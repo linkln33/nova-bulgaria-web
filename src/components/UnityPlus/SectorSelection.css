@@ -83,13 +83,13 @@
 .sector-status {
   font-size: 0.8rem;
   font-weight: 600;
-  color: #3a7bd5;
+  color: #00D6A1;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .sector-card.selected .sector-status {
-  color: #2a6ac4;
+  color: #00c87f;
 }
 
 .sector-actions {
