@@ -1,0 +1,162 @@
+.user-profile {
+  padding: 15px;
+}
+
+.user-profile-loading {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3a7bd5, #00d2ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-right: 15px;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.profile-id {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.profile-rank {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #3a7bd5;
+  text-transform: uppercase;
+}
+
+.profile-poc {
+  margin-bottom: 25px;
+}
+
+.poc-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.poc-meter {
+  height: 8px;
+  background: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.poc-value {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.poc-number {
+  text-align: right;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.expertise-tags, .followed-sectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.expertise-tag, .sector-tag {
+  background: rgba(58, 123, 213, 0.1);
+  color: #3a7bd5;
+  padding: 4px 10px;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.sector-tag {
+  background: rgba(46, 204, 113, 0.1);
+  color: #2ecc71;
+}
+
+.token-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.token-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+}
+
+.token-name {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.token-amount {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.profile-actions {
+  margin-top: 25px;
+}
+
+.profile-button {
+  width: 100%;
+  background: #3a7bd5;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-button:hover {
+  background: #2a6ac4;
+}

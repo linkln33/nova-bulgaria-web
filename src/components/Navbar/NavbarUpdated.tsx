@@ -53,8 +53,9 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
             <a href="#vision" className={`nav-link ${activeSection === 'vision' ? 'active' : ''}`}>{t('nav.vision')}</a>
             <a href="#governance" className={`nav-link ${activeSection === 'governance' ? 'active' : ''}`}>{t('nav.governance')}</a>
             <a href="#technology" className={`nav-link ${activeSection === 'technology' ? 'active' : ''}`}>{t('nav.technology')}</a>
-            <a href="#fund" className={`nav-link ${activeSection === 'fund' ? 'active' : ''}`}>Lionheart Fund</a>
+            <a href="#fund" className={`nav-link ${activeSection === 'fund' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
             <a href="#development" className={`nav-link ${activeSection === 'development' ? 'active' : ''}`}>{t('nav.development')}</a>
+            <a href="#unity-plus" className={`nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
           </div>
 
           {/* Mobile Menu Panel */}
@@ -64,8 +65,9 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
                 <a href="#vision" className={`text-2xl nav-link ${activeSection === 'vision' ? 'active' : ''}`}>{t('nav.vision')}</a>
                 <a href="#governance" className={`text-2xl nav-link ${activeSection === 'governance' ? 'active' : ''}`}>{t('nav.governance')}</a>
                 <a href="#technology" className={`text-2xl nav-link ${activeSection === 'technology' ? 'active' : ''}`}>{t('nav.technology')}</a>
-                <a href="#fund" className={`text-2xl nav-link ${activeSection === 'fund' ? 'active' : ''}`}>Lionheart Fund</a>
+                <a href="#fund" className={`text-2xl nav-link ${activeSection === 'fund' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
                 <a href="#development" className={`text-2xl nav-link ${activeSection === 'development' ? 'active' : ''}`}>{t('nav.development')}</a>
+                <a href="#unity-plus" className={`text-2xl nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
                 <button onClick={toggleMobileMenu} className="absolute top-6 right-6">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
