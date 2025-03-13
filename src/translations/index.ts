@@ -5,6 +5,8 @@ export interface TranslationDictionary {
   };
 }
 
+import { futureTabTranslations } from './future-tab-translations';
+
 const translations: TranslationDictionary = {
   // Navbar
   'nav.vision': {
@@ -42,11 +44,11 @@ const translations: TranslationDictionary = {
     bg: 'Време е! Събуди Лъвовете'
   },
   'hero.slogan1': {
-    en: '1300 Years Unconquered [FLAG] Bulgaria Stands Eternal',
-    bg: '1300 Години Непокорена [FLAG] България Стои Вечна'
+    en: '1300 Years Unconquered Bulgaria Stands Eternal',
+    bg: '1300 Години Непокорена България е Вечна'
   },
   'hero.slogan2': {
-    en: 'From Khan Krum to NOVA BULGARIA—Tyrants Shall Fall',
+    en: 'From Khan Krum to NOVA BULGARIA',
     bg: 'От Хан Крум до НОВА БЪЛГАРИЯ'
   },
   'hero.slogan3': {
@@ -55,16 +57,13 @@ const translations: TranslationDictionary = {
   },
   'hero.slogan4': {
     en: 'We Gave the World an Alphabet—Now We Give It a Future!',
-    bg: 'Дадохме на Света Азбука Сега Му Даваме Бъдеще!'
+    bg: 'Дадохме на Света Азбука Сега Даваме Бъдеще!'
   },
   'hero.slogan5': {
-    en: 'Thracian Blood, Spartan Spirit—Bulgaria Bows to No One!',
+    en: 'Thracian Blood, Spartan Spirit!',
     bg: 'Тракийска Кръв, Спартански Дух!'
   },
-  'hero.slogan6': {
-    en: 'When Others Betrayed, Bulgaria Defied—We Protect Our Own!',
-    bg: 'Когато Другите се Предават,Ние Защитаваме Своите!'
-  },
+  
   'hero.slogan7': {
     en: 'The Gold of Our Ancestors, The Strength of Our Future!',
     bg: 'Златото на Нашите Предци, Силата на Нашето Бъдеще!'
@@ -305,8 +304,8 @@ const translations: TranslationDictionary = {
     bg: 'Блокчейн решение за възстановяване на нация в криза'
   },
   'intro.tab.political': {
-    en: 'Political Crisis',
-    bg: 'Политическа Криза'
+    en: 'A Failing State',
+    bg: 'Провалена Държава'
   },
   'intro.tab.environmental': {
     en: 'Environmental Crisis',
@@ -321,12 +320,12 @@ const translations: TranslationDictionary = {
     bg: 'Решението'
   },
   'intro.tab.vision': {
-    en: 'Vision',
-    bg: 'Визия'
+    en: 'A New Bulgarian Renaissance',
+    bg: 'Ново Българско Възраждане'
   },
   'intro.tab.blockchain': {
-    en: 'Why Blockchain',
-    bg: 'Защо Блокчейн'
+    en: 'Why Blockchain is Essential',
+    bg: 'Защо Блокчейнът е от Съществено Значение'
   },
   'intro.crisis.title': {
     en: 'The Current Political Crisis: Corruption, Tyranny, and National Collapse',
@@ -503,8 +502,8 @@ const translations: TranslationDictionary = {
     bg: 'България е на критичен кръстопът, изправена пред политическа корупция, екологична деградация и младежки изход.'
   },
   'need.tab.political': {
-    en: 'Political Crisis',
-    bg: 'Политическа Криза'
+    en: 'A Failing State',
+    bg: 'Провалена Държава'
   },
   'need.tab.environmental': {
     en: 'Environmental Crisis',
@@ -519,12 +518,12 @@ const translations: TranslationDictionary = {
     bg: 'Решението'
   },
   'need.tab.vision': {
-    en: 'Vision',
-    bg: 'Визия'
+    en: 'A New Bulgarian Renaissance',
+    bg: 'Ново Българско Възраждане'
   },
   'need.tab.blockchain': {
-    en: 'Why Blockchain',
-    bg: 'Защо Блокчейн'
+    en: 'Why Blockchain is Essential',
+    bg: 'Защо Блокчейнът е от Съществено Значение'
   },
   'need.political.title': {
     en: 'The Current Political Crisis: Corruption, Tyranny, and National Collapse',
@@ -563,8 +562,8 @@ const translations: TranslationDictionary = {
     bg: 'Екологично Опустошение'
   },
   'need.environmental.paragraph1': {
-    en: 'Bulgaria\'s once pristine environment is being systematically destroyed by corrupt officials who sell off protected lands to private interests. Ancient forests are being clear-cut, rivers polluted with industrial waste, and protected areas developed for commercial gain. The government has failed to implement effective environmental regulations, resulting in some of the worst air quality in Europe and widespread environmental degradation.',
-    bg: 'Природните ресурси на България—нейните гори, реки и черноморско крайбрежие—се унищожават систематично от корумпирани служители, които продават защитени земи на частни интереси. Древните гори се изсичат, реките се замърсяват с промишлени отпадъци, а защитените територии се разработват за търговска печалба. Правителството не успя да приложи ефективни екологични разпоредби, което доведе до някои от най-лошите показатели за качество на въздуха в Европа и широко разпространена екологична деградация.'
+    en: 'Bulgaria\'s once pristine environment is being systematically destroyed by corrupt officials who sell off protected lands to private interests. Illegal logging has devastated ancient forests, while unregulated construction has ruined coastal areas. The country\'s water resources are contaminated with industrial waste, and air pollution in major cities far exceeds safe levels, causing severe health problems for citizens.',
+    bg: 'Природните ресурси на България—нейните гори, реки и черноморско крайбрежие—се унищожават систематично от корумпирани служители, които продават защитени земи на частни интереси. Незаконната сеч е опустошила древни гори, докато нерегулираното строителство е съсипало крайбрежните райони. Водните ресурси на страната са замърсени с промишлени отпадъци, а замърсяването на въздуха в големите градове далеч надхвърля безопасните нива, причинявайки сериозни здравословни проблеми на гражданите.'
   },
   'need.environmental.paragraph2': {
     en: 'The Black Sea coast, once a natural treasure, has been overdeveloped with illegal construction projects that destroy fragile ecosystems. Mining operations continue to contaminate soil and water sources, while waste management remains inadequate, leading to illegal dumping and pollution. Climate change further exacerbates these issues, with more frequent droughts, floods, and extreme weather events affecting agriculture and water supplies.',
@@ -810,15 +809,15 @@ const translations: TranslationDictionary = {
   },
   'nftid.description': {
     en: 'Every citizen of NOVA Bulgaria receives a unique soulbound NFT ID card that serves as their digital identity within our ecosystem.',
-    bg: 'Всеки гражданин на НОВА България получава уникална привързана NFT ID карта, която служи като тяхна дигитална идентичност в нашата екосистема.'
+    bg: 'Всеки гражданин на НОВА България получава уникална NFT ID карта, която служи като тяхна дигитална идентичност в нашата екосистема.'
   },
   'funding.container': {
     en: 'A Nation of Lions Shall Never Kneel',
-    bg: 'Контейнер за финансиране'
+    bg: 'Ще се финансираме сами'
   },
   'lionheart.title': {
     en: 'Igniting Bulgaria\'s Digital Rebirth',
-    bg: 'Запалване на Дигиталното Възраждане на България'
+    bg: 'Запали на Дигиталното Възраждане на България'
   },
   'lionheart.subtitle': {
     en: 'Igniting Bulgaria\'s Digital Rebirth',
@@ -1186,6 +1185,315 @@ const translations: TranslationDictionary = {
   'tokenomics.phases.peak.description': {
     en: 'Final Decade: 3.0% annual (30B BGL/year)',
     bg: 'Последно Десетилетие: 3.0% годишно (30 млрд. BGL/година)'
+  },
+  
+  // Need For Nova - New Tabs
+  'need.tab.cbdc': {
+    en: 'CBDC vs. Bulgarian Lion (BGL)',
+    bg: 'ЦБДВ срещу Български Лъв (БГЛ)'
+  },
+  'need.tab.future': {
+    en: 'Look at the Future',
+    bg: 'Поглед към Бъдещето'
+  },
+  'need.tab.interoperability': {
+    en: 'Interoperability',
+    bg: 'Оперативна Съвместимост'
+  },
+  'need.cbdc.title': {
+    en: 'CBDC vs. Bulgarian Lion Tokens (BGL)',
+    bg: 'ЦБДВ срещу Български Лъв (БГЛ)'
+  },
+  'need.cbdc.subtitle': {
+    en: '💰 One Takes Power from You – The Other Gives It Back 🔥',
+    bg: '💰 Едното Отнема Силата Ти – Другото Ти Я Връща 🔥'
+  },
+  'need.cbdc.column1.title': {
+    en: '🏦 CBDCs – Control, Debt, & Surveillance',
+    bg: '🏦 ЦБДВ – Контрол, Дълг и Наблюдение'
+  },
+  'need.cbdc.column1.subtitle': {
+    en: 'Central Bank Digital Currencies are designed for control, not freedom',
+    bg: 'Централизираните Дигитални Валути са създадени за контрол, не за свобода'
+  },
+  'need.cbdc.column1.item1': {
+    en: 'Based on Debt – CBDCs are just digital versions of fiat currency, which means they are backed by government debt. The more money is printed, the less yours is worth. Inflation eats away your savings!',
+    bg: 'Базирани на Дълг – ЦБДВ са просто дигитални версии на фиатните пари, което означава, че са подкрепени от държавен дълг. Колкото повече пари се печатат, толкова по-малко струват вашите. Инфлацията изяжда спестяванията ви!'
+  },
+  'need.cbdc.column1.item2': {
+    en: 'Centralized Control – A central bank controls every transaction, can freeze your funds, and even limit what you can spend money on.',
+    bg: 'Централизиран Контрол – Централната банка контролира всяка транзакция, може да замрази средствата ви и дори да ограничи за какво можете да харчите пари.'
+  },
+  'need.cbdc.column1.item3': {
+    en: 'Programmable Expiration – Imagine your money expiring if you don\'t spend it fast enough or being blocked from buying things the government doesn\'t approve of.',
+    bg: 'Програмируем Срок на Годност – Представете си, че парите ви изтичат, ако не ги похарчите достатъчно бързо, или ви е забранено да купувате неща, които правителството не одобрява.'
+  },
+  'need.cbdc.column1.item4': {
+    en: 'Full Surveillance – Every purchase you make is tracked. No privacy, no anonymity, no financial freedom.',
+    bg: 'Пълно Наблюдение – Всяка покупка, която правите, се проследява. Без поверителност, без анонимност, без финансова свобода.'
+  },
+  'need.cbdc.column1.item5': {
+    en: 'Negative Interest Rates – Your money can be automatically deducted as a "fee" for holding it.',
+    bg: 'Отрицателни Лихвени Проценти – Парите ви могат да бъдат автоматично удържани като "такса" за притежаването им.'
+  },
+  'need.cbdc.column1.item6': {
+    en: 'Restricted Access – Your account can be blocked for political, social, or arbitrary reasons.',
+    bg: 'Ограничен Достъп – Вашият акаунт може да бъде блокиран по политически, социални или произволни причини.'
+  },
+  'need.cbdc.column2.title': {
+    en: '🦁 Bulgarian Lion Tokens (BGL) – Real Value, Real Freedom',
+    bg: '🦁 Български Лъв Токени (БГЛ) – Реална Стойност, Реална Свобода'
+  },
+  'need.cbdc.column2.subtitle': {
+    en: 'A currency designed for the people, not for control',
+    bg: 'Валута, създадена за хората, а не за контрол'
+  },
+  'need.cbdc.column2.item1': {
+    en: 'Based on Contribution – Instead of debt, BGL is earned through real contributions to the community. Your value in the system is based on what you do, not what you owe.',
+    bg: 'Базирани на Принос – Вместо дълг, БГЛ се печели чрез реален принос към общността. Вашата стойност в системата се основава на това, което правите, а не на това, което дължите.'
+  },
+  'need.cbdc.column2.item2': {
+    en: 'Decentralized & Transparent – No single entity controls BGL. It\'s managed by smart contracts and the community, so no government or bank can freeze or take your money.',
+    bg: 'Децентрализирани и Прозрачни – Нито един субект не контролира БГЛ. Управлява се от умни договори и общността, така че нито правителство, нито банка може да замрази или да вземе парите ви.'
+  },
+  'need.cbdc.column2.item3': {
+    en: 'True Ownership – With BGL, you are in full control of your digital assets. No one can block, delete, or devalue your holdings at will.',
+    bg: 'Истинска Собственост – С БГЛ вие имате пълен контрол върху вашите дигитални активи. Никой не може да блокира, изтрие или обезцени вашите активи по своя воля.'
+  },
+  'need.cbdc.column2.item4': {
+    en: 'Privacy & Choice – While transparent, blockchain doesn\'t tie your identity to your wallet. You decide what to do with your money—no restrictions.',
+    bg: 'Поверителност и Избор – Въпреки че е прозрачен, блокчейнът не обвързва самоличността ви с вашия портфейл. Вие решавате какво да правите с парите си—без ограничения.'
+  },
+  'need.cbdc.column2.item5': {
+    en: 'Deflationary by Design – BGL is designed to increase in value over time, not lose value like inflationary fiat currencies.',
+    bg: 'Дефлационни по Дизайн – БГЛ е проектиран да увеличава стойността си с течение на времето, а не да губи стойност като инфлационните фиатни валути.'
+  },
+  'need.cbdc.column2.item6': {
+    en: 'Community Governance – Token holders vote on important decisions, giving you a real voice in the future of your currency.',
+    bg: 'Общностно Управление – Притежателите на токени гласуват по важни решения, давайки ви реален глас в бъдещето на вашата валута.'
+  },
+  'need.future.title': {
+    en: 'What Can We Do Using Blockchain?',
+    bg: 'Какво Можем да Правим с Блокчейн?'
+  },
+  'need.future.subtitle': {
+    en: '🚀 The Future is Decentralized – And It Pays You! 🔥',
+    bg: '🚀 Бъдещето е Децентрализирано – И То Ви Плаща! 🔥'
+  },
+  'need.future.intro': {
+    en: 'Imagine a world where you get rewarded for everything you do—voting, traveling, social media, sharing internet, and even marketing. No middlemen, no exploitation—just fair rewards. Here\'s how blockchain turns everyday activities into earning opportunities!',
+    bg: 'Представете си свят, в който получавате възнаграждение за всичко, което правите—гласуване, пътуване, социални медии, споделяне на интернет и дори маркетинг. Без посредници, без експлоатация—само справедливи награди. Ето как блокчейнът превръща ежедневните дейности във възможности за печалба!'
+  },
+  'need.future.howYouCanEarn': {
+    en: '💸 How You Can Earn:',
+    bg: '💸 Как Можете да Печелите:'
+  },
+  'need.future.example': {
+    en: '🌍 Example:',
+    bg: '🌍 Пример:'
+  },
+  // Import all future tab translations
+  ...futureTabTranslations,
+
+  'need.interoperability.title': {
+    en: 'Interoperability: Connecting NOVA BULGARIA to the Global Blockchain Economy',
+    bg: 'Оперативна Съвместимост: Свързване на НОВА БЪЛГАРИЯ с Глобалната Блокчейн Икономика'
+  },
+  'need.interoperability.subtitle': {
+    en: 'A Nation Without Borders – A System That Works Everywhere',
+    bg: 'Нация Без Граници – Система, Която Работи Навсякъде'
+  },
+  'need.interoperability.intro': {
+    en: 'Most countries are isolated systems—their banking, governance, and infrastructure don\'t connect easily with the world. NOVA BULGARIA is different. We use blockchain interoperability to connect with global networks, projects, and economies, making our nation more advanced, efficient, and open to innovation.',
+    bg: 'Повечето държави са изолирани системи—тяхното банкиране, управление и инфраструктура не се свързват лесно със света. НОВА БЪЛГАРИЯ е различна. Ние използваме блокчейн оперативна съвместимост, за да се свържем с глобални мрежи, проекти и икономики, правейки нашата нация по-напреднала, ефективна и отворена към иновации.'
+  },
+  'need.interoperability.whatIsInteroperability': {
+    en: '🔗 What is Interoperability?',
+    bg: '🔗 Какво е Оперативна Съвместимост?'
+  },
+  'need.interoperability.definition': {
+    en: 'Interoperability means that different blockchains can work together, allowing assets, data, and services to move freely across networks.',
+    bg: 'Оперативната съвместимост означава, че различни блокчейни могат да работят заедно, позволявайки на активи, данни и услуги да се движат свободно между мрежите.'
+  },
+  'need.interoperability.whyItMatters': {
+    en: '🔄 Why It Matters:',
+    bg: '🔄 Защо Това е Важно:'
+  },
+  'need.interoperability.noSilos': {
+    en: 'No more silos – We integrate with Ethereum, Solana, Cosmos, and Polkadot for smooth transactions.',
+    bg: 'Без повече силози – Интегрираме се с Ethereum, Solana, Cosmos и Polkadot за гладки транзакции.'
+  },
+  'need.interoperability.globalParticipation': {
+    en: 'Global economic participation – Our citizens can trade, invest, and earn across multiple ecosystems.',
+    bg: 'Глобално икономическо участие – Нашите граждани могат да търгуват, инвестират и печелят в множество екосистеми.'
+  },
+  'need.interoperability.borderlessOpportunities': {
+    en: 'Borderless opportunities – Services like finance, ID verification, and governance work internationally.',
+    bg: 'Възможности без граници – Услуги като финанси, проверка на самоличност и управление работят международно.'
+  },
+  'need.interoperability.howWeUseInteroperability': {
+    en: 'How NOVA BULGARIA Uses Interoperability 🚀',
+    bg: 'Как НОВА БЪЛГАРИЯ Използва Оперативната Съвместимост 🚀'
+  },
+  'need.interoperability.crossChainGovernance': {
+    en: '🏛 1️⃣ Cross-Chain Governance – Vote from Anywhere',
+    bg: '🏛 1️⃣ Междуверижно Управление – Гласувайте от Всякъде'
+  },
+  'need.interoperability.problem': {
+    en: '💼 Problem',
+    bg: '💼 Проблем'
+  },
+  'need.interoperability.solution': {
+    en: '✅ Solution',
+    bg: '✅ Решение'
+  },
+  'need.interoperability.example': {
+    en: '🛠 Example',
+    bg: '🛠 Пример'
+  },
+  'need.interoperability.impact': {
+    en: '🚀 Impact',
+    bg: '🚀 Въздействие'
+  },
+  'need.interoperability.governanceProblem': {
+    en: 'Traditional voting is locked to one country, making global participation impossible.',
+    bg: 'Традиционното гласуване е ограничено до една държава, което прави глобалното участие невъзможно.'
+  },
+  'need.interoperability.governanceSolution': {
+    en: 'Our blockchain-based voting connects with Cosmos & Polkadot, letting citizens vote from anywhere.',
+    bg: 'Нашето блокчейн-базирано гласуване се свързва с Cosmos и Polkadot, позволявайки на гражданите да гласуват отвсякъде.'
+  },
+  'need.interoperability.governanceExample': {
+    en: 'Bulgarian expats can securely vote on-chain, without embassies or mail-in ballots.',
+    bg: 'Българските емигранти могат да гласуват сигурно чрез блокчейн, без посолства или пощенски бюлетини.'
+  },
+  'need.interoperability.governanceImpact': {
+    en: '100% verifiable elections, no fraud, and instant results.',
+    bg: '100% проверими избори, без измами и мигновени резултати.'
+  },
+  'need.interoperability.crossChainFinance': {
+    en: '💰 2️⃣ Cross-Chain Finance – Instant Payments & Trading',
+    bg: '💰 2️⃣ Междуверижни Финанси – Мигновени Плащания и Търговия'
+  },
+  'need.interoperability.financeProblem': {
+    en: 'Sending money internationally is slow and expensive.',
+    bg: 'Изпращането на пари в международен план е бавно и скъпо.'
+  },
+  'need.interoperability.financeSolution': {
+    en: 'BGL tokens work across Ethereum, Solana, and other major networks, enabling instant, low-cost payments.',
+    bg: 'БГЛ токените работят в Ethereum, Solana и други основни мрежи, позволявайки мигновени плащания с ниски такси.'
+  },
+  'need.interoperability.financeExample1': {
+    en: 'A Bulgarian freelancer in Japan gets paid instantly in BGL, then swaps it for local currency on Solana without fees.',
+    bg: 'Български фрийлансър в Япония получава заплащане мигновено в БГЛ, след което го обменя за местна валута в Solana без такси.'
+  },
+  'need.interoperability.financeExample2': {
+    en: 'Decentralized Internet – Citizens share and earn from internet nodes, avoiding monopolies.',
+    bg: 'Децентрализиран Интернет – Гражданите споделят и печелят от интернет възли, избягвайки монополите.'
+  },
+  'need.interoperability.financeExample3': {
+    en: 'Smart City Networks – Public transportation, energy, and security are blockchain-powered for efficiency.',
+    bg: 'Мрежи за Умни Градове – Общественият транспорт, енергията и сигурността се захранват от блокчейн за ефективност.'
+  },
+  'need.interoperability.financeImpact': {
+    en: 'Seamless global transactions with no banks or middlemen.',
+    bg: 'Безпроблемни глобални транзакции без банки или посредници.'
+  },
+  'need.interoperability.universalDigitalID': {
+    en: '🆔 3️⃣ Universal Digital ID – Trusted Everywhere',
+    bg: '🆔 3️⃣ Универсална Дигитална Самоличност – Доверена Навсякъде'
+  },
+  'need.interoperability.idProblem': {
+    en: 'IDs are tied to specific countries and can\'t be used globally.',
+    bg: 'Личните документи са обвързани с конкретни държави и не могат да се използват глобално.'
+  },
+  'need.interoperability.idSolution': {
+    en: 'Our NFT-based ID system integrates with Web3 platforms for universal verification.',
+    bg: 'Нашата NFT-базирана система за самоличност се интегрира с Web3 платформи за универсална проверка.'
+  },
+  'need.interoperability.idExample': {
+    en: 'A NOVA BULGARIA citizen logs into decentralized finance (DeFi) services, job platforms, or digital universities without extra verification.',
+    bg: 'Гражданин на НОВА БЪЛГАРИЯ влиза в децентрализирани финансови (DeFi) услуги, платформи за работа или дигитални университети без допълнителна проверка.'
+  },
+  'need.interoperability.idImpact': {
+    en: 'One ID for everything—banking, travel, and online services.',
+    bg: 'Една самоличност за всичко—банкиране, пътуване и онлайн услуги.'
+  },
+  'need.interoperability.crossBorderInfrastructure': {
+    en: '🏗 4️⃣ Cross-Border Infrastructure – DePIN & Smart Cities',
+    bg: '🏗 4️⃣ Трансгранична Инфраструктура – DePIN и Умни Градове'
+  },
+  'need.interoperability.infrastructureProblem': {
+    en: 'Traditional infrastructure is slow, expensive, and owned by corporations.',
+    bg: 'Традиционната инфраструктура е бавна, скъпа и собственост на корпорации.'
+  },
+  'need.interoperability.infrastructureSolution': {
+    en: 'Decentralized Physical Infrastructure Networks (DePIN) connect Bulgaria to global resources.',
+    bg: 'Децентрализираните Физически Инфраструктурни Мрежи (DePIN) свързват България с глобални ресурси.'
+  },
+  'need.interoperability.infrastructureExample1': {
+    en: 'Energy Sharing – People can sell excess solar power through a decentralized grid.',
+    bg: 'Споделяне на Енергия – Хората могат да продават излишната слънчева енергия чрез децентрализирана мрежа.'
+  },
+  'need.interoperability.infrastructureExample2': {
+    en: 'Decentralized Internet – Citizens share and earn from internet nodes, avoiding monopolies.',
+    bg: 'Децентрализиран Интернет – Гражданите споделят и печелят от интернет възли, избягвайки монополите.'
+  },
+  'need.interoperability.infrastructureExample3': {
+    en: 'Smart City Networks – Public transportation, energy, and security are blockchain-powered for efficiency.',
+    bg: 'Мрежи за Умни Градове – Общественият транспорт, енергията и сигурността се захранват от блокчейн за ефективност.'
+  },
+  'need.interoperability.infrastructureImpact': {
+    en: 'A self-sustaining, high-tech nation where citizens own the infrastructure.',
+    bg: 'Самоподдържаща се, високотехнологична нация, в която гражданите притежават инфраструктурата.'
+  },
+  'need.interoperability.globalEconomy': {
+    en: '💼 5️⃣ Global Economy – Trade, Jobs, and Investments',
+    bg: '💼 5️⃣ Глобална Икономика – Търговия, Работни Места и Инвестиции'
+  },
+  'need.interoperability.economyProblem': {
+    en: 'Bureaucracy blocks international trade and work.',
+    bg: 'Бюрокрацията блокира международната търговия и работа.'
+  },
+  'need.interoperability.economySolution': {
+    en: 'Our system integrates with global marketplaces, allowing frictionless commerce.',
+    bg: 'Нашата система се интегрира с глобални пазари, позволявайки безпроблемна търговия.'
+  },
+  'need.interoperability.economyExample1': {
+    en: 'A NOVA BULGARIA business can access global Web3 talent, hiring without paperwork.',
+    bg: 'Бизнес от НОВА БЪЛГАРИЯ може да получи достъп до глобални Web3 таланти, наемайки без документация.'
+  },
+  'need.interoperability.economyExample2': {
+    en: 'Foreigners can invest in Bulgarian projects using blockchain escrow systems.',
+    bg: 'Чужденци могат да инвестират в български проекти, използвайки блокчейн системи за доверително управление.'
+  },
+  'need.interoperability.economyExample3': {
+    en: 'Bulgarian artisans sell directly to international buyers with instant settlements.',
+    bg: 'Български занаятчии продават директно на международни купувачи с мигновени разплащания.'
+  },
+  'need.interoperability.economyImpact': {
+    en: 'A borderless, fast-growing economy powered by blockchain.',
+    bg: 'Безгранична, бързо растяща икономика, задвижвана от блокчейн.'
+  },
+  'need.interoperability.modernNation': {
+    en: 'NOVA BULGARIA: A Hyperconnected, Modern Nation 🇧🇬',
+    bg: 'НОВА БЪЛГАРИЯ: Хиперсвързана, Модерна Нация 🇧🇬'
+  },
+  'need.interoperability.conclusion1': {
+    en: '🌎 Tied to No One – Open to Everyone',
+    bg: '🌎 Необвързана с Никого – Отворена за Всички'
+  },
+  'need.interoperability.conclusion2': {
+    en: '🔗 Connected to the Global Web3 Economy',
+    bg: '🔗 Свързана с Глобалната Web3 Икономика'
+  },
+  'need.interoperability.conclusion3': {
+    en: '💡 Built on Innovation, Transparency, and Inclusion',
+    bg: '💡 Изградена върху Иновации, Прозрачност и Приобщаване'
+  },
+  'need.interoperability.finalMessage': {
+    en: '📢 A nation where borders don\'t limit success! 🚀🔥',
+    bg: '📢 Нация, където границите не ограничават успеха! 🚀🔥'
   }
 };
 
