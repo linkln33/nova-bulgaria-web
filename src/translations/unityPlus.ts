@@ -42,6 +42,10 @@ const unityPlusTranslations: TranslationDictionary = {
     en: 'Tasks',
     bg: 'Задачи'
   },
+  'unityPlus.tabs.elections': {
+    en: 'Elections',
+    bg: 'Избори'
+  },
   'unityPlus.tabs.wallet': {
     en: 'Wallet',
     bg: 'Портфейл'
@@ -305,6 +309,56 @@ const unityPlusTranslations: TranslationDictionary = {
   'unityPlus.proposals.prop7.description': {
     en: 'Implement advanced cybersecurity measures to protect national digital infrastructure and provide training programs for citizens on digital security best practices.',
     bg: 'Внедряване на усъвършенствани мерки за киберсигурност за защита на националната дигитална инфраструктура и предоставяне на обучителни програми за гражданите относно най-добрите практики за дигитална сигурност.'
+  },
+  
+  // Elections
+  'unityPlus.elections.title': {
+    en: 'Elections',
+    bg: 'Избори'
+  },
+  'unityPlus.elections.description': {
+    en: 'Participate in democratic governance through secure blockchain voting',
+    bg: 'Участвайте в демократичното управление чрез сигурно блокчейн гласуване'
+  },
+  'unityPlus.elections.vote': {
+    en: 'Vote Now',
+    bg: 'Гласувайте Сега'
+  },
+  'unityPlus.elections.viewDetails': {
+    en: 'View Details',
+    bg: 'Вижте Детайли'
+  },
+  'unityPlus.elections.castVote': {
+    en: 'Cast Your Vote',
+    bg: 'Подайте Своя Глас'
+  },
+  'unityPlus.elections.voted': {
+    en: 'You have voted',
+    bg: 'Вие гласувахте'
+  },
+  'unityPlus.elections.candidates': {
+    en: 'Candidates',
+    bg: 'Кандидати'
+  },
+  'unityPlus.elections.results': {
+    en: 'Election Results',
+    bg: 'Резултати от Изборите'
+  },
+  'unityPlus.elections.confirmVote': {
+    en: 'Confirm Vote',
+    bg: 'Потвърдете Гласа'
+  },
+  'unityPlus.elections.processing': {
+    en: 'Processing...',
+    bg: 'Обработка...'
+  },
+  'unityPlus.elections.cancel': {
+    en: 'Cancel',
+    bg: 'Отказ'
+  },
+  'unityPlus.elections.voteSuccess': {
+    en: 'Vote Successfully Cast!',
+    bg: 'Гласът е Успешно Подаден!'
   },
   
   // Tasks

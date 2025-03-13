@@ -6,12 +6,26 @@ import ProposalFeed from './ProposalFeed';
 import TaskBoard from './TaskBoard';
 import UserProfile from './UserProfile';
 import WalletConnect from './WalletConnect';
+import Elections from './Elections';
+
+// Define the user profile interface
+interface UserProfileType {
+  nftId: string;
+  name: string;
+  pocScore: number;
+  expertise: string[];
+  rank: string;
+  followedSectors: string[];
+  walletBalance: {
+    [key: string]: number;
+  };
+}
 
 const UnityPlus: React.FC = () => {
   const { t } = useLanguage();
   const [activeTab, setActiveTab] = useState('feed');
   const [isConnected, setIsConnected] = useState(false);
-  const [userProfile, setUserProfile] = useState(null);
+  const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
 
   // Mock function to simulate wallet connection
   const handleConnect = () => {
@@ -43,7 +57,7 @@ const UnityPlus: React.FC = () => {
         <div className="unity-plus-login">
           <div className="login-card">
             <h2>{t('unityPlus.welcome', 'Welcome to Unity+')}</h2>
-            <p>{t('unityPlus.loginDescription', 'Connect your wallet or enter with your NFT ID to access the governance platform.')}</p>
+            <p>{t('unityPlus.loginDescription', 'Experience the Future')}</p>
             <WalletConnect onConnect={handleConnect} />
             <button className="explore-button">
               {t('unityPlus.explore', 'Explore Unity+')}
@@ -53,7 +67,7 @@ const UnityPlus: React.FC = () => {
       ) : (
         <div className="unity-plus-dashboard">
           <div className="unity-plus-sidebar">
-            <UserProfile profile={userProfile} />
+            {userProfile && <UserProfile profile={userProfile} />}
           </div>
           <div className="unity-plus-main">
             <div className="unity-plus-tabs">
@@ -76,6 +90,12 @@ const UnityPlus: React.FC = () => {
                 {t('unityPlus.tabs.tasks', 'Tasks')}
               </button>
               <button 
+                className={`tab-button ${activeTab === 'elections' ? 'active' : ''}`}
+                onClick={() => setActiveTab('elections')}
+              >
+                {t('unityPlus.tabs.elections', 'Elections')}
+              </button>
+              <button 
                 className={`tab-button ${activeTab === 'wallet' ? 'active' : ''}`}
                 onClick={() => setActiveTab('wallet')}
               >
@@ -83,10 +103,11 @@ const UnityPlus: React.FC = () => {
               </button>
             </div>
             <div className="unity-plus-content">
-              {activeTab === 'feed' && <ProposalFeed userProfile={userProfile} />}
-              {activeTab === 'sectors' && <SectorSelection userProfile={userProfile} />}
-              {activeTab === 'tasks' && <TaskBoard userProfile={userProfile} />}
-              {activeTab === 'wallet' && (
+              {activeTab === 'feed' && userProfile && <ProposalFeed userProfile={userProfile} />}
+              {activeTab === 'sectors' && userProfile && <SectorSelection userProfile={userProfile} />}
+              {activeTab === 'tasks' && userProfile && <TaskBoard userProfile={userProfile} />}
+              {activeTab === 'elections' && userProfile && <Elections userProfile={userProfile} />}
+              {activeTab === 'wallet' && userProfile && (
                 <div className="wallet-info">
                   <h3>{t('unityPlus.wallet.title', 'Your Wallet')}</h3>
                   <div className="token-balances">
