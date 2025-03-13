@@ -233,3 +233,41 @@
     text-align: center;
   }
 }
+
+/* Additional mobile optimizations */
+@media (max-width: 480px) {
+  .proposal-card {
+    padding: 15px;
+  }
+  
+  .proposal-title {
+    font-size: 1.2rem;
+  }
+  
+  .voting-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .vote-button {
+    padding: 14px 20px; /* Larger tap target height */
+  }
+  
+  .feed-filters {
+    gap: 5px;
+  }
+  
+  .filter-button {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+  
+  .proposal-description {
+    font-size: 0.95rem;
+  }
+  
+  .voting-stats {
+    flex-direction: column;
+    gap: 5px;
+  }
+}
