@@ -6,16 +6,13 @@ const translations = {
         roadmap: "Roadmap",
         pitchDeck: "Pitch Deck",
         whitepaper: "Whitepaper",
-        connectWallet: "Connect Wallet"
-    },
-    bg: {
-        slogan: "Добре дошли в бъдещето на нациите",
-        features: "Функции",
-        tokenomics: "Токеномика",
-        roadmap: "Пътна карта",
-        pitchDeck: "Презентация",
-        whitepaper: "Бяла книга",
-        connectWallet: "Свържете портфейл"
+        connectWallet: "Connect Wallet",
+        lionheartFund: "Lionheart Fund",
+        decentralizeQuote: "Decentralize or disappear—our survival depends on change.",
+        nationalNFTID: "National NFT ID System",
+        fundingContainer: "Funding Container",
+        sectors: "44 Sectors"
+
     },
     ru: {
         slogan: "Добро пожаловать в будущее наций",
@@ -24,7 +21,12 @@ const translations = {
         roadmap: "Дорожная карта",
         pitchDeck: "Презентация",
         whitepaper: "Белая книга",
-        connectWallet: "Подключить кошелек"
+        connectWallet: "Подключить кошелек",
+        lionheartFund: "Фонд Львиное Сердце",
+        decentralizeQuote: "Децентрализуйся или исчезни—наше выживание зависит от перемен.",
+        nationalNFTID: "Национальная система NFT ID",
+        fundingContainer: "Контейнер финансирования",
+        sectors: "44 Сектора"
     }
 };
 

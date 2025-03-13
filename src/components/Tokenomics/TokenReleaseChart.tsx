@@ -10,8 +10,11 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import './TokenReleaseChart.css';
+import { useLanguage } from '../../context/LanguageContext';
 
 const TokenReleaseChart: React.FC = () => {
+  const { t } = useLanguage();
+  
   // Data for the token release schedule over 100 years based on the exact specifications
   const data = [
     { year: 'Year 10', annualRelease: 1, totalSupply: 10, inflationRate: 10 },
@@ -28,34 +31,34 @@ const TokenReleaseChart: React.FC = () => {
 
   const phases = [
     {
-      title: 'Foundation Phase',
-      years: '2025-2044',
-      rate: '0.1% to 0.2% annual',
-      description: 'First Decade: 0.1% annual (1B BGL/year), Second Decade: 0.2% annual (2B BGL/year)'
+      title: t('tokenomics.phases.foundation.title'),
+      years: t('tokenomics.phases.foundation.years'),
+      rate: t('tokenomics.phases.foundation.rate'),
+      description: t('tokenomics.phases.foundation.description')
     },
     {
-      title: 'Development Phase',
-      years: '2045-2084',
-      rate: '0.3% to 1.0% annual',
-      description: 'Third Decade: 0.3% (3B BGL/year), Fourth: 0.5% (5B BGL/year), Fifth: 0.7% (7B BGL/year), Sixth: 1.0% (10B BGL/year)'
+      title: t('tokenomics.phases.development.title'),
+      years: t('tokenomics.phases.development.years'),
+      rate: t('tokenomics.phases.development.rate'),
+      description: t('tokenomics.phases.development.description')
     },
     {
-      title: 'Expansion Phase',
-      years: '2085-2114',
-      rate: '1.5% to 2.5% annual',
-      description: 'Seventh Decade: 1.5% (15B BGL/year), Eighth: 2.0% (20B BGL/year), Ninth: 2.5% (25B BGL/year)'
+      title: t('tokenomics.phases.expansion.title'),
+      years: t('tokenomics.phases.expansion.years'),
+      rate: t('tokenomics.phases.expansion.rate'),
+      description: t('tokenomics.phases.expansion.description')
     },
     {
-      title: 'Peak Phase',
-      years: '2115-2124',
-      rate: '3.0% annual',
-      description: 'Final Decade: 3.0% annual (30B BGL/year)'
+      title: t('tokenomics.phases.peak.title'),
+      years: t('tokenomics.phases.peak.years'),
+      rate: t('tokenomics.phases.peak.rate'),
+      description: t('tokenomics.phases.peak.description')
     }
   ];
 
   return (
     <div className="token-release-chart-container glassmorphism-dark">
-      <h3 className="chart-title">Token Release Schedule</h3>
+      <h3 className="chart-title">{t('tokenomics.releaseSchedule.title')}</h3>
       
       <div className="chart-wrapper">
         <ResponsiveContainer width="100%" height={300}>
@@ -69,7 +72,7 @@ const TokenReleaseChart: React.FC = () => {
               yAxisId="left" 
               stroke="#00FFAA" 
               label={{ 
-                value: 'Annual Release (Billions BGL)', 
+                value: t('tokenomics.releaseSchedule.annualRelease'), 
                 angle: -90, 
                 position: 'insideLeft',
                 style: { fill: '#00FFAA', fontSize: 12 }
@@ -80,7 +83,7 @@ const TokenReleaseChart: React.FC = () => {
               orientation="right" 
               stroke="#00CCFF"
               label={{ 
-                value: 'Total Supply (Billions BGL)', 
+                value: t('tokenomics.releaseSchedule.totalSupply'), 
                 angle: -90, 
                 position: 'insideRight',
                 style: { fill: '#00CCFF', fontSize: 12 }
@@ -91,7 +94,7 @@ const TokenReleaseChart: React.FC = () => {
               orientation="right" 
               stroke="#FF00FF"
               label={{ 
-                value: 'Inflation Rate (%)', 
+                value: t('tokenomics.releaseSchedule.inflationRate'), 
                 angle: -90, 
                 position: 'insideRight',
                 style: { fill: '#FF00FF', fontSize: 12 }
@@ -112,7 +115,7 @@ const TokenReleaseChart: React.FC = () => {
               yAxisId="left"
               type="monotone" 
               dataKey="annualRelease" 
-              name="Annual Release (Billions BGL)"
+              name={t('tokenomics.releaseSchedule.annualReleaseLegend')}
               stroke="#00FFAA" 
               activeDot={{ r: 8 }} 
               strokeWidth={2}
@@ -121,7 +124,7 @@ const TokenReleaseChart: React.FC = () => {
               yAxisId="middle"
               type="monotone" 
               dataKey="totalSupply" 
-              name="Total Supply in Circulation (Billions BGL)"
+              name={t('tokenomics.releaseSchedule.totalSupplyLegend')}
               stroke="#00CCFF" 
               strokeWidth={2}
             />
@@ -129,7 +132,7 @@ const TokenReleaseChart: React.FC = () => {
               yAxisId="right"
               type="monotone" 
               dataKey="inflationRate" 
-              name="Inflation Rate (%)"
+              name={t('tokenomics.releaseSchedule.inflationRateLegend')}
               stroke="#FF00FF" 
               strokeWidth={2}
             />
@@ -148,13 +151,13 @@ const TokenReleaseChart: React.FC = () => {
       </div>
 
       <div className="total-supply-box">
-        <h4>Total Supply: 1 Trillion BGL (1,000,000,000,000 BGL) released over 100 years</h4>
-        <p>This gradual release schedule ensures long-term sustainability and minimizes inflation</p>
+        <h4>{t('tokenomics.releaseSchedule.totalSupplyBox')}</h4>
+        <p>{t('tokenomics.releaseSchedule.totalSupplyDescription')}</p>
       </div>
 
       <div className="inflation-box">
-        <h4>Proof of Contribution Integration</h4>
-        <p>The token release model is directly tied to the Proof of Contribution (PoC) system, ensuring that economic rewards are fairly distributed based on real effort and value creation.</p>
+        <h4>{t('tokenomics.releaseSchedule.pocTitle')}</h4>
+        <p>{t('tokenomics.releaseSchedule.pocDescription')}</p>
       </div>
     </div>
   );
