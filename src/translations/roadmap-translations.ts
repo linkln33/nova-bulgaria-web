@@ -8,6 +8,47 @@ export const roadmapTranslations = {
     en: 'Building a sovereign digital nation through strategic phases',
     bg: 'Изграждане на суверенна дигитална нация чрез стратегически фази'
   },
+  // Development Phases
+  'roadmap.developmentPhases.title': {
+    en: 'Development Phases',
+    bg: 'Фази на Развитие'
+  },
+  'roadmap.developmentPhases.subtitle': {
+    en: 'Our journey to building a sovereign digital nation',
+    bg: 'Нашият път към изграждане на суверенна дигитална нация'
+  },
+  'roadmap.developmentPhases.phase1': {
+    en: 'Foundation Phase',
+    bg: 'Фаза на Основите'
+  },
+  'roadmap.developmentPhases.phase1.description': {
+    en: 'Establishing the core technology and community',
+    bg: 'Изграждане на основната технология и общност'
+  },
+  'roadmap.developmentPhases.phase2': {
+    en: 'Growth Phase',
+    bg: 'Фаза на Растеж'
+  },
+  'roadmap.developmentPhases.phase2.description': {
+    en: 'Expanding our ecosystem and user base',
+    bg: 'Разширяване на нашата екосистема и потребителска база'
+  },
+  'roadmap.developmentPhases.phase3': {
+    en: 'Maturity Phase',
+    bg: 'Фаза на Зрялост'
+  },
+  'roadmap.developmentPhases.phase3.description': {
+    en: 'Establishing governance and economic systems',
+    bg: 'Установяване на системи за управление и икономика'
+  },
+  'roadmap.developmentPhases.phase4': {
+    en: 'Expansion Phase',
+    bg: 'Фаза на Експанзия'
+  },
+  'roadmap.developmentPhases.phase4.description': {
+    en: 'Global recognition and physical presence',
+    bg: 'Глобално признание и физическо присъствие'
+  },
   // Phase 1
   'roadmap.phase1.name': {
     en: 'Phase 1',
