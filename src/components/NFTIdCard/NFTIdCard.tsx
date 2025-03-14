@@ -19,6 +19,7 @@ interface NFTIdCardProps {
     rank: string;
     expertise: string;
   };
+  photoUrl?: string;
 }
 
 const NFTIdCard: React.FC<NFTIdCardProps> = ({ 
@@ -34,7 +35,8 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
     socialScore: 785,
     rank: "Citizen",
     expertise: "Technology"
-  }
+  },
+  photoUrl
 }) => {
   // Create refs for the container and card elements
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -52,7 +54,7 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
   });
 
   // Bulgarian flag image for QR code center logo
-  const flagImageUrl = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAxOCI+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmYiLz48cmVjdCB5PSI2IiB3aWR0aD0iMzAiIGhlaWdodD0iNiIgZmlsbD0iIzAwOTY2RSIvPjxyZWN0IHk9IjEyIiB3aWR0aD0iMzAiIGhlaWdodD0iNiIgZmlsbD0iI0Q2MjYxMiIvPjwvc3ZnPg==";
+  const flagImageUrl = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAxOCI+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmYiLz48cmVjdCB5PSI2IiB3aWR0aD0iMzAiIGhlaWdodD0iNiIgZmlsbD0iIzAwOTY2RSIvPjxyZWN0IHk9IjEyIiB3aWR0aD0iMzAiIGhlaWg9IjYiIGZpbGw9IiNENjI2MTIiLz48L3N2Zz4=";
 
   // Scale the ID card for mobile responsiveness
   const scaleIdCard = () => {
@@ -98,11 +100,12 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
   }, []);
 
   return (
-    <div ref={containerRef} className="flex justify-center h-[442px]">
+    <div ref={containerRef} className="flex justify-center h-auto min-h-[442px]">
       {/* NFT ID Card with refined holographic effect */}
       <div 
         ref={cardRef} 
         className="w-full max-w-[700px] h-full shadow-2xl relative"
+        style={{ transformOrigin: 'center top' }}
       >
         {/* Card base with holographic effects */}
         <div className="card-base">
@@ -124,17 +127,21 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
           {/* Card content */}
           <div className="card-content p-6">
             {/* Photo Area */}
-            <div className="absolute top-[5%] left-[5%] w-[25%] h-[45%] glass rounded-lg border-2 border-[var(--primary)] flex items-center justify-center">
-              <svg className="w-3/4 h-3/4 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-              </svg>
+            <div className="absolute top-[5%] left-[5%] w-[25%] h-[45%] glass rounded-lg border-2 border-[var(--primary)] flex items-center justify-center overflow-hidden">
+              {photoUrl ? (
+                <img src={photoUrl} alt="User" className="w-full h-full object-cover" />
+              ) : (
+                <svg className="w-3/4 h-3/4 text-[var(--primary)]" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+              )}
             </div>
 
             {/* Header */}
             <div className="absolute top-[5%] left-[32%] right-[5%] flex flex-col items-end">
               <div className="flex items-center">
                 {/* Title */}
-                <h3 className="text-base sm:text-lg md:text-xl font-bold text-[var(--primary)]">NATIONAL REPUBLIC OF BULGARIA</h3>
+                <h3 className="text-base sm:text-lg md:text-xl font-bold text-[var(--primary)] text-right">NATIONAL REPUBLIC OF BULGARIA</h3>
                 {/* Bulgarian Flag */}
                 <div className="flex flex-col ml-2 h-[1.25em] justify-center">
                   <div className="w-8 h-[0.425em] bg-white"></div>
@@ -143,11 +150,11 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
                 </div>
               </div>
               {/* Subtitle */}
-              <p className="text-xs italic text-gray-300 mt-1 text-center">Self-sovereign identity SSID</p>
+              <p className="text-xs italic text-gray-300 mt-1 text-right">Self-sovereign identity SSID</p>
             </div>
 
             {/* Additional Features */}
-            <div className="absolute top-[25%] left-[32%] right-[5%] flex flex-row gap-2 justify-center">
+            <div className="absolute top-[25%] left-[32%] right-[5%] flex flex-row gap-2 justify-end">
               {/* Social Score */}
               <div className="glass rounded-lg p-3 flex flex-col items-center">
                 <img src={logoImage} alt="NOVA Bulgaria Logo" className="w-8 h-8 object-contain mb-2" />
@@ -187,7 +194,7 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
                 qrStyle="dots"
                 eyeRadius={5}
                 removeQrCodeBehindLogo={true}
-                logoPadding={2}
+                logoPadding={0}
                 logoOpacity={1}
                 bgColor="#FFFFFF"
                 fgColor="#000000"

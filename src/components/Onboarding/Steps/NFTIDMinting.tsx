@@ -7,10 +7,19 @@ import '../../NFTIdCard/NFTIdCard.css'; // Import the NFT ID card styles
 interface NFTIDMintingProps {
   examScore: number;
   redirectToDashboard: string;
+  earnedBGL: number;
 }
 
-const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashboard }) => {
+const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashboard, earnedBGL }) => {
   const { t } = useLanguage();
+  
+  // Helper function for string interpolation in translations
+  const interpolate = (text: string, params: Record<string, string>) => {
+    return Object.entries(params).reduce((result, [key, value]) => {
+      return result.replace(new RegExp(`{${key}}`, 'g'), value);
+    }, text);
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     dob: '',
@@ -32,6 +41,7 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
   const [nftId, setNftId] = useState('');
   const [countdown, setCountdown] = useState(10);
   const [isEditing, setIsEditing] = useState(true);
+  const [totalBGL, setTotalBGL] = useState(earnedBGL);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Handle form input changes
@@ -87,6 +97,10 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
       const generatedId = 'BG-' + new Date().getFullYear() + '-' + Math.floor(Math.random() * 10000).toString().padStart(4, '0');
       setNftId(generatedId);
       
+      // Add bonus BGL for minting
+      const mintingBonus = 10;
+      setTotalBGL(earnedBGL + mintingBonus);
+      
       // Update the form data with the generated ID
       setFormData({
         ...formData,
@@ -105,10 +119,10 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
       }, 1000);
       return () => clearTimeout(timer);
     } else if (mintingComplete && countdown === 0) {
-      // Redirect to Unity app dashboard
-      window.location.href = redirectToDashboard || "/unity-dashboard";
+      // Redirect to Unity app dashboard with proper protocol and parameters
+      window.location.href = redirectToDashboard || "unity://dashboard?id=" + nftId;
     }
-  }, [mintingComplete, countdown, redirectToDashboard]);
+  }, [mintingComplete, countdown, redirectToDashboard, nftId]);
 
   // Check if form is complete
   const isFormComplete = () => {
@@ -144,9 +158,36 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
         {t('onboarding.nftid.description', 'Your NFT ID serves as your digital citizenship proof in NOVA BULGARIA. Complete the form below to mint your unique NFT ID.')}
       </p>
       
-      <div className="flex flex-col lg:flex-row w-full gap-8 mt-8">
+      {/* BGL Earned Display */}
+      <div className="bgl-earned-container bg-[rgba(0,255,170,0.1)] p-4 rounded-lg border border-[rgba(0,255,170,0.3)] mb-6">
+        <div className="flex justify-between items-center">
+          <div>
+            <h3 className="text-lg font-bold text-[#00ffaa]">{t('onboarding.nftid.bglEarned', 'BGL Earned')}</h3>
+            <p className="text-sm text-gray-300">{t('onboarding.nftid.bglDescription', 'Bulgarian Lion (BGL) tokens earned during onboarding')}</p>
+          </div>
+          <div className="text-2xl font-bold text-[#00ffaa] flex items-center">
+            <span className="mr-2">💰</span>
+            <span>{totalBGL} BGL</span>
+          </div>
+        </div>
+        {mintingComplete && (
+          <div className="mt-3 pt-3 border-t border-[rgba(0,255,170,0.3)]">
+            <p className="text-sm text-[#00ffaa]">
+              {interpolate(
+                t('onboarding.nftid.bglBonus', 'Congratulations! You earned {examBGL} BGL from the exam and {mintingBGL} BGL bonus for minting your NFT ID!'),
+                { 
+                  examBGL: earnedBGL.toString(), 
+                  mintingBGL: (totalBGL - earnedBGL).toString() 
+                }
+              )}
+            </p>
+          </div>
+        )}
+      </div>
+      
+      <div className="flex flex-col lg:flex-row-reverse w-full gap-8 mt-8">
         {/* NFT ID Card Preview */}
-        <div className="w-full lg:w-1/2 flex flex-col items-center">
+        <div className="w-full lg:w-1/2 flex flex-col items-center mb-8 lg:mb-0">
           <div className="mb-4 text-center">
             <h3 className="text-xl font-bold text-[var(--primary)]">
               {isEditing 
@@ -156,8 +197,11 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
                   : t('onboarding.nftid.minting', 'Minting in progress...')}
             </h3>
           </div>
-          <div className="nft-card-wrapper w-full max-w-[700px]">
-            <NFTIdCard userData={generateUserData()} />
+          <div className="nft-card-wrapper w-full">
+            <NFTIdCard 
+              userData={generateUserData()} 
+              photoUrl={photoPreview || undefined}
+            />
           </div>
         </div>
         
@@ -168,52 +212,72 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
               <div className="form-section mb-6">
                 <h3 className="text-lg font-bold mb-4 text-[var(--primary)]">{t('onboarding.nftid.personalInfo', 'Personal Information')}</h3>
                 
-                <div className="form-group">
-                  <label htmlFor="name" className="block mb-2">{t('onboarding.nftid.fullName', 'Full Name')}</label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
-                    placeholder="Enter your full name"
-                    disabled={!isEditing}
-                    required
-                  />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="dob" className="block mb-2">{t('onboarding.nftid.dob', 'Date of Birth')}</label>
-                  <input
-                    type="date"
-                    id="dob"
-                    name="dob"
-                    value={formData.dob}
-                    onChange={handleInputChange}
-                    className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
-                    disabled={!isEditing}
-                    required
-                  />
-                </div>
-                
-                <div className="form-group">
-                  <label htmlFor="expertise" className="block mb-2">{t('onboarding.nftid.expertise', 'Area of Expertise')}</label>
-                  <select
-                    id="expertise"
-                    name="expertise"
-                    value={formData.expertise}
-                    onChange={(e) => setFormData({...formData, expertise: e.target.value})}
-                    className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
-                    disabled={!isEditing}
-                  >
-                    <option value="Technology">Technology</option>
-                    <option value="Science">Science</option>
-                    <option value="Arts">Arts</option>
-                    <option value="Business">Business</option>
-                    <option value="Education">Education</option>
-                    <option value="Healthcare">Healthcare</option>
-                  </select>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="form-group">
+                    <label htmlFor="name" className="block mb-2">{t('onboarding.nftid.fullName', 'Full Name')}</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
+                      placeholder="Enter your full name"
+                      disabled={!isEditing}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="dob" className="block mb-2">{t('onboarding.nftid.dob', 'Date of Birth')}</label>
+                    <input
+                      type="date"
+                      id="dob"
+                      name="dob"
+                      value={formData.dob}
+                      onChange={handleInputChange}
+                      className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
+                      disabled={!isEditing}
+                      required
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="nationality" className="block mb-2">{t('onboarding.nftid.nationality', 'Nationality')}</label>
+                    <input
+                      type="text"
+                      id="nationality"
+                      name="nationality"
+                      value={formData.nationality}
+                      onChange={handleInputChange}
+                      className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
+                      disabled={true}
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="walletAddress" className="block mb-2">{t('onboarding.nftid.walletAddress', 'Wallet Address')}</label>
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="walletAddress"
+                        name="walletAddress"
+                        value={formData.walletAddress}
+                        onChange={handleInputChange}
+                        className="w-full p-3 bg-[rgba(0,0,0,0.3)] border border-[rgba(255,255,255,0.1)] rounded-lg focus:border-[var(--primary)] focus:outline-none"
+                        placeholder="0x..."
+                        disabled={!isEditing}
+                        required
+                      />
+                      <button 
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-[var(--primary)] hover:text-[var(--primary-dark)]"
+                        onClick={connectWallet}
+                        disabled={!isEditing}
+                      >
+                        <FaWallet />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
               
@@ -301,32 +365,45 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
               </div>
             </div>
           ) : (
-            <div className="glass p-6 rounded-lg">
+            <div className="minting-complete glass p-6 rounded-lg">
               <div className="text-center mb-6">
-                <div className="w-16 h-16 rounded-full bg-[var(--primary)] flex items-center justify-center mx-auto mb-4">
-                  <FaCheck size={32} className="text-black" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">{t('onboarding.nftid.mintingComplete', 'NFT ID Successfully Minted!')}</h3>
-                <p className="text-[rgba(255,255,255,0.7)]">{t('onboarding.nftid.citizenshipGranted', 'Your digital citizenship has been granted.')}</p>
+                <FaCheck className="text-[var(--primary)] text-5xl mb-4 inline-block" />
+                <h3 className="text-xl font-bold text-[var(--primary)]">
+                  {t('onboarding.nftid.success', 'NFT ID Successfully Minted!')}
+                </h3>
+                <p className="mt-2">
+                  {interpolate(
+                    t('onboarding.nftid.redirecting', 'Redirecting to Unity+ App Dashboard in {seconds} seconds...'),
+                    { seconds: countdown.toString() }
+                  )}
+                </p>
               </div>
               
-              <div className="mb-6 p-4 bg-[rgba(0,0,0,0.2)] rounded-lg">
-                <div className="flex justify-between mb-2">
-                  <span className="text-[rgba(255,255,255,0.7)]">{t('onboarding.nftid.tokenEarned', 'BGL Tokens Earned from Exam:')}</span>
-                  <span className="font-bold text-[var(--primary)]">{examScore >= 70 ? '100' : '0'} BGL</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-[rgba(255,255,255,0.7)]">{t('onboarding.nftid.idNumber', 'NFT ID Number:')}</span>
-                  <span className="font-bold text-[var(--primary)]">{nftId}</span>
-                </div>
+              <div className="bg-[rgba(0,0,0,0.2)] p-4 rounded-lg mb-4">
+                <h4 className="font-bold text-[var(--primary)] mb-2">{t('onboarding.nftid.summary', 'Onboarding Summary')}</h4>
+                <ul className="list-disc pl-5 space-y-2">
+                  <li>{interpolate(
+                    t('onboarding.nftid.examCompleted', 'Knowledge Exam Completed: {score}%'),
+                    { score: examScore.toString() }
+                  )}</li>
+                  <li>{interpolate(
+                    t('onboarding.nftid.bglEarnedSummary', 'BGL Tokens Earned: {bgl}'),
+                    { bgl: totalBGL.toString() }
+                  )}</li>
+                  <li>{interpolate(
+                    t('onboarding.nftid.nftMinted', 'NFT ID Minted: {id}'),
+                    { id: nftId }
+                  )}</li>
+                </ul>
               </div>
               
               <div className="text-center">
-                <p className="mb-2">{t('onboarding.nftid.redirecting', 'Redirecting to dashboard in')}</p>
-                <div className="w-12 h-12 rounded-full bg-[rgba(0,0,0,0.3)] flex items-center justify-center mx-auto mb-4 border-2 border-[var(--primary)]">
-                  <span className="text-xl font-bold">{countdown}</span>
-                </div>
-                <p className="text-sm text-[rgba(255,255,255,0.5)]">{t('onboarding.nftid.seconds', 'seconds')}</p>
+                <button
+                  className="primary-button w-full"
+                  onClick={() => window.location.href = redirectToDashboard || "unity://dashboard?id=" + nftId}
+                >
+                  {t('onboarding.nftid.goToDashboard', 'Go to Dashboard Now')}
+                </button>
               </div>
             </div>
           )}
