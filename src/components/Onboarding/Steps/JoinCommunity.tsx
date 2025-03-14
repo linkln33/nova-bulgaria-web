@@ -13,7 +13,7 @@ const JoinCommunity: React.FC<JoinCommunityProps> = ({ onComplete }) => {
 
   const handleJoinDiscord = () => {
     // In a real implementation, this would open Discord invite link
-    window.open('https://discord.gg/novabulgaria', '_blank');
+    window.open('https://discord.gg/mRfydr8P', '_blank');
     setDiscordJoined(true);
   };
 
