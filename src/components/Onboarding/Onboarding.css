@@ -1,0 +1,482 @@
+.onboarding-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  color: white;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.onboarding-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.onboarding-progress {
+  margin-bottom: 3rem;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.progress-step.active {
+  opacity: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+}
+
+.progress-step.active .step-number {
+  background-color: #00ffaa;
+  color: black;
+}
+
+.step-label {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.progress-line {
+  flex-grow: 1;
+  height: 2px;
+  background-color: #333;
+  margin: 0 1rem;
+  max-width: 100px;
+}
+
+.onboarding-content {
+  flex-grow: 1;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.onboarding-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+.nav-button {
+  padding: 0.75rem 2rem;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.back-button {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.next-button {
+  background-color: #00ffaa;
+  color: black;
+  border: none;
+}
+
+.next-button:hover {
+  background-color: #00cc88;
+}
+
+/* Step-specific styles */
+.step-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.step-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #00ffaa;
+}
+
+.step-description {
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.discord-section {
+  background-color: rgba(114, 137, 218, 0.1);
+  border: 1px solid rgba(114, 137, 218, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.discord-button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #7289da;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.discord-button:hover {
+  background-color: #5e73bc;
+}
+
+.discord-icon {
+  margin-right: 0.5rem;
+}
+
+/* Exam styles */
+.exam-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.question-container {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.question-category {
+  font-size: 0.8rem;
+  color: #00ffaa;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.answer-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.answer-option {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.answer-option:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.answer-option.selected {
+  background-color: rgba(0, 255, 170, 0.2);
+  border: 1px solid #00ffaa;
+}
+
+.answer-radio {
+  margin-right: 0.75rem;
+}
+
+.exam-progress {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.exam-progress-bar {
+  flex-grow: 1;
+  height: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 1rem;
+}
+
+.exam-progress-fill {
+  height: 100%;
+  background-color: #00ffaa;
+  transition: width 0.3s ease;
+}
+
+.exam-submit {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.submit-button {
+  background-color: #00ffaa;
+  color: black;
+  padding: 0.75rem 2rem;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #00cc88;
+}
+
+.submit-button:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* NFT ID Minting styles */
+.nft-id-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nft-id-card {
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1.6/1;
+  background: linear-gradient(135deg, #111 0%, #333 100%);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 255, 170, 0.3);
+}
+
+.nft-id-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, rgba(0, 255, 170, 0.1) 0%, transparent 100%);
+  z-index: 1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.card-logo {
+  width: 60px;
+  height: 60px;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #00ffaa;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  gap: 1rem;
+}
+
+.card-photo {
+  width: 80px;
+  height: 80px;
+  background-color: #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-details {
+  flex-grow: 1;
+}
+
+.card-detail {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.detail-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.7rem;
+  margin-bottom: 0.1rem;
+}
+
+.detail-value {
+  font-weight: bold;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.card-id {
+  font-family: monospace;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.card-qr {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.nft-form {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+  color: white;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #00ffaa;
+}
+
+.photo-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.upload-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.upload-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.mint-button {
+  width: 100%;
+  background-color: #00ffaa;
+  color: black;
+  padding: 0.75rem;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.mint-button:hover {
+  background-color: #00cc88;
+}
+
+.mint-button:disabled {
+  background-color: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.reward-info {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: rgba(0, 255, 170, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 255, 170, 0.3);
+}
+
+.reward-amount {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00ffaa;
+  margin-bottom: 0.5rem;
+}
+
+.reward-description {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}

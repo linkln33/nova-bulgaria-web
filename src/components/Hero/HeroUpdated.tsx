@@ -13,7 +13,11 @@ const BulgarianFlag = () => (
   </svg>
 );
 
-const HeroUpdated: React.FC = () => {
+interface HeroUpdatedProps {
+  onGetStarted?: () => void;
+}
+
+const HeroUpdated: React.FC<HeroUpdatedProps> = ({ onGetStarted }) => {
   const { language, t } = useLanguage();
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
@@ -72,6 +76,17 @@ const HeroUpdated: React.FC = () => {
     setIsDeleting(false);
   }, [language]);
 
+  const handleJoinMovement = () => {
+    if (onGetStarted) {
+      onGetStarted();
+    } else {
+      // Fallback if no handler is provided
+      const url = new URL(window.location.href);
+      url.searchParams.set('route', 'onboarding');
+      window.location.href = url.toString();
+    }
+  };
+
   return (
     <section id="hero" className="hero pt-32 flex flex-col items-center justify-start relative overflow-hidden">
       <div className="container mx-auto px-6 pt-[calc(16px*0.65)] pb-20 relative z-10">
@@ -97,9 +112,15 @@ const HeroUpdated: React.FC = () => {
             <span className="cursor">|</span>
           </p>
           <div className="flex flex-col md:flex-row gap-6 justify-center">
-            <button className="bg-[#00ffaa] text-black px-10 py-4 rounded-full hover:shadow-glow transition-all duration-300 font-bold text-lg transform hover:scale-105">
-              {t('hero.button.getStarted')}
-            </button>
+            <a 
+              onClick={handleJoinMovement}
+              className="bg-[#00ffaa] text-black px-10 py-4 rounded-full hover:shadow-glow transition-all duration-300 font-bold text-lg transform hover:scale-105 cursor-pointer"
+            >
+              {t('hero.button.joinMovement', 'Join Movement')}
+            </a>
+            <a href="#need-for-nova" className="border-2 border-[#00ffaa] text-white px-10 py-4 rounded-full hover:bg-[rgba(0,255,170,0.1)] transition-all duration-300 font-bold text-lg transform hover:scale-105">
+              {t('hero.button.learnMore', 'Learn More')}
+            </a>
           </div>
         </div>
       </div>

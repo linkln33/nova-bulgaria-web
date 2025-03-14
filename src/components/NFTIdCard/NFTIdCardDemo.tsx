@@ -18,7 +18,7 @@ const NFTIdCardDemo: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-[700px]">
+    <div className="w-full">
       <NFTIdCard userData={userData} />
     </div>
   );

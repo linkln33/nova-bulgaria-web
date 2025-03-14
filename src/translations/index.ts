@@ -1,3 +1,5 @@
+import { futureTabTranslations } from "./future-tab-translations";
+
 export interface TranslationDictionary {
   [key: string]: {
     en: string;
@@ -5,9 +7,185 @@ export interface TranslationDictionary {
   };
 }
 
-import { futureTabTranslations } from './future-tab-translations';
+export const translations = {
+  // Sectors S
+  // Sectors Section
+  'sectors.title': {
+    en: '44 Sectors of NOVA BULGARIA',
+    bg: '44 Сектора на НОВА БЪЛГАРИЯ'
+  },
+  'sectors.categories.governance': {
+    en: 'Governance & Politics',
+    bg: 'Управление и Политика'
+  },
+  'sectors.categories.economy': {
+    en: 'Economy & Finance',
+    bg: 'Икономика и Финанси'
+  },
+  'sectors.categories.society': {
+    en: 'Society & Welfare',
+    bg: 'Общество и Благосъстояние'
+  },
+  'sectors.categories.technology': {
+    en: 'Technology & Innovation',
+    bg: 'Технологии и Иновации'
+  },
+  'sectors.categories.environment': {
+    en: 'Environment & Infrastructure',
+    bg: 'Околна Среда и Инфраструктура'
+  },
+  'sectors.categories.future': {
+    en: 'Future Technologies',
+    bg: 'Бъдещи Технологии'
+  },
+  
+  // Governance Sectors
+  'sectors.governance.title': {
+    en: 'Governance & Political System',
+    bg: 'Система на Управление и Политика'
+  },
+  'sectors.governance.item1': {
+    en: 'Decentralized Autonomous Governance (DAG): Voting, administration, and policy-making are executed on-chain through quadratic voting and proof-of-contribution mechanisms.',
+    bg: 'Децентрализирано Автономно Управление (ДАУ): Гласуването, администрацията и създаването на политики се изпълняват чрез блокчейн с квадратично гласуване и механизми за доказателство на принос.'
+  },
+  'sectors.governance.item2': {
+    en: 'Citizen-Proposed Laws: Smart contracts execute laws instantly once approved.',
+    bg: 'Закони, Предложени от Граждани: Умните договори изпълняват законите незабавно след одобрение.'
+  },
+  
+  'sectors.legal.title': {
+    en: 'Legal & Judicial System',
+    bg: 'Правна и Съдебна Система'
+  },
+  'sectors.legal.item1': {
+    en: 'Blockchain Courts: Disputes are resolved via smart contract arbitration with elected community judges.',
+    bg: 'Блокчейн Съдилища: Споровете се разрешават чрез арбитраж на умни договори с избрани общностни съдии.'
+  },
+  'sectors.legal.item2': {
+    en: 'Proof-of-Law Enforcement: Law enforcement actions are logged on-chain for full transparency.',
+    bg: 'Доказателство за Правоприлагане: Действията по правоприлагане се записват в блокчейна за пълна прозрачност.'
+  },
+  
+  'sectors.foreign.title': {
+    en: 'Foreign Relations & Diplomatic System',
+    bg: 'Външни Отношения и Дипломатическа Система'
+  },
+  'sectors.foreign.item1': {
+    en: 'Blockchain-Based Trade Agreements: Smart contracts govern international partnerships and commerce.',
+    bg: 'Търговски Споразумения на Базата на Блокчейн: Умните договори управляват международните партньорства и търговия.'
+  },
+  'sectors.foreign.item2': {
+    en: 'NFT Passports & Visas: Soulbound NFT visas replace paper-based systems.',
+    bg: 'NFT Паспорти и Визи: Soulbound NFT визи заменят системите на хартиена основа.'
+  },
+  
+  'sectors.immigration.title': {
+    en: 'Immigration & Citizenship System',
+    bg: 'Имиграционна и Гражданска Система'
+  },
+  'sectors.immigration.item1': {
+    en: 'Digital Citizenship: Citizens receive a non-transferable Soulbound NFT that serves as their digital identity.',
+    bg: 'Дигитално Гражданство: Гражданите получават непрехвърляем Soulbound NFT, който служи като тяхна дигитална самоличност.'
+  },
+  'sectors.immigration.item2': {
+    en: 'Merit-Based Immigration: Citizenship is earned through contribution, not birthright.',
+    bg: 'Имиграция на Базата на Заслуги: Гражданството се печели чрез принос, а не по рождение.'
+  },
+  
+  'sectors.security.title': {
+    en: 'Law Enforcement & Internal Security System',
+    bg: 'Правоприлагане и Система за Вътрешна Сигурност'
+  },
+  'sectors.security.item1': {
+    en: 'Decentralized Crime Reporting: A blockchain-based whistleblower system protects citizens.',
+    bg: 'Децентрализирано Докладване на Престъпления: Система за сигнализиране, базирана на блокчейн, защитава гражданите.'
+  },
+  'sectors.security.item2': {
+    en: 'Smart Contract-Based Policing: Officers are funded based on verifiable task completion.',
+    bg: 'Полицейска Дейност, Базирана на Умни Договори: Служителите се финансират въз основа на проверимо изпълнение на задачи.'
+  },
+  
+  'sectors.taxation.title': {
+    en: 'Taxation & Revenue Collection System',
+    bg: 'Система за Данъчно Облагане и Събиране на Приходи'
+  },
+  'sectors.taxation.item1': {
+    en: 'On-Chain Taxation: Citizens pay taxes automatically via programmable smart contracts.',
+    bg: 'Данъчно Облагане в Блокчейн: Гражданите плащат данъци автоматично чрез програмируеми умни договори.'
+  },
+  'sectors.taxation.item2': {
+    en: 'Transparent Public Budgets: Government spending is fully traceable via open-source blockchain ledgers.',
+    bg: 'Прозрачни Публични Бюджети: Правителствените разходи са напълно проследими чрез блокчейн регистри с отворен код.'
+  },
+  
+  'sectors.crisis.title': {
+    en: 'Crisis Management & Emergency Response System',
+    bg: 'Система за Управление на Кризи и Спешно Реагиране'
+  },
+  'sectors.crisis.item1': {
+    en: 'Blockchain Emergency Fund: Automated disaster relief allocates BGL instantly to affected areas.',
+    bg: 'Блокчейн Фонд за Спешни Случаи: Автоматизираната помощ при бедствия разпределя БГЛ незабавно към засегнатите райони.'
+  },
+  'sectors.crisis.item2': {
+    en: 'Decentralized First Responders: DAOs coordinate volunteer & paramedic response efforts.',
+    bg: 'Децентрализирани Екипи за Първа Помощ: ДАО координират усилията на доброволци и парамедици.'
+  },
+  
+  'sectors.smart-contracts.title': {
+    en: 'Decentralized Law & Smart Contracts',
+    bg: 'Децентрализирано Право и Умни Договори'
+  },
+  'sectors.smart-contracts.item1': {
+    en: 'Automated Legal Frameworks: Smart contracts enforce agreements without intermediaries.',
+    bg: 'Автоматизирани Правни Рамки: Умните договори изпълняват споразумения без посредници.'
+  },
+  'sectors.smart-contracts.item2': {
+    en: 'Decentralized Arbitration: Disputes are resolved through community-elected judges and transparent protocols.',
+    bg: 'Децентрализиран Арбитраж: Споровете се разрешават чрез избрани от общността съдии и прозрачни протоколи.'
+  },
+  
+  'sectors.meta.title': {
+    en: 'Meta-Governance & AI Policy',
+    bg: 'Мета-Управление и Политика за ИИ'
+  },
+  'sectors.meta.item1': {
+    en: 'AI-Assisted Decision Making: Artificial intelligence helps optimize governance decisions.',
+    bg: 'Вземане на Решения с Помощта на ИИ: Изкуственият интелект помага за оптимизиране на решенията за управление.'
+  },
+  'sectors.meta.item2': {
+    en: 'Decentralized Policy Development: Policies evolve through community input and transparent processes.',
+    bg: 'Децентрализирано Разработване на Политики: Политиките се развиват чрез принос от общността и прозрачни процеси.'
+  },
+  
+  // Economy Sectors
+  'sectors.economic.title': {
+    en: 'Economic & Financial System',
+    bg: 'Икономическа и Финансова Система'
+  },
+  'sectors.economic.item1': {
+    en: 'Decentralized Treasury: All funds are managed via a DAO treasury, with budgets allocated by citizen votes.',
+    bg: 'Децентрализирана Хазна: Всички средства се управляват чрез ДАО хазна, с бюджети, разпределени чрез гласове на гражданите.'
+  },
+  'sectors.economic.item2': {
+    en: 'On-Chain Banking: DeFi lending & stablecoins (BGL-S) ensure economic stability.',
+    bg: 'Банкиране в Блокчейн: DeFi кредитиране и стабилни монети (БГЛ-С) осигуряват икономическа стабилност.'
+  },
+  
+  'sectors.currency.title': {
+    en: 'Currency & Monetary System',
+    bg: 'Валутна и Парична Система'
+  },
+  'sectors.currency.item1': {
+    en: 'Bulgarian Lion (BGL): A fully-backed, non-inflationary cryptocurrency that serves as the national currency.',
+    bg: 'Български Лъв (БГЛ): Напълно обезпечена, неинфлационна криптовалута, която служи като национална валута.'
+  },
+  'sectors.currency.item2': {
+    en: 'Algorithmic Monetary Policy: Supply and interest rates are managed by transparent smart contracts, not central banks.',
+    bg: 'Алгоритмична Парична Политика: Предлагането и лихвените проценти се управляват от прозрачни умни договори, а не от централни банки.'
+  },
 
-const translations: TranslationDictionary = {
+  // Add more translations as needed
+  
   // Navbar
   'nav.vision': {
     en: 'Vision',
@@ -64,13 +242,23 @@ const translations: TranslationDictionary = {
     bg: 'Тракийска Кръв, Спартански Дух!'
   },
   
-  'hero.slogan7': {
+  'hero.slogan6': {
+    en: 'Digital Sovereignty, Blockchain Democracy!',
+    bg: 'Дигитален Суверенитет, Блокчейн Демокрация!'
+  },
+    'hero.slogan7': {
     en: 'The Gold of Our Ancestors, The Strength of Our Future!',
     bg: 'Златото на Нашите Предци, Силата на Нашето Бъдеще!'
   },
   'hero.button.whitepaper': {
     en: 'Learn More',
     bg: 'Научи Повече'
+  },
+
+  
+  'need-for-nova.title': {
+    en: 'Decentralize or disappear',
+    bg: 'Децентрализирай се или изчезни'
   },
   'hero.button.getStarted': {
     en: 'Join the Movement',
@@ -529,6 +717,11 @@ const translations: TranslationDictionary = {
     en: 'The Current Political Crisis: Corruption, Tyranny, and National Collapse',
     bg: 'Текущата Политическа Криза: Корупция, Тирания и Национален Колапс'
   },
+
+  'need.political.tabTitle': {
+    en: 'A Failing State',
+    bg: 'Провалена Държава'
+  },
   'need.political.paragraph1': {
     en: 'Bulgaria stands at the edge of destruction, gripped by a ruthless and corrupt regime that has held power for decades. The country is controlled by an oligarchic mafia, led by political figures such as Boyko Borisov and Delyan Peevski, who have systematically looted the nation\'s resources, silenced opposition, and driven millions into poverty.',
     bg: 'България е на ръба на разрушението, сграбчена от безмилостен и корумпиран режим, който държи властта десетилетия наред. Страната е контролирана от олигархична мафия, водена от политически фигури като Бойко Борисов и Делян Пеевски, които систематично разграбват ресурсите на нацията, заглушават опозицията и тласкат милиони в бедност.'
@@ -809,7 +1002,7 @@ const translations: TranslationDictionary = {
   },
   'nftid.description': {
     en: 'Every citizen of NOVA Bulgaria receives a unique soulbound NFT ID card that serves as their digital identity within our ecosystem.',
-    bg: 'Всеки гражданин на НОВА България получава уникална NFT ID карта, която служи като тяхна дигитална идентичност в нашата екосистема.'
+    bg: 'Всеки гражданин на НОВА България получава уникална привързана NFT ID карта, която служи като тяхна дигитална идентичност в нашата екосистема.'
   },
   'funding.container': {
     en: 'A Nation of Lions Shall Never Kneel',
@@ -835,23 +1028,131 @@ const translations: TranslationDictionary = {
     en: 'Development Roadmap',
     bg: 'Пътна карта за развитие'
   },
-  'sectors.title': {
-    en: '44 Sectors of NOVA BULGARIA',
-    bg: '44 Сектора на НОВА БЪЛГАРИЯ'
+  'roadmap.subtitle': {
+    en: 'Building a sovereign digital nation through strategic phases',
+    bg: 'Изграждане на суверенна дигитална нация чрез стратегически фази'
+  },
+  'roadmap.phase1': {
+    en: 'Phase 1',
+    bg: 'Фаза 1'
+  },
+  'roadmap.phase2': {
+    en: 'Phase 2',
+    bg: 'Фаза 2'
+  },
+  'roadmap.phase3': {
+    en: 'Phase 3',
+    bg: 'Фаза 3'
+  },
+  'roadmap.phase4': {
+    en: 'Phase 4',
+    bg: 'Фаза 4'
   },
   'sectors.header.subtitle': {
     en: 'Transforming every aspect of our nation through decentralization, transparency, and blockchain technology on the Cosmos ecosystem',
     bg: 'Трансформиране на всеки аспект на нашата нация чрез децентрализация, прозрачност и блокчейн технология в екосистемата на Cosmos'
   },
-  'nftid.title': {
-    en: 'National NFT ID System',
-    bg: 'Национална NFT ID Система'
+  'sectors.categories.environment': {
+    en: 'Environment & Infrastructure',
+    bg: 'Околна среда и Инфраструктура'
   },
-  'nftid.description': {
-    en: 'A secure, self-sovereign identity system for all citizens',
-    bg: 'Сигурна, самостоятелна система за идентичност за всички граждани'
+  // Environment & Infrastructure Sectors
+  'sectors.environmental.title': {
+    en: 'Environmental Protection',
+    bg: 'Опазване на Околната Среда'
   },
-  
+  'sectors.environmental.item1': {
+    en: 'Blockchain-based environmental monitoring systems track pollution in real-time with tamper-proof data.',
+    bg: 'Системи за мониторинг на околната среда, базирани на блокчейн, проследяват замърсяването в реално време с непроменими данни.'
+  },
+  'sectors.environmental.item2': {
+    en: 'Smart contracts automatically enforce environmental regulations and penalties for violations.',
+    bg: 'Смарт договорите автоматично налагат екологични разпоредби и санкции за нарушения.'
+  },
+  'sectors.infrastructure.title': {
+    en: 'Infrastructure Development',
+    bg: 'Развитие на Инфраструктурата'
+  },
+  'sectors.infrastructure.item1': {
+    en: 'Decentralized infrastructure funding through tokenized community bonds and participatory budgeting.',
+    bg: 'Децентрализирано финансиране на инфраструктурата чрез токенизирани общностни облигации и партисипативно бюджетиране.'
+  },
+  'sectors.infrastructure.item2': {
+    en: 'Smart infrastructure with IoT sensors and blockchain verification ensures optimal resource allocation.',
+    bg: 'Умна инфраструктура със сензори IoT и блокчейн верификация осигурява оптимално разпределение на ресурсите.'
+  },
+  'sectors.energy.title': {
+    en: 'Energy Systems',
+    bg: 'Енергийни Системи'
+  },
+  'sectors.energy.item1': {
+    en: 'Peer-to-peer energy trading platform allows citizens to buy and sell renewable energy directly.',
+    bg: 'Платформа за директна търговия с енергия позволява на гражданите да купуват и продават възобновяема енергия директно.'
+  },
+  'sectors.energy.item2': {
+    en: 'Tokenized renewable energy certificates incentivize clean energy production and investment.',
+    bg: 'Токенизирани сертификати за възобновяема енергия стимулират производството и инвестициите в чиста енергия.'
+  },
+  'sectors.agriculture.title': {
+    en: 'Agricultural Innovation',
+    bg: 'Земеделски Иновации'
+  },
+  'sectors.agriculture.item1': {
+    en: 'Blockchain-based supply chain tracking ensures food safety and fair compensation for farmers.',
+    bg: 'Проследяване на веригата за доставки, базирано на блокчейн, осигурява безопасност на храните и справедливо заплащане за земеделците.'
+  },
+  'sectors.agriculture.item2': {
+    en: 'Tokenized land registry and smart contracts streamline agricultural land management and leasing.',
+    bg: 'Токенизиран поземлен регистър и смарт договори оптимизират управлението и отдаването под наем на земеделски земи.'
+  },
+  'sectors.transportation.title': {
+    en: 'Transportation Networks',
+    bg: 'Транспортни Мрежи'
+  },
+  'sectors.transportation.item1': {
+    en: 'Decentralized mobility platform connects all transportation modes with seamless payment and booking.',
+    bg: 'Децентрализирана платформа за мобилност свързва всички видове транспорт с безпроблемно плащане и резервация.'
+  },
+  'sectors.transportation.item2': {
+    en: 'Tokenized incentives reward sustainable transportation choices and reduce urban congestion.',
+    bg: 'Токенизирани стимули възнаграждават устойчивите транспортни избори и намаляват градското задръстване.'
+  },
+  'sectors.water.title': {
+    en: 'Water Management',
+    bg: 'Управление на Водите'
+  },
+  'sectors.water.item1': {
+    en: 'Blockchain-based water rights and trading system ensures equitable distribution and conservation.',
+    bg: 'Система за водни права и търговия, базирана на блокчейн, осигурява справедливо разпределение и опазване.'
+  },
+  'sectors.water.item2': {
+    en: 'Smart contracts automatically manage water allocation during droughts and emergencies.',
+    bg: 'Смарт договорите автоматично управляват разпределението на водата по време на суши и извънредни ситуации.'
+  },
+  'sectors.urban.title': {
+    en: 'Urban Planning',
+    bg: 'Градско Планиране'
+  },
+  'sectors.urban.item1': {
+    en: 'Decentralized urban planning platform allows citizens to propose and vote on development projects.',
+    bg: 'Децентрализирана платформа за градско планиране позволява на гражданите да предлагат и гласуват за проекти за развитие.'
+  },
+  'sectors.urban.item2': {
+    en: 'Tokenized building rights create transparent and equitable urban development incentives.',
+    bg: 'Токенизираните строителни права създават прозрачни и справедливи стимули за градско развитие.'
+  },
+  'sectors.climate.title': {
+    en: 'Climate Action',
+    bg: 'Климатични Действия'
+  },
+  'sectors.climate.item1': {
+    en: 'Carbon credit marketplace enables transparent tracking and trading of emissions reductions.',
+    bg: 'Пазарът на въглеродни кредити позволява прозрачно проследяване и търговия с намаления на емисиите.'
+  },
+  'sectors.climate.item2': {
+    en: 'Climate adaptation fund uses smart contracts to distribute resources based on verified needs.',
+    bg: 'Фондът за адаптация към климата използва смарт договори за разпределяне на ресурси въз основа на проверени нужди.'
+  },
   // NFT ID System Section
   'nftid.system.title': {
     en: 'National NFT ID System',
@@ -885,7 +1186,7 @@ const translations: TranslationDictionary = {
   },
   'ssi.apply.step3': {
     en: 'Pass Identity Verification',
-    bg: 'Преминете Проверка на Самоличността'
+    bg: 'Проверка на Самоличността'
   },
   'ssi.apply.description': {
     en: 'Start your application process',
@@ -1190,7 +1491,7 @@ const translations: TranslationDictionary = {
   // Need For Nova - New Tabs
   'need.tab.cbdc': {
     en: 'CBDC vs. Bulgarian Lion (BGL)',
-    bg: 'ЦБДВ срещу Български Лъв (БГЛ)'
+    bg: 'СБДС срещу Български Лъв (БГЛ)'
   },
   'need.tab.future': {
     en: 'Look at the Future',
@@ -1202,7 +1503,7 @@ const translations: TranslationDictionary = {
   },
   'need.cbdc.title': {
     en: 'CBDC vs. Bulgarian Lion Tokens (BGL)',
-    bg: 'ЦБДВ срещу Български Лъв (БГЛ)'
+    bg: 'СБДС срещу Български Лъв (БГЛ)'
   },
   'need.cbdc.subtitle': {
     en: '💰 One Takes Power from You – The Other Gives It Back 🔥',
@@ -1210,15 +1511,15 @@ const translations: TranslationDictionary = {
   },
   'need.cbdc.column1.title': {
     en: '🏦 CBDCs – Control, Debt, & Surveillance',
-    bg: '🏦 ЦБДВ – Контрол, Дълг и Наблюдение'
+    bg: '🏦 СБДС – Контрол, Дълг и Наблюдение'
   },
   'need.cbdc.column1.subtitle': {
     en: 'Central Bank Digital Currencies are designed for control, not freedom',
-    bg: 'Централизираните Дигитални Валути са създадени за контрол, не за свобода'
+    bg: 'Централните Дигитални Валути са създадени за контрол, не за свобода'
   },
   'need.cbdc.column1.item1': {
     en: 'Based on Debt – CBDCs are just digital versions of fiat currency, which means they are backed by government debt. The more money is printed, the less yours is worth. Inflation eats away your savings!',
-    bg: 'Базирани на Дълг – ЦБДВ са просто дигитални версии на фиатните пари, което означава, че са подкрепени от държавен дълг. Колкото повече пари се печатат, толкова по-малко струват вашите. Инфлацията изяжда спестяванията ви!'
+    bg: 'Базирани на Дълг – СБДС са просто дигитални версии на фиатните пари, което означава, че са подкрепени от държавен дълг. Колкото повече пари се печатат, толкова по-малко струват вашите. Инфлацията изяжда спестяванията ви!'
   },
   'need.cbdc.column1.item2': {
     en: 'Centralized Control – A central bank controls every transaction, can freeze your funds, and even limit what you can spend money on.',
@@ -1495,6 +1796,329 @@ const translations: TranslationDictionary = {
     en: '📢 A nation where borders don\'t limit success! 🚀🔥',
     bg: '📢 Нация, където границите не ограничават успеха! 🚀🔥'
   }
-};
+,
 
-export default translations;
+  // Added missing sector translations
+  // All Missing Sector Translations
+
+// Future Technologies Sectors
+'sectors.space.title': {
+  en: 'Space Exploration & Colonization',
+  bg: 'Космическо Изследване и Колонизация'
+},
+'sectors.space.item1': {
+  en: 'Decentralized space missions funded through community staking and governed by citizen votes.',
+  bg: 'Децентрализирани космически мисии, финансирани чрез общностно залагане и управлявани от гласове на граждани.'
+},
+'sectors.space.item2': {
+  en: 'Tokenized space assets allow citizens to own shares in satellites, space stations, and extraterrestrial resources.',
+  bg: 'Токенизирани космически активи позволяват на гражданите да притежават дялове в сателити, космически станции и извънземни ресурси.'
+},
+'sectors.agriculture-tech.title': {
+  en: 'Agricultural Technology',
+  bg: 'Земеделска Технология'
+},
+'sectors.agriculture-tech.item1': {
+  en: 'Blockchain-tracked vertical farming systems maximize food production with minimal environmental impact.',
+  bg: 'Системи за вертикално земеделие, проследявани чрез блокчейн, максимизират производството на храна с минимално въздействие върху околната среда.'
+},
+'sectors.agriculture-tech.item2': {
+  en: 'Smart contract-managed automated farms ensure food security and sovereignty.',
+  bg: 'Автоматизирани ферми, управлявани чрез смарт договори, осигуряват продоволствена сигурност и суверенитет.'
+},
+'sectors.grid-tech.title': {
+  en: 'Smart Grid Technology',
+  bg: 'Технология на Умни Електрически Мрежи'
+},
+'sectors.grid-tech.item1': {
+  en: 'Decentralized energy grid with AI optimization ensures efficient distribution and resilience.',
+  bg: 'Децентрализирана енергийна мрежа с ИИ оптимизация осигурява ефективно разпределение и устойчивост.'
+},
+'sectors.grid-tech.item2': {
+  en: 'Blockchain-based energy trading allows for real-time pricing and automatic load balancing.',
+  bg: 'Търговия с енергия, базирана на блокчейн, позволява ценообразуване в реално време и автоматично балансиране на натоварването.'
+},
+'sectors.vehicles.title': {
+  en: 'Autonomous Vehicles',
+  bg: 'Автономни Превозни Средства'
+},
+'sectors.vehicles.item1': {
+  en: 'Self-driving vehicles coordinated through a decentralized traffic management system.',
+  bg: 'Самоуправляващи се превозни средства, координирани чрез децентрализирана система за управление на трафика.'
+},
+'sectors.vehicles.item2': {
+  en: 'Tokenized vehicle sharing economy allows citizens to earn from their autonomous vehicles when not in use.',
+  bg: 'Токенизирана икономика на споделяне на превозни средства позволява на гражданите да печелят от своите автономни превозни средства, когато не се използват.'
+},
+
+// Technology & Innovation Sectors
+'sectors.technology.title': {
+  en: 'Technology Development',
+  bg: 'Технологично Развитие'
+},
+'sectors.technology.item1': {
+  en: 'Open-source technology development funded through community staking and governed by citizen votes.',
+  bg: 'Разработка на технологии с отворен код, финансирана чрез общностно залагане и управлявана от гласове на граждани.'
+},
+'sectors.technology.item2': {
+  en: 'Decentralized research and development hubs connect global talent to solve local challenges.',
+  bg: 'Децентрализирани центрове за научноизследователска и развойна дейност свързват глобалния талант за решаване на местни предизвикателства.'
+},
+'sectors.communication.title': {
+  en: 'Communication Networks',
+  bg: 'Комуникационни Мрежи'
+},
+'sectors.communication.item1': {
+  en: 'Decentralized mesh networks ensure censorship-resistant communication for all citizens.',
+  bg: 'Децентрализирани мрежови системи осигуряват устойчива на цензура комуникация за всички граждани.'
+},
+'sectors.communication.item2': {
+  en: 'Blockchain-verified communication protocols protect privacy while ensuring accountability.',
+  bg: 'Комуникационни протоколи, проверени чрез блокчейн, защитават поверителността, като същевременно осигуряват отчетност.'
+},
+'sectors.science.title': {
+  en: 'Scientific Research',
+  bg: 'Научни Изследвания'
+},
+'sectors.science.item1': {
+  en: 'Decentralized science funding through quadratic voting ensures resources go to the most valuable research.',
+  bg: 'Децентрализирано финансиране на науката чрез квадратично гласуване гарантира, че ресурсите отиват към най-ценните изследвания.'
+},
+'sectors.science.item2': {
+  en: 'Open science protocols with blockchain verification create transparent and reproducible research.',
+  bg: 'Протоколи за отворена наука с блокчейн верификация създават прозрачни и възпроизводими изследвания.'
+},
+'sectors.intellectual.title': {
+  en: 'Intellectual Property',
+  bg: 'Интелектуална Собственост'
+},
+'sectors.intellectual.item1': {
+  en: 'NFT-based intellectual property rights ensure creators are fairly compensated for their work.',
+  bg: 'Права на интелектуална собственост, базирани на NFT, гарантират, че творците са справедливо компенсирани за своята работа.'
+},
+'sectors.intellectual.item2': {
+  en: 'Smart licensing contracts automatically distribute royalties to all contributors.',
+  bg: 'Умни лицензионни договори автоматично разпределят възнаграждения на всички сътрудници.'
+},
+'sectors.cybersecurity.title': {
+  en: 'Cybersecurity',
+  bg: 'Киберсигурност'
+},
+'sectors.cybersecurity.item1': {
+  en: 'Decentralized security protocols protect citizens and infrastructure from cyber threats.',
+  bg: 'Децентрализирани протоколи за сигурност защитават гражданите и инфраструктурата от кибер заплахи.'
+},
+'sectors.cybersecurity.item2': {
+  en: 'Bug bounty DAOs incentivize continuous security improvements across all systems.',
+  bg: 'ДАО за награди за открити бъгове стимулират непрекъснати подобрения на сигурността във всички системи.'
+},
+'sectors.military.title': {
+  en: 'Defense & Security',
+  bg: 'Отбрана и Сигурност'
+},
+'sectors.military.item1': {
+  en: 'Decentralized defense systems with citizen oversight ensure protection without centralized control.',
+  bg: 'Децентрализирани системи за отбрана с граждански надзор осигуряват защита без централизиран контрол.'
+},
+'sectors.military.item2': {
+  en: 'Smart contract-governed military operations ensure transparency and accountability.',
+  bg: 'Военни операции, управлявани чрез смарт договори, осигуряват прозрачност и отчетност.'
+},
+'sectors.robotics.title': {
+  en: 'Robotics & Automation',
+  bg: 'Роботика и Автоматизация'
+},
+'sectors.robotics.item1': {
+  en: 'Citizen-owned robot workers generate passive income for their owners through automated labor.',
+  bg: 'Роботи работници, притежавани от граждани, генерират пасивен доход за собствениците си чрез автоматизиран труд.'
+},
+'sectors.robotics.item2': {
+  en: 'Decentralized robotics development ensures ethical AI and machine learning implementations.',
+  bg: 'Децентрализираното развитие на роботиката осигурява етични внедрявания на ИИ и машинно обучение.'
+},
+'sectors.innovation.title': {
+  en: 'Innovation Hubs',
+  bg: 'Иновационни Центрове'
+},
+'sectors.innovation.item1': {
+  en: 'Decentralized innovation labs connect global talent to solve local and global challenges.',
+  bg: 'Децентрализирани иновационни лаборатории свързват глобалния талант за решаване на местни и глобални предизвикателства.'
+},
+'sectors.innovation.item2': {
+  en: 'Token-incentivized innovation competitions drive rapid technological advancement.',
+  bg: 'Иновационни състезания, стимулирани с токени, стимулират бързия технологичен напредък.'
+},
+
+// Economy & Finance Sectors
+'sectors.employment.title': {
+  en: 'Employment & Labor',
+  bg: 'Заетост и Труд'
+},
+'sectors.employment.item1': {
+  en: 'Decentralized job marketplaces match skills with opportunities based on verified credentials.',
+  bg: 'Децентрализирани пазари на труда съчетават умения с възможности въз основа на проверени удостоверения.'
+},
+'sectors.employment.item2': {
+  en: 'Smart contract employment agreements ensure fair compensation and working conditions.',
+  bg: 'Трудови договори чрез смарт контракти осигуряват справедливо заплащане и условия на труд.'
+},
+'sectors.social.title': {
+  en: 'Social Security',
+  bg: 'Социална Сигурност'
+},
+'sectors.social.item1': {
+  en: 'Blockchain-based social security system provides transparent and efficient benefits distribution.',
+  bg: 'Система за социална сигурност, базирана на блокчейн, осигурява прозрачно и ефективно разпределение на обезщетения.'
+},
+'sectors.social.item2': {
+  en: 'Smart contracts automatically adjust benefits based on verified need and contribution.',
+  bg: 'Смарт договорите автоматично коригират обезщетенията въз основа на проверена нужда и принос.'
+},
+'sectors.ubi.title': {
+  en: 'Universal Basic Income',
+  bg: 'Универсален Базов Доход'
+},
+'sectors.ubi.item1': {
+  en: 'Automated UBI distribution ensures all citizens receive a basic income regardless of employment status.',
+  bg: 'Автоматизираното разпределение на УБД гарантира, че всички граждани получават основен доход независимо от трудовия им статус.'
+},
+'sectors.ubi.item2': {
+  en: 'Token-based UBI system is funded through a combination of taxation and national resource dividends.',
+  bg: 'Системата за УБД, базирана на токени, се финансира чрез комбинация от данъчно облагане и дивиденти от национални ресурси.'
+},
+'sectors.businesses.title': {
+  en: 'Business Development',
+  bg: 'Бизнес Развитие'
+},
+'sectors.businesses.item1': {
+  en: 'DAO-structured businesses allow for democratic management and profit sharing among stakeholders.',
+  bg: 'Бизнеси, структурирани като ДАО, позволяват демократично управление и споделяне на печалбата между заинтересованите страни.'
+},
+'sectors.businesses.item2': {
+  en: 'Blockchain-based business registries streamline formation and compliance for entrepreneurs.',
+  bg: 'Бизнес регистри, базирани на блокчейн, оптимизират формирането и съответствието за предприемачите.'
+},
+'sectors.digital-economy.title': {
+  en: 'Digital Economy',
+  bg: 'Дигитална Икономика'
+},
+'sectors.digital-economy.item1': {
+  en: 'Decentralized digital marketplaces connect producers and consumers without intermediaries.',
+  bg: 'Децентрализирани дигитални пазари свързват производители и потребители без посредници.'
+},
+'sectors.digital-economy.item2': {
+  en: 'Token-based incentives reward content creators, app developers, and digital service providers.',
+  bg: 'Стимули, базирани на токени, възнаграждават създателите на съдържание, разработчиците на приложения и доставчиците на дигитални услуги.'
+},
+'sectors.blockchain.title': {
+  en: 'Blockchain Infrastructure',
+  bg: 'Блокчейн Инфраструктура'
+},
+'sectors.blockchain.item1': {
+  en: 'National blockchain infrastructure supports all government services and economic activities.',
+  bg: 'Националната блокчейн инфраструктура поддържа всички правителствени услуги и икономически дейности.'
+},
+'sectors.blockchain.item2': {
+  en: 'Interoperable blockchain networks ensure seamless integration with global digital economies.',
+  bg: 'Оперативно съвместими блокчейн мрежи осигуряват безпроблемна интеграция с глобалните дигитални икономики.'
+},
+'sectors.circular.title': {
+  en: 'Circular Economy',
+  bg: 'Кръгова Икономика'
+},
+'sectors.circular.item1': {
+  en: 'Blockchain-tracked product lifecycles ensure materials are reused and recycled efficiently.',
+  bg: 'Жизнени цикли на продуктите, проследявани чрез блокчейн, гарантират, че материалите се използват повторно и рециклират ефективно.'
+},
+'sectors.circular.item2': {
+  en: 'Token incentives reward sustainable production and consumption practices.',
+  bg: 'Токен стимули възнаграждават устойчиви практики на производство и потребление.'
+},
+
+// Society & Welfare Sectors
+'sectors.education.title': {
+  en: 'Education System',
+  bg: 'Образователна Система'
+},
+'sectors.education.item1': {
+  en: 'Decentralized learning platforms offer personalized education with blockchain-verified credentials.',
+  bg: 'Децентрализирани платформи за обучение предлагат персонализирано образование с удостоверения, проверени чрез блокчейн.'
+},
+'sectors.education.item2': {
+  en: 'Token incentives reward both teachers and students for educational achievements.',
+  bg: 'Токен стимули възнаграждават както учителите, така и учениците за образователни постижения.'
+},
+'sectors.healthcare.title': {
+  en: 'Healthcare System',
+  bg: 'Здравна Система'
+},
+'sectors.healthcare.item1': {
+  en: 'Decentralized healthcare services with blockchain-secured patient records ensure privacy and accessibility.',
+  bg: 'Децентрализирани здравни услуги с пациентски досиета, защитени чрез блокчейн, осигуряват поверителност и достъпност.'
+},
+'sectors.healthcare.item2': {
+  en: 'Smart contract-based insurance automatically processes claims and distributes payments.',
+  bg: 'Застраховки, базирани на смарт договори, автоматично обработват искове и разпределят плащания.'
+},
+'sectors.housing.title': {
+  en: 'Housing & Real Estate',
+  bg: 'Жилищно Настаняване и Недвижими Имоти'
+},
+'sectors.housing.item1': {
+  en: 'Tokenized real estate allows fractional ownership and seamless property transfers.',
+  bg: 'Токенизираните недвижими имоти позволяват фракционна собственост и безпроблемни прехвърляния на имоти.'
+},
+'sectors.housing.item2': {
+  en: 'Decentralized housing DAOs develop and manage community-owned residential properties.',
+  bg: 'Децентрализирани жилищни ДАО разработват и управляват жилищни имоти, притежавани от общността.'
+},
+'sectors.tourism.title': {
+  en: 'Tourism & Hospitality',
+  bg: 'Туризъм и Гостоприемство'
+},
+'sectors.tourism.item1': {
+  en: 'Blockchain-based tourism platforms connect travelers directly with local service providers.',
+  bg: 'Туристически платформи, базирани на блокчейн, свързват пътуващите директно с местните доставчици на услуги.'
+},
+'sectors.tourism.item2': {
+  en: 'Tokenized cultural experiences preserve and promote Bulgarian heritage.',
+  bg: 'Токенизирани културни преживявания запазват и популяризират българското наследство.'
+},
+'sectors.services.title': {
+  en: 'Public Services',
+  bg: 'Обществени Услуги'
+},
+'sectors.services.item1': {
+  en: 'Decentralized service delivery platforms connect citizens with providers based on reputation and expertise.',
+  bg: 'Децентрализирани платформи за предоставяне на услуги свързват гражданите с доставчици въз основа на репутация и експертиза.'
+},
+'sectors.services.item2': {
+  en: 'Smart contract-based service agreements ensure quality and accountability.',
+  bg: 'Договори за услуги, базирани на смарт договори, осигуряват качество и отчетност.'
+},
+'sectors.eco-travel.title': {
+  en: 'Eco-Tourism',
+  bg: 'Еко-Туризъм'
+},
+'sectors.eco-travel.item1': {
+  en: 'Blockchain-verified sustainable tourism certifications ensure environmental responsibility.',
+  bg: 'Сертификати за устойчив туризъм, проверени чрез блокчейн, гарантират екологична отговорност.'
+},
+'sectors.eco-travel.item2': {
+  en: 'Tokenized conservation efforts allow tourists to directly contribute to environmental protection.',
+  bg: 'Токенизирани усилия за опазване позволяват на туристите да допринасят директно за опазването на околната среда.'
+},
+'sectors.biotech.title': {
+  en: 'Biotechnology',
+  bg: 'Биотехнологии'
+},
+'sectors.biotech.item1': {
+  en: 'Decentralized biotech research platforms connect global scientists to solve health challenges.',
+  bg: 'Децентрализирани платформи за биотехнологични изследвания свързват глобални учени за решаване на здравни предизвикателства.'
+},
+'sectors.biotech.item2': {
+  en: 'Blockchain-verified genetic data marketplaces ensure privacy and fair compensation.',
+  bg: 'Пазари на генетични данни, проверени чрез блокчейн, осигуряват поверителност и справедливо заплащане.'
+}
+
+};

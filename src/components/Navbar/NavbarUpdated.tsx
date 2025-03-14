@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
-import { useUnityPlus } from '../../context/UnityPlusContext';
 import './NavbarUpdated.css';
 
 interface NavbarUpdatedProps {
   activeSection?: string;
+  onNavigate?: (section: string) => void;
 }
 
-const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' }) => {
+const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero', onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
-  const { openUnityPlusDashboard } = useUnityPlus();
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -23,7 +22,29 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
 
   const handleBecomeALionClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    openUnityPlusDashboard();
+    
+    // Navigate to onboarding instead of opening Unity Plus dashboard
+    if (onNavigate) {
+      onNavigate('onboarding');
+    }
+    
+    if (mobileMenuOpen) {
+      toggleMobileMenu();
+    }
+  };
+
+  const handleNavLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
+    e.preventDefault();
+    if (onNavigate) {
+      onNavigate(section);
+    } else {
+      // Default behavior if onNavigate is not provided
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+    
     if (mobileMenuOpen) {
       toggleMobileMenu();
     }
@@ -55,25 +76,25 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
         <div className="flex items-center justify-between relative">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="#" className="text-2xl font-bold text-[#00ffaa]">NOVA BULGARIA</a>
+            <a href="#" onClick={(e) => handleNavLinkClick(e, 'hero')} className="text-2xl font-bold text-[#00ffaa]">NOVA BULGARIA</a>
           </div>
           
           {/* Desktop Menu - Absolutely positioned to center */}
-          <div className="hidden md:flex items-center space-x-10 absolute left-1/2 transform -translate-x-1/2">
-            <a href="#problem" className={`nav-link ${activeSection === 'problem' ? 'active' : ''}`}>{t('nav.vision')}</a>
-            <a href="#lionheart-title" className={`nav-link ${activeSection === 'lionheart' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
-            <a href="#development-roadmap" className={`nav-link ${activeSection === 'roadmap' ? 'active' : ''}`}>{t('nav.development')}</a>
-            <a href="#unity-plus" className={`nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
+          <div className="hidden md:flex items-center space-x-8 absolute left-1/2 transform -translate-x-1/2">
+            <a href="#problem" onClick={(e) => handleNavLinkClick(e, 'problem')} className={`nav-link ${activeSection === 'problem' ? 'active' : ''}`}>{t('nav.vision')}</a>
+            <a href="#lionheart" onClick={(e) => handleNavLinkClick(e, 'lionheart')} className={`nav-link ${activeSection === 'lionheart' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
+            <a href="#roadmap" onClick={(e) => handleNavLinkClick(e, 'roadmap')} className={`nav-link ${activeSection === 'roadmap' ? 'active' : ''}`}>{t('nav.development')}</a>
+            <a href="#unity-plus" onClick={(e) => handleNavLinkClick(e, 'unity-plus')} className={`nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
           </div>
 
           {/* Mobile Menu Panel */}
           {mobileMenuOpen && (
             <div className="fixed inset-0 bg-black bg-opacity-90 z-50">
               <div className="flex flex-col items-center justify-center h-full space-y-8">
-                <a href="#problem" className={`text-2xl nav-link ${activeSection === 'problem' ? 'active' : ''}`}>{t('nav.vision')}</a>
-                <a href="#lionheart-title" className={`text-2xl nav-link ${activeSection === 'lionheart' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
-                <a href="#development-roadmap" className={`text-2xl nav-link ${activeSection === 'roadmap' ? 'active' : ''}`}>{t('nav.development')}</a>
-                <a href="#unity-plus" className={`text-2xl nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
+                <a href="#problem" onClick={(e) => handleNavLinkClick(e, 'problem')} className={`text-2xl nav-link ${activeSection === 'problem' ? 'active' : ''}`}>{t('nav.vision')}</a>
+                <a href="#lionheart" onClick={(e) => handleNavLinkClick(e, 'lionheart')} className={`text-2xl nav-link ${activeSection === 'lionheart' ? 'active' : ''}`}>{t('nav.lionheartFund')}</a>
+                <a href="#roadmap" onClick={(e) => handleNavLinkClick(e, 'roadmap')} className={`text-2xl nav-link ${activeSection === 'roadmap' ? 'active' : ''}`}>{t('nav.development')}</a>
+                <a href="#unity-plus" onClick={(e) => handleNavLinkClick(e, 'unity-plus')} className={`text-2xl nav-link ${activeSection === 'unity-plus' ? 'active' : ''}`}>{t('nav.unityPlus', 'Unity+')}</a>
                 <button 
                   onClick={handleBecomeALionClick}
                   className="bg-[#00ffaa] text-black px-6 py-2 rounded-lg hover:bg-[#00dd99] transition-colors mt-4"
@@ -82,46 +103,38 @@ const NavbarUpdated: React.FC<NavbarUpdatedProps> = ({ activeSection = 'hero' })
                 </button>
                 <button onClick={toggleMobileMenu} className="absolute top-6 right-6">
                   <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                   </svg>
                 </button>
               </div>
             </div>
           )}
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button onClick={toggleMobileMenu} className="text-white p-2">
-              <svg className="w-6 h-[1.125em]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-              </svg>
-            </button>
-          </div>
-
-          <div className="flex items-center space-x-4 ml-auto">
-            {/* Language Selector with Proper UK Flag */}
-            <div className="relative">
-              <select 
-                value={language}
-                onChange={handleLanguageChange}
-                className="glass pl-2 pr-8 py-2 rounded-lg appearance-none cursor-pointer min-w-[100px] text-left"
-              >
-                <option value="en" className="text-left">🇬🇧 EN</option>
-                <option value="bg" className="text-left">🇧🇬 BG</option>
-              </select>
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-white">
-                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
-                </svg>
-              </div>
-            </div>
+          {/* Right Side - Language Selector and Buttons */}
+          <div className="flex items-center space-x-4">
+            {/* Language Selector */}
+            <select 
+              value={language} 
+              onChange={handleLanguageChange}
+              className="bg-transparent border border-[#00ffaa] text-[#00ffaa] rounded-lg px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-[#00ffaa]"
+            >
+              <option value="en" className="bg-gray-900">EN</option>
+              <option value="bg" className="bg-gray-900">BG</option>
+            </select>
             
-            {/* Become a Lion Button */}
+            {/* Become a Lion Button - Desktop */}
             <button 
               onClick={handleBecomeALionClick}
-              className="hidden md:block bg-[#00ffaa] text-black px-6 py-2 rounded-lg hover:bg-[#00dd99] transition-colors"
+              className="hidden md:block bg-[#00ffaa] text-black px-4 py-2 rounded-lg hover:bg-[#00dd99] transition-colors"
             >
               {t('nav.becomeALion')}
+            </button>
+            
+            {/* Mobile Menu Toggle */}
+            <button onClick={toggleMobileMenu} className="md:hidden">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
             </button>
           </div>
         </div>
