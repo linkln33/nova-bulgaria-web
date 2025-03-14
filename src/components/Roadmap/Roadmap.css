@@ -167,6 +167,49 @@
   margin: 0;
 }
 
+/* Development Phase Cards */
+.development-phase-card {
+  position: relative;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 170, 0.2);
+  overflow: hidden;
+}
+
+.development-phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, 
+    rgba(0, 255, 170, 0) 0%, 
+    rgba(0, 255, 170, 0.8) 50%, 
+    rgba(0, 255, 170, 0) 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.development-phase-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 255, 170, 0.5);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 
+              0 0 15px rgba(0, 255, 170, 0.3);
+}
+
+.development-phase-card:hover::before {
+  transform: translateX(100%);
+}
+
+.phase-number {
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(135deg, #00ffaa 0%, #00a876 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .phase-button {

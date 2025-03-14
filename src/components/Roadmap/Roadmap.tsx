@@ -25,6 +25,62 @@ const Roadmap: React.FC = () => {
         </p>
       </div>
       
+      {/* Development Phases Section */}
+      <div className="mb-16">
+        <div className="text-center mb-8">
+          <h3 className="text-3xl font-bold text-[#00ffaa]">{t('roadmap.developmentPhases.title', 'Development Phases')}</h3>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto mt-4">
+            {t('roadmap.developmentPhases.subtitle', 'Our journey to building a sovereign digital nation')}
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Phase 1 */}
+          <div className="development-phase-card glassmorphism-dark p-6 rounded-lg">
+            <div className="phase-number text-[#00ffaa] text-4xl font-bold mb-2">01</div>
+            <h4 className="text-2xl font-bold text-white mb-2">
+              {t('roadmap.developmentPhases.phase1', 'Foundation Phase')}
+            </h4>
+            <p className="text-gray-300">
+              {t('roadmap.developmentPhases.phase1.description', 'Establishing the core technology and community')}
+            </p>
+          </div>
+          
+          {/* Phase 2 */}
+          <div className="development-phase-card glassmorphism-dark p-6 rounded-lg">
+            <div className="phase-number text-[#00ffaa] text-4xl font-bold mb-2">02</div>
+            <h4 className="text-2xl font-bold text-white mb-2">
+              {t('roadmap.developmentPhases.phase2', 'Growth Phase')}
+            </h4>
+            <p className="text-gray-300">
+              {t('roadmap.developmentPhases.phase2.description', 'Expanding our ecosystem and user base')}
+            </p>
+          </div>
+          
+          {/* Phase 3 */}
+          <div className="development-phase-card glassmorphism-dark p-6 rounded-lg">
+            <div className="phase-number text-[#00ffaa] text-4xl font-bold mb-2">03</div>
+            <h4 className="text-2xl font-bold text-white mb-2">
+              {t('roadmap.developmentPhases.phase3', 'Maturity Phase')}
+            </h4>
+            <p className="text-gray-300">
+              {t('roadmap.developmentPhases.phase3.description', 'Establishing governance and economic systems')}
+            </p>
+          </div>
+          
+          {/* Phase 4 */}
+          <div className="development-phase-card glassmorphism-dark p-6 rounded-lg">
+            <div className="phase-number text-[#00ffaa] text-4xl font-bold mb-2">04</div>
+            <h4 className="text-2xl font-bold text-white mb-2">
+              {t('roadmap.developmentPhases.phase4', 'Expansion Phase')}
+            </h4>
+            <p className="text-gray-300">
+              {t('roadmap.developmentPhases.phase4.description', 'Global recognition and physical presence')}
+            </p>
+          </div>
+        </div>
+      </div>
+      
       {/* Phase Navigation */}
       <div className="flex flex-wrap justify-center mb-10 gap-4">
         <button 
