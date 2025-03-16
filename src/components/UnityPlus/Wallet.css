@@ -1,0 +1,892 @@
+.wallet-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  color: white;
+}
+
+/* Header Styles */
+.wallet-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wallet-title-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wallet-title-area h3 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: white;
+}
+
+.wallet-address {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.wallet-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid;
+  transition: all 0.3s ease;
+}
+
+.summary-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.summary-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+}
+
+.summary-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.summary-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.summary-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Token Distribution Chart */
+.token-distribution {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.chart-container {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #3498db;
+}
+
+.chart-container h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: white;
+}
+
+.doughnut-chart {
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.token-info {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #9b59b6;
+  display: flex;
+  flex-direction: column;
+}
+
+.token-info-header {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.token-icon {
+  font-size: 1.5rem;
+  color: #f39c12;
+}
+
+.token-info h4 {
+  margin: 0;
+  color: white;
+}
+
+.token-description {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.token-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.3rem;
+}
+
+.stat-value {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+/* Staking Section */
+.staking-section {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 2px solid #2ecc71;
+  position: relative;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h4 {
+  margin: 0;
+  color: white;
+}
+
+.info-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.info-button:hover {
+  color: white;
+}
+
+.staking-info {
+  position: absolute;
+  top: 4rem;
+  right: 1.5rem;
+  background-color: rgba(0, 0, 0, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  z-index: 10;
+  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.staking-info h5 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.staking-info p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.staking-info ul {
+  margin: 0 0 1rem 1rem;
+  padding: 0;
+}
+
+.staking-info li {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.close-info {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.close-info:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Staking Tabs */
+.staking-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.staking-tab {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.staking-tab:hover {
+  color: white;
+}
+
+.staking-tab.active {
+  color: white;
+}
+
+.staking-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #9b59b6);
+  border-radius: 3px 3px 0 0;
+}
+
+.tab-icon {
+  font-size: 1rem;
+}
+
+/* Staking Form */
+.stake-container {
+  padding: 1rem 0;
+}
+
+.stake-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.amount-input-container {
+  position: relative;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+.currency-label {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.balance-info {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-top: 0.3rem;
+}
+
+.quick-amount-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.quick-amount {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  padding: 0.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  flex: 1;
+  transition: all 0.3s ease;
+}
+
+.quick-amount:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Tier Selection */
+.tier-selection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.tier-option {
+  border-radius: 10px;
+  border: 2px solid;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+}
+
+.tier-option:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tier-option.active {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tier-header {
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.tier-details {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.tier-apy {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.tier-duration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.tier-icon {
+  font-size: 0.9rem;
+}
+
+/* Stake Projection */
+.stake-projection {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.projection-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.daily-earnings {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.daily-earnings h5 {
+  margin: 0 0 0.5rem 0;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.earnings-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.stake-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.detail-item.highlight {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.projection-chart {
+  min-height: 250px;
+}
+
+.projection-chart h5 {
+  margin: 0 0 1rem 0;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Stake Button */
+.stake-button {
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.stake-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stake-button:disabled {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Staked Tokens */
+.staked-tokens {
+  padding: 1rem 0;
+}
+
+.staked-tokens h5 {
+  margin: 0 0 1.5rem 0;
+  color: white;
+}
+
+.staked-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.staked-item {
+  border-radius: 12px;
+  border: 2px solid;
+  overflow: hidden;
+}
+
+.staked-header {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.staked-tier {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.staked-amount {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.staked-details {
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.staked-period {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.period-icon {
+  font-size: 0.9rem;
+}
+
+.staked-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem;
+  border-radius: 8px;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.3rem;
+}
+
+.metric-value {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.staked-actions {
+  display: flex;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.unstake-button, .claim-button {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.unstake-button {
+  background-color: transparent;
+  border: 1px solid;
+}
+
+.unstake-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.claim-button {
+  border: none;
+  color: white;
+}
+
+.claim-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.no-staked-tokens {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+.no-stakes-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.start-staking-button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  background-color: #3498db;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-staking-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Rewards Section */
+.rewards-section {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rewards-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.total-rewards-card {
+  border-radius: 12px;
+  padding: 1.5rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.total-rewards-card h5 {
+  margin: 0 0 1rem 0;
+  color: white;
+}
+
+.total-amount {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.claim-all-button {
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.claim-all-button:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.rewards-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 1.2rem;
+  border: 2px solid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.stat-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.rewards-history {
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.rewards-history h5 {
+  margin: 0 0 1.5rem 0;
+  color: white;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.history-date {
+  width: 100px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.history-details {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-type {
+  font-size: 0.9rem;
+}
+
+.history-amount {
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+/* Wallet Actions */
+.wallet-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.wallet-button {
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wallet-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.button-icon {
+  font-size: 1.2rem;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .token-distribution,
+  .stake-projection,
+  .rewards-summary {
+    grid-template-columns: 1fr;
+  }
+  
+  .staking-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  
+  .tier-selection {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .staked-metrics {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .wallet-summary,
+  .rewards-stats,
+  .tier-selection {
+    grid-template-columns: 1fr;
+  }
+  
+  .wallet-actions {
+    grid-template-columns: 1fr;
+  }
+}
