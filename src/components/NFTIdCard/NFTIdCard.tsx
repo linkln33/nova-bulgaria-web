@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { QRCode } from 'react-qrcode-logo';
 import useResizeObserver from '@hooks/useResizeObserver';
 import './NFTIdCard.css';
@@ -43,6 +43,9 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const qrContainerRef = useRef<HTMLDivElement>(null);
   
+  // Add state to force re-render after initial mount
+  const [isReady, setIsReady] = useState(false);
+  
   // Original card width for scaling calculations
   const originalWidth = 700;
 
@@ -54,7 +57,7 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
   });
 
   // Bulgarian flag image for QR code center logo
-  const flagImageUrl = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAxOCI+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmYiLz48cmVjdCB5PSI2IiB3aWR0aD0iMzAiIGhlaWdodD0iNiIgZmlsbD0iIzAwOTY2RSIvPjxyZWN0IHk9IjEyIiB3aWR0aD0iMzAiIGhlaWg9IjYiIGZpbGw9IiNENjI2MTIiLz48L3N2Zz4=";
+  const flagImageUrl = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAxOCI+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjYiIGZpbGw9IiNmZmYiLz48cmVjdCB5PSI2IiB3aWR0aD0iMzAiIGhlaWdodD0iNiIgZmlsbD0iIzAwOTY2RSIvPjxyZWN0IHk9IjEyIiB3aWR0aD0iMzAiIGhlaWdodD0iNiIgZmlsbD0iI0Q2MjYxMiIvPjwvc3ZnPg==";
 
   // Scale the ID card for mobile responsiveness
   const scaleIdCard = () => {
@@ -87,17 +90,33 @@ const NFTIdCard: React.FC<NFTIdCardProps> = ({
     }
   }, [dimensions]);
 
+  // Initialize card on mount and handle window resize
   useEffect(() => {
-    // Apply initial scaling
-    scaleIdCard();
+    // Set a small timeout to ensure DOM is fully rendered
+    const timer = setTimeout(() => {
+      scaleIdCard();
+      setIsReady(true);
+    }, 100);
     
     // Re-apply scaling when window is resized
     window.addEventListener('resize', scaleIdCard);
     
     return () => {
       window.removeEventListener('resize', scaleIdCard);
+      clearTimeout(timer);
     };
   }, []);
+
+  // Force re-render after card is mounted to ensure proper layout
+  useEffect(() => {
+    if (isReady) {
+      const reRenderTimer = setTimeout(() => {
+        scaleIdCard();
+      }, 200);
+      
+      return () => clearTimeout(reRenderTimer);
+    }
+  }, [isReady]);
 
   return (
     <div ref={containerRef} className="flex justify-center h-auto min-h-[442px]">

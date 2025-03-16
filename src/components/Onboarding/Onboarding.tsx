@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import './Onboarding.css';
+import { FaRedo, FaGlobe, FaChevronDown } from 'react-icons/fa';
 
 // Step components
 import JoinCommunity from './Steps/JoinCommunity';
@@ -8,17 +9,46 @@ import KnowledgeExam from './Steps/KnowledgeExam';
 import NFTIDMinting from './Steps/NFTIDMinting';
 
 const Onboarding: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const [currentStep, setCurrentStep] = useState(1);
   const [examScore, setExamScore] = useState(0);
-  const [examPassed, setExamPassed] = useState(false);
-  const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
+  // Store answers for analytics purposes
+  const [examAnswers, setExamAnswers] = useState<Record<string, string>>({});
+  const [showLanguageSelector, setShowLanguageSelector] = useState(false);
+  const [earnedBGL, setEarnedBGL] = useState(0);
+
+  // Available languages
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'bg', name: 'Български' }
+  ];
+
+  // Log analytics data when exam is completed
+  useEffect(() => {
+    if (Object.keys(examAnswers).length > 0) {
+      // In a real app, we would send this data to an analytics service
+      console.log('Exam analytics:', { 
+        score: examScore, 
+        answers: examAnswers,
+        language
+      });
+    }
+  }, [examAnswers, examScore, language]);
 
   // Progress through onboarding steps
   const goToNextStep = () => {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     }
+  };
+
+  // Skip directly to NFT ID minting step
+  const skipToMinting = () => {
+    setCurrentStep(3);
+    // Force layout recalculation after a short delay to ensure NFT card renders properly
+    setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 300);
   };
 
   const goToPreviousStep = () => {
@@ -28,39 +58,66 @@ const Onboarding: React.FC = () => {
   };
 
   // Handle exam completion
-  const handleExamComplete = (score: number, passed: boolean, answers: Record<string, string>) => {
+  const handleExamComplete = (score: number, passed: boolean, answers: Record<string, string>, bglEarned: number) => {
     setExamScore(score);
-    setExamPassed(passed);
-    setUserAnswers(answers);
+    setExamAnswers(answers); // Always store answers for analytics, regardless of pass/fail
+    setEarnedBGL(bglEarned);
     if (passed) {
       goToNextStep();
     }
   };
 
-  // Render the current step
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return <JoinCommunity onComplete={goToNextStep} />;
-      case 2:
-        return <KnowledgeExam onComplete={handleExamComplete} />;
-      case 3:
-        return <NFTIDMinting examScore={examScore} />;
-      default:
-        return <JoinCommunity onComplete={goToNextStep} />;
-    }
+  // Restart the onboarding process
+  const restartOnboarding = () => {
+    setCurrentStep(1);
+    setExamScore(0);
+    setExamAnswers({});
+    setEarnedBGL(0);
+  };
+
+  // Toggle language selector
+  const toggleLanguageSelector = () => {
+    setShowLanguageSelector(prev => !prev);
+  };
+
+  // Change language
+  const changeLanguage = (langCode: string) => {
+    setLanguage(langCode);
+    setShowLanguageSelector(false);
   };
 
   return (
     <div className="onboarding-container">
       <div className="onboarding-header">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#00ffaa]">
-          {t('onboarding.title', 'Join NOVA BULGARIA')}
-        </h1>
-        <div className="w-24 h-1 bg-[#00ffaa] mx-auto mb-8"></div>
-        <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-          {t('onboarding.subtitle', 'Complete these steps to become a citizen of the digital nation')}
-        </p>
+        <h1 className="onboarding-title">{t('onboarding.title', 'Welcome to NOVA BULGARIA')}</h1>
+        <h2 className="onboarding-subtitle">{t('onboarding.subtitle', 'Rule Your Destiny, Embrace Your Lion Nature!')}</h2>
+        
+        {/* Language selector button - centered below subtitle */}
+        <div className="language-toggle-container">
+          <button 
+            className="language-toggle-button"
+            onClick={toggleLanguageSelector}
+            aria-label="Change language"
+          >
+            <FaGlobe className="language-icon" />
+            <span>{language === 'en' ? 'English' : 'Български'}</span>
+            <FaChevronDown className="dropdown-icon" />
+          </button>
+          
+          {showLanguageSelector && (
+            <div className="language-dropdown">
+              {languages.map(lang => (
+                <button
+                  key={lang.code}
+                  className={`language-option ${language === lang.code ? 'active' : ''}`}
+                  onClick={() => changeLanguage(lang.code)}
+                >
+                  {lang.name}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className="onboarding-progress">
@@ -69,12 +126,10 @@ const Onboarding: React.FC = () => {
             <div className="step-number">1</div>
             <div className="step-label">{t('onboarding.step1', 'Join Community')}</div>
           </div>
-          <div className="progress-line"></div>
           <div className={`progress-step ${currentStep >= 2 ? 'active' : ''}`}>
             <div className="step-number">2</div>
             <div className="step-label">{t('onboarding.step2', 'Knowledge Exam')}</div>
           </div>
-          <div className="progress-line"></div>
           <div className={`progress-step ${currentStep >= 3 ? 'active' : ''}`}>
             <div className="step-number">3</div>
             <div className="step-label">{t('onboarding.step3', 'NFT ID Minting')}</div>
@@ -83,16 +138,30 @@ const Onboarding: React.FC = () => {
       </div>
 
       <div className="onboarding-content">
-        {renderStep()}
+        {currentStep === 1 && (
+          <JoinCommunity onComplete={goToNextStep} />
+        )}
+        
+        {currentStep === 2 && (
+          <KnowledgeExam onComplete={handleExamComplete} onSkipToMinting={skipToMinting} />
+        )}
+        
+        {currentStep === 3 && (
+          <NFTIDMinting 
+            examScore={examScore} 
+            redirectToDashboard="/unity-app-dashboard" 
+            earnedBGL={earnedBGL}
+          />
+        )}
       </div>
 
       <div className="onboarding-navigation">
         {currentStep > 1 && (
           <button 
-            className="nav-button back-button"
+            className="nav-button prev-button"
             onClick={goToPreviousStep}
           >
-            {t('onboarding.back', 'Back')}
+            {t('onboarding.previous', 'Previous')}
           </button>
         )}
         
@@ -104,6 +173,18 @@ const Onboarding: React.FC = () => {
             {t('onboarding.next', 'Next')}
           </button>
         )}
+      </div>
+      
+      {/* Restart button at the end of the quiz */}
+      <div className="restart-button-container">
+        <button 
+          className="restart-button"
+          onClick={restartOnboarding}
+          aria-label="Restart onboarding"
+        >
+          <FaRedo />
+          <span>{t('onboarding.restart', 'Restart Quiz')}</span>
+        </button>
       </div>
     </div>
   );

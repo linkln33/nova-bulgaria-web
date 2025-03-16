@@ -108,6 +108,11 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
         issued: new Date().toISOString().split('T')[0],
         expires: new Date(new Date().setFullYear(new Date().getFullYear() + 5)).toISOString().split('T')[0]
       });
+
+      // Force layout recalculation after a short delay
+      setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 300);
     }, 3000);
   };
 
@@ -119,10 +124,159 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
       }, 1000);
       return () => clearTimeout(timer);
     } else if (mintingComplete && countdown === 0) {
-      // Redirect to Unity app dashboard with proper protocol and parameters
-      window.location.href = redirectToDashboard || "unity://dashboard?id=" + nftId;
+      try {
+        // Create a more comprehensive data payload for the Unity+ app
+        const nftData = {
+          id: nftId,
+          name: formData.name,
+          score: examScore,
+          dob: formData.dob,
+          nationality: formData.nationality,
+          walletAddress: formData.walletAddress,
+          citizenshipLevel: formData.citizenshipLevel,
+          socialScore: formData.socialScore,
+          rank: formData.rank,
+          expertise: formData.expertise,
+          issued: formData.issued,
+          expires: formData.expires
+        };
+        
+        // Encode the data as a base64 string to avoid URL encoding issues
+        const encodedData = btoa(JSON.stringify(nftData));
+        
+        // Create the Unity app URL with proper protocol handler and parameters
+        // Using nova-unity:// protocol which should be registered by the Unity app
+        const unityAppUrl = `nova-unity://dashboard?data=${encodedData}`;
+        console.log("Redirecting to Unity app:", unityAppUrl);
+        
+        // Try to open Unity app with protocol handler
+        window.location.href = unityAppUrl;
+        
+        // Enhanced fallback mechanism with multiple checks
+        let fallbackTriggered = false;
+        
+        // First check - if we're still here after 1 second
+        setTimeout(() => {
+          if (document.hasFocus() && !fallbackTriggered) {
+            console.log("Unity app didn't open after 1s, trying alternative protocol...");
+            
+            // Try alternative protocol format
+            window.location.href = `com.novabulgaria.unityplus://?data=${encodedData}`;
+            
+            // Second check - if we're still here after another second
+            setTimeout(() => {
+              if (document.hasFocus() && !fallbackTriggered) {
+                console.log("Alternative protocol failed, falling back to web dashboard");
+                fallbackTriggered = true;
+                
+                // Store NFT data in localStorage for the web dashboard to use
+                localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
+                
+                // Redirect to web dashboard with minimal query params
+                window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+              }
+            }, 1000);
+          }
+        }, 1000);
+      } catch (e) {
+        console.error("Failed to open Unity app:", e);
+        // Fallback to web dashboard if Unity app fails
+        const nftData = {
+          id: nftId,
+          name: formData.name,
+          score: examScore,
+          dob: formData.dob,
+          nationality: formData.nationality,
+          walletAddress: formData.walletAddress,
+          citizenshipLevel: formData.citizenshipLevel,
+          socialScore: formData.socialScore,
+          rank: formData.rank,
+          expertise: formData.expertise,
+          issued: formData.issued,
+          expires: formData.expires
+        };
+        localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
+        window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+      }
     }
-  }, [mintingComplete, countdown, redirectToDashboard, nftId]);
+  }, [mintingComplete, countdown, redirectToDashboard, nftId, examScore, formData]);
+
+  // Update the manual redirect button as well
+  const handleDashboardRedirect = () => {
+    try {
+      // Create a more comprehensive data payload for the Unity+ app
+      const nftData = {
+        id: nftId,
+        name: formData.name,
+        score: examScore,
+        dob: formData.dob,
+        nationality: formData.nationality,
+        walletAddress: formData.walletAddress,
+        citizenshipLevel: formData.citizenshipLevel,
+        socialScore: formData.socialScore,
+        rank: formData.rank,
+        expertise: formData.expertise,
+        issued: formData.issued,
+        expires: formData.expires
+      };
+      
+      // Encode the data as a base64 string to avoid URL encoding issues
+      const encodedData = btoa(JSON.stringify(nftData));
+      
+      // Create the Unity app URL with proper protocol handler and parameters
+      const unityAppUrl = `nova-unity://dashboard?data=${encodedData}`;
+      console.log("Manually redirecting to Unity app:", unityAppUrl);
+      
+      // Try to open Unity app with protocol handler
+      window.location.href = unityAppUrl;
+      
+      // Enhanced fallback mechanism with multiple checks
+      let fallbackTriggered = false;
+      
+      // First check - if we're still here after 1 second
+      setTimeout(() => {
+        if (document.hasFocus() && !fallbackTriggered) {
+          console.log("Unity app didn't open after 1s, trying alternative protocol...");
+          
+          // Try alternative protocol format
+          window.location.href = `com.novabulgaria.unityplus://?data=${encodedData}`;
+          
+          // Second check - if we're still here after another second
+          setTimeout(() => {
+            if (document.hasFocus() && !fallbackTriggered) {
+              console.log("Alternative protocol failed, falling back to web dashboard");
+              fallbackTriggered = true;
+              
+              // Store NFT data in localStorage for the web dashboard to use
+              localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
+              
+              // Redirect to web dashboard with minimal query params
+              window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+            }
+          }, 1000);
+        }
+      }, 1000);
+    } catch (e) {
+      console.error("Failed to open Unity app:", e);
+      // Fallback to web dashboard if Unity app fails
+      const nftData = {
+        id: nftId,
+        name: formData.name,
+        score: examScore,
+        dob: formData.dob,
+        nationality: formData.nationality,
+        walletAddress: formData.walletAddress,
+        citizenshipLevel: formData.citizenshipLevel,
+        socialScore: formData.socialScore,
+        rank: formData.rank,
+        expertise: formData.expertise,
+        issued: formData.issued,
+        expires: formData.expires
+      };
+      localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
+      window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+    }
+  };
 
   // Check if form is complete
   const isFormComplete = () => {
@@ -400,7 +554,7 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
               <div className="text-center">
                 <button
                   className="primary-button w-full"
-                  onClick={() => window.location.href = redirectToDashboard || "unity://dashboard?id=" + nftId}
+                  onClick={handleDashboardRedirect}
                 >
                   {t('onboarding.nftid.goToDashboard', 'Go to Dashboard Now')}
                 </button>

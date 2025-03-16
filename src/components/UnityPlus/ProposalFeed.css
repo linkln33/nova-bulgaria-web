@@ -174,6 +174,17 @@
   border: none;
 }
 
+.vote-button.vote-no {
+  background: #ff335b !important;
+  color: white;
+}
+
+.vote-button.vote-no:hover {
+  background: #e01e46 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 .vote-yes {
   background: #4CAF50;
   color: white;
@@ -181,17 +192,6 @@
 
 .vote-yes:hover {
   background: #45a049;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.vote-no {
-  background: #f44336;
-  color: white;
-}
-
-.vote-no:hover {
-  background: #d32f2f;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
