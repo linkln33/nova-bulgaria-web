@@ -1,0 +1,27 @@
+/* Modern NFT ID Card Styles */
+
+/* Animation keyframes */
+@keyframes gradientBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* QR code styling */
+canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Card container responsive height */
+@media (max-width: 640px) {
+  .card-container {
+    height: 300px;
+  }
+}
+
+@media (min-width: 641px) {
+  .card-container {
+    height: 442px;
+  }
+}

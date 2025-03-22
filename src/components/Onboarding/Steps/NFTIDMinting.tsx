@@ -173,7 +173,10 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
                 localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
                 
                 // Redirect to web dashboard with minimal query params
-                window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+                window.location.href = redirectToDashboard || '/#unity-plus';
+                
+                // Also set the active tab in localStorage to 'wallet' so the Unity+ dashboard opens with the wallet tab active
+                localStorage.setItem('unity_plus_active_tab', 'wallet');
               }
             }, 1000);
           }
@@ -196,7 +199,8 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
           expires: formData.expires
         };
         localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
-        window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+        window.location.href = redirectToDashboard || '/#unity-plus';
+        localStorage.setItem('unity_plus_active_tab', 'wallet');
       }
     }
   }, [mintingComplete, countdown, redirectToDashboard, nftId, examScore, formData]);
@@ -251,7 +255,10 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
               localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
               
               // Redirect to web dashboard with minimal query params
-              window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+              window.location.href = redirectToDashboard || '/#unity-plus';
+              
+              // Also set the active tab in localStorage to 'wallet' so the Unity+ dashboard opens with the wallet tab active
+              localStorage.setItem('unity_plus_active_tab', 'wallet');
             }
           }, 1000);
         }
@@ -274,7 +281,8 @@ const NFTIDMinting: React.FC<NFTIDMintingProps> = ({ examScore, redirectToDashbo
         expires: formData.expires
       };
       localStorage.setItem('nova_nft_data', JSON.stringify(nftData));
-      window.location.href = redirectToDashboard || `/unity-plus-dashboard?id=${nftId}`;
+      window.location.href = redirectToDashboard || '/#unity-plus';
+      localStorage.setItem('unity_plus_active_tab', 'wallet');
     }
   };
 

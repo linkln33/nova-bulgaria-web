@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { useUnityPlus } from '../../context/UnityPlusContext';
 import './UnityPlus.css';
@@ -8,6 +8,7 @@ import TaskBoard from './TaskBoard';
 import UserProfile from './UserProfile';
 import WalletConnect from './WalletConnect';
 import Elections from './Elections';
+import Wallet from './Wallet';
 
 const UnityPlus: React.FC = () => {
   const { t } = useLanguage();
@@ -20,6 +21,31 @@ const UnityPlus: React.FC = () => {
     handleConnect,
     openUnityPlusDashboard
   } = useUnityPlus();
+
+  // Check if we should automatically open the dashboard and set the active tab
+  useEffect(() => {
+    // Check if redirected from onboarding with active tab preference
+    const activeTabFromStorage = localStorage.getItem('unity_plus_active_tab');
+    const nftData = localStorage.getItem('nova_nft_data');
+    
+    if (nftData && activeTabFromStorage) {
+      // Open the dashboard if it's not already open
+      if (!isUnityPlusDashboardOpen) {
+        openUnityPlusDashboard();
+      }
+      
+      // Automatically connect wallet if not already connected
+      if (!isConnected) {
+        handleConnect();
+      }
+      
+      // Set the active tab (usually 'wallet' after NFT minting)
+      setActiveTab(activeTabFromStorage);
+      
+      // Clear the localStorage values after using them
+      localStorage.removeItem('unity_plus_active_tab');
+    }
+  }, [isUnityPlusDashboardOpen, openUnityPlusDashboard, setActiveTab, isConnected, handleConnect]);
 
   return (
     <div className="unity-plus-container">
@@ -97,33 +123,7 @@ const UnityPlus: React.FC = () => {
                 {activeTab === 'sectors' && userProfile && <SectorSelection userProfile={userProfile} />}
                 {activeTab === 'tasks' && userProfile && <TaskBoard userProfile={userProfile} />}
                 {activeTab === 'elections' && userProfile && <Elections userProfile={userProfile} />}
-                {activeTab === 'wallet' && userProfile && (
-                  <div className="wallet-info">
-                    <h3>{t('unityPlus.wallet.title', 'Your Wallet')}</h3>
-                    <div className="token-balances">
-                      <div className="token-item">
-                        <span className="token-name">BGL</span>
-                        <span className="token-value">{userProfile.walletBalance.BGL}</span>
-                      </div>
-                      <div className="token-item">
-                        <span className="token-name">BGL-TECH</span>
-                        <span className="token-value">{userProfile.walletBalance['BGL-TECH']}</span>
-                      </div>
-                      <div className="token-item">
-                        <span className="token-name">BGL-HEALTH</span>
-                        <span className="token-value">{userProfile.walletBalance['BGL-HEALTH']}</span>
-                      </div>
-                    </div>
-                    <div className="wallet-actions">
-                      <button className="wallet-button">
-                        {t('unityPlus.wallet.stake', 'Stake Tokens')}
-                      </button>
-                      <button className="wallet-button">
-                        {t('unityPlus.wallet.transfer', 'Transfer')}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                {activeTab === 'wallet' && userProfile && <Wallet userProfile={userProfile} />}
               </div>
             </div>
           </div>

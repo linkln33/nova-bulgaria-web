@@ -15,6 +15,16 @@ module.exports = {
         accent4: 'var(--accent4)',
         accent5: 'var(--accent5)',
       },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'float-delayed': 'float 6s ease-in-out 3s infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        }
+      },
     },
   },
   plugins: [],

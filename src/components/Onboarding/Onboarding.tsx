@@ -149,7 +149,7 @@ const Onboarding: React.FC = () => {
         {currentStep === 3 && (
           <NFTIDMinting 
             examScore={examScore} 
-            redirectToDashboard="/unity-app-dashboard" 
+            redirectToDashboard="/#unity-plus" 
             earnedBGL={earnedBGL}
           />
         )}

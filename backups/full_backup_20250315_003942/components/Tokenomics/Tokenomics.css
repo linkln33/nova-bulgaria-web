@@ -1,0 +1,556 @@
+/* Tokenomics Component Styles */
+
+.tokenomics-container {
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  max-width: 1580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tokenomics-section {
+  padding: 0;
+  background-color: #000;
+  position: relative;
+  overflow: hidden;
+}
+
+.tokenomics-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 30%, rgba(0, 150, 110, 0.1) 0%, transparent 70%),
+              radial-gradient(circle at 70% 70%, rgba(255, 255, 0, 0.05) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header h2 {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  max-width: 700px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Tabs */
+.tokenomics-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.tab-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.tab-button:hover {
+  background: rgba(0, 150, 110, 0.1);
+  color: white;
+}
+
+.tab-button.active {
+  background: rgba(0, 150, 110, 0.2);
+  border-color: rgba(0, 150, 110, 0.3);
+  color: white;
+}
+
+/* Content Container */
+.tokenomics-content {
+  padding: 2.5rem;
+  position: relative;
+  z-index: 1;
+  min-height: 500px;
+}
+
+/* Distribution Tab */
+.distribution-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.distribution-chart {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-chart {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.pie-segment {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 50%;
+  transition: all 0.3s ease;
+}
+
+.pie-segment:hover {
+  transform-origin: 50% 50%;
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+.segment-tooltip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.pie-segment:hover .segment-tooltip {
+  opacity: 1;
+}
+
+.pie-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: rgba(0, 10, 8, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.token-symbol {
+  font-weight: 700;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent1) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.distribution-legend {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.legend-item:hover {
+  background: rgba(0, 0, 0, 0.4);
+  transform: translateX(5px);
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.legend-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.legend-name {
+  font-weight: 500;
+}
+
+.legend-percentage {
+  font-weight: 700;
+}
+
+/* Release Schedule Tab */
+.release-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.release-chart {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.chart-header, .chart-row {
+  display: grid;
+  grid-template-columns: 80px repeat(4, 1fr) 80px;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+
+.chart-header {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-year, .chart-quarter, .chart-total {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.chart-year {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.chart-total {
+  font-weight: 700;
+}
+
+.release-bar {
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+  width: 100%;
+  min-height: 10px;
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.release-bar:hover {
+  filter: brightness(1.2);
+  transform: scaleY(1.05);
+  transform-origin: bottom;
+}
+
+.release-percentage {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: white;
+}
+
+.chart-footer {
+  margin-top: 2rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+.release-notes {
+  padding: 1.5rem;
+}
+
+.release-notes h4 {
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.release-notes ul {
+  padding-left: 1.5rem;
+}
+
+.release-notes li {
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Token Utility Tab */
+.utility-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.utility-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.utility-card {
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.utility-card:hover {
+  transform: translateY(-10px);
+}
+
+.utility-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.utility-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.utility-description {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.token-stats h4 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.stat-card {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-icon {
+  font-size: 1.75rem;
+}
+
+.stat-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-name {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 2.5rem;
+  }
+  
+  .tokenomics-content {
+    padding: 1.5rem;
+  }
+  
+  .distribution-content {
+    flex-direction: column;
+  }
+  
+  .chart-header, .chart-row {
+    grid-template-columns: 60px repeat(4, 1fr) 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tokenomics-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .pie-chart {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .pie-center {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .chart-header, .chart-row {
+    grid-template-columns: 50px repeat(4, 1fr) 50px;
+    font-size: 0.875rem;
+  }
+}
+
+/* Glassmorphism Dark */
+.glassmorphism-dark {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 170, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.glassmorphism-dark::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 0.5rem;
+  background: linear-gradient(45deg, rgba(0, 255, 170, 0), rgba(0, 255, 170, 0.3), rgba(0, 255, 170, 0)) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.glassmorphism-dark:hover::before {
+  opacity: 1;
+}
+
+.glassmorphism-dark:hover {
+  box-shadow: 0 8px 32px 0 rgba(0, 255, 170, 0.2);
+  transform: translateY(-3px);
+}
+
+/* Pie chart customization */
+.recharts-pie-label-text {
+  fill: white;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* Token Distribution and Fund Allocation panels */
+.glassmorphism-dark h3 {
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 255, 170, 0.3);
+  padding-bottom: 10px;
+}
+
+/* Stats boxes */
+.bg-black.bg-opacity-30 {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-black.bg-opacity-30::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0, 255, 170, 0),
+    rgba(0, 255, 170, 0.1),
+    rgba(0, 255, 170, 0)
+  );
+  transform: rotate(30deg);
+  opacity: 0;
+  transition: transform 0.7s ease, opacity 0.7s ease;
+}
+
+.bg-black.bg-opacity-30:hover::after {
+  opacity: 1;
+  transform: rotate(30deg) translate(25%, 25%);
+}
+
+.bg-black.bg-opacity-30:hover {
+  border-color: rgba(0, 255, 170, 0.6);
+  box-shadow: 0 0 15px rgba(0, 255, 170, 0.3);
+  transform: scale(1.02);
+}
+
+/* Fund allocation text */
+.bg-black.bg-opacity-50 {
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 255, 170, 0.2);
+}
+
+.bg-black.bg-opacity-50:hover {
+  border-color: rgba(0, 255, 170, 0.4);
+  box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
+}
+
+.bg-black.bg-opacity-50 p {
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .grid-cols-1 {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .recharts-pie-label-text {
+    font-size: 10px;
+  }
+}

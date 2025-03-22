@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Define the user profile interface
 export interface UserProfileType {
@@ -44,6 +44,15 @@ export const UnityPlusProvider: React.FC<UnityPlusProviderProps> = ({ children }
   const [userProfile, setUserProfile] = useState<UserProfileType | null>(null);
   const [activeTab, setActiveTab] = useState('feed');
 
+  // Check for NFT data on initial load
+  useEffect(() => {
+    const nftDataString = localStorage.getItem('nova_nft_data');
+    if (nftDataString) {
+      // If we have NFT data, we should auto-connect
+      handleConnect();
+    }
+  }, []);
+
   const openUnityPlusDashboard = () => {
     // Scroll to Unity+ section first
     const unityPlusSection = document.getElementById('unity-plus');
@@ -60,7 +69,45 @@ export const UnityPlusProvider: React.FC<UnityPlusProviderProps> = ({ children }
   // Mock function to simulate wallet connection
   const handleConnect = () => {
     setIsConnected(true);
-    // Mock user profile data
+    
+    // Check if we have NFT data from the onboarding process
+    const nftDataString = localStorage.getItem('nova_nft_data');
+    
+    if (nftDataString) {
+      try {
+        // Parse the NFT data from localStorage
+        const nftData = JSON.parse(nftDataString);
+        
+        // Create user profile from NFT data
+        setUserProfile({
+          nftId: nftData.id || 'BG-NFT-1234',
+          name: nftData.name || 'Alexander Petrov',
+          pocScore: nftData.socialScore || 78,
+          expertise: nftData.expertise ? [nftData.expertise] : ['Economy', 'Technology'],
+          rank: nftData.rank || 'Citizen',
+          followedSectors: ['Economy', 'Technology', 'Healthcare'],
+          walletBalance: {
+            BGL: nftData.earnedBGL || 1250,
+            'BGL-TECH': 320,
+            'BGL-HEALTH': 150
+          }
+        });
+        
+        // Clear the NFT data from localStorage after using it
+        localStorage.removeItem('nova_nft_data');
+      } catch (error) {
+        console.error('Error parsing NFT data:', error);
+        // Fall back to mock data if there's an error
+        setDefaultUserProfile();
+      }
+    } else {
+      // Use default mock data if no NFT data is available
+      setDefaultUserProfile();
+    }
+  };
+  
+  // Helper function to set default user profile
+  const setDefaultUserProfile = () => {
     setUserProfile({
       nftId: 'BG-NFT-1234',
       name: 'Alexander Petrov',

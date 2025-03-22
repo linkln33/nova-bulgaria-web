@@ -1,0 +1,200 @@
+.sectors-container {
+  max-width: 1580px;
+  margin: 0 auto;
+  padding: 2rem 3rem;
+  color: white;
+}
+
+.sectors-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.sectors-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #00ffaa;
+  margin-bottom: 0.5rem;
+}
+
+.sectors-subtitle {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 800px;
+  margin: 0 auto 2rem;
+}
+
+.sectors-tabs {
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 2rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sectors-tab-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 1.5rem;
+  border: none;
+  background: transparent;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0.25rem;
+}
+
+.sectors-tab-button.active {
+  background: #00ffaa;
+  color: black;
+}
+
+.sectors-tab-button:not(.active):hover {
+  background: rgba(0, 255, 170, 0.2);
+}
+
+.sectors-content {
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 170, 0.2);
+}
+
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.sector-card {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  border-left: 4px solid;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sector-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 255, 170, 0.1);
+}
+
+.sector-card h3 {
+  color: #00ffaa;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  border-bottom: 1px solid rgba(0, 255, 170, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.sector-card ul {
+  padding-left: 1.5rem;
+  margin-top: auto;
+}
+
+.sector-card li {
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.sector-card.governance { border-color: #00ffaa; }
+.sector-card.legal { border-color: #ff00ff; }
+.sector-card.economic { border-color: #00ccff; }
+.sector-card.social { border-color: #ffcc00; }
+.sector-card.military { border-color: #ff3333; }
+.sector-card.education { border-color: #9966ff; }
+.sector-card.healthcare { border-color: #33cc33; }
+.sector-card.infrastructure { border-color: #ff9900; }
+.sector-card.communication { border-color: #00ffff; }
+.sector-card.environmental { border-color: #66ff66; }
+.sector-card.foreign { border-color: #3366ff; }
+.sector-card.security { border-color: #cc3300; }
+.sector-card.immigration { border-color: #ff66cc; }
+.sector-card.energy { border-color: #ffff00; }
+.sector-card.agriculture { border-color: #99cc00; }
+.sector-card.employment { border-color: #cc99ff; }
+.sector-card.housing { border-color: #ff6600; }
+.sector-card.science { border-color: #00ff99; }
+.sector-card.tourism { border-color: #ff99cc; }
+.sector-card.crisis { border-color: #ff3300; }
+.sector-card.taxation { border-color: #cc6600; }
+.sector-card.technology { border-color: #33ccff; }
+.sector-card.intellectual { border-color: #9933ff; }
+.sector-card.transportation { border-color: #ff9966; }
+
+.sector-card.space { border-color: #6633cc; }
+.sector-card.robotics { border-color: #cc33ff; }
+.sector-card.innovation { border-color: #00cc99; }
+.sector-card.businesses { border-color: #ff6633; }
+.sector-card.blockchain { border-color: #3399ff; }
+.sector-card.smart-contracts { border-color: #cc66ff; }
+.sector-card.ubi { border-color: #33cc99; }
+.sector-card.circular { border-color: #99cc33; }
+.sector-card.water { border-color: #00cccc; }
+.sector-card.urban { border-color: #66cc66; }
+.sector-card.services { border-color: #ff9933; }
+.sector-card.meta { border-color: #9966cc; }
+.sector-card.agriculture-tech { border-color: #cccc00; }
+.sector-card.cybersecurity { border-color: #3333cc; }
+.sector-card.eco-travel { border-color: #33cc66; }
+.sector-card.climate { border-color: #00cc66; }
+.sector-card.grid-tech { border-color: #ffcc33; }
+.sector-card.vehicles { border-color: #cc6633; }
+.sector-card.biotech { border-color: #33ff99; }
+.sector-card.digital-economy { border-color: #6699ff; }
+
+.sectors-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.page-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-button.active {
+  background: #00ffaa;
+  color: black;
+}
+
+.page-button:hover:not(.active) {
+  background: rgba(0, 255, 170, 0.2);
+}
+
+@media (max-width: 768px) {
+  .sectors-container {
+    padding: 1.5rem;
+  }
+  
+  .sectors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sectors-content {
+    padding: 1.5rem;
+  }
+}

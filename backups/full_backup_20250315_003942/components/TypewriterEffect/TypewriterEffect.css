@@ -1,0 +1,18 @@
+.typewriter-effect {
+  display: inline-flex;
+  align-items: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 768px) {
+  .typewriter-effect {
+    font-size: 1.75rem;
+  }
+}
+
+.typewriter-effect .Typewriter__cursor {
+  font-weight: 700;
+}

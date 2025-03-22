@@ -1,0 +1,141 @@
+.token-release-chart-container {
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  max-width: 1580px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chart-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #00FFAA;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.chart-wrapper {
+  margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid rgba(0, 255, 170, 0.2);
+}
+
+/* Phase boxes styling */
+.phases-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.phase-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 170, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.phase-box:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 255, 170, 0.4);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 
+              0 0 15px rgba(0, 255, 170, 0.2);
+}
+
+.phase-box h4 {
+  color: #00FFAA;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.phase-years {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0.5rem;
+}
+
+.phase-box p {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.4;
+}
+
+/* Total supply box */
+.total-supply-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 170, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.total-supply-box h4 {
+  color: #00FFAA;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.total-supply-box p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Inflation calculation box */
+.inflation-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 255, 170, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.inflation-box h4 {
+  color: #00FFAA;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.inflation-box p {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 0.5rem;
+}
+
+.inflation-note {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Tooltip customization */
+.recharts-tooltip-wrapper {
+  outline: none;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .phases-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .phases-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .chart-title {
+    font-size: 1.5rem;
+  }
+  
+  .token-release-chart-container {
+    padding: 1.5rem 3rem;
+  }
+}

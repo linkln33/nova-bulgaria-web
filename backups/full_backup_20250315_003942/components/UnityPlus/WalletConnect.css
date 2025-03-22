@@ -1,0 +1,177 @@
+.wallet-connect {
+  width: 100%;
+}
+
+.connect-tabs {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 150, 110, 0.3);
+}
+
+.connect-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.connect-tab:hover {
+  color: #00D6A1;
+}
+
+.connect-tab.active {
+  color: #00D6A1;
+  font-weight: 600;
+}
+
+.connect-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #00D6A1;
+}
+
+.connect-content {
+  padding: 10px 0;
+}
+
+.wallet-description, .nft-description {
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.wallet-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.wallet-button {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 150, 110, 0.3);
+  background: rgba(0, 26, 21, 0.6);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.wallet-button:hover {
+  border-color: #00D6A1;
+  background: rgba(0, 214, 161, 0.1);
+}
+
+.wallet-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.wallet-icon {
+  font-size: 1.2rem;
+  margin-right: 10px;
+}
+
+.wallet-button.metamask:hover {
+  border-color: #f6851b;
+  background: rgba(246, 133, 27, 0.05);
+}
+
+.wallet-button.coinbase:hover {
+  border-color: #0052ff;
+  background: rgba(0, 82, 255, 0.05);
+}
+
+.wallet-button.walletconnect:hover {
+  border-color: #3b99fc;
+  background: rgba(59, 153, 252, 0.05);
+}
+
+.nft-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.nft-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 1px solid rgba(0, 150, 110, 0.3);
+  border-radius: 8px;
+  background: rgba(0, 26, 21, 0.6);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.nft-input:focus {
+  outline: none;
+  border-color: #00D6A1;
+  box-shadow: 0 0 0 2px rgba(0, 214, 161, 0.2);
+}
+
+.nft-input:disabled {
+  background: rgba(0, 26, 21, 0.3);
+  cursor: not-allowed;
+}
+
+.nft-submit {
+  padding: 12px 20px;
+  background: #00D6A1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nft-submit:hover {
+  background: #00c87f;
+}
+
+.nft-submit:disabled {
+  background: rgba(0, 214, 161, 0.5);
+  cursor: not-allowed;
+}
+
+.loading-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(0, 214, 161, 0.2);
+  border-radius: 50%;
+  border-top-color: #00D6A1;
+  animation: spin 1s ease-in-out infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-indicator p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}

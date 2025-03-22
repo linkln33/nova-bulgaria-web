@@ -1,0 +1,30 @@
+.typewriter-section {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(0, 255, 170, 0.2);
+  border-bottom: 1px solid rgba(0, 255, 170, 0.2);
+}
+
+.typewriter-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(0, 255, 170, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+}
+
+.typewriter-large {
+  font-size: 3rem;
+  line-height: 1.2;
+  text-shadow: 0 0 10px rgba(0, 255, 170, 0.5);
+}
+
+@media (max-width: 768px) {
+  .typewriter-large {
+    font-size: 2rem;
+  }
+}
