@@ -1,15 +1,14 @@
 [build]
-<<<<<<< HEAD
-  base = "web/"
-  publish = "."
-  command = "# no build command needed"
-=======
   base = "/"
   publish = "dist"
   command = "npm run build"
->>>>>>> 75ebcdf8 (Initial commit of NOVA Bulgaria React app)
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+  force = true
+
+[build.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
