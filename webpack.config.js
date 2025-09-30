@@ -14,7 +14,7 @@ module.exports = {
     // Add content hash for better caching
     filename: '[name].[contenthash].js',
     chunkFilename: '[name].[contenthash].chunk.js',
-    publicPath: '/'
+    publicPath: './'
   },
   // Add optimization for code splitting and minification
   optimization: {
