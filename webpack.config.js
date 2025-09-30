@@ -14,7 +14,7 @@ module.exports = {
     // Add content hash for better caching
     filename: '[name].[contenthash].js',
     chunkFilename: '[name].[contenthash].chunk.js',
-    publicPath: '/',
+    publicPath: '/'
   },
   // Add optimization for code splitting and minification
   optimization: {
@@ -105,6 +105,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      filename: 'index.html',
+      inject: true,
       minify: process.env.NODE_ENV === 'production' ? {
         removeComments: true,
         collapseWhitespace: true,
