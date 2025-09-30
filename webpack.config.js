@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // Add BundleAnalyzerPlugin for bundle analysis
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// Add CopyWebpackPlugin for copying static files
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -14,7 +16,7 @@ module.exports = {
     // Add content hash for better caching
     filename: '[name].[contenthash].js',
     chunkFilename: '[name].[contenthash].chunk.js',
-    publicPath: './'
+    publicPath: ''
   },
   // Add optimization for code splitting and minification
   optimization: {
@@ -119,6 +121,12 @@ module.exports = {
         minifyCSS: true,
         minifyURLs: true,
       } : false,
+    }),
+    // Copy _redirects file for Netlify
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: 'public/_redirects', to: '' }
+      ],
     }),
     // Add BundleAnalyzerPlugin (only active when ANALYZE env var is set)
     process.env.ANALYZE && new BundleAnalyzerPlugin(),
